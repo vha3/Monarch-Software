@@ -98,12 +98,12 @@ void LSM9DS1init(void)
 	// 1 = 14.9    4 = 238
 	// 2 = 59.5    5 = 476
 	// 3 = 119     6 = 952
-	settings.gyro.sampleRate = 6;
+	settings.gyro.sampleRate = 0x01;
 	// gyro cutoff frequency: value between 0-3
 	// Actual value of cutoff frequency depends
 	// on sample rate.
 	settings.gyro.bandwidth = 0;
-	settings.gyro.lowPowerEnable = false;
+	settings.gyro.lowPowerEnable = true;
 	settings.gyro.HPFEnable = false;
 	// Gyro HPF cutoff frequency: value between 0-9
 	// Actual value depends on sample rate. Only applies
@@ -125,7 +125,7 @@ void LSM9DS1init(void)
 	// 1 = 10 Hz    4 = 238 Hz
 	// 2 = 50 Hz    5 = 476 Hz
 	// 3 = 119 Hz   6 = 952 Hz
-	settings.accel.sampleRate = 6;
+	settings.accel.sampleRate = 0x01;
 	// Accel cutoff freqeuncy can be any value between -1 - 3.
 	// -1 = bandwidth determined by sample rate
 	// 0 = 408 Hz   2 = 105 Hz
@@ -625,13 +625,13 @@ void readGyro()
 	}
 }
 
-//void sleepGyro(bool enable)
-//{
-//	uint8_t temp = xgReadByte(CTRL_REG9);
-//	if (enable) temp |= (1<<6);
-//	else temp &= ~(1<<6);
-//	xgWriteByte(CTRL_REG9, temp);
-//}
+void sleepGyro(bool enable)
+{
+	uint8_t temp = xgReadByte(CTRL_REG9);
+	if (enable) temp |= (1<<6);
+	else temp &= ~(1<<6);
+	xgWriteByte(CTRL_REG9, temp);
+}
 
 void readAccel()
 {
@@ -892,18 +892,18 @@ void setAccelODR(uint8_t aRate)
 	}
 }
 
-//void setMagODR(uint8_t mRate)
-//{
-//	// We need to preserve the other bytes in CTRL_REG5_XM. So, first read it:
-//	uint8_t temp = mReadByte(CTRL_REG1_M);
-//	// Then mask out the mag ODR bits:
-//	temp &= 0xFF^(0x7 << 2);
-//	// Then shift in our new ODR bits:
-//	temp |= ((mRate & 0x07) << 2);
-//	settings.mag.sampleRate = mRate & 0x07;
-//	// And write the new register value back into CTRL_REG5_XM:
-//	mWriteByte(CTRL_REG1_M, temp);
-//}
+void setMagODR(uint8_t mRate)
+{
+	// We need to preserve the other bytes in CTRL_REG5_XM. So, first read it:
+	uint8_t temp = mReadByte(CTRL_REG1_M);
+	// Then mask out the mag ODR bits:
+	temp &= 0xFF^(0x7 << 2);
+	// Then shift in our new ODR bits:
+	temp |= ((mRate & 0x07) << 2);
+	settings.mag.sampleRate = mRate & 0x07;
+	// And write the new register value back into CTRL_REG5_XM:
+	mWriteByte(CTRL_REG1_M, temp);
+}
 
 
 /* ===============================================================

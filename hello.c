@@ -34,9 +34,12 @@ Task_Struct calibrationTask;
 /* Semaphore structs */
 static Semaphore_Struct IMUStartsemaphore;
 static Semaphore_Handle IMUStartsemaphoreHandle;
+
 static Semaphore_Struct CalibrationStartsemaphore;
 static Semaphore_Handle CalibrationStartsemaphoreHandle;
 
+static Semaphore_Struct getDatasemaphore;
+static Semaphore_Handle getDatasemaphoreHandle;
 
 /* Make sure we have nice 8-byte alignment on the stack to avoid wasting memory */
 #pragma DATA_ALIGN(initializationTaskStack, 8)
@@ -52,9 +55,7 @@ Void initializationTaskFunc(UArg arg0, UArg arg1)
         	Display_printf(display, 0, 0, "Initializing");
         uint16_t workpls = LSM9DS1begin();
         configInt(XG_INT1, INT_DRDY_G, INT_ACTIVE_HIGH, INT_PUSH_PULL);
-        // Lowest datarate and lowest power setting
-        setGyroODR(0x01);
-        setAccelODR(0x01);
+        configInt(XG_INT2, INT_DRDY_XL, INT_ACTIVE_HIGH, INT_PUSH_PULL);
         Semaphore_post(CalibrationStartsemaphoreHandle);
 //        Task_sleep(500 * (1000 / Clock_tickPeriod));
     }
@@ -74,15 +75,27 @@ Void calibrationTaskFunc(UArg arg0, UArg arg1)
 Void runningTaskFunc(UArg arg0, UArg arg1)
 {
     while (1) {
-    		readAccel();
-    		Display_printf(display, 0, 0, "%f", calcAccel(ax));
-    		Display_printf(display, 0, 0, "%f", calcAccel(ay));
-    		Display_printf(display, 0, 0, "%f", calcAccel(az));
-    		Display_printf(display, 0, 0, "%02x", settings.accel.sampleRate);
+    		Semaphore_pend(getDatasemaphoreHandle, BIOS_WAIT_FOREVER);
+    		readMag();
+    		Display_printf(display, 0, 0, "%f", calcMag(mx));
+    		Display_printf(display, 0, 0, "%f", calcMag(my));
+    		Display_printf(display, 0, 0, "%f", calcMag(mz));
+    		Display_printf(display, 0, 0, "%02x", settings.mag.sampleRate);
     		Display_printf(display, 0, 0, "\n\n");
         /* Wait a while, because doWork should be a periodic thing, not continuous.*/
         Task_sleep(50 * (1000 / Clock_tickPeriod));
     }
+}
+
+/*
+ *  ======== gpioButtonFxn0 ========
+ *  Callback function for the GPIO interrupt on Board_GPIO_BUTTON0.
+ */
+void gpioButtonFxn0(uint_least8_t index)
+{
+    /* Clear the GPIO interrupt and toggle an LED */
+    GPIO_toggle(Board_GPIO_LED0);
+    Semaphore_post(getDatasemaphoreHandle);
 }
 
 /*
@@ -118,7 +131,8 @@ int main(void)
 
     initializationTaskParams.priority = 2;
     initializationTaskParams.stack = &runningTaskStack;
-    Task_construct(&runningTask, runningTaskFunc, &initializationTaskParams, NULL);
+    Task_construct(&runningTask, runningTaskFunc,
+    		           &initializationTaskParams, NULL);
 
     initializationTaskParams.priority = 1;
     initializationTaskParams.stack = &calibrationTaskStack;
@@ -131,6 +145,15 @@ int main(void)
 
     Semaphore_construct(&CalibrationStartsemaphore, 0, NULL);
     CalibrationStartsemaphoreHandle = Semaphore_handle(&CalibrationStartsemaphore);
+
+    Semaphore_construct(&getDatasemaphore, 0, NULL);
+    getDatasemaphoreHandle = Semaphore_handle(&getDatasemaphore);
+
+    /* install Button callback */
+    GPIO_setCallback(Board_GPIO_BUTTON0, gpioButtonFxn0);
+
+    /* Enable interrupts */
+    GPIO_enableInt(Board_GPIO_BUTTON0);
 
     /* Start kernel. */
     BIOS_start();
