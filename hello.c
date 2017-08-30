@@ -42,6 +42,7 @@ static PIN_State pinState;
 PIN_Config pinTable[] = {
 	CC1310_LAUNCHXL_DIO15  | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_POSEDGE,
 	CC1310_LAUNCHXL_DIO12  | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_POSEDGE,
+	CC1310_LAUNCHXL_DIO22  | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_POSEDGE,
 	CC1310_LAUNCHXL_PIN_RLED | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
 	CC1310_LAUNCHXL_PIN_GLED | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
     PIN_TERMINATE
@@ -52,6 +53,7 @@ Task_Struct initializationTask;
 Task_Struct calibrationTask;
 Task_Struct magTask;
 Task_Struct gyroTask;
+Task_Struct accelTask;
 
 /* Semaphore structs */
 static Semaphore_Struct initSemaphore;
@@ -66,16 +68,20 @@ static Semaphore_Handle magSemaphoreHandle;
 static Semaphore_Struct gyroSemaphore;
 static Semaphore_Handle gyroSemaphoreHandle;
 
+static Semaphore_Struct accelSemaphore;
+static Semaphore_Handle accelSemaphoreHandle;
+
 static Semaphore_Struct batonSemaphore;
 static Semaphore_Handle batonSemaphoreHandle;
 
 /* Make sure we have nice 8-byte alignment on the stack to avoid wasting memory */
 #pragma DATA_ALIGN(initializationTaskStack, 8)
-#define STACKSIZE 2048
+#define STACKSIZE 1024
 static uint8_t initializationTaskStack[STACKSIZE];
 static uint8_t calibrationTaskStack[STACKSIZE];
 static uint8_t magTaskStack[STACKSIZE];
 static uint8_t gyroTaskStack[STACKSIZE];
+static uint8_t accelTaskStack[STACKSIZE];
 
 int goodToGo = 0;
 
@@ -101,6 +107,7 @@ Void calibrationTaskFunc(UArg arg0, UArg arg1)
 		calibrateMag(1);
 		goodToGo += 1;
 		readGyro();
+		readAccel();
 	}
 }
 
@@ -142,6 +149,25 @@ Void gyroTaskFunc(UArg arg0, UArg arg1)
     }
 }
 
+Void accelTaskFunc(UArg arg0, UArg arg1)
+{
+    while (1) {
+    		Semaphore_pend(accelSemaphoreHandle, BIOS_WAIT_FOREVER);
+    		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
+    		if(goodToGo){
+    			readAccel();
+    			Display_printf(display, 0, 0, "Accel");
+			Display_printf(display, 0, 0, "%f", calcAccel(ax));
+			Display_printf(display, 0, 0, "%f", calcAccel(ay));
+			Display_printf(display, 0, 0, "%f", calcAccel(az));
+			Display_printf(display, 0, 0, "\n\n");
+    		}
+    		Semaphore_post(batonSemaphoreHandle);
+        /* Wait a while, because doWork should be a periodic thing, not continuous.*/
+//        Task_sleep(50 * (1000 / Clock_tickPeriod));
+    }
+}
+
 
 
 void pinCallback(PIN_Handle handle, PIN_Id pinId) {
@@ -157,6 +183,10 @@ void pinCallback(PIN_Handle handle, PIN_Id pinId) {
 			currVal =  PIN_getOutputValue(Board_PIN_LED1);
 			PIN_setOutputValue(pinHandle, Board_PIN_LED1, !currVal);
 			Semaphore_post(magSemaphoreHandle);
+			break;
+
+		case CC1310_LAUNCHXL_DIO22:
+			Semaphore_post(accelSemaphoreHandle);
 			break;
 
 		default:
@@ -214,6 +244,11 @@ int main(void)
     Task_construct(&gyroTask, gyroTaskFunc,
     		           &task_params, NULL);
 
+    task_params.priority = 1;
+    task_params.stack = &accelTaskStack;
+    Task_construct(&accelTask, accelTaskFunc,
+    		           &task_params, NULL);
+
 
     /* Create Semaphore */
     Semaphore_construct(&initSemaphore, 1, NULL);
@@ -227,6 +262,9 @@ int main(void)
 
     Semaphore_construct(&gyroSemaphore, 0, NULL);
     gyroSemaphoreHandle = Semaphore_handle(&gyroSemaphore);
+
+    Semaphore_construct(&accelSemaphore, 0, NULL);
+    accelSemaphoreHandle = Semaphore_handle(&accelSemaphore);
 
     Semaphore_construct(&batonSemaphore, 1, NULL);
     batonSemaphoreHandle = Semaphore_handle(&batonSemaphore);
