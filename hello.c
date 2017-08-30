@@ -15,8 +15,8 @@
 #include <ti/sysbios/knl/Semaphore.h>
 
 /* Driver header files */
-#include <ti/drivers/GPIO.h>
 #include <ti/sysbios/knl/Clock.h>
+#include <ti/sysbios/knl/Swi.h>
 #include <ti/drivers/I2C.h>
 #include <ti/display/Display.h>
 #include <ti/drivers/Power.h>
@@ -32,14 +32,14 @@ static Display_Handle display;
 
 
 /* Pin handles and states*/
-static PIN_Handle buttonPinHandle;
-static PIN_State buttonPinState;
+static PIN_Handle pinHandle;
+static PIN_State pinState;
 
 /*
  * Application button pin configuration table:
  *   - Buttons interrupts are configured to trigger on rising edge.
  */
-PIN_Config buttonPinTable[] = {
+PIN_Config pinTable[] = {
 	CC1310_LAUNCHXL_DIO15  | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_POSEDGE,
 	Board_PIN_BUTTON0  | PIN_INPUT_EN | PIN_PULLUP | PIN_IRQ_NEGEDGE,
 	CC1310_LAUNCHXL_PIN_RLED | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
@@ -47,41 +47,39 @@ PIN_Config buttonPinTable[] = {
     PIN_TERMINATE
 };
 
-
-
 /* Task structs */
 Task_Struct initializationTask;
-Task_Struct runningTask;
 Task_Struct calibrationTask;
+Task_Struct magTask;
 
 /* Semaphore structs */
-static Semaphore_Struct IMUStartsemaphore;
-static Semaphore_Handle IMUStartsemaphoreHandle;
+static Semaphore_Struct initSemaphore;
+static Semaphore_Handle initSemaphoreHandle;
 
-static Semaphore_Struct CalibrationStartsemaphore;
-static Semaphore_Handle CalibrationStartsemaphoreHandle;
+static Semaphore_Struct calibSemaphore;
+static Semaphore_Handle calibSemaphoreHandle;
 
-static Semaphore_Struct getDatasemaphore;
-static Semaphore_Handle getDatasemaphoreHandle;
+static Semaphore_Struct magSemaphore;
+static Semaphore_Handle magSemaphoreHandle;
 
 /* Make sure we have nice 8-byte alignment on the stack to avoid wasting memory */
 #pragma DATA_ALIGN(initializationTaskStack, 8)
 #define STACKSIZE 2048
 static uint8_t initializationTaskStack[STACKSIZE];
-static uint8_t runningTaskStack[STACKSIZE];
 static uint8_t calibrationTaskStack[STACKSIZE];
+static uint8_t magTaskStack[STACKSIZE];
 
 int goodToGo = 0;
 
 Void initializationTaskFunc(UArg arg0, UArg arg1)
 {
     while (1) {
-    		Semaphore_pend(IMUStartsemaphoreHandle,BIOS_WAIT_FOREVER);
+    		Semaphore_pend(initSemaphoreHandle,BIOS_WAIT_FOREVER);
         	Display_printf(display, 0, 0, "Initializing");
         uint16_t workpls = LSM9DS1begin();
         configInt(XG_INT1, INT_DRDY_G, INT_ACTIVE_HIGH, INT_PUSH_PULL);
         configInt(XG_INT2, INT_DRDY_XL, INT_ACTIVE_HIGH, INT_PUSH_PULL);
-        Semaphore_post(CalibrationStartsemaphoreHandle);
+        Semaphore_post(calibSemaphoreHandle);
 //        Task_sleep(500 * (1000 / Clock_tickPeriod));
     }
 }
@@ -89,7 +87,7 @@ Void initializationTaskFunc(UArg arg0, UArg arg1)
 Void calibrationTaskFunc(UArg arg0, UArg arg1)
 {
 	while (1) {
-		Semaphore_pend(CalibrationStartsemaphoreHandle, BIOS_WAIT_FOREVER);
+		Semaphore_pend(calibSemaphoreHandle, BIOS_WAIT_FOREVER);
 		Display_printf(display, 0, 0, "Calibrating");
 		calibrate(1);
 		calibrateMag(1);
@@ -97,34 +95,35 @@ Void calibrationTaskFunc(UArg arg0, UArg arg1)
 	}
 }
 
-Void runningTaskFunc(UArg arg0, UArg arg1)
+Void magTaskFunc(UArg arg0, UArg arg1)
 {
     while (1) {
-    		Semaphore_pend(getDatasemaphoreHandle, BIOS_WAIT_FOREVER);
+    		Semaphore_pend(magSemaphoreHandle, BIOS_WAIT_FOREVER);
     		if(goodToGo){
-    		readMag();
-				Display_printf(display, 0, 0, "%f", calcMag(mx));
-				Display_printf(display, 0, 0, "%f", calcMag(my));
-				Display_printf(display, 0, 0, "%f", calcMag(mz));
-				Display_printf(display, 0, 0, "\n\n");
+    			readMag();
+			Display_printf(display, 0, 0, "%f", calcMag(mx));
+			Display_printf(display, 0, 0, "%f", calcMag(my));
+			Display_printf(display, 0, 0, "%f", calcMag(mz));
+			Display_printf(display, 0, 0, "\n\n");
     		}
         /* Wait a while, because doWork should be a periodic thing, not continuous.*/
 //        Task_sleep(50 * (1000 / Clock_tickPeriod));
     }
 }
 
-void buttonCallbackFxn(PIN_Handle handle, PIN_Id pinId) {
+
+void pinCallback(PIN_Handle handle, PIN_Id pinId) {
     uint32_t currVal = 0;
 	switch (pinId) {
 		case Board_PIN_BUTTON0:
 			currVal =  PIN_getOutputValue(Board_PIN_LED0);
-			PIN_setOutputValue(buttonPinHandle, Board_PIN_LED0, !currVal);
+			PIN_setOutputValue(pinHandle, Board_PIN_LED0, !currVal);
 			break;
 
 		case CC1310_LAUNCHXL_DIO15:
 			currVal =  PIN_getOutputValue(Board_PIN_LED1);
-			PIN_setOutputValue(buttonPinHandle, Board_PIN_LED1, !currVal);
-			Semaphore_post(getDatasemaphoreHandle);
+			PIN_setOutputValue(pinHandle, Board_PIN_LED1, !currVal);
+			Semaphore_post(magSemaphoreHandle);
 			break;
 
 		default:
@@ -132,19 +131,6 @@ void buttonCallbackFxn(PIN_Handle handle, PIN_Id pinId) {
 			break;
 	}
 }
-
-///*
-// *  ======== gpioButtonFxn0 ========
-// *  Callback function for the GPIO interrupt on Board_GPIO_BUTTON0.
-// */
-//void buttonCallbackFxn(PIN_Handle handle, PIN_Id pinId)
-//{
-//    /* Clear the GPIO interrupt and toggle an LED */
-//	uint32_t currVal = 0;
-//	currVal =  PIN_getOutputValue(Board_PIN_LED0);
-//	PIN_setOutputValue(buttonPinHandle, Board_PIN_LED0, !currVal);
-//    Semaphore_post(getDatasemaphoreHandle);
-//}
 
 /*
  *  ======== main ========
@@ -154,10 +140,10 @@ int main(void)
 {
 	/* Initialize TI drivers */
     Board_initGeneral();
-    GPIO_init();
+//    GPIO_init();
     Display_init();
     I2C_init();
-    PIN_init(buttonPinTable);
+    PIN_init(pinTable);
 
     /* Open Display */
     display = Display_open(Display_Type_UART, NULL);
@@ -171,51 +157,47 @@ int main(void)
     initI2C();
 
     /* Set up the led task */
-    Task_Params initializationTaskParams;
-    Task_Params_init(&initializationTaskParams);
-    initializationTaskParams.stackSize = STACKSIZE;
-    initializationTaskParams.priority = 3;
-    initializationTaskParams.stack = &initializationTaskStack;
+    Task_Params task_params;
+    Task_Params_init(&task_params);
+    task_params.stackSize = STACKSIZE;
+    task_params.priority = 3;
+    task_params.stack = &initializationTaskStack;
     Task_construct(&initializationTask, initializationTaskFunc,
-    		           &initializationTaskParams, NULL);
+    		           &task_params, NULL);
 
-    initializationTaskParams.priority = 2;
-    initializationTaskParams.stack = &runningTaskStack;
-    Task_construct(&runningTask, runningTaskFunc,
-    		           &initializationTaskParams, NULL);
 
-    initializationTaskParams.priority = 1;
-    initializationTaskParams.stack = &calibrationTaskStack;
+    task_params.priority = 2;
+    task_params.stack = &calibrationTaskStack;
     Task_construct(&calibrationTask, calibrationTaskFunc,
-    				   &initializationTaskParams, NULL);
+    				   &task_params, NULL);
+
+    task_params.priority = 1;
+    task_params.stack = &magTaskStack;
+    Task_construct(&magTask, magTaskFunc,
+    		           &task_params, NULL);
+
 
     /* Create Semaphore */
-    Semaphore_construct(&IMUStartsemaphore, 1, NULL);
-    IMUStartsemaphoreHandle = Semaphore_handle(&IMUStartsemaphore);
+    Semaphore_construct(&initSemaphore, 1, NULL);
+    initSemaphoreHandle = Semaphore_handle(&initSemaphore);
 
-    Semaphore_construct(&CalibrationStartsemaphore, 0, NULL);
-    CalibrationStartsemaphoreHandle = Semaphore_handle(&CalibrationStartsemaphore);
+    Semaphore_construct(&calibSemaphore, 0, NULL);
+    calibSemaphoreHandle = Semaphore_handle(&calibSemaphore);
 
-    Semaphore_construct(&getDatasemaphore, 0, NULL);
-    getDatasemaphoreHandle = Semaphore_handle(&getDatasemaphore);
+    Semaphore_construct(&magSemaphore, 0, NULL);
+    magSemaphoreHandle = Semaphore_handle(&magSemaphore);
 
-    buttonPinHandle = PIN_open(&buttonPinState, buttonPinTable);
-	if(!buttonPinHandle) {
+    pinHandle = PIN_open(&pinState, pinTable);
+	if(!pinHandle) {
 		/* Error initializing button pins */
 		while(1);
 	}
 
     /* Setup callback for button pins */
-    if (PIN_registerIntCb(buttonPinHandle, &buttonCallbackFxn) != 0) {
+    if (PIN_registerIntCb(pinHandle, &pinCallback) != 0) {
         /* Error registering button callback function */
         while(1);
     }
-
-//    /* install Button callback */
-//    GPIO_setCallback(Board_GPIO_BUTTON0, gpioButtonFxn0);
-//
-//    /* Enable interrupts */
-//    GPIO_enableInt(Board_GPIO_BUTTON0);
 
     /* Start kernel. */
     BIOS_start();

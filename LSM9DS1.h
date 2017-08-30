@@ -19,7 +19,7 @@
 #include <math.h>
 
 /* Include necessary TI drivers */
-#include <ti/drivers/GPIO.h>
+//#include <ti/drivers/GPIO.h>
 #include <ti/sysbios/knl/Clock.h>
 #include <ti/drivers/I2C.h>
 
@@ -187,7 +187,7 @@ void initI2C(void){
 	i2cParams.bitRate = I2C_400kHz;
 	i2c = I2C_open(Board_I2C0, &i2cParams);
 	if (i2c == NULL) {
-		GPIO_write(Board_GPIO_LED0, Board_GPIO_LED_ON);
+//		GPIO_write(Board_GPIO_LED0, Board_GPIO_LED_ON);
 		while (1);
 	}
 	else {
@@ -213,7 +213,7 @@ uint8_t I2CreadByte(uint8_t address, uint8_t subAddress){
     if(I2C_transfer(i2c, &i2cTransaction)) {
     }
     else{
-    		GPIO_write(Board_GPIO_LED0, Board_GPIO_LED_ON);
+//    		GPIO_write(Board_GPIO_LED0, Board_GPIO_LED_ON);
     }
 
     data = rxBuffer[0];
@@ -240,7 +240,7 @@ uint8_t I2CreadBytes(uint8_t address, uint8_t subAddress, uint8_t * dest, uint8_
     if(I2C_transfer(i2c, &i2cTransaction)) {
     }
     else{
-    		GPIO_write(Board_GPIO_LED0, Board_GPIO_LED_ON);
+//    		GPIO_write(Board_GPIO_LED0, Board_GPIO_LED_ON);
     }
 
     for (i=0; i<count; i+=1){
@@ -266,7 +266,7 @@ void I2CwriteByte(uint8_t address, uint8_t subAddress, uint8_t data){
     if(I2C_transfer(i2c, &i2cTransaction)) {
     }
     else{
-    		GPIO_write(Board_GPIO_LED0, Board_GPIO_LED_ON);
+//    		GPIO_write(Board_GPIO_LED0, Board_GPIO_LED_ON);
     }
 }
 
