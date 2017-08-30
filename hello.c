@@ -9,21 +9,43 @@
 
 /* TI-RTOS Header files */
 #include <xdc/std.h>
+#include <unistd.h>
 #include <ti/sysbios/BIOS.h>
 #include <ti/sysbios/knl/Task.h>
 #include <ti/sysbios/knl/Semaphore.h>
-//#include <math.h>
 
 /* Driver header files */
 #include <ti/drivers/GPIO.h>
 #include <ti/sysbios/knl/Clock.h>
 #include <ti/drivers/I2C.h>
 #include <ti/display/Display.h>
+#include <ti/drivers/Power.h>
+#include <ti/drivers/power/PowerCC26XX.h>
+#include <ti/drivers/PIN.h>
+#include <ti/drivers/pin/PINCC26XX.h>
 
 /* Example/Board Header files */
 #include "Board.h"
 
+/* Display Handle */
 static Display_Handle display;
+
+
+/* Pin handles and states*/
+static PIN_Handle buttonPinHandle;
+static PIN_State buttonPinState;
+
+/*
+ * Application button pin configuration table:
+ *   - Buttons interrupts are configured to trigger on rising edge.
+ */
+PIN_Config buttonPinTable[] = {
+    Board_PIN_BUTTON0  | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_POSEDGE,
+	CC1310_LAUNCHXL_PIN_RLED | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
+	CC1310_LAUNCHXL_PIN_GLED | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
+    PIN_TERMINATE
+};
+
 
 
 /* Task structs */
@@ -48,6 +70,8 @@ static uint8_t initializationTaskStack[STACKSIZE];
 static uint8_t runningTaskStack[STACKSIZE];
 static uint8_t calibrationTaskStack[STACKSIZE];
 
+int goodToGo = 0;
+
 Void initializationTaskFunc(UArg arg0, UArg arg1)
 {
     while (1) {
@@ -68,7 +92,7 @@ Void calibrationTaskFunc(UArg arg0, UArg arg1)
 		Display_printf(display, 0, 0, "Calibrating");
 		calibrate(1);
 		calibrateMag(1);
-//		Task_sleep(500 * (1000 / Clock_tickPeriod));
+		goodToGo += 1;
 	}
 }
 
@@ -76,14 +100,15 @@ Void runningTaskFunc(UArg arg0, UArg arg1)
 {
     while (1) {
     		Semaphore_pend(getDatasemaphoreHandle, BIOS_WAIT_FOREVER);
+    		if(goodToGo){
     		readMag();
-    		Display_printf(display, 0, 0, "%f", calcMag(mx));
-    		Display_printf(display, 0, 0, "%f", calcMag(my));
-    		Display_printf(display, 0, 0, "%f", calcMag(mz));
-    		Display_printf(display, 0, 0, "%02x", settings.mag.sampleRate);
-    		Display_printf(display, 0, 0, "\n\n");
+				Display_printf(display, 0, 0, "%f", calcMag(mx));
+				Display_printf(display, 0, 0, "%f", calcMag(my));
+				Display_printf(display, 0, 0, "%f", calcMag(mz));
+				Display_printf(display, 0, 0, "\n\n");
+    		}
         /* Wait a while, because doWork should be a periodic thing, not continuous.*/
-        Task_sleep(50 * (1000 / Clock_tickPeriod));
+//        Task_sleep(50 * (1000 / Clock_tickPeriod));
     }
 }
 
@@ -91,10 +116,23 @@ Void runningTaskFunc(UArg arg0, UArg arg1)
  *  ======== gpioButtonFxn0 ========
  *  Callback function for the GPIO interrupt on Board_GPIO_BUTTON0.
  */
-void gpioButtonFxn0(uint_least8_t index)
+int dex = 0;
+void buttonCallbackFxn(PIN_Handle handle, PIN_Id pinId)
 {
     /* Clear the GPIO interrupt and toggle an LED */
-    GPIO_toggle(Board_GPIO_LED0);
+	uint32_t currVal = 0;
+	if(dex<1){
+		currVal =  PIN_getOutputValue(Board_PIN_LED0);
+		PIN_setOutputValue(buttonPinHandle, Board_PIN_LED0, !currVal);
+		dex += 1;
+	}
+	else{
+		currVal =  PIN_getOutputValue(Board_PIN_LED0);
+		PIN_setOutputValue(buttonPinHandle, Board_PIN_LED1, !currVal);
+		dex -= 1;
+	}
+
+//    GPIO_toggle(Board_GPIO_LED0);
     Semaphore_post(getDatasemaphoreHandle);
 }
 
@@ -109,12 +147,14 @@ int main(void)
     GPIO_init();
     Display_init();
     I2C_init();
+    PIN_init(buttonPinTable);
 
     /* Open Display */
     display = Display_open(Display_Type_UART, NULL);
     if (display == NULL){
     		while(1);
     }
+
 
     	/* Open I2C connection to LSM9DS1 */
     LSM9DS1init();
@@ -149,11 +189,23 @@ int main(void)
     Semaphore_construct(&getDatasemaphore, 0, NULL);
     getDatasemaphoreHandle = Semaphore_handle(&getDatasemaphore);
 
-    /* install Button callback */
-    GPIO_setCallback(Board_GPIO_BUTTON0, gpioButtonFxn0);
+    buttonPinHandle = PIN_open(&buttonPinState, buttonPinTable);
+	if(!buttonPinHandle) {
+		/* Error initializing button pins */
+		while(1);
+	}
 
-    /* Enable interrupts */
-    GPIO_enableInt(Board_GPIO_BUTTON0);
+    /* Setup callback for button pins */
+    if (PIN_registerIntCb(buttonPinHandle, &buttonCallbackFxn) != 0) {
+        /* Error registering button callback function */
+        while(1);
+    }
+
+//    /* install Button callback */
+//    GPIO_setCallback(Board_GPIO_BUTTON0, gpioButtonFxn0);
+//
+//    /* Enable interrupts */
+//    GPIO_enableInt(Board_GPIO_BUTTON0);
 
     /* Start kernel. */
     BIOS_start();

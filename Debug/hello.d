@@ -145,20 +145,17 @@ hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/c
 hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../driverlib/rom.h
 hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/gpio.h
 hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_gpio.h
-hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/BIOS.h
-hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Types.h
-hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/BIOS__prologue.h
-hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/package/package.defs.h
-hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Error.h
-hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Types.h
-hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IModule.h
-hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IGateProvider.h
-hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/package/BIOS_RtsGateProxy.h
+hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/posix/unistd.h
+hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/posix/sys/types.h
+hello.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
+hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Queue.h
+hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Semaphore.h
 hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Types.h
 hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IInstance.h
-hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IGateProvider.h
-hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/BIOS__epilogue.h
-hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/package/BIOS_RtsGateProxy.h
+hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Diags.h
+hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Log.h
+hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Assert.h
+hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Queue.h
 hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Task.h
 hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Types.h
 hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IInstance.h
@@ -179,15 +176,6 @@ hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packa
 hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Types.h
 hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/interfaces/ITaskSupport.h
 hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Task__epilogue.h
-hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/package/Task_SupportProxy.h
-hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Semaphore.h
-hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Types.h
-hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IInstance.h
-hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Diags.h
-hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Log.h
-hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Assert.h
-hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Queue.h
-hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Task.h
 hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Clock.h
 hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IModule.h
 hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Event.h
@@ -202,9 +190,37 @@ hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packa
 hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Task.h
 hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IModule.h
 hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Event__epilogue.h
+hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/BIOS.h
+hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Types.h
+hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/BIOS__prologue.h
+hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/package/package.defs.h
+hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Error.h
+hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Types.h
+hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IModule.h
+hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IGateProvider.h
+hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/package/BIOS_RtsGateProxy.h
+hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Types.h
+hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IInstance.h
+hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IGateProvider.h
+hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/BIOS__epilogue.h
+hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/package/BIOS_RtsGateProxy.h
+hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Task.h
+hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/package/Task_SupportProxy.h
+hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Semaphore.h
 hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Clock.h
 hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/display/Display.h
 hello.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stdarg.h
+hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/Power.h
+hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/utils/List.h
+hello.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
+hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/power/PowerCC26XX.h
+hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/dpl/HwiP.h
+hello.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
+hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/dpl/ClockP.h
+hello.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
+hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/pin/PINCC26XX.h
+hello.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
+hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/DeviceFamily.h
 
 ../hello.c: 
 ../LSM9DS1.h: 
@@ -351,20 +367,17 @@ hello.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stda
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../driverlib/rom.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/gpio.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_gpio.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/BIOS.h: 
-/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Types.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/BIOS__prologue.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/package/package.defs.h: 
-/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Error.h: 
-/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Types.h: 
-/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IModule.h: 
-/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IGateProvider.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/package/BIOS_RtsGateProxy.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/posix/unistd.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/posix/sys/types.h: 
+/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Queue.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Semaphore.h: 
 /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Types.h: 
 /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IInstance.h: 
-/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IGateProvider.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/BIOS__epilogue.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/package/BIOS_RtsGateProxy.h: 
+/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Diags.h: 
+/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Log.h: 
+/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Assert.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Queue.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Task.h: 
 /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Types.h: 
 /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IInstance.h: 
@@ -385,15 +398,6 @@ hello.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stda
 /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Types.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/interfaces/ITaskSupport.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Task__epilogue.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/package/Task_SupportProxy.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Semaphore.h: 
-/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Types.h: 
-/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IInstance.h: 
-/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Diags.h: 
-/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Log.h: 
-/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Assert.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Queue.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Task.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Clock.h: 
 /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IModule.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Event.h: 
@@ -408,6 +412,34 @@ hello.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stda
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Task.h: 
 /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IModule.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Event__epilogue.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/BIOS.h: 
+/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Types.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/BIOS__prologue.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/package/package.defs.h: 
+/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Error.h: 
+/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Types.h: 
+/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IModule.h: 
+/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IGateProvider.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/package/BIOS_RtsGateProxy.h: 
+/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Types.h: 
+/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IInstance.h: 
+/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IGateProvider.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/BIOS__epilogue.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/package/BIOS_RtsGateProxy.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Task.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/package/Task_SupportProxy.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Semaphore.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Clock.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/display/Display.h: 
 /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stdarg.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/Power.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/utils/List.h: 
+/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/power/PowerCC26XX.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/dpl/HwiP.h: 
+/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/dpl/ClockP.h: 
+/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/pin/PINCC26XX.h: 
+/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/DeviceFamily.h: 
