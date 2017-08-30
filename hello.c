@@ -40,7 +40,8 @@ static PIN_State buttonPinState;
  *   - Buttons interrupts are configured to trigger on rising edge.
  */
 PIN_Config buttonPinTable[] = {
-    Board_PIN_BUTTON0  | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_POSEDGE,
+	CC1310_LAUNCHXL_DIO15  | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_POSEDGE,
+	Board_PIN_BUTTON0  | PIN_INPUT_EN | PIN_PULLUP | PIN_IRQ_NEGEDGE,
 	CC1310_LAUNCHXL_PIN_RLED | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
 	CC1310_LAUNCHXL_PIN_GLED | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
     PIN_TERMINATE
@@ -112,29 +113,38 @@ Void runningTaskFunc(UArg arg0, UArg arg1)
     }
 }
 
-/*
- *  ======== gpioButtonFxn0 ========
- *  Callback function for the GPIO interrupt on Board_GPIO_BUTTON0.
- */
-int dex = 0;
-void buttonCallbackFxn(PIN_Handle handle, PIN_Id pinId)
-{
-    /* Clear the GPIO interrupt and toggle an LED */
-	uint32_t currVal = 0;
-	if(dex<1){
-		currVal =  PIN_getOutputValue(Board_PIN_LED0);
-		PIN_setOutputValue(buttonPinHandle, Board_PIN_LED0, !currVal);
-		dex += 1;
-	}
-	else{
-		currVal =  PIN_getOutputValue(Board_PIN_LED0);
-		PIN_setOutputValue(buttonPinHandle, Board_PIN_LED1, !currVal);
-		dex -= 1;
-	}
+void buttonCallbackFxn(PIN_Handle handle, PIN_Id pinId) {
+    uint32_t currVal = 0;
+	switch (pinId) {
+		case Board_PIN_BUTTON0:
+			currVal =  PIN_getOutputValue(Board_PIN_LED0);
+			PIN_setOutputValue(buttonPinHandle, Board_PIN_LED0, !currVal);
+			break;
 
-//    GPIO_toggle(Board_GPIO_LED0);
-    Semaphore_post(getDatasemaphoreHandle);
+		case CC1310_LAUNCHXL_DIO15:
+			currVal =  PIN_getOutputValue(Board_PIN_LED1);
+			PIN_setOutputValue(buttonPinHandle, Board_PIN_LED1, !currVal);
+			Semaphore_post(getDatasemaphoreHandle);
+			break;
+
+		default:
+			/* Do nothing */
+			break;
+	}
 }
+
+///*
+// *  ======== gpioButtonFxn0 ========
+// *  Callback function for the GPIO interrupt on Board_GPIO_BUTTON0.
+// */
+//void buttonCallbackFxn(PIN_Handle handle, PIN_Id pinId)
+//{
+//    /* Clear the GPIO interrupt and toggle an LED */
+//	uint32_t currVal = 0;
+//	currVal =  PIN_getOutputValue(Board_PIN_LED0);
+//	PIN_setOutputValue(buttonPinHandle, Board_PIN_LED0, !currVal);
+//    Semaphore_post(getDatasemaphoreHandle);
+//}
 
 /*
  *  ======== main ========
