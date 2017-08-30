@@ -41,7 +41,7 @@ static PIN_State pinState;
  */
 PIN_Config pinTable[] = {
 	CC1310_LAUNCHXL_DIO15  | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_POSEDGE,
-	Board_PIN_BUTTON0  | PIN_INPUT_EN | PIN_PULLUP | PIN_IRQ_NEGEDGE,
+	CC1310_LAUNCHXL_DIO12  | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_POSEDGE,
 	CC1310_LAUNCHXL_PIN_RLED | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
 	CC1310_LAUNCHXL_PIN_GLED | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
     PIN_TERMINATE
@@ -51,6 +51,7 @@ PIN_Config pinTable[] = {
 Task_Struct initializationTask;
 Task_Struct calibrationTask;
 Task_Struct magTask;
+Task_Struct gyroTask;
 
 /* Semaphore structs */
 static Semaphore_Struct initSemaphore;
@@ -62,12 +63,19 @@ static Semaphore_Handle calibSemaphoreHandle;
 static Semaphore_Struct magSemaphore;
 static Semaphore_Handle magSemaphoreHandle;
 
+static Semaphore_Struct gyroSemaphore;
+static Semaphore_Handle gyroSemaphoreHandle;
+
+static Semaphore_Struct batonSemaphore;
+static Semaphore_Handle batonSemaphoreHandle;
+
 /* Make sure we have nice 8-byte alignment on the stack to avoid wasting memory */
 #pragma DATA_ALIGN(initializationTaskStack, 8)
 #define STACKSIZE 2048
 static uint8_t initializationTaskStack[STACKSIZE];
 static uint8_t calibrationTaskStack[STACKSIZE];
 static uint8_t magTaskStack[STACKSIZE];
+static uint8_t gyroTaskStack[STACKSIZE];
 
 int goodToGo = 0;
 
@@ -92,6 +100,7 @@ Void calibrationTaskFunc(UArg arg0, UArg arg1)
 		calibrate(1);
 		calibrateMag(1);
 		goodToGo += 1;
+		readGyro();
 	}
 }
 
@@ -99,25 +108,49 @@ Void magTaskFunc(UArg arg0, UArg arg1)
 {
     while (1) {
     		Semaphore_pend(magSemaphoreHandle, BIOS_WAIT_FOREVER);
+    		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
     		if(goodToGo){
     			readMag();
+    			Display_printf(display, 0, 0, "Magnetometer");
 			Display_printf(display, 0, 0, "%f", calcMag(mx));
 			Display_printf(display, 0, 0, "%f", calcMag(my));
 			Display_printf(display, 0, 0, "%f", calcMag(mz));
 			Display_printf(display, 0, 0, "\n\n");
     		}
+    		Semaphore_post(batonSemaphoreHandle);
+        /* Wait a while, because doWork should be a periodic thing, not continuous.*/
+//        Task_sleep(50 * (1000 / Clock_tickPeriod));
+    }
+}
+
+Void gyroTaskFunc(UArg arg0, UArg arg1)
+{
+    while (1) {
+    		Semaphore_pend(gyroSemaphoreHandle, BIOS_WAIT_FOREVER);
+    		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
+    		if(goodToGo){
+    			readGyro();
+    			Display_printf(display, 0, 0, "Gyro");
+			Display_printf(display, 0, 0, "%f", calcGyro(gx));
+			Display_printf(display, 0, 0, "%f", calcGyro(gy));
+			Display_printf(display, 0, 0, "%f", calcGyro(gz));
+			Display_printf(display, 0, 0, "\n\n");
+    		}
+    		Semaphore_post(batonSemaphoreHandle);
         /* Wait a while, because doWork should be a periodic thing, not continuous.*/
 //        Task_sleep(50 * (1000 / Clock_tickPeriod));
     }
 }
 
 
+
 void pinCallback(PIN_Handle handle, PIN_Id pinId) {
     uint32_t currVal = 0;
 	switch (pinId) {
-		case Board_PIN_BUTTON0:
+		case CC1310_LAUNCHXL_DIO12:
 			currVal =  PIN_getOutputValue(Board_PIN_LED0);
 			PIN_setOutputValue(pinHandle, Board_PIN_LED0, !currVal);
+			Semaphore_post(gyroSemaphoreHandle);
 			break;
 
 		case CC1310_LAUNCHXL_DIO15:
@@ -131,6 +164,7 @@ void pinCallback(PIN_Handle handle, PIN_Id pinId) {
 			break;
 	}
 }
+
 
 /*
  *  ======== main ========
@@ -165,7 +199,6 @@ int main(void)
     Task_construct(&initializationTask, initializationTaskFunc,
     		           &task_params, NULL);
 
-
     task_params.priority = 2;
     task_params.stack = &calibrationTaskStack;
     Task_construct(&calibrationTask, calibrationTaskFunc,
@@ -174,6 +207,11 @@ int main(void)
     task_params.priority = 1;
     task_params.stack = &magTaskStack;
     Task_construct(&magTask, magTaskFunc,
+    		           &task_params, NULL);
+
+    task_params.priority = 1;
+    task_params.stack = &gyroTaskStack;
+    Task_construct(&gyroTask, gyroTaskFunc,
     		           &task_params, NULL);
 
 
@@ -186,6 +224,12 @@ int main(void)
 
     Semaphore_construct(&magSemaphore, 0, NULL);
     magSemaphoreHandle = Semaphore_handle(&magSemaphore);
+
+    Semaphore_construct(&gyroSemaphore, 0, NULL);
+    gyroSemaphoreHandle = Semaphore_handle(&gyroSemaphore);
+
+    Semaphore_construct(&batonSemaphore, 1, NULL);
+    batonSemaphoreHandle = Semaphore_handle(&batonSemaphore);
 
     pinHandle = PIN_open(&pinState, pinTable);
 	if(!pinHandle) {
