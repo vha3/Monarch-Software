@@ -80,6 +80,13 @@ uint8_t _mAddress, _xgAddress;
 float gRes, aRes, mRes;
 bool _autoCalc;
 
+float AXN = 0;
+float AYN = 0;
+float AZN = -1.;
+float MXN;
+float MYN;
+float MZN;
+
 /*
  * Initialization
  */
@@ -146,7 +153,7 @@ void LSM9DS1init(void)
 	// 1 = 1.25 Hz   5 = 20 Hz
 	// 2 = 2.5 Hz    6 = 40 Hz
 	// 3 = 5 Hz      7 = 80 Hz
-	settings.mag.sampleRate = 7;
+	settings.mag.sampleRate = 5;
 	settings.mag.tempCompensationEnable = false;
 	// magPerformance can be any value between 0-3
 	// 0 = Low power mode      2 = high performance
@@ -1115,6 +1122,26 @@ void calibrate(bool autoCalc)
 //	setFIFO(FIFO_OFF, 0x00);
 
 	if (autoCalc) _autoCalc = true;
+}
+
+void getMagInitial()
+{
+	uint8_t samples = 20;
+	int ii;
+	int32_t mcalib[3] = {0, 0, 0};
+
+	for(ii = 0; ii < samples ; ii++)
+	{
+		readMag();
+		mcalib[0] += mx;
+		mcalib[1] += my;
+		mcalib[2] += mz;
+		readAccel();
+	}
+	MXN = mcalib[0]/samples;
+	MYN = mcalib[1]/samples;
+	MZN = mcalib[2]/samples;
+
 }
 
 void calibrateMag(bool loadIn)
