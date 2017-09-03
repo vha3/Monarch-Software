@@ -27,8 +27,6 @@
 /* Example/Board Header files */
 #include "Board.h"
 
-/* another test push */
-
 /* Display Handle */
 static Display_Handle display;
 
