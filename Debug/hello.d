@@ -145,6 +145,7 @@ hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/c
 hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../driverlib/rom.h
 hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/gpio.h
 hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_gpio.h
+hello.obj: ../TRIAD.h
 hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/posix/unistd.h
 hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/posix/sys/types.h
 hello.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
@@ -368,6 +369,7 @@ hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/D
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../driverlib/rom.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/gpio.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_gpio.h: 
+../TRIAD.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/posix/unistd.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/posix/sys/types.h: 
 /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 
