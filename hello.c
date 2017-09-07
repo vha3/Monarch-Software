@@ -36,7 +36,7 @@
 
 /* TX quantities */
 #define RFEASYLINKTX_BURST_SIZE         10
-#define RFEASYLINKTXPAYLOAD_LENGTH      30
+#define RFEASYLINKTXPAYLOAD_LENGTH      29
 
 /* Display Handle */
 static Display_Handle display;
@@ -89,8 +89,17 @@ static Semaphore_Handle accelSemaphoreHandle;
 static Semaphore_Struct attitudeSemaphore;
 static Semaphore_Handle attitudeSemaphoreHandle;
 
-static Semaphore_Struct txSemaphore;
-static Semaphore_Handle txSemaphoreHandle;
+//static Semaphore_Struct txSemaphore;
+//static Semaphore_Handle txSemaphoreHandle;
+
+static Semaphore_Struct txGyroSemaphore;
+static Semaphore_Handle txGyroSemaphoreHandle;
+
+static Semaphore_Struct txAccelSemaphore;
+static Semaphore_Handle txAccelSemaphoreHandle;
+
+static Semaphore_Struct txMagSemaphore;
+static Semaphore_Handle txMagSemaphoreHandle;
 
 static Semaphore_Struct batonSemaphore;
 static Semaphore_Handle batonSemaphoreHandle;
@@ -106,6 +115,32 @@ static uint8_t attitudeTaskStack[400];
 static uint8_t txTaskStack[1024];
 
 int goodToGo = 0;
+
+/* ###########################################################
+ * Some Bit Manipulation Functions
+ */
+static uint16_t seqNumber;
+
+uint8_t sign(int16_t x)
+{
+	if(x>0){
+		return 1;
+	}
+	else{
+		return 0;
+	}
+}
+
+uint8_t lowerPart(int16_t x){
+	return (x & 0xff);
+}
+
+uint8_t upperPart(int16_t x){
+	return (x >> 8);
+}
+/*
+ * ###########################################################
+ */
 
 /* Message is SPACE SYSTEMS DESIGN STUDIO */
 uint8_t message[30] = {0x20, 0x53, 0x50, 0x41, 0x43, 0x45, 0x20, 0x53,
@@ -153,6 +188,7 @@ Void magTaskFunc(UArg arg0, UArg arg1)
     			readMag();
     		}
     		Semaphore_post(attitudeSemaphoreHandle);
+    		Semaphore_post(txMagSemaphoreHandle);
     		Semaphore_post(batonSemaphoreHandle);
     }
 }
@@ -166,6 +202,7 @@ Void gyroTaskFunc(UArg arg0, UArg arg1)
     			readGyro();
     		}
     		Semaphore_post(attitudeSemaphoreHandle);
+    		Semaphore_post(txGyroSemaphoreHandle);
     		Semaphore_post(batonSemaphoreHandle);
     }
 }
@@ -179,6 +216,7 @@ Void accelTaskFunc(UArg arg0, UArg arg1)
     			readAccel();
     		}
     		Semaphore_post(attitudeSemaphoreHandle);
+    		Semaphore_post(txAccelSemaphoreHandle);
     		Semaphore_post(batonSemaphoreHandle);
     }
 }
@@ -191,7 +229,7 @@ Void attitudeTaskFunc(UArg arg0, UArg arg1)
 		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
 		if(goodToGo){
 
-			Display_printf(display, 0, 0, "attitude");
+//			Display_printf(display, 0, 0, "attitude");
 
 //			computeAttitude(mx, my, mz, ax, ay, az, attitudeBuffer);
 //			float a11 = attitudeBuffer[0];
@@ -206,7 +244,7 @@ Void attitudeTaskFunc(UArg arg0, UArg arg1)
 //			Display_printf(display, 0, 0, "%f, %f, %f, %f, %f, %f, %f, %f, %f", a11, a12, a13, a21, a22, a23, a31, a32, a33);
 		}
 		Semaphore_post(batonSemaphoreHandle);
-		Semaphore_post(txSemaphoreHandle);
+//		Semaphore_post(txSemaphoreHandle);
 	}
 }
 
@@ -215,16 +253,49 @@ Void txTaskFunc(UArg arg0, UArg arg1)
 	EasyLink_init(EasyLink_Phy_Custom);
 	EasyLink_setRfPwr(12);
 	while(1) {
-		Semaphore_pend(txSemaphoreHandle, BIOS_WAIT_FOREVER);
+		Semaphore_pend(txGyroSemaphoreHandle, BIOS_WAIT_FOREVER);
+		Semaphore_pend(txAccelSemaphoreHandle, BIOS_WAIT_FOREVER);
+		Semaphore_pend(txMagSemaphoreHandle, BIOS_WAIT_FOREVER);
 		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
 		if(goodToGo){
 			EasyLink_abort();
 			EasyLink_TxPacket txPacket =  { {0}, 0, 0, {0} };
-			uint8_t i;
-			for (i = 0; i < RFEASYLINKTXPAYLOAD_LENGTH; i++)
-			{
-			  txPacket.payload[i] = message[i];
-			}
+//			uint8_t i;
+			txPacket.payload[0] = (uint8_t)(seqNumber >> 8);
+			txPacket.payload[1] = (uint8_t)(seqNumber++);
+			txPacket.payload[2] = sign(ax);
+			txPacket.payload[3] = upperPart(ax);
+			txPacket.payload[4] = lowerPart(ax);
+			txPacket.payload[5] = sign(ay);
+			txPacket.payload[6] = upperPart(ay);
+			txPacket.payload[7] = lowerPart(ay);
+			txPacket.payload[8] = sign(az);
+			txPacket.payload[9] = upperPart(az);
+			txPacket.payload[10] = lowerPart(az);
+
+			txPacket.payload[11] = sign(gx);
+			txPacket.payload[12] = upperPart(gx);
+			txPacket.payload[13] = lowerPart(gx);
+			txPacket.payload[14] = sign(gy);
+			txPacket.payload[15] = upperPart(gy);
+			txPacket.payload[16] = lowerPart(gy);
+			txPacket.payload[17] = sign(gz);
+			txPacket.payload[18] = upperPart(gz);
+			txPacket.payload[19] = lowerPart(gz);
+
+			txPacket.payload[20] = sign(mx);
+			txPacket.payload[21] = upperPart(mx);
+			txPacket.payload[22] = lowerPart(mx);
+			txPacket.payload[23] = sign(my);
+			txPacket.payload[24] = upperPart(my);
+			txPacket.payload[25] = lowerPart(my);
+			txPacket.payload[26] = sign(mz);
+			txPacket.payload[27] = upperPart(mz);
+			txPacket.payload[28] = lowerPart(mz);
+//			for (i = 0; i < RFEASYLINKTXPAYLOAD_LENGTH; i++)
+//			{
+//			  txPacket.payload[i] = message[i];
+//			}
 	        txPacket.len = RFEASYLINKTXPAYLOAD_LENGTH;
 	        txPacket.dstAddr[0] = 0xaa;
 	        txPacket.absTime = 0;
@@ -297,7 +368,7 @@ int main(void)
     LSM9DS1init();
     initI2C();
 
-    /* Set up the led task */
+    /* Setup/create tasks */
     Task_Params task_params;
     Task_Params_init(&task_params);
     task_params.stackSize = 400;
@@ -343,7 +414,7 @@ int main(void)
 				   &task_params, NULL);
 
 
-    /* Create Semaphore */
+    /* Create Semaphores */
     Semaphore_construct(&initSemaphore, 1, NULL);
     initSemaphoreHandle = Semaphore_handle(&initSemaphore);
 
@@ -362,8 +433,17 @@ int main(void)
     Semaphore_construct(&attitudeSemaphore, 0, NULL);
     attitudeSemaphoreHandle = Semaphore_handle(&attitudeSemaphore);
 
-    Semaphore_construct(&txSemaphore, 0, NULL);
-    txSemaphoreHandle = Semaphore_handle(&txSemaphore);
+//    Semaphore_construct(&txSemaphore, 0, NULL);
+//    txSemaphoreHandle = Semaphore_handle(&txSemaphore);
+
+	Semaphore_construct(&txGyroSemaphore, 0, NULL);
+	txGyroSemaphoreHandle = Semaphore_handle(&txGyroSemaphore);
+
+	Semaphore_construct(&txAccelSemaphore, 0, NULL);
+	txAccelSemaphoreHandle = Semaphore_handle(&txAccelSemaphore);
+
+	Semaphore_construct(&txMagSemaphore, 0, NULL);
+	txMagSemaphoreHandle = Semaphore_handle(&txMagSemaphore);
 
     Semaphore_construct(&batonSemaphore, 1, NULL);
     batonSemaphoreHandle = Semaphore_handle(&batonSemaphore);
