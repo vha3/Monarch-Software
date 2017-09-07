@@ -4,20 +4,14 @@
  * vha3@cornell.edu
  */
 
-//#include "LSM9DS1_Registers.h"
-#include "LSM9DS1.h"
-#include "TRIAD.h"
-
 /* TI-RTOS Header files */
 #include <xdc/std.h>
 #include <unistd.h>
-#include <ti/sysbios/BIOS.h>
-#include <ti/sysbios/knl/Task.h>
-#include <ti/sysbios/knl/Semaphore.h>
+#include <stdlib.h>
+#include <xdc/runtime/System.h>
+#include <xdc/runtime/Error.h>
 
 /* Driver header files */
-#include <ti/sysbios/knl/Clock.h>
-#include <ti/sysbios/knl/Swi.h>
 #include <ti/drivers/I2C.h>
 #include <ti/display/Display.h>
 #include <ti/drivers/Power.h>
@@ -25,12 +19,27 @@
 #include <ti/drivers/PIN.h>
 #include <ti/drivers/pin/PINCC26XX.h>
 
+/* BIOS Header files */
+#include <ti/sysbios/knl/Clock.h>
+#include <ti/sysbios/BIOS.h>
+#include <ti/sysbios/knl/Task.h>
+#include <ti/sysbios/knl/Semaphore.h>
+
 /* Example/Board Header files */
 #include "Board.h"
 
+/* Other header files */
+#include "LSM9DS1.h"
+//#include "TRIAD.h"
+#include "smartrf_settings/smartrf_settings.h"
+#include "easylink/EasyLink.h"
+
+/* TX quantities */
+#define RFEASYLINKTX_BURST_SIZE         10
+#define RFEASYLINKTXPAYLOAD_LENGTH      30
+
 /* Display Handle */
 static Display_Handle display;
-
 
 /* Pin handles and states*/
 static PIN_Handle pinHandle;
@@ -56,9 +65,10 @@ Task_Struct magTask;
 Task_Struct gyroTask;
 Task_Struct accelTask;
 Task_Struct attitudeTask;
+Task_Struct txTask;
 
 /* Attitude buffer */
-float attitudeBuffer[9];
+//float attitudeBuffer[9];
 
 /* Semaphore structs */
 static Semaphore_Struct initSemaphore;
@@ -79,20 +89,25 @@ static Semaphore_Handle accelSemaphoreHandle;
 static Semaphore_Struct attitudeSemaphore;
 static Semaphore_Handle attitudeSemaphoreHandle;
 
+static Semaphore_Struct txSemaphore;
+static Semaphore_Handle txSemaphoreHandle;
+
 static Semaphore_Struct batonSemaphore;
 static Semaphore_Handle batonSemaphoreHandle;
 
 /* Make sure we have nice 8-byte alignment on the stack to avoid wasting memory */
-#pragma DATA_ALIGN(initializationTaskStack, 8)
-#define STACKSIZE 1024
-static uint8_t initializationTaskStack[STACKSIZE];
-static uint8_t calibrationTaskStack[STACKSIZE];
-static uint8_t magTaskStack[STACKSIZE];
-static uint8_t gyroTaskStack[STACKSIZE];
-static uint8_t accelTaskStack[STACKSIZE];
-static uint8_t attitudeTaskStack[STACKSIZE];
+#pragma DATA_ALIGN(txTaskStack, 8)
+//#define STACKSIZE 400
+static uint8_t initializationTaskStack[400];
+static uint8_t calibrationTaskStack[400];
+static uint8_t magTaskStack[400];
+static uint8_t gyroTaskStack[400];
+static uint8_t accelTaskStack[400];
+static uint8_t attitudeTaskStack[400];
+static uint8_t txTaskStack[1024];
 
 int goodToGo = 0;
+static uint16_t seqNumber;
 
 /*
  * As far as I can tell, it's not strictly necessary to have
@@ -167,29 +182,6 @@ Void accelTaskFunc(UArg arg0, UArg arg1)
 }
 
 
-//float crossProductX(float u1, float u2, float u3,
-//		            float v1, float v2, float v3)
-//{
-//	return u2*v3-u3*v2;
-//}
-//
-//float crossProductY(float u1, float u2, float u3,
-//					float v1, float v2, float v3)
-//{
-//	return u3*v1-u1*v3;
-//}
-//
-//float crossProductZ(float u1, float u2, float u3,
-//					float v1, float v2, float v3)
-//{
-//	return u1*v2-u2*v1;
-//}
-//
-//float vectorMagnitude(float u1, float u2, float u3)
-//{
-//	return sqrt(u1*u1 + u2*u2 + u3*u3);
-//}
-
 Void attitudeTaskFunc(UArg arg0, UArg arg1)
 {
 	while(1) {
@@ -197,17 +189,57 @@ Void attitudeTaskFunc(UArg arg0, UArg arg1)
 		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
 		if(goodToGo){
 
-			computeAttitude(mx, my, mz, ax, ay, az, attitudeBuffer);
-			float a11 = attitudeBuffer[0];
-			float a12 = attitudeBuffer[1];
-			float a13 = attitudeBuffer[2];
-			float a21 = attitudeBuffer[3];
-			float a22 = attitudeBuffer[4];
-			float a23 = attitudeBuffer[5];
-			float a31 = attitudeBuffer[6];
-			float a32 = attitudeBuffer[7];
-			float a33 = attitudeBuffer[8];
-			Display_printf(display, 0, 0, "%f, %f, %f, %f, %f, %f, %f, %f, %f", a11, a12, a13, a21, a22, a23, a31, a32, a33);
+//			computeAttitude(mx, my, mz, ax, ay, az, attitudeBuffer);
+//			float a11 = attitudeBuffer[0];
+//			float a12 = attitudeBuffer[1];
+//			float a13 = attitudeBuffer[2];
+//			float a21 = attitudeBuffer[3];
+//			float a22 = attitudeBuffer[4];
+//			float a23 = attitudeBuffer[5];
+//			float a31 = attitudeBuffer[6];
+//			float a32 = attitudeBuffer[7];
+//			float a33 = attitudeBuffer[8];
+//			Display_printf(display, 0, 0, "%f, %f, %f, %f, %f, %f, %f, %f, %f", a11, a12, a13, a21, a22, a23, a31, a32, a33);
+		}
+		Display_printf(display, 0, 0, "BUTT");
+		Semaphore_post(batonSemaphoreHandle);
+		Semaphore_post(txSemaphoreHandle);
+	}
+}
+
+Void txTaskFunc(UArg arg0, UArg arg1)
+{
+	EasyLink_init(EasyLink_Phy_Custom);
+	EasyLink_setRfPwr(12);
+	while(1) {
+		Semaphore_pend(txSemaphoreHandle, BIOS_WAIT_FOREVER);
+		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
+		if(goodToGo){
+			EasyLink_abort();
+			EasyLink_TxPacket txPacket =  { {0}, 0, 0, {0} };
+			txPacket.payload[0] = (uint8_t)(seqNumber >> 8);
+			txPacket.payload[1] = (uint8_t)(seqNumber++);
+			uint8_t i;
+			for (i = 2; i < RFEASYLINKTXPAYLOAD_LENGTH; i++)
+			{
+			  txPacket.payload[i] = 0xff;
+			}
+	        txPacket.len = RFEASYLINKTXPAYLOAD_LENGTH;
+	        txPacket.dstAddr[0] = 0xaa;
+	        txPacket.absTime = 0;
+	        EasyLink_Status result = EasyLink_transmit(&txPacket);
+
+	        if (result == EasyLink_Status_Success)
+			{
+				/* Toggle LED1 to indicate TX */
+				PIN_setOutputValue(pinHandle, Board_PIN_LED1,!PIN_getOutputValue(Board_PIN_LED1));
+			}
+			else
+			{
+				/* Toggle LED1 and LED2 to indicate error */
+				PIN_setOutputValue(pinHandle, Board_PIN_LED1,!PIN_getOutputValue(Board_PIN_LED1));
+				PIN_setOutputValue(pinHandle, Board_PIN_LED2,!PIN_getOutputValue(Board_PIN_LED2));
+			}
 		}
 		Semaphore_post(batonSemaphoreHandle);
 	}
@@ -267,36 +299,47 @@ int main(void)
     /* Set up the led task */
     Task_Params task_params;
     Task_Params_init(&task_params);
-    task_params.stackSize = STACKSIZE;
+    task_params.stackSize = 400;
     task_params.priority = 3;
     task_params.stack = &initializationTaskStack;
     Task_construct(&initializationTask, initializationTaskFunc,
     		           &task_params, NULL);
 
+    task_params.stackSize = 400;
     task_params.priority = 2;
     task_params.stack = &calibrationTaskStack;
     Task_construct(&calibrationTask, calibrationTaskFunc,
     				   &task_params, NULL);
 
+    	task_params.stackSize = 400;
     task_params.priority = 1;
     task_params.stack = &magTaskStack;
     Task_construct(&magTask, magTaskFunc,
     		           &task_params, NULL);
 
+    task_params.stackSize = 400;
     task_params.priority = 1;
     task_params.stack = &gyroTaskStack;
     Task_construct(&gyroTask, gyroTaskFunc,
     		           &task_params, NULL);
 
+    task_params.stackSize = 400;
     task_params.priority = 1;
     task_params.stack = &accelTaskStack;
     Task_construct(&accelTask, accelTaskFunc,
     		           &task_params, NULL);
 
+    task_params.stackSize = 400;
     task_params.priority = 1;
     task_params.stack = &attitudeTaskStack;
     Task_construct(&attitudeTask, attitudeTaskFunc,
     		           &task_params, NULL);
+
+    task_params.stackSize = 1024;
+    task_params.priority = 1;
+	task_params.stack = &txTaskStack;
+	Task_construct(&txTask, txTaskFunc,
+				   &task_params, NULL);
 
 
     /* Create Semaphore */
@@ -318,8 +361,12 @@ int main(void)
     Semaphore_construct(&attitudeSemaphore, 0, NULL);
     attitudeSemaphoreHandle = Semaphore_handle(&attitudeSemaphore);
 
+    Semaphore_construct(&txSemaphore, 0, NULL);
+    txSemaphoreHandle = Semaphore_handle(&txSemaphore);
+
     Semaphore_construct(&batonSemaphore, 1, NULL);
     batonSemaphoreHandle = Semaphore_handle(&batonSemaphore);
+
 
     pinHandle = PIN_open(&pinState, pinTable);
 	if(!pinHandle) {

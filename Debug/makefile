@@ -11,6 +11,9 @@ ORDERED_OBJS += \
 "./CC1310_LAUNCHXL.obj" \
 "./ccfg.obj" \
 "./hello.obj" \
+"./easylink/EasyLink.obj" \
+"./smartrf_settings/smartrf_settings.obj" \
+"./smartrf_settings/smartrf_settings_predefined.obj" \
 "../CC1310_LAUNCHXL_TIRTOS.cmd" \
 $(GEN_CMDS__FLAG) \
 -l"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/display/lib/display.aem3" \
@@ -31,7 +34,11 @@ RMDIR := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include subdir_vars.mk
+-include easylink/subdir_vars.mk
+-include smartrf_settings/subdir_vars.mk
 -include subdir_rules.mk
+-include easylink/subdir_rules.mk
+-include smartrf_settings/subdir_rules.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -162,8 +169,8 @@ hello_CC1310_LAUNCHXL_tirtos_ccs.hex: $(EXE_OUTPUTS)
 clean:
 	-$(RM) $(GEN_CMDS__QUOTED)$(GEN_MISC_FILES__QUOTED)$(BIN_OUTPUTS__QUOTED)$(GEN_FILES__QUOTED)$(EXE_OUTPUTS__QUOTED)$(GEN_OPTS__QUOTED)
 	-$(RMDIR) $(GEN_MISC_DIRS__QUOTED)
-	-$(RM) "CC1310_LAUNCHXL.obj" "ccfg.obj" "hello.obj" 
-	-$(RM) "CC1310_LAUNCHXL.d" "ccfg.d" "hello.d" 
+	-$(RM) "CC1310_LAUNCHXL.obj" "ccfg.obj" "hello.obj" "easylink/EasyLink.obj" "smartrf_settings/smartrf_settings.obj" "smartrf_settings/smartrf_settings_predefined.obj" 
+	-$(RM) "CC1310_LAUNCHXL.d" "ccfg.d" "hello.d" "easylink/EasyLink.d" "smartrf_settings/smartrf_settings.d" "smartrf_settings/smartrf_settings_predefined.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
