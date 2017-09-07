@@ -97,7 +97,6 @@ static Semaphore_Handle batonSemaphoreHandle;
 
 /* Make sure we have nice 8-byte alignment on the stack to avoid wasting memory */
 #pragma DATA_ALIGN(txTaskStack, 8)
-//#define STACKSIZE 400
 static uint8_t initializationTaskStack[400];
 static uint8_t calibrationTaskStack[400];
 static uint8_t magTaskStack[400];
@@ -107,7 +106,12 @@ static uint8_t attitudeTaskStack[400];
 static uint8_t txTaskStack[1024];
 
 int goodToGo = 0;
-static uint16_t seqNumber;
+
+/* Message is SPACE SYSTEMS DESIGN STUDIO */
+uint8_t message[30] = {0x20, 0x53, 0x50, 0x41, 0x43, 0x45, 0x20, 0x53,
+		0x59, 0x53, 0x54, 0x45, 0x4d, 0x53, 0x20, 0x44, 0x45, 0x53,
+		0x49, 0x47, 0x4e, 0x20, 0x53, 0x54, 0x55, 0x44, 0x49, 0x4f,
+		0x20, 0x20};
 
 /*
  * As far as I can tell, it's not strictly necessary to have
@@ -118,7 +122,6 @@ Void initializationTaskFunc(UArg arg0, UArg arg1)
 {
     while (1) {
     		Semaphore_pend(initSemaphoreHandle,BIOS_WAIT_FOREVER);
-//        	Display_printf(display, 0, 0, "Initializing");
         uint16_t workpls = LSM9DS1begin();
         configInt(XG_INT1, INT_DRDY_G, INT_ACTIVE_HIGH, INT_PUSH_PULL);
         configInt(XG_INT2, INT_DRDY_XL, INT_ACTIVE_HIGH, INT_PUSH_PULL);
@@ -130,7 +133,6 @@ Void calibrationTaskFunc(UArg arg0, UArg arg1)
 {
 	while (1) {
 		Semaphore_pend(calibSemaphoreHandle, BIOS_WAIT_FOREVER);
-//		Display_printf(display, 0, 0, "Calibrating");
 		calibrate(1);
 //		calibrateMag(1);
 		/* getMagInitial is only required if you're calibrating for the computer attitude */
@@ -189,6 +191,8 @@ Void attitudeTaskFunc(UArg arg0, UArg arg1)
 		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
 		if(goodToGo){
 
+			Display_printf(display, 0, 0, "attitude");
+
 //			computeAttitude(mx, my, mz, ax, ay, az, attitudeBuffer);
 //			float a11 = attitudeBuffer[0];
 //			float a12 = attitudeBuffer[1];
@@ -201,7 +205,6 @@ Void attitudeTaskFunc(UArg arg0, UArg arg1)
 //			float a33 = attitudeBuffer[8];
 //			Display_printf(display, 0, 0, "%f, %f, %f, %f, %f, %f, %f, %f, %f", a11, a12, a13, a21, a22, a23, a31, a32, a33);
 		}
-		Display_printf(display, 0, 0, "BUTT");
 		Semaphore_post(batonSemaphoreHandle);
 		Semaphore_post(txSemaphoreHandle);
 	}
@@ -217,12 +220,10 @@ Void txTaskFunc(UArg arg0, UArg arg1)
 		if(goodToGo){
 			EasyLink_abort();
 			EasyLink_TxPacket txPacket =  { {0}, 0, 0, {0} };
-			txPacket.payload[0] = (uint8_t)(seqNumber >> 8);
-			txPacket.payload[1] = (uint8_t)(seqNumber++);
 			uint8_t i;
-			for (i = 2; i < RFEASYLINKTXPAYLOAD_LENGTH; i++)
+			for (i = 0; i < RFEASYLINKTXPAYLOAD_LENGTH; i++)
 			{
-			  txPacket.payload[i] = 0xff;
+			  txPacket.payload[i] = message[i];
 			}
 	        txPacket.len = RFEASYLINKTXPAYLOAD_LENGTH;
 	        txPacket.dstAddr[0] = 0xaa;
