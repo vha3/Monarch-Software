@@ -90,9 +90,6 @@ static Semaphore_Handle accelSemaphoreHandle;
 static Semaphore_Struct attitudeSemaphore;
 static Semaphore_Handle attitudeSemaphoreHandle;
 
-//static Semaphore_Struct txSemaphore;
-//static Semaphore_Handle txSemaphoreHandle;
-
 static Semaphore_Struct txGyroSemaphore;
 static Semaphore_Handle txGyroSemaphoreHandle;
 
@@ -273,15 +270,14 @@ Void attitudeTaskFunc(UArg arg0, UArg arg1)
 //			Display_printf(display, 0, 0, "%f, %f, %f, %f, %f, %f, %f, %f, %f", a11, a12, a13, a21, a22, a23, a31, a32, a33);
 		}
 		Semaphore_post(batonSemaphoreHandle);
-//		Semaphore_post(txSemaphoreHandle);
 	}
 }
 
+EasyLink_RxPacket rxPacket = {0};
 Void txTaskFunc(UArg arg0, UArg arg1)
 {
 	EasyLink_init(EasyLink_Phy_Custom);
 	EasyLink_setRfPwr(12);
-	EasyLink_RxPacket rxPacket = {0};
 	uint8_t addrFilter = 0xaa;
 	EasyLink_enableRxAddrFilter(&addrFilter, 1, 1);
 
@@ -293,7 +289,6 @@ Void txTaskFunc(UArg arg0, UArg arg1)
 		if(goodToGo){
 			EasyLink_abort();
 			EasyLink_TxPacket txPacket =  { {0}, 0, 0, {0} };
-//			uint8_t i;
 			txPacket.payload[0] = (uint8_t)(seqNumber >> 8);
 			txPacket.payload[1] = (uint8_t)(seqNumber++);
 			txPacket.payload[2] = sign(ax);
@@ -484,9 +479,6 @@ int main(void)
 
     Semaphore_construct(&attitudeSemaphore, 0, NULL);
     attitudeSemaphoreHandle = Semaphore_handle(&attitudeSemaphore);
-
-//    Semaphore_construct(&txSemaphore, 0, NULL);
-//    txSemaphoreHandle = Semaphore_handle(&txSemaphore);
 
 	Semaphore_construct(&txGyroSemaphore, 0, NULL);
 	txGyroSemaphoreHandle = Semaphore_handle(&txGyroSemaphore);
