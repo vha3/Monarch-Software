@@ -152,12 +152,15 @@ uint8_t message[30] = {0x20, 0x53, 0x50, 0x41, 0x43, 0x45, 0x20, 0x53,
 
 
 /* RX callback function */
+EasyLink_RxPacket globalPacket = {0};
 void rxDoneCb(EasyLink_RxPacket * rxPacket, EasyLink_Status status)
 {
     if (status == EasyLink_Status_Success)
     {
         /* Toggle LED2 to indicate RX */
         PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_PIN_RLED,!PIN_getOutputValue(CC1310_LAUNCHXL_PIN_RLED));
+        globalPacket.len = rxPacket->len;
+
     }
     else if(status == EasyLink_Status_Aborted)
     {
@@ -273,7 +276,6 @@ Void attitudeTaskFunc(UArg arg0, UArg arg1)
 	}
 }
 
-EasyLink_RxPacket rxPacket = {0};
 Void txTaskFunc(UArg arg0, UArg arg1)
 {
 	EasyLink_init(EasyLink_Phy_Custom);
@@ -340,7 +342,7 @@ Void txTaskFunc(UArg arg0, UArg arg1)
 				PIN_setOutputValue(pinHandle, Board_PIN_LED1,!PIN_getOutputValue(Board_PIN_LED1));
 				PIN_setOutputValue(pinHandle, Board_PIN_LED2,!PIN_getOutputValue(Board_PIN_LED2));
 			}
-	        EasyLink_receiveAsync(rxDoneCb, 0);
+	        Semaphore_post(rxDoneSemaphoreHandle);
 		}
 		Semaphore_post(batonSemaphoreHandle);
 	}
@@ -352,6 +354,7 @@ Void rxTaskFunc(UArg arg0, UArg arg1)
     		Semaphore_pend(rxDoneSemaphoreHandle, BIOS_WAIT_FOREVER);
     		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
     		if (goodToGo) {
+    			Display_printf(display, 0, 0, "%02x", globalPacket.len);
     			EasyLink_receiveAsync(rxDoneCb, 0);
     		}
     		Semaphore_post(batonSemaphoreHandle);
