@@ -66,6 +66,7 @@ Task_Struct gyroTask;
 Task_Struct accelTask;
 Task_Struct attitudeTask;
 Task_Struct txTask;
+Task_Struct rxTask;
 
 /* Attitude buffer */
 //float attitudeBuffer[9];
@@ -101,6 +102,9 @@ static Semaphore_Handle txAccelSemaphoreHandle;
 static Semaphore_Struct txMagSemaphore;
 static Semaphore_Handle txMagSemaphoreHandle;
 
+static Semaphore_Struct rxDoneSemaphore;
+static Semaphore_Handle rxDoneSemaphoreHandle;
+
 static Semaphore_Struct batonSemaphore;
 static Semaphore_Handle batonSemaphoreHandle;
 
@@ -113,6 +117,7 @@ static uint8_t gyroTaskStack[400];
 static uint8_t accelTaskStack[400];
 static uint8_t attitudeTaskStack[400];
 static uint8_t txTaskStack[1024];
+static uint8_t rxTaskStack[1024];
 
 int goodToGo = 0;
 
@@ -147,6 +152,30 @@ uint8_t message[30] = {0x20, 0x53, 0x50, 0x41, 0x43, 0x45, 0x20, 0x53,
 		0x59, 0x53, 0x54, 0x45, 0x4d, 0x53, 0x20, 0x44, 0x45, 0x53,
 		0x49, 0x47, 0x4e, 0x20, 0x53, 0x54, 0x55, 0x44, 0x49, 0x4f,
 		0x20, 0x20};
+
+
+/* RX callback function */
+void rxDoneCb(EasyLink_RxPacket * rxPacket, EasyLink_Status status)
+{
+    if (status == EasyLink_Status_Success)
+    {
+        /* Toggle LED2 to indicate RX */
+        PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_PIN_RLED,!PIN_getOutputValue(CC1310_LAUNCHXL_PIN_RLED));
+    }
+    else if(status == EasyLink_Status_Aborted)
+    {
+        /* Toggle LED1 to indicate command aborted */
+        PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_PIN_GLED,!PIN_getOutputValue(CC1310_LAUNCHXL_PIN_GLED));
+    }
+    else
+    {
+        /* Toggle LED1 and LED2 to indicate error */
+        PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_PIN_GLED,!PIN_getOutputValue(CC1310_LAUNCHXL_PIN_GLED));
+        PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_PIN_RLED,!PIN_getOutputValue(CC1310_LAUNCHXL_PIN_RLED));
+    }
+
+    Semaphore_post(rxDoneSemaphoreHandle);
+}
 
 /*
  * As far as I can tell, it's not strictly necessary to have
@@ -252,6 +281,10 @@ Void txTaskFunc(UArg arg0, UArg arg1)
 {
 	EasyLink_init(EasyLink_Phy_Custom);
 	EasyLink_setRfPwr(12);
+	EasyLink_RxPacket rxPacket = {0};
+	uint8_t addrFilter = 0xaa;
+	EasyLink_enableRxAddrFilter(&addrFilter, 1, 1);
+
 	while(1) {
 		Semaphore_pend(txGyroSemaphoreHandle, BIOS_WAIT_FOREVER);
 		Semaphore_pend(txAccelSemaphoreHandle, BIOS_WAIT_FOREVER);
@@ -304,7 +337,7 @@ Void txTaskFunc(UArg arg0, UArg arg1)
 	        if (result == EasyLink_Status_Success)
 			{
 				/* Toggle LED1 to indicate TX */
-				PIN_setOutputValue(pinHandle, Board_PIN_LED1,!PIN_getOutputValue(Board_PIN_LED1));
+//				PIN_setOutputValue(pinHandle, Board_PIN_LED1,!PIN_getOutputValue(Board_PIN_LED1));
 			}
 			else
 			{
@@ -312,25 +345,38 @@ Void txTaskFunc(UArg arg0, UArg arg1)
 				PIN_setOutputValue(pinHandle, Board_PIN_LED1,!PIN_getOutputValue(Board_PIN_LED1));
 				PIN_setOutputValue(pinHandle, Board_PIN_LED2,!PIN_getOutputValue(Board_PIN_LED2));
 			}
+	        EasyLink_receiveAsync(rxDoneCb, 0);
 		}
 		Semaphore_post(batonSemaphoreHandle);
 	}
 }
 
+Void rxTaskFunc(UArg arg0, UArg arg1)
+{
+    while(1) {
+    		Semaphore_pend(rxDoneSemaphoreHandle, BIOS_WAIT_FOREVER);
+    		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
+    		if (goodToGo) {
+    			EasyLink_receiveAsync(rxDoneCb, 0);
+    		}
+    		Semaphore_post(batonSemaphoreHandle);
+    }
+}
+
 
 
 void pinCallback(PIN_Handle handle, PIN_Id pinId) {
-    uint32_t currVal = 0;
+//    uint32_t currVal = 0;
 	switch (pinId) {
 		case CC1310_LAUNCHXL_DIO12:
-			currVal =  PIN_getOutputValue(Board_PIN_LED0);
-			PIN_setOutputValue(pinHandle, Board_PIN_LED0, !currVal);
+//			currVal =  PIN_getOutputValue(Board_PIN_LED0);
+//			PIN_setOutputValue(pinHandle, Board_PIN_LED0, !currVal);
 			Semaphore_post(gyroSemaphoreHandle);
 			break;
 
 		case CC1310_LAUNCHXL_DIO15:
-			currVal =  PIN_getOutputValue(Board_PIN_LED1);
-			PIN_setOutputValue(pinHandle, Board_PIN_LED1, !currVal);
+//			currVal =  PIN_getOutputValue(Board_PIN_LED1);
+//			PIN_setOutputValue(pinHandle, Board_PIN_LED1, !currVal);
 			Semaphore_post(magSemaphoreHandle);
 			break;
 
@@ -413,6 +459,12 @@ int main(void)
 	Task_construct(&txTask, txTaskFunc,
 				   &task_params, NULL);
 
+    task_params.stackSize = 1024;
+    task_params.priority = 1;
+	task_params.stack = &rxTaskStack;
+	Task_construct(&rxTask, rxTaskFunc,
+				   &task_params, NULL);
+
 
     /* Create Semaphores */
     Semaphore_construct(&initSemaphore, 1, NULL);
@@ -444,6 +496,9 @@ int main(void)
 
 	Semaphore_construct(&txMagSemaphore, 0, NULL);
 	txMagSemaphoreHandle = Semaphore_handle(&txMagSemaphore);
+
+	Semaphore_construct(&rxDoneSemaphore, 0, NULL);
+	rxDoneSemaphoreHandle = Semaphore_handle(&rxDoneSemaphore);
 
     Semaphore_construct(&batonSemaphore, 1, NULL);
     batonSemaphoreHandle = Semaphore_handle(&batonSemaphore);
