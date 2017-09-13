@@ -45,6 +45,11 @@ static Display_Handle display;
 static PIN_Handle pinHandle;
 static PIN_State pinState;
 
+/* Stuff related to clock */
+Void clk0Fxn(UArg arg0);
+Clock_Struct clk0Struct;
+Clock_Handle clk0Handle;
+
 /*
  * Application button pin configuration table:
  *   - Interrupts are configured to trigger on rising edge.
@@ -90,14 +95,8 @@ static Semaphore_Handle accelSemaphoreHandle;
 static Semaphore_Struct attitudeSemaphore;
 static Semaphore_Handle attitudeSemaphoreHandle;
 
-static Semaphore_Struct txGyroSemaphore;
-static Semaphore_Handle txGyroSemaphoreHandle;
-
-static Semaphore_Struct txAccelSemaphore;
-static Semaphore_Handle txAccelSemaphoreHandle;
-
-static Semaphore_Struct txMagSemaphore;
-static Semaphore_Handle txMagSemaphoreHandle;
+static Semaphore_Struct txBeaconSemaphore;
+static Semaphore_Handle txBeaconSemaphoreHandle;
 
 static Semaphore_Struct rxDoneSemaphore;
 static Semaphore_Handle rxDoneSemaphoreHandle;
@@ -170,11 +169,20 @@ void rxDoneCb(EasyLink_RxPacket * rxPacket, EasyLink_Status status)
     else
     {
         /* Toggle LED1 and LED2 to indicate error */
-        PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_PIN_GLED,!PIN_getOutputValue(CC1310_LAUNCHXL_PIN_GLED));
-        PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_PIN_RLED,!PIN_getOutputValue(CC1310_LAUNCHXL_PIN_RLED));
+        PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_PIN_GLED,
+        		!PIN_getOutputValue(CC1310_LAUNCHXL_PIN_GLED));
+        PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_PIN_RLED,
+        		!PIN_getOutputValue(CC1310_LAUNCHXL_PIN_RLED));
     }
 
     Semaphore_post(rxDoneSemaphoreHandle);
+}
+
+Void clk0Fxn(UArg arg0)
+{
+	if(goodToGo){
+		Semaphore_post(txBeaconSemaphoreHandle);
+	}
 }
 
 /*
@@ -214,10 +222,10 @@ Void magTaskFunc(UArg arg0, UArg arg1)
     		Semaphore_pend(magSemaphoreHandle, BIOS_WAIT_FOREVER);
     		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
     		if(goodToGo){
+    			Display_printf(display, 0, 0, "mag");
     			readMag();
     		}
     		Semaphore_post(attitudeSemaphoreHandle);
-    		Semaphore_post(txMagSemaphoreHandle);
     		Semaphore_post(batonSemaphoreHandle);
     }
 }
@@ -228,10 +236,10 @@ Void gyroTaskFunc(UArg arg0, UArg arg1)
     		Semaphore_pend(gyroSemaphoreHandle, BIOS_WAIT_FOREVER);
     		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
     		if(goodToGo){
+    			Display_printf(display, 0, 0, "gyro");
     			readGyro();
     		}
     		Semaphore_post(attitudeSemaphoreHandle);
-    		Semaphore_post(txGyroSemaphoreHandle);
     		Semaphore_post(batonSemaphoreHandle);
     }
 }
@@ -242,10 +250,10 @@ Void accelTaskFunc(UArg arg0, UArg arg1)
     		Semaphore_pend(accelSemaphoreHandle, BIOS_WAIT_FOREVER);
     		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
     		if(goodToGo){
+    			Display_printf(display, 0, 0, "accel");
     			readAccel();
     		}
     		Semaphore_post(attitudeSemaphoreHandle);
-    		Semaphore_post(txAccelSemaphoreHandle);
     		Semaphore_post(batonSemaphoreHandle);
     }
 }
@@ -284,9 +292,7 @@ Void txTaskFunc(UArg arg0, UArg arg1)
 	EasyLink_enableRxAddrFilter(&addrFilter, 1, 1);
 
 	while(1) {
-		Semaphore_pend(txGyroSemaphoreHandle, BIOS_WAIT_FOREVER);
-		Semaphore_pend(txAccelSemaphoreHandle, BIOS_WAIT_FOREVER);
-		Semaphore_pend(txMagSemaphoreHandle, BIOS_WAIT_FOREVER);
+		Semaphore_pend(txBeaconSemaphoreHandle, BIOS_WAIT_FOREVER);
 		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
 		if(goodToGo){
 			EasyLink_abort();
@@ -395,6 +401,9 @@ void pinCallback(PIN_Handle handle, PIN_Id pinId) {
  */
 int main(void)
 {
+
+	Clock_Params clkParams;
+
 	/* Initialize TI drivers */
     Board_initGeneral();
     Display_init();
@@ -407,6 +416,13 @@ int main(void)
     		while(1);
     }
 
+    Clock_Params_init(&clkParams);
+	clkParams.period = 500000/Clock_tickPeriod;
+	clkParams.startFlag = TRUE;
+
+	/* Construct a periodic Clock Instance */
+	Clock_construct(&clk0Struct, (Clock_FuncPtr)clk0Fxn,
+					5000/Clock_tickPeriod, &clkParams);
 
     	/* Open I2C connection to LSM9DS1 */
     LSM9DS1init();
@@ -483,14 +499,8 @@ int main(void)
     Semaphore_construct(&attitudeSemaphore, 0, NULL);
     attitudeSemaphoreHandle = Semaphore_handle(&attitudeSemaphore);
 
-	Semaphore_construct(&txGyroSemaphore, 0, NULL);
-	txGyroSemaphoreHandle = Semaphore_handle(&txGyroSemaphore);
-
-	Semaphore_construct(&txAccelSemaphore, 0, NULL);
-	txAccelSemaphoreHandle = Semaphore_handle(&txAccelSemaphore);
-
-	Semaphore_construct(&txMagSemaphore, 0, NULL);
-	txMagSemaphoreHandle = Semaphore_handle(&txMagSemaphore);
+	Semaphore_construct(&txBeaconSemaphore, 0, NULL);
+	txBeaconSemaphoreHandle = Semaphore_handle(&txBeaconSemaphore);
 
 	Semaphore_construct(&rxDoneSemaphore, 0, NULL);
 	rxDoneSemaphoreHandle = Semaphore_handle(&rxDoneSemaphore);
