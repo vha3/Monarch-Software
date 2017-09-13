@@ -38,6 +38,16 @@
 #define RFEASYLINKTX_BURST_SIZE         10
 #define RFEASYLINKTXPAYLOAD_LENGTH      29
 
+/* Addresses */
+#define UNIVERSAL_ADDRESS 0xaa
+#define PERSONAL_ADDRESS 0xbb
+
+static uint8_t AddressList[0x10] =
+{
+UNIVERSAL_ADDRESS, // First address to match
+PERSONAL_ADDRESS // Second address to match
+};
+
 /* Display Handle */
 static Display_Handle display;
 
@@ -288,8 +298,8 @@ Void txTaskFunc(UArg arg0, UArg arg1)
 {
 	EasyLink_init(EasyLink_Phy_Custom);
 	EasyLink_setRfPwr(12);
-	uint8_t addrFilter = 0xaa;
-	EasyLink_enableRxAddrFilter(&addrFilter, 1, 1);
+//	uint8_t addrFilter = (uint8_t)&AddressList;
+	EasyLink_enableRxAddrFilter((uint8_t*)&AddressList, 1, 2);
 
 	while(1) {
 		Semaphore_pend(txBeaconSemaphoreHandle, BIOS_WAIT_FOREVER);
