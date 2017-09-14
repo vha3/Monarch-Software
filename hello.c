@@ -44,8 +44,8 @@
 
 static uint8_t AddressList[0x10] =
 {
-UNIVERSAL_ADDRESS, // First address to match
-PERSONAL_ADDRESS // Second address to match
+		UNIVERSAL_ADDRESS, // First address to match
+		PERSONAL_ADDRESS // Second address to match
 };
 
 /* Display Handle */
@@ -80,7 +80,7 @@ Task_Struct magTask;
 Task_Struct gyroTask;
 Task_Struct accelTask;
 Task_Struct attitudeTask;
-Task_Struct txTask;
+Task_Struct txDataTask;
 Task_Struct rxTask;
 
 /* Attitude buffer */
@@ -105,8 +105,8 @@ static Semaphore_Handle accelSemaphoreHandle;
 static Semaphore_Struct attitudeSemaphore;
 static Semaphore_Handle attitudeSemaphoreHandle;
 
-static Semaphore_Struct txBeaconSemaphore;
-static Semaphore_Handle txBeaconSemaphoreHandle;
+static Semaphore_Struct txDataSemaphore;
+static Semaphore_Handle txDataSemaphoreHandle;
 
 static Semaphore_Struct rxDoneSemaphore;
 static Semaphore_Handle rxDoneSemaphoreHandle;
@@ -115,14 +115,14 @@ static Semaphore_Struct batonSemaphore;
 static Semaphore_Handle batonSemaphoreHandle;
 
 /* Make sure we have nice 8-byte alignment on the stack to avoid wasting memory */
-#pragma DATA_ALIGN(txTaskStack, 8)
+#pragma DATA_ALIGN(txDataTaskStack, 8)
 static uint8_t initializationTaskStack[400];
 static uint8_t calibrationTaskStack[400];
 static uint8_t magTaskStack[400];
 static uint8_t gyroTaskStack[400];
 static uint8_t accelTaskStack[400];
 static uint8_t attitudeTaskStack[400];
-static uint8_t txTaskStack[1024];
+static uint8_t txDataTaskStack[1024];
 static uint8_t rxTaskStack[1024];
 
 int goodToGo = 0;
@@ -167,14 +167,16 @@ void rxDoneCb(EasyLink_RxPacket * rxPacket, EasyLink_Status status)
     if (status == EasyLink_Status_Success)
     {
         /* Toggle LED2 to indicate RX */
-        PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_PIN_RLED,!PIN_getOutputValue(CC1310_LAUNCHXL_PIN_RLED));
-        globalPacket.len = rxPacket->len;
+        PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_PIN_RLED,
+        		!PIN_getOutputValue(CC1310_LAUNCHXL_PIN_RLED));
+        globalPacket.dstAddr[0] = rxPacket->dstAddr[0];
 
     }
     else if(status == EasyLink_Status_Aborted)
     {
         /* Toggle LED1 to indicate command aborted */
-        PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_PIN_GLED,!PIN_getOutputValue(CC1310_LAUNCHXL_PIN_GLED));
+        PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_PIN_GLED,
+        		!PIN_getOutputValue(CC1310_LAUNCHXL_PIN_GLED));
     }
     else
     {
@@ -191,7 +193,7 @@ void rxDoneCb(EasyLink_RxPacket * rxPacket, EasyLink_Status status)
 Void clk0Fxn(UArg arg0)
 {
 	if(goodToGo){
-		Semaphore_post(txBeaconSemaphoreHandle);
+		Semaphore_post(txDataSemaphoreHandle);
 	}
 }
 
@@ -294,7 +296,7 @@ Void attitudeTaskFunc(UArg arg0, UArg arg1)
 	}
 }
 
-Void txTaskFunc(UArg arg0, UArg arg1)
+Void txDataTaskFunc(UArg arg0, UArg arg1)
 {
 	EasyLink_init(EasyLink_Phy_Custom);
 	EasyLink_setRfPwr(12);
@@ -302,7 +304,7 @@ Void txTaskFunc(UArg arg0, UArg arg1)
 	EasyLink_enableRxAddrFilter((uint8_t*)&AddressList, 1, 2);
 
 	while(1) {
-		Semaphore_pend(txBeaconSemaphoreHandle, BIOS_WAIT_FOREVER);
+		Semaphore_pend(txDataSemaphoreHandle, BIOS_WAIT_FOREVER);
 		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
 		if(goodToGo){
 			EasyLink_abort();
@@ -370,7 +372,7 @@ Void rxTaskFunc(UArg arg0, UArg arg1)
     		Semaphore_pend(rxDoneSemaphoreHandle, BIOS_WAIT_FOREVER);
     		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
     		if (goodToGo) {
-    			Display_printf(display, 0, 0, "%02x", globalPacket.len);
+    			Display_printf(display, 0, 0, "%02x", globalPacket.dstAddr[0]);
     			EasyLink_receiveAsync(rxDoneCb, 0);
     		}
     		Semaphore_post(batonSemaphoreHandle);
@@ -479,8 +481,8 @@ int main(void)
 
     task_params.stackSize = 1024;
     task_params.priority = 1;
-	task_params.stack = &txTaskStack;
-	Task_construct(&txTask, txTaskFunc,
+	task_params.stack = &txDataTaskStack;
+	Task_construct(&txDataTask, txDataTaskFunc,
 				   &task_params, NULL);
 
     task_params.stackSize = 1024;
@@ -509,8 +511,8 @@ int main(void)
     Semaphore_construct(&attitudeSemaphore, 0, NULL);
     attitudeSemaphoreHandle = Semaphore_handle(&attitudeSemaphore);
 
-	Semaphore_construct(&txBeaconSemaphore, 0, NULL);
-	txBeaconSemaphoreHandle = Semaphore_handle(&txBeaconSemaphore);
+	Semaphore_construct(&txDataSemaphore, 0, NULL);
+	txDataSemaphoreHandle = Semaphore_handle(&txDataSemaphore);
 
 	Semaphore_construct(&rxDoneSemaphore, 0, NULL);
 	rxDoneSemaphoreHandle = Semaphore_handle(&rxDoneSemaphore);

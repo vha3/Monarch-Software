@@ -1,7 +1,7 @@
 ******************************************************************************
                   TI ARM Linker Unix v16.9.3                   
 ******************************************************************************
->> Linked Wed Sep 13 13:13:11 2017
+>> Linked Thu Sep 14 15:43:35 2017
 
 OUTPUT FILE NAME:   <hello_CC1310_LAUNCHXL_tirtos_ccs.out>
 ENTRY POINT SYMBOL: "ResetISR"  address: 0000a3c5
@@ -48,7 +48,7 @@ section   page    origin      length       input sections
                   00000b88    00000324     rtsv7M3_T_le_eabi.lib : trgdrv.obj (.text)
                   00000eac    0000030c     drivers_cc13x0.aem3 : PowerCC26XX_calibrateRCOSC.oem3 (.text:PowerCC26XX_auxISR)
                   000011b8    000002e8     hello.obj (.text:main)
-                  000014a0    00000290     hello.obj (.text:txTaskFunc)
+                  000014a0    00000290     hello.obj (.text:txDataTaskFunc)
                   00001730    00000248     rtsv7M3_T_le_eabi.lib : vla_alloc.obj (.text)
                   00001978    00000228     driverlib.lib : sys_ctrl.obj (.text:NOROM_SysCtrlSetRechargeBeforePowerDown)
                   00001ba0    0000021c     drivers_cc13x0.aem3 : PowerCC26XX.oem3 (.text:Power_sleep)
@@ -894,7 +894,7 @@ section   page    origin      length       input sections
 
 .bss       0    20000100    00002e66     UNINITIALIZED
                   20000100    00000400     hello.obj (.bss:rxTaskStack)
-                  20000500    00000400     hello.obj (.bss:txTaskStack)
+                  20000500    00000400     hello.obj (.bss:txDataTaskStack)
                   20000900    00000400     (.common:ti_uia_loggers_LoggerStopMode_Instance_State_0_packetArray__A)
                   20000d00    00000400     (.common:ti_uia_loggers_LoggerStopMode_Instance_State_1_packetArray__A)
                   20001100    000002d0     rf_multiMode_cc13x0.aem3 : RFCC26XX_multiMode.oem3 (.bss:$O1$$)
@@ -924,7 +924,7 @@ section   page    origin      length       input sections
                   20002a7c    00000050     (.common:initializationTask)
                   20002acc    00000050     (.common:magTask)
                   20002b1c    00000050     (.common:rxTask)
-                  20002b6c    00000050     (.common:txTask)
+                  20002b6c    00000050     (.common:txDataTask)
                   20002bbc    00000030     EasyLink.obj (.bss:EasyLink_cmdPropRxAdv)
                   20002bec    00000014     driverlib.lib : osc.obj (.bss:oscHfGlobals)
                   20002c00    00000030     (.common:ti_uia_loggers_LoggerStopMode_Instance_State_0_hdr__A)
@@ -946,7 +946,7 @@ section   page    origin      length       input sections
                   20002dcc    0000001c     hello.obj (.bss:magSemaphore)
                   20002de8    0000001c     EasyLink.obj (.bss:rfParams)
                   20002e04    0000001c     hello.obj (.bss:rxDoneSemaphore)
-                  20002e20    0000001c     hello.obj (.bss:txBeaconSemaphore)
+                  20002e20    0000001c     hello.obj (.bss:txDataSemaphore)
                   20002e3c    0000001c     (.common:i2cTransaction)
                   20002e58    00000018     EasyLink.obj (.bss:EasyLink_cmdFs)
                   20002e70    00000018     EasyLink.obj (.bss:EasyLink_cmdPropTx)
@@ -2106,8 +2106,8 @@ e000e000  ti_sysbios_family_arm_m3_Hwi_nvic
 000085b5  ti_uia_runtime_QueueDescriptor_addToList__E                     
 20004948  ti_uia_runtime_QueueDescriptor_gPtrToFirstDescriptor            
 2000494c  ti_uia_runtime_QueueDescriptor_gUpdateCount                     
-20002b6c  txTask                                                          
-000014a1  txTaskFunc                                                      
+20002b6c  txDataTask                                                      
+000014a1  txDataTaskFunc                                                  
 000115f4  uartCC26XXHWAttrs                                               
 20002130  uartCC26XXObjects                                               
 0000c741  upperPart                                                       
@@ -2260,7 +2260,7 @@ address   name
 00000ead  PowerCC26XX_auxISR                                              
 00001000  HEAPSIZE                                                        
 000011b9  main                                                            
-000014a1  txTaskFunc                                                      
+000014a1  txDataTaskFunc                                                  
 00001731  __vla_dealloc                                                   
 000017a3  __vla_dealloc_eh                                                
 00001823  __vla_alloc                                                     
@@ -3059,7 +3059,7 @@ address   name
 20002a7c  initializationTask                                              
 20002acc  magTask                                                         
 20002b1c  rxTask                                                          
-20002b6c  txTask                                                          
+20002b6c  txDataTask                                                      
 20002c00  ti_uia_loggers_LoggerStopMode_Instance_State_0_hdr__A           
 20002c7c  MXN                                                             
 20002c80  ti_uia_loggers_LoggerStopMode_Instance_State_1_hdr__A           
