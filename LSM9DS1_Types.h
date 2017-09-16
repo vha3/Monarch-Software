@@ -39,7 +39,7 @@ typedef enum
 {
 	G_SCALE_245DPS,		// 00:  245 degrees per second
 	G_SCALE_500DPS,		// 01:  500 dps
-	G_SCALE_2000DPS,	// 11:  2000 dps
+	G_SCALE_2000DPS,		// 11:  2000 dps
 } gyro_scale;
 
 // mag_scale defines all possible FSR's of the magnetometer:
@@ -90,11 +90,11 @@ typedef enum
 	M_ODR_0625,	// 0.625 Hz (0)
 	M_ODR_125,	// 1.25 Hz (1)
 	M_ODR_250,	// 2.5 Hz (2)
-	M_ODR_5,	// 5 Hz (3)
+	M_ODR_5,		// 5 Hz (3)
 	M_ODR_10,	// 10 Hz (4)
 	M_ODR_20,	// 20 Hz (5)
 	M_ODR_40,	// 40 Hz (6)
-	M_ODR_80	// 80 Hz (7)
+	M_ODR_80		// 80 Hz (7)
 } mag_odr;
 
 typedef enum
@@ -106,15 +106,15 @@ typedef enum
 typedef enum
 {
 	INT_DRDY_XL = (1<<0),	 // Accelerometer data ready (INT1 & INT2)
-	INT_DRDY_G = (1<<1),	 // Gyroscope data ready (INT1 & INT2)
-	INT1_BOOT = (1<<2),	 // Boot status (INT1)
-	INT2_DRDY_TEMP = (1<<2),// Temp data ready (INT2)
+	INT_DRDY_G = (1<<1),	 	 // Gyroscope data ready (INT1 & INT2)
+	INT1_BOOT = (1<<2),	 	 // Boot status (INT1)
+	INT2_DRDY_TEMP = (1<<2), // Temp data ready (INT2)
 	INT_FTH = (1<<3),		 // FIFO threshold interrupt (INT1 & INT2)
 	INT_OVR = (1<<4),		 // Overrun interrupt (INT1 & INT2)
 	INT_FSS5 = (1<<5),		 // FSS5 interrupt (INT1 & INT2)
-	INT_IG_XL = (1<<6),	 // Accel interrupt generator (INT1)
-	INT1_IG_G = (1<<7),	 // Gyro interrupt enable (INT1)
-	INT2_INACT = (1<<7),	 // Inactivity interrupt output (INT2)
+	INT_IG_XL = (1<<6),		 // Accel interrupt generator (INT1)
+	INT1_IG_G = (1<<7),	 	// Gyro interrupt enable (INT1)
+	INT2_INACT = (1<<7),	 	// Inactivity interrupt output (INT2)
 } interrupt_generators;
 
 typedef enum

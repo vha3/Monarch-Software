@@ -240,6 +240,7 @@ hello.obj: ../LSM9DS1_Types.h
 hello.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/math.h
 hello.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/_defs.h
 hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Clock.h
+hello.obj: ../Network_Types.h
 hello.obj: ../smartrf_settings/smartrf_settings.h
 hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/rf_mailbox.h
 hello.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/string.h
@@ -491,6 +492,7 @@ hello.obj: ../easylink/EasyLink.h
 /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/math.h: 
 /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/_defs.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Clock.h: 
+../Network_Types.h: 
 ../smartrf_settings/smartrf_settings.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/rf_mailbox.h: 
 /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/string.h: 

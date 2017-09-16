@@ -30,6 +30,7 @@
 
 /* Other header files */
 #include "LSM9DS1.h"
+#include "Network_Types.h"
 //#include "TRIAD.h"
 #include "smartrf_settings/smartrf_settings.h"
 #include "easylink/EasyLink.h"
@@ -60,6 +61,7 @@ Void clk0Fxn(UArg arg0);
 Clock_Struct clk0Struct;
 Clock_Handle clk0Handle;
 
+
 /*
  * Application button pin configuration table:
  *   - Interrupts are configured to trigger on rising edge.
@@ -81,7 +83,8 @@ Task_Struct gyroTask;
 Task_Struct accelTask;
 Task_Struct attitudeTask;
 Task_Struct txDataTask;
-Task_Struct rxTask;
+Task_Struct rxRestartTask;
+Task_Struct rxBeaconTask;
 
 /* Attitude buffer */
 //float attitudeBuffer[9];
@@ -108,8 +111,11 @@ static Semaphore_Handle attitudeSemaphoreHandle;
 static Semaphore_Struct txDataSemaphore;
 static Semaphore_Handle txDataSemaphoreHandle;
 
-static Semaphore_Struct rxDoneSemaphore;
-static Semaphore_Handle rxDoneSemaphoreHandle;
+static Semaphore_Struct rxRestartSemaphore;
+static Semaphore_Handle rxRestartSemaphoreHandle;
+
+static Semaphore_Struct rxBeaconSemaphore;
+static Semaphore_Handle rxBeaconSemaphoreHandle;
 
 static Semaphore_Struct batonSemaphore;
 static Semaphore_Handle batonSemaphoreHandle;
@@ -123,9 +129,14 @@ static uint8_t gyroTaskStack[400];
 static uint8_t accelTaskStack[400];
 static uint8_t attitudeTaskStack[400];
 static uint8_t txDataTaskStack[1024];
-static uint8_t rxTaskStack[1024];
+static uint8_t rxRestartTaskStack[300];
+static uint8_t rxBeaconTaskStack[1024];
 
 int goodToGo = 0;
+
+/* List for holding neighbors */
+int numConnections = 0;
+uint8_t Connections[MAXNEIGHBORS] = {};
 
 /* ###########################################################
  * Some Bit Manipulation Functions
@@ -153,12 +164,6 @@ uint8_t upperPart(int16_t x){
  * ###########################################################
  */
 
-/* Message is SPACE SYSTEMS DESIGN STUDIO */
-uint8_t message[30] = {0x20, 0x53, 0x50, 0x41, 0x43, 0x45, 0x20, 0x53,
-		0x59, 0x53, 0x54, 0x45, 0x4d, 0x53, 0x20, 0x44, 0x45, 0x53,
-		0x49, 0x47, 0x4e, 0x20, 0x53, 0x54, 0x55, 0x44, 0x49, 0x4f,
-		0x20, 0x20};
-
 
 /* RX callback function */
 EasyLink_RxPacket globalPacket = {0};
@@ -170,6 +175,21 @@ void rxDoneCb(EasyLink_RxPacket * rxPacket, EasyLink_Status status)
         PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_PIN_RLED,
         		!PIN_getOutputValue(CC1310_LAUNCHXL_PIN_RLED));
         globalPacket.dstAddr[0] = rxPacket->dstAddr[0];
+        globalPacket.rssi = rxPacket->rssi;
+        globalPacket.absTime = rxPacket->absTime;
+        globalPacket.rxTimeout = rxPacket->rxTimeout;
+        globalPacket.len = rxPacket->len;
+        int i=0;
+        while(i < globalPacket.len){
+        		globalPacket.payload[i] = rxPacket->payload[i];
+        		i += 1;
+        }
+        if (globalPacket.payload[0] == BEACON){
+        		Semaphore_post(rxBeaconSemaphoreHandle);
+        }
+        else {
+        		Semaphore_post(rxRestartSemaphoreHandle);
+        }
 
     }
     else if(status == EasyLink_Status_Aborted)
@@ -177,6 +197,7 @@ void rxDoneCb(EasyLink_RxPacket * rxPacket, EasyLink_Status status)
         /* Toggle LED1 to indicate command aborted */
         PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_PIN_GLED,
         		!PIN_getOutputValue(CC1310_LAUNCHXL_PIN_GLED));
+        Semaphore_post(rxRestartSemaphoreHandle);
     }
     else
     {
@@ -186,8 +207,6 @@ void rxDoneCb(EasyLink_RxPacket * rxPacket, EasyLink_Status status)
         PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_PIN_RLED,
         		!PIN_getOutputValue(CC1310_LAUNCHXL_PIN_RLED));
     }
-
-    Semaphore_post(rxDoneSemaphoreHandle);
 }
 
 Void clk0Fxn(UArg arg0)
@@ -234,7 +253,6 @@ Void magTaskFunc(UArg arg0, UArg arg1)
     		Semaphore_pend(magSemaphoreHandle, BIOS_WAIT_FOREVER);
     		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
     		if(goodToGo){
-    			Display_printf(display, 0, 0, "mag");
     			readMag();
     		}
     		Semaphore_post(attitudeSemaphoreHandle);
@@ -248,7 +266,6 @@ Void gyroTaskFunc(UArg arg0, UArg arg1)
     		Semaphore_pend(gyroSemaphoreHandle, BIOS_WAIT_FOREVER);
     		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
     		if(goodToGo){
-    			Display_printf(display, 0, 0, "gyro");
     			readGyro();
     		}
     		Semaphore_post(attitudeSemaphoreHandle);
@@ -262,7 +279,6 @@ Void accelTaskFunc(UArg arg0, UArg arg1)
     		Semaphore_pend(accelSemaphoreHandle, BIOS_WAIT_FOREVER);
     		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
     		if(goodToGo){
-    			Display_printf(display, 0, 0, "accel");
     			readAccel();
     		}
     		Semaphore_post(attitudeSemaphoreHandle);
@@ -290,7 +306,6 @@ Void attitudeTaskFunc(UArg arg0, UArg arg1)
 //			float a31 = attitudeBuffer[6];
 //			float a32 = attitudeBuffer[7];
 //			float a33 = attitudeBuffer[8];
-//			Display_printf(display, 0, 0, "%f, %f, %f, %f, %f, %f, %f, %f, %f", a11, a12, a13, a21, a22, a23, a31, a32, a33);
 		}
 		Semaphore_post(batonSemaphoreHandle);
 	}
@@ -309,37 +324,41 @@ Void txDataTaskFunc(UArg arg0, UArg arg1)
 		if(goodToGo){
 			EasyLink_abort();
 			EasyLink_TxPacket txPacket =  { {0}, 0, 0, {0} };
-			txPacket.payload[0] = (uint8_t)(seqNumber >> 8);
-			txPacket.payload[1] = (uint8_t)(seqNumber++);
-			txPacket.payload[2] = sign(ax);
-			txPacket.payload[3] = upperPart(ax);
-			txPacket.payload[4] = lowerPart(ax);
-			txPacket.payload[5] = sign(ay);
-			txPacket.payload[6] = upperPart(ay);
-			txPacket.payload[7] = lowerPart(ay);
-			txPacket.payload[8] = sign(az);
-			txPacket.payload[9] = upperPart(az);
-			txPacket.payload[10] = lowerPart(az);
 
-			txPacket.payload[11] = sign(gx);
-			txPacket.payload[12] = upperPart(gx);
-			txPacket.payload[13] = lowerPart(gx);
-			txPacket.payload[14] = sign(gy);
-			txPacket.payload[15] = upperPart(gy);
-			txPacket.payload[16] = lowerPart(gy);
-			txPacket.payload[17] = sign(gz);
-			txPacket.payload[18] = upperPart(gz);
-			txPacket.payload[19] = lowerPart(gz);
+			txPacket.payload[0] = BEACON;
+			txPacket.payload[1] = PERSONAL_ADDRESS;
 
-			txPacket.payload[20] = sign(mx);
-			txPacket.payload[21] = upperPart(mx);
-			txPacket.payload[22] = lowerPart(mx);
-			txPacket.payload[23] = sign(my);
-			txPacket.payload[24] = upperPart(my);
-			txPacket.payload[25] = lowerPart(my);
-			txPacket.payload[26] = sign(mz);
-			txPacket.payload[27] = upperPart(mz);
-			txPacket.payload[28] = lowerPart(mz);
+//			txPacket.payload[0] = (uint8_t)(seqNumber >> 8);
+//			txPacket.payload[1] = (uint8_t)(seqNumber++);
+//			txPacket.payload[2] = sign(ax);
+//			txPacket.payload[3] = upperPart(ax);
+//			txPacket.payload[4] = lowerPart(ax);
+//			txPacket.payload[5] = sign(ay);
+//			txPacket.payload[6] = upperPart(ay);
+//			txPacket.payload[7] = lowerPart(ay);
+//			txPacket.payload[8] = sign(az);
+//			txPacket.payload[9] = upperPart(az);
+//			txPacket.payload[10] = lowerPart(az);
+//
+//			txPacket.payload[11] = sign(gx);
+//			txPacket.payload[12] = upperPart(gx);
+//			txPacket.payload[13] = lowerPart(gx);
+//			txPacket.payload[14] = sign(gy);
+//			txPacket.payload[15] = upperPart(gy);
+//			txPacket.payload[16] = lowerPart(gy);
+//			txPacket.payload[17] = sign(gz);
+//			txPacket.payload[18] = upperPart(gz);
+//			txPacket.payload[19] = lowerPart(gz);
+//
+//			txPacket.payload[20] = sign(mx);
+//			txPacket.payload[21] = upperPart(mx);
+//			txPacket.payload[22] = lowerPart(mx);
+//			txPacket.payload[23] = sign(my);
+//			txPacket.payload[24] = upperPart(my);
+//			txPacket.payload[25] = lowerPart(my);
+//			txPacket.payload[26] = sign(mz);
+//			txPacket.payload[27] = upperPart(mz);
+//			txPacket.payload[28] = lowerPart(mz);
 //			for (i = 0; i < RFEASYLINKTXPAYLOAD_LENGTH; i++)
 //			{
 //			  txPacket.payload[i] = message[i];
@@ -360,22 +379,54 @@ Void txDataTaskFunc(UArg arg0, UArg arg1)
 				PIN_setOutputValue(pinHandle, Board_PIN_LED1,!PIN_getOutputValue(Board_PIN_LED1));
 				PIN_setOutputValue(pinHandle, Board_PIN_LED2,!PIN_getOutputValue(Board_PIN_LED2));
 			}
-	        Semaphore_post(rxDoneSemaphoreHandle);
+	        Semaphore_post(rxRestartSemaphoreHandle);
 		}
 		Semaphore_post(batonSemaphoreHandle);
 	}
 }
 
-Void rxTaskFunc(UArg arg0, UArg arg1)
+Void rxRestartFunc(UArg arg0, UArg arg1)
 {
     while(1) {
-    		Semaphore_pend(rxDoneSemaphoreHandle, BIOS_WAIT_FOREVER);
-    		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
-    		if (goodToGo) {
-    			Display_printf(display, 0, 0, "%02x", globalPacket.dstAddr[0]);
-    			EasyLink_receiveAsync(rxDoneCb, 0);
+    		Semaphore_pend(rxRestartSemaphoreHandle, BIOS_WAIT_FOREVER);
+    		EasyLink_receiveAsync(rxDoneCb, 0);
+    }
+}
+
+Void rxBeaconFunc(UArg arg0, UArg arg1)
+{
+    while(1) {
+    		Semaphore_pend(rxBeaconSemaphoreHandle, BIOS_WAIT_FOREVER);
+    		uint8_t senderAddress = globalPacket.payload[1];
+    		if (numConnections == 0){
+    			Connections[0] = senderAddress;
+    			numConnections += 1;
+    			Display_printf(display, 0, 0, "%02x", Connections[0]);
     		}
-    		Semaphore_post(batonSemaphoreHandle);
+    		else {
+    			int index = 0;
+    			int similarities = 0;
+    			while (index < numConnections){
+    				if (Connections[index] == senderAddress){
+    					similarities = 1;
+    				}
+    				index += 1;
+    			}
+    			if(similarities){
+    				Semaphore_post(rxRestartSemaphoreHandle);
+    			}
+    			else{
+    				if (numConnections < MAXNEIGHBORS){
+						Connections[numConnections] = senderAddress;
+						Display_printf(display, 0, 0, "%02x", Connections[numConnections]);
+						numConnections += 1;
+						Semaphore_post(rxRestartSemaphoreHandle);
+    				}
+    				else{
+    					Semaphore_post(rxRestartSemaphoreHandle);
+    				}
+    			}
+    		}
     }
 }
 
@@ -405,6 +456,7 @@ void pinCallback(PIN_Handle handle, PIN_Id pinId) {
 			break;
 	}
 }
+
 
 
 /*
@@ -485,10 +537,16 @@ int main(void)
 	Task_construct(&txDataTask, txDataTaskFunc,
 				   &task_params, NULL);
 
+    task_params.stackSize = 300;
+    task_params.priority = 1;
+	task_params.stack = &rxRestartTaskStack;
+	Task_construct(&rxRestartTask, rxRestartFunc,
+				   &task_params, NULL);
+
     task_params.stackSize = 1024;
     task_params.priority = 1;
-	task_params.stack = &rxTaskStack;
-	Task_construct(&rxTask, rxTaskFunc,
+	task_params.stack = &rxBeaconTaskStack;
+	Task_construct(&rxBeaconTask, rxBeaconFunc,
 				   &task_params, NULL);
 
 
@@ -514,8 +572,11 @@ int main(void)
 	Semaphore_construct(&txDataSemaphore, 0, NULL);
 	txDataSemaphoreHandle = Semaphore_handle(&txDataSemaphore);
 
-	Semaphore_construct(&rxDoneSemaphore, 0, NULL);
-	rxDoneSemaphoreHandle = Semaphore_handle(&rxDoneSemaphore);
+	Semaphore_construct(&rxRestartSemaphore, 0, NULL);
+	rxRestartSemaphoreHandle = Semaphore_handle(&rxRestartSemaphore);
+
+	Semaphore_construct(&rxBeaconSemaphore, 0, NULL);
+	rxBeaconSemaphoreHandle = Semaphore_handle(&rxBeaconSemaphore);
 
     Semaphore_construct(&batonSemaphore, 1, NULL);
     batonSemaphoreHandle = Semaphore_handle(&batonSemaphore);
