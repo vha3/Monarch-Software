@@ -13,11 +13,12 @@
 
 /* Driver header files */
 #include <ti/drivers/I2C.h>
-#include <ti/display/Display.h>
+//#include <ti/display/Display.h>
 #include <ti/drivers/Power.h>
 #include <ti/drivers/power/PowerCC26XX.h>
 #include <ti/drivers/PIN.h>
 #include <ti/drivers/pin/PINCC26XX.h>
+#include <ti/drivers/Watchdog.h>
 
 /* BIOS Header files */
 #include <ti/sysbios/knl/Clock.h>
@@ -35,6 +36,9 @@
 #include "smartrf_settings/smartrf_settings.h"
 #include "easylink/EasyLink.h"
 
+#include <ti/drivers/UART.h>
+#include <ti/drivers/uart/UARTCC26XX.h>
+
 /* TX quantities */
 #define RFEASYLINKTX_BURST_SIZE         10
 #define RFEASYLINKTXPAYLOAD_LENGTH      29
@@ -50,7 +54,7 @@ static uint8_t AddressList[0x10] =
 };
 
 /* Display Handle */
-static Display_Handle display;
+//static Display_Handle display;
 
 /* Pin handles and states*/
 static PIN_Handle pinHandle;
@@ -81,10 +85,10 @@ Task_Struct calibrationTask;
 Task_Struct magTask;
 Task_Struct gyroTask;
 Task_Struct accelTask;
-Task_Struct attitudeTask;
 Task_Struct txDataTask;
 Task_Struct rxRestartTask;
 Task_Struct rxBeaconTask;
+Task_Struct gpsTask;
 
 /* Attitude buffer */
 //float attitudeBuffer[9];
@@ -105,9 +109,6 @@ static Semaphore_Handle gyroSemaphoreHandle;
 static Semaphore_Struct accelSemaphore;
 static Semaphore_Handle accelSemaphoreHandle;
 
-static Semaphore_Struct attitudeSemaphore;
-static Semaphore_Handle attitudeSemaphoreHandle;
-
 static Semaphore_Struct txDataSemaphore;
 static Semaphore_Handle txDataSemaphoreHandle;
 
@@ -123,14 +124,14 @@ static Semaphore_Handle batonSemaphoreHandle;
 /* Make sure we have nice 8-byte alignment on the stack to avoid wasting memory */
 #pragma DATA_ALIGN(txDataTaskStack, 8)
 static uint8_t initializationTaskStack[400];
-static uint8_t calibrationTaskStack[400];
-static uint8_t magTaskStack[400];
-static uint8_t gyroTaskStack[400];
-static uint8_t accelTaskStack[400];
-static uint8_t attitudeTaskStack[400];
+static uint8_t calibrationTaskStack[450];
+static uint8_t magTaskStack[450];
+static uint8_t gyroTaskStack[450];
+static uint8_t accelTaskStack[450];
 static uint8_t txDataTaskStack[1024];
 static uint8_t rxRestartTaskStack[300];
-static uint8_t rxBeaconTaskStack[1024];
+static uint8_t rxBeaconTaskStack[300];
+static uint8_t gpsTaskStack[800];
 
 int goodToGo = 0;
 
@@ -138,10 +139,13 @@ int goodToGo = 0;
 int numConnections = 0;
 uint8_t Connections[MAXNEIGHBORS] = {};
 
+UART_Handle uart;
+UART_Params uartParams;
+
 /* ###########################################################
  * Some Bit Manipulation Functions
  */
-static uint16_t seqNumber;
+//static uint16_t seqNumber;
 
 uint8_t sign(int16_t x)
 {
@@ -163,7 +167,18 @@ uint8_t upperPart(int16_t x){
 /*
  * ###########################################################
  */
-
+Watchdog_Handle watchdogHandle;
+void wdtSetup()
+{
+	Watchdog_Params params;
+	/* Call board init functions */
+	Watchdog_init();
+	/* Create and enable a Watchdog with resets disabled */
+	Watchdog_Params_init(&params);
+	params.resetMode = Watchdog_RESET_ON; //generate Reboot interrupt
+	watchdogHandle = Watchdog_open(Board_WATCHDOG0, &params);
+	Watchdog_setReload(watchdogHandle, 3000000); //set WDT period
+}
 
 /* RX callback function */
 EasyLink_RxPacket globalPacket = {0};
@@ -212,6 +227,7 @@ void rxDoneCb(EasyLink_RxPacket * rxPacket, EasyLink_Status status)
 Void clk0Fxn(UArg arg0)
 {
 	if(goodToGo){
+		Watchdog_clear(watchdogHandle);
 		Semaphore_post(txDataSemaphoreHandle);
 	}
 }
@@ -225,9 +241,11 @@ Void initializationTaskFunc(UArg arg0, UArg arg1)
 {
     while (1) {
     		Semaphore_pend(initSemaphoreHandle,BIOS_WAIT_FOREVER);
+
         uint16_t workpls = LSM9DS1begin();
         configInt(XG_INT1, INT_DRDY_G, INT_ACTIVE_HIGH, INT_PUSH_PULL);
         configInt(XG_INT2, INT_DRDY_XL, INT_ACTIVE_HIGH, INT_PUSH_PULL);
+
         Semaphore_post(calibSemaphoreHandle);
     }
 }
@@ -255,7 +273,6 @@ Void magTaskFunc(UArg arg0, UArg arg1)
     		if(goodToGo){
     			readMag();
     		}
-    		Semaphore_post(attitudeSemaphoreHandle);
     		Semaphore_post(batonSemaphoreHandle);
     }
 }
@@ -268,7 +285,6 @@ Void gyroTaskFunc(UArg arg0, UArg arg1)
     		if(goodToGo){
     			readGyro();
     		}
-    		Semaphore_post(attitudeSemaphoreHandle);
     		Semaphore_post(batonSemaphoreHandle);
     }
 }
@@ -281,41 +297,14 @@ Void accelTaskFunc(UArg arg0, UArg arg1)
     		if(goodToGo){
     			readAccel();
     		}
-    		Semaphore_post(attitudeSemaphoreHandle);
     		Semaphore_post(batonSemaphoreHandle);
     }
-}
-
-
-Void attitudeTaskFunc(UArg arg0, UArg arg1)
-{
-	while(1) {
-		Semaphore_pend(attitudeSemaphoreHandle, BIOS_WAIT_FOREVER);
-		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
-		if(goodToGo){
-
-//			Display_printf(display, 0, 0, "attitude");
-
-//			computeAttitude(mx, my, mz, ax, ay, az, attitudeBuffer);
-//			float a11 = attitudeBuffer[0];
-//			float a12 = attitudeBuffer[1];
-//			float a13 = attitudeBuffer[2];
-//			float a21 = attitudeBuffer[3];
-//			float a22 = attitudeBuffer[4];
-//			float a23 = attitudeBuffer[5];
-//			float a31 = attitudeBuffer[6];
-//			float a32 = attitudeBuffer[7];
-//			float a33 = attitudeBuffer[8];
-		}
-		Semaphore_post(batonSemaphoreHandle);
-	}
 }
 
 Void txDataTaskFunc(UArg arg0, UArg arg1)
 {
 	EasyLink_init(EasyLink_Phy_Custom);
 	EasyLink_setRfPwr(12);
-//	uint8_t addrFilter = (uint8_t)&AddressList;
 	EasyLink_enableRxAddrFilter((uint8_t*)&AddressList, 1, 2);
 
 	while(1) {
@@ -401,7 +390,8 @@ Void rxBeaconFunc(UArg arg0, UArg arg1)
     		if (numConnections == 0){
     			Connections[0] = senderAddress;
     			numConnections += 1;
-    			Display_printf(display, 0, 0, "%02x", Connections[0]);
+//    			Display_printf(display, 0, 0, "%02x", Connections[0]);
+    			Semaphore_post(rxRestartSemaphoreHandle);
     		}
     		else {
     			int index = 0;
@@ -418,7 +408,7 @@ Void rxBeaconFunc(UArg arg0, UArg arg1)
     			else{
     				if (numConnections < MAXNEIGHBORS){
 						Connections[numConnections] = senderAddress;
-						Display_printf(display, 0, 0, "%02x", Connections[numConnections]);
+//						Display_printf(display, 0, 0, "%02x", Connections[numConnections]);
 						numConnections += 1;
 						Semaphore_post(rxRestartSemaphoreHandle);
     				}
@@ -430,6 +420,34 @@ Void rxBeaconFunc(UArg arg0, UArg arg1)
     }
 }
 
+Void gpsFunc(UArg arg0, UArg arg1)
+{
+    UART_Params_init(&uartParams);
+    uartParams.writeDataMode = UART_DATA_BINARY;
+    uartParams.readDataMode = UART_DATA_TEXT;
+    uartParams.readReturnMode = UART_RETURN_FULL;
+    uartParams.readEcho = UART_ECHO_OFF;
+    uartParams.baudRate = 9600;
+
+    uart = UART_open(Board_UART0, &uartParams);
+
+	if (uart == NULL) {
+		/* UART_open() failed */
+		while (1);
+	}
+	UART_control(uart, UARTCC26XX_CMD_RETURN_PARTIAL_ENABLE, NULL);
+	char        input[256] = {0};
+	const char 	newlinePrompt[] = "\r\n";
+	while (1) {
+		if(goodToGo){
+			int numBytes = UART_read(uart, &input, 256);
+			UART_write(uart, &input, numBytes);
+			UART_write(uart, newlinePrompt, sizeof(newlinePrompt));
+			UART_control(uart, UARTCC26XX_CMD_RX_FIFO_FLUSH, NULL);
+			Task_yield();
+		}
+	}
+}
 
 
 void pinCallback(PIN_Handle handle, PIN_Id pinId) {
@@ -448,6 +466,8 @@ void pinCallback(PIN_Handle handle, PIN_Id pinId) {
 			break;
 
 		case CC1310_LAUNCHXL_DIO22:
+//			currVal =  PIN_getOutputValue(Board_PIN_LED1);
+//			PIN_setOutputValue(pinHandle, Board_PIN_LED1, !currVal);
 			Semaphore_post(accelSemaphoreHandle);
 			break;
 
@@ -456,8 +476,6 @@ void pinCallback(PIN_Handle handle, PIN_Id pinId) {
 			break;
 	}
 }
-
-
 
 /*
  *  ======== main ========
@@ -470,15 +488,18 @@ int main(void)
 
 	/* Initialize TI drivers */
     Board_initGeneral();
-    Display_init();
+//    Display_init();
     I2C_init();
     PIN_init(pinTable);
+    UART_init();
+
+    wdtSetup();
 
     /* Open Display */
-    display = Display_open(Display_Type_UART, NULL);
-    if (display == NULL){
-    		while(1);
-    }
+//    display = Display_open(Display_Type_UART, NULL);
+//    if (display == NULL){
+//    		while(1);
+//    }
 
     Clock_Params_init(&clkParams);
 	clkParams.period = 500000/Clock_tickPeriod;
@@ -492,61 +513,62 @@ int main(void)
     LSM9DS1init();
     initI2C();
 
+
     /* Setup/create tasks */
     Task_Params task_params;
     Task_Params_init(&task_params);
     task_params.stackSize = 400;
-    task_params.priority = 3;
+    task_params.priority = 4;
     task_params.stack = &initializationTaskStack;
     Task_construct(&initializationTask, initializationTaskFunc,
     		           &task_params, NULL);
 
-    task_params.stackSize = 400;
-    task_params.priority = 2;
+    task_params.stackSize = 450;
+    task_params.priority = 3;
     task_params.stack = &calibrationTaskStack;
     Task_construct(&calibrationTask, calibrationTaskFunc,
     				   &task_params, NULL);
 
-    	task_params.stackSize = 400;
-    task_params.priority = 1;
+    	task_params.stackSize = 450;
+    task_params.priority = 2;
     task_params.stack = &magTaskStack;
     Task_construct(&magTask, magTaskFunc,
     		           &task_params, NULL);
 
-    task_params.stackSize = 400;
-    task_params.priority = 1;
+    task_params.stackSize = 450;
+    task_params.priority = 2;
     task_params.stack = &gyroTaskStack;
     Task_construct(&gyroTask, gyroTaskFunc,
     		           &task_params, NULL);
 
-    task_params.stackSize = 400;
-    task_params.priority = 1;
+    task_params.stackSize = 450;
+    task_params.priority = 2;
     task_params.stack = &accelTaskStack;
     Task_construct(&accelTask, accelTaskFunc,
     		           &task_params, NULL);
 
-    task_params.stackSize = 400;
-    task_params.priority = 1;
-    task_params.stack = &attitudeTaskStack;
-    Task_construct(&attitudeTask, attitudeTaskFunc,
-    		           &task_params, NULL);
-
     task_params.stackSize = 1024;
-    task_params.priority = 1;
+    task_params.priority = 2;
 	task_params.stack = &txDataTaskStack;
 	Task_construct(&txDataTask, txDataTaskFunc,
 				   &task_params, NULL);
 
     task_params.stackSize = 300;
-    task_params.priority = 1;
+    task_params.priority = 2;
 	task_params.stack = &rxRestartTaskStack;
 	Task_construct(&rxRestartTask, rxRestartFunc,
 				   &task_params, NULL);
 
-    task_params.stackSize = 1024;
-    task_params.priority = 1;
+    task_params.stackSize = 300;
+    task_params.priority = 2;
 	task_params.stack = &rxBeaconTaskStack;
 	Task_construct(&rxBeaconTask, rxBeaconFunc,
+				   &task_params, NULL);
+
+	task_params.stackSize = 800;
+	task_params.priority = 1;
+	task_params.stack = &gpsTaskStack;
+	Task_construct(&gpsTask, gpsFunc,
 				   &task_params, NULL);
 
 
@@ -565,9 +587,6 @@ int main(void)
 
     Semaphore_construct(&accelSemaphore, 0, NULL);
     accelSemaphoreHandle = Semaphore_handle(&accelSemaphore);
-
-    Semaphore_construct(&attitudeSemaphore, 0, NULL);
-    attitudeSemaphoreHandle = Semaphore_handle(&attitudeSemaphore);
 
 	Semaphore_construct(&txDataSemaphore, 0, NULL);
 	txDataSemaphoreHandle = Semaphore_handle(&txDataSemaphore);

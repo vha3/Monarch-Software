@@ -173,8 +173,6 @@ hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Error.h
 hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/I2C.h
 hello.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stdbool.h
 hello.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
-hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/display/Display.h
-hello.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stdarg.h
 hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/Power.h
 hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/utils/List.h
 hello.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
@@ -202,6 +200,7 @@ hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/c
 hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../driverlib/rom.h
 hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/gpio.h
 hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_gpio.h
+hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/Watchdog.h
 hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Clock.h
 hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/package/Clock_TimerProxy.h
 hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/BIOS.h
@@ -232,7 +231,6 @@ hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/S
 hello.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
 hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/UART.h
 hello.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
-hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/Watchdog.h
 hello.obj: ../CC1310_LAUNCHXL.h
 hello.obj: ../LSM9DS1.h
 hello.obj: ../LSM9DS1_Registers.h
@@ -251,6 +249,13 @@ hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/d
 hello.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
 hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/rf_ble_cmd.h
 hello.obj: ../easylink/EasyLink.h
+hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/uart/UARTCC26XX.h
+hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/utils/RingBuf.h
+hello.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
+hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/uart.h
+hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_uart.h
+hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/dpl/SwiP.h
+hello.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
 
 ../hello.c: 
 /Applications/xdctools_3_50_02_20_core/packages/xdc/std.h: 
@@ -425,8 +430,6 @@ hello.obj: ../easylink/EasyLink.h
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/I2C.h: 
 /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stdbool.h: 
 /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/display/Display.h: 
-/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stdarg.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/Power.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/utils/List.h: 
 /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 
@@ -454,6 +457,7 @@ hello.obj: ../easylink/EasyLink.h
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../driverlib/rom.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/gpio.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_gpio.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/Watchdog.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Clock.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/package/Clock_TimerProxy.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/BIOS.h: 
@@ -484,7 +488,6 @@ hello.obj: ../easylink/EasyLink.h
 /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/UART.h: 
 /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/Watchdog.h: 
 ../CC1310_LAUNCHXL.h: 
 ../LSM9DS1.h: 
 ../LSM9DS1_Registers.h: 
@@ -503,3 +506,10 @@ hello.obj: ../easylink/EasyLink.h
 /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/rf_ble_cmd.h: 
 ../easylink/EasyLink.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/uart/UARTCC26XX.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/utils/RingBuf.h: 
+/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/uart.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_uart.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/dpl/SwiP.h: 
+/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 
