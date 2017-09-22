@@ -170,6 +170,7 @@ hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IGateProv
 hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/package/System_SupportProxy.h
 hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/package/System_Module_GateProxy.h
 hello.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Error.h
+hello.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/string.h
 hello.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/I2C.h
 hello.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stdbool.h
 hello.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
@@ -427,6 +428,7 @@ hello.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stdd
 /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/package/System_SupportProxy.h: 
 /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/package/System_Module_GateProxy.h: 
 /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Error.h: 
+/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/string.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/I2C.h: 
 /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stdbool.h: 
 /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 

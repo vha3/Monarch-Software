@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <xdc/runtime/System.h>
 #include <xdc/runtime/Error.h>
+#include <string.h>
 
 /* Driver header files */
 #include <ti/drivers/I2C.h>
@@ -118,6 +119,9 @@ static Semaphore_Handle rxRestartSemaphoreHandle;
 static Semaphore_Struct rxBeaconSemaphore;
 static Semaphore_Handle rxBeaconSemaphoreHandle;
 
+static Semaphore_Struct readSemaphore;
+static Semaphore_Handle readSemaphoreHandle;
+
 static Semaphore_Struct batonSemaphore;
 static Semaphore_Handle batonSemaphoreHandle;
 
@@ -141,6 +145,15 @@ uint8_t Connections[MAXNEIGHBORS] = {};
 
 UART_Handle uart;
 UART_Params uartParams;
+
+int bytesRead = 0;
+
+void Serial_RxDataCallback(UART_Handle handle, void *buffer, size_t size)
+{
+
+    Semaphore_post(readSemaphoreHandle);
+    bytesRead = size;
+}
 
 /* ###########################################################
  * Some Bit Manipulation Functions
@@ -429,6 +442,9 @@ Void gpsFunc(UArg arg0, UArg arg1)
     uartParams.readEcho = UART_ECHO_OFF;
     uartParams.baudRate = 9600;
 
+    uartParams.readMode       = UART_MODE_CALLBACK;
+    uartParams.readCallback   = &Serial_RxDataCallback;
+
     uart = UART_open(Board_UART0, &uartParams);
 
 	if (uart == NULL) {
@@ -441,10 +457,11 @@ Void gpsFunc(UArg arg0, UArg arg1)
 	while (1) {
 		if(goodToGo){
 			int numBytes = UART_read(uart, &input, 256);
-			UART_write(uart, &input, numBytes);
+			Semaphore_pend(readSemaphoreHandle, BIOS_WAIT_FOREVER);
+			UART_write(uart, &input, bytesRead);
 			UART_write(uart, newlinePrompt, sizeof(newlinePrompt));
 			UART_control(uart, UARTCC26XX_CMD_RX_FIFO_FLUSH, NULL);
-			Task_yield();
+//			Task_sleep(100);
 		}
 	}
 }
@@ -596,6 +613,9 @@ int main(void)
 
 	Semaphore_construct(&rxBeaconSemaphore, 0, NULL);
 	rxBeaconSemaphoreHandle = Semaphore_handle(&rxBeaconSemaphore);
+
+	Semaphore_construct(&readSemaphore, 0, NULL);
+	readSemaphoreHandle = Semaphore_handle(&readSemaphore);
 
     Semaphore_construct(&batonSemaphore, 1, NULL);
     batonSemaphoreHandle = Semaphore_handle(&batonSemaphore);
