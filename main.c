@@ -49,6 +49,7 @@ int main(void)
     PIN_init(pinTable);
     UART_init();
 
+    /* Setup peripherals and semaphores */
     wdtSetup();
     LSM9DS1init();
     initI2C();
@@ -56,6 +57,7 @@ int main(void)
 	semaphoreSetup();
 	pinSetup();
 
+	/* Construct tasks */
     createInitializationTask();
     createCalibrationTask();
     createIMUTasks();
