@@ -5,8 +5,8 @@
  *      Author: hunteradams
  */
 
-#ifndef LSM9DS1_H_
-#define LSM9DS1_H_
+#ifndef TASKS_IMU_LSM9DS1_H_
+#define TASKS_IMU_LSM9DS1_H_
 
 
 /* ===============================================================
@@ -14,8 +14,6 @@
  * ===============================================================
  */
 /* Include IMU registers and datatypes */
-#include "LSM9DS1_Registers.h"
-#include "LSM9DS1_Types.h"
 #include <math.h>
 
 /* Include necessary TI drivers */
@@ -25,6 +23,8 @@
 
 /* Include board file for access to pin definitions */
 #include "Board.h"
+#include "Tasks/IMU/LSM9DS1_Registers.h"
+#include "Tasks/IMU/LSM9DS1_Types.h"
 
 
 /* ===============================================================
@@ -1215,4 +1215,4 @@ uint16_t LSM9DS1begin(void)
 	// Once everything is initialized, return the WHO_AM_I registers we read:
 	return whoAmICombined;
 }
-#endif /* LSM9DS1_H_ */
+#endif /* TASKS_IMU_LSM9DS1_H_ */

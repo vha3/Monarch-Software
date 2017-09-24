@@ -5,12 +5,13 @@
  *      Author: hunteradams
  */
 
-#ifndef TASKS_IMU_TASKS_H_
-#define TASKS_IMU_TASKS_H_
+#ifndef TASKS_IMU_IMU_TASKS_H_
+#define TASKS_IMU_IMU_TASKS_H_
 
-#include "LSM9DS1.h"
 #include "Semaphore_Initialization.h"
 #include <ti/sysbios/knl/Task.h>
+#include "Shared_Resources.h"
+#include "LSM9DS1.h"
 
 Task_Struct magTask;
 Task_Struct gyroTask;
@@ -83,4 +84,4 @@ void createIMUTasks()
 
 
 
-#endif /* TASKS_IMU_TASKS_H_ */
+#endif /* TASKS_IMU_IMU_TASKS_H_ */

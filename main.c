@@ -18,6 +18,7 @@
 /* BIOS Header files */
 #include <ti/sysbios/BIOS.h>
 
+
 /* Example/Board Header files */
 #include "Board.h"
 
@@ -31,10 +32,10 @@
 /* Task Inclusion */
 #include "Tasks/Initialization_Task.h"
 #include "Tasks/Calibration_Task.h"
-#include "Tasks/IMU_Tasks.h"
 #include "Tasks/GPS_Task.h"
 #include "Tasks/Radio/RF_RX_Tasks.h"
 #include "Tasks/Radio/RF_TX_Tasks.h"
+#include "Tasks/IMU/IMU_Tasks.h"
 
 
 /*

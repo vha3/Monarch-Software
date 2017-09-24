@@ -9,7 +9,7 @@
 #define TASKS_INITIALIZATION_TASK_H_
 
 #include <ti/sysbios/knl/Task.h>
-#include "LSM9DS1.h"
+#include "IMU/LSM9DS1.h"
 
 Task_Struct initializationTask;
 static uint8_t initializationTaskStack[400];
