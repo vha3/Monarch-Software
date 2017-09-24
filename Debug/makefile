@@ -10,7 +10,7 @@ GEN_CMDS__FLAG := -l"configPkg/linker.cmd"
 ORDERED_OBJS += \
 "./CC1310_LAUNCHXL.obj" \
 "./ccfg.obj" \
-"./hello.obj" \
+"./main.obj" \
 "./easylink/EasyLink.obj" \
 "./smartrf_settings/smartrf_settings.obj" \
 "./smartrf_settings/smartrf_settings_predefined.obj" \
@@ -169,8 +169,8 @@ hello_CC1310_LAUNCHXL_tirtos_ccs.hex: $(EXE_OUTPUTS)
 clean:
 	-$(RM) $(GEN_CMDS__QUOTED)$(GEN_MISC_FILES__QUOTED)$(BIN_OUTPUTS__QUOTED)$(GEN_FILES__QUOTED)$(EXE_OUTPUTS__QUOTED)$(GEN_OPTS__QUOTED)
 	-$(RMDIR) $(GEN_MISC_DIRS__QUOTED)
-	-$(RM) "CC1310_LAUNCHXL.obj" "ccfg.obj" "hello.obj" "easylink/EasyLink.obj" "smartrf_settings/smartrf_settings.obj" "smartrf_settings/smartrf_settings_predefined.obj" 
-	-$(RM) "CC1310_LAUNCHXL.d" "ccfg.d" "hello.d" "easylink/EasyLink.d" "smartrf_settings/smartrf_settings.d" "smartrf_settings/smartrf_settings_predefined.d" 
+	-$(RM) "CC1310_LAUNCHXL.obj" "ccfg.obj" "main.obj" "easylink/EasyLink.obj" "smartrf_settings/smartrf_settings.obj" "smartrf_settings/smartrf_settings_predefined.obj" 
+	-$(RM) "CC1310_LAUNCHXL.d" "ccfg.d" "main.d" "easylink/EasyLink.d" "smartrf_settings/smartrf_settings.d" "smartrf_settings/smartrf_settings_predefined.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

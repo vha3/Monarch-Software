@@ -12,7 +12,7 @@ CMD_SRCS += \
 C_SRCS += \
 ../CC1310_LAUNCHXL.c \
 ../ccfg.c \
-../hello.c 
+../main.c 
 
 GEN_CMDS += \
 ./configPkg/linker.cmd 
@@ -27,7 +27,7 @@ GEN_MISC_DIRS += \
 C_DEPS += \
 ./CC1310_LAUNCHXL.d \
 ./ccfg.d \
-./hello.d 
+./main.d 
 
 GEN_OPTS += \
 ./configPkg/compiler.opt 
@@ -35,7 +35,7 @@ GEN_OPTS += \
 OBJS += \
 ./CC1310_LAUNCHXL.obj \
 ./ccfg.obj \
-./hello.obj 
+./main.obj 
 
 GEN_MISC_DIRS__QUOTED += \
 "configPkg/" 
@@ -43,12 +43,12 @@ GEN_MISC_DIRS__QUOTED += \
 OBJS__QUOTED += \
 "CC1310_LAUNCHXL.obj" \
 "ccfg.obj" \
-"hello.obj" 
+"main.obj" 
 
 C_DEPS__QUOTED += \
 "CC1310_LAUNCHXL.d" \
 "ccfg.d" \
-"hello.d" 
+"main.d" 
 
 GEN_FILES__QUOTED += \
 "configPkg/linker.cmd" \
@@ -57,6 +57,6 @@ GEN_FILES__QUOTED += \
 C_SRCS__QUOTED += \
 "../CC1310_LAUNCHXL.c" \
 "../ccfg.c" \
-"../hello.c" 
+"../main.c" 
 
 

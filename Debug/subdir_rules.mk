@@ -17,13 +17,6 @@ ccfg.obj: ../ccfg.c $(GEN_OPTS) | $(GEN_HDRS)
 	@echo 'Finished building: $<'
 	@echo ' '
 
-hello.obj: ../hello.c $(GEN_OPTS) | $(GEN_HDRS)
-	@echo 'Building file: $<'
-	@echo 'Invoking: ARM Compiler'
-	"/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/bin/armcl" -mv7M3 --code_state=16 --float_support=vfplib -me --include_path="/Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs" --include_path="/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/posix" --include_path="/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include" --define=DeviceFamily_CC13X0 -g --diag_warning=225 --diag_warning=255 --diag_wrap=off --display_error_number --gen_func_subsections=on --preproc_with_compile --preproc_dependency="hello.d" $(GEN_OPTS__FLAG) "$<"
-	@echo 'Finished building: $<'
-	@echo ' '
-
 build-1471320049:
 	@$(MAKE) -Onone -f subdir_rules.mk build-1471320049-inproc
 
@@ -37,5 +30,12 @@ build-1471320049-inproc: ../hello.cfg
 configPkg/linker.cmd: build-1471320049 ../hello.cfg
 configPkg/compiler.opt: build-1471320049
 configPkg/: build-1471320049
+
+main.obj: ../main.c $(GEN_OPTS) | $(GEN_HDRS)
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM Compiler'
+	"/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/bin/armcl" -mv7M3 --code_state=16 --float_support=vfplib -me --include_path="/Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs" --include_path="/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/posix" --include_path="/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include" --define=DeviceFamily_CC13X0 -g --diag_warning=225 --diag_warning=255 --diag_wrap=off --display_error_number --gen_func_subsections=on --preproc_with_compile --preproc_dependency="main.d" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
 
 
