@@ -5,13 +5,13 @@
  *      Author: hunteradams
  */
 
-#ifndef CLOCK_INITIALIZATION_H_
-#define CLOCK_INITIALIZATION_H_
+#ifndef PERIPHERALS_CLOCK_INITIALIZATION_H_
+#define PERIPHERALS_CLOCK_INITIALIZATION_H_
 
 #include <ti/sysbios/knl/Clock.h>
+#include "Peripherals/Watchdog_Initialization.h"
 #include "Semaphore_Initialization.h"
 #include "Shared_Resources.h"
-#include "Watchdog_Initialization.h"
 
 
 /* Stuff related to clock */
@@ -42,4 +42,4 @@ void clockSetup()
 
 
 
-#endif /* CLOCK_INITIALIZATION_H_ */
+#endif /* PERIPHERALS_CLOCK_INITIALIZATION_H_ */

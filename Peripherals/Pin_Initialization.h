@@ -5,8 +5,8 @@
  *      Author: hunteradams
  */
 
-#ifndef PIN_INITIALIZATION_H_
-#define PIN_INITIALIZATION_H_
+#ifndef PERIPHERALS_PIN_INITIALIZATION_H_
+#define PERIPHERALS_PIN_INITIALIZATION_H_
 
 #include <ti/drivers/PIN.h>
 #include <ti/drivers/pin/PINCC26XX.h>
@@ -75,4 +75,4 @@ void pinSetup()
 
 
 
-#endif /* PIN_INITIALIZATION_H_ */
+#endif /* PERIPHERALS_PIN_INITIALIZATION_H_ */

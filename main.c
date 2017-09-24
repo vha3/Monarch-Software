@@ -5,6 +5,9 @@
  */
 
 /* TI-RTOS Header files */
+#include <Peripherals/Clock_Initialization.h>
+#include <Peripherals/Pin_Initialization.h>
+#include <Peripherals/Watchdog_Initialization.h>
 #include <xdc/std.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -24,12 +27,7 @@
 
 /* Customized Initializations and Resources */
 #include "Semaphore_Initialization.h"
-#include "Clock_Initialization.h"
 #include "Shared_Resources.h"
-#include "Watchdog_Initialization.h"
-#include "Pin_Initialization.h"
-
-/* Task Inclusion */
 #include "Tasks/Initialization_Task.h"
 #include "Tasks/Calibration_Task.h"
 #include "Tasks/GPS_Task.h"

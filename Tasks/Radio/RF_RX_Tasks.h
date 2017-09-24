@@ -9,9 +9,9 @@
 #define TASKS_RADIO_RF_RX_TASKS_H_
 
 #include "RF_Globals.h"
-#include "Pin_Initialization.h"
 #include "Semaphore_Initialization.h"
 #include <ti/sysbios/knl/Task.h>
+#include "../../Peripherals/Pin_Initialization.h"
 
 Task_Struct rxRestartTask;
 Task_Struct rxBeaconTask;

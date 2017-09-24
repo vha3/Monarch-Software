@@ -5,10 +5,11 @@
  *      Author: hunteradams
  */
 
-#ifndef WATCHDOG_INITIALIZATION_H_
-#define WATCHDOG_INITIALIZATION_H_
+#ifndef PERIPHERALS_WATCHDOG_INITIALIZATION_H_
+#define PERIPHERALS_WATCHDOG_INITIALIZATION_H_
 
 #include <ti/drivers/Watchdog.h>
+#include "Board.h"
 
 Watchdog_Handle watchdogHandle;
 void wdtSetup()
@@ -25,4 +26,4 @@ void wdtSetup()
 
 
 
-#endif /* WATCHDOG_INITIALIZATION_H_ */
+#endif /* PERIPHERALS_WATCHDOG_INITIALIZATION_H_ */
