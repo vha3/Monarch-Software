@@ -5,8 +5,8 @@
  *      Author: hunteradams
  */
 
-#ifndef NETWORK_TYPES_H_
-#define NETWORK_TYPES_H_
+#ifndef TASKS_RADIO_NETWORK_TYPES_H_
+#define TASKS_RADIO_NETWORK_TYPES_H_
 
 #include <xdc/std.h>
 
@@ -22,4 +22,4 @@ typedef enum
 
 
 
-#endif /* NETWORK_TYPES_H_ */
+#endif /* TASKS_RADIO_NETWORK_TYPES_H_ */

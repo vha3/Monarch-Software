@@ -12,7 +12,6 @@
 #include <xdc/runtime/Error.h>
 
 /* Driver header files */
-#include <ti/drivers/I2C.h>
 #include <ti/drivers/Power.h>
 #include <ti/drivers/power/PowerCC26XX.h>
 
@@ -36,6 +35,7 @@
 #include "Tasks/GPS_Task.h"
 #include "Tasks/Radio/RF_RX_Tasks.h"
 #include "Tasks/Radio/RF_TX_Tasks.h"
+
 
 /*
  *  ======== main ========

@@ -170,11 +170,9 @@ main.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IGateProvi
 main.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/package/System_SupportProxy.h
 main.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/package/System_Module_GateProxy.h
 main.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Error.h
-main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/I2C.h
-main.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stdbool.h
-main.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
 main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/Power.h
 main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/utils/List.h
+main.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stdbool.h
 main.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
 main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/power/PowerCC26XX.h
 main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/dpl/HwiP.h
@@ -244,6 +242,8 @@ main.obj: /Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_ti
 main.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/math.h
 main.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/_defs.h
 main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Clock.h
+main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/I2C.h
+main.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
 main.obj: ../Tasks/Calibration_Task.h
 main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Task.h
 main.obj: ../Tasks/IMU_Tasks.h
@@ -269,7 +269,7 @@ main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc
 main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/rf/RF.h
 main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/rf_ble_cmd.h
 main.obj: /Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/easylink/EasyLink.h
-main.obj: /Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/Network_Types.h
+main.obj: ../Tasks/Radio/Network_Types.h
 main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Task.h
 main.obj: ../Tasks/Radio/RF_TX_Tasks.h
 main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Task.h
@@ -444,11 +444,9 @@ main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packag
 /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/package/System_SupportProxy.h: 
 /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/package/System_Module_GateProxy.h: 
 /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Error.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/I2C.h: 
-/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stdbool.h: 
-/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/Power.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/utils/List.h: 
+/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stdbool.h: 
 /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/power/PowerCC26XX.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/dpl/HwiP.h: 
@@ -518,6 +516,8 @@ main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packag
 /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/math.h: 
 /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/_defs.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Clock.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/I2C.h: 
+/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 
 ../Tasks/Calibration_Task.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Task.h: 
 ../Tasks/IMU_Tasks.h: 
@@ -543,7 +543,7 @@ main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packag
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/rf/RF.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/rf_ble_cmd.h: 
 /Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/easylink/EasyLink.h: 
-/Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/Network_Types.h: 
+../Tasks/Radio/Network_Types.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Task.h: 
 ../Tasks/Radio/RF_TX_Tasks.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Task.h: 
