@@ -20,14 +20,14 @@
 
 /* BIOS Header files */
 #include <ti/sysbios/BIOS.h>
+#include <Tasks/Semaphore_Initialization.h>
+#include <Tasks/Shared_Resources.h>
 
 
 /* Example/Board Header files */
 #include "Board.h"
 
 /* Customized Initializations and Resources */
-#include "Semaphore_Initialization.h"
-#include "Shared_Resources.h"
 #include "Tasks/Initialization_Task.h"
 #include "Tasks/Calibration_Task.h"
 #include "Tasks/GPS_Task.h"

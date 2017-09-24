@@ -9,9 +9,9 @@
 #define PERIPHERALS_CLOCK_INITIALIZATION_H_
 
 #include <ti/sysbios/knl/Clock.h>
+#include "../Tasks/Semaphore_Initialization.h"
+#include "../Tasks/Shared_Resources.h"
 #include "Peripherals/Watchdog_Initialization.h"
-#include "Semaphore_Initialization.h"
-#include "Shared_Resources.h"
 
 
 /* Stuff related to clock */

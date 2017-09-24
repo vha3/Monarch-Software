@@ -9,9 +9,9 @@
 #define TASKS_RADIO_RF_TX_TASKS_H_
 
 #include "RF_Globals.h"
-#include "Semaphore_Initialization.h"
 #include <ti/sysbios/knl/Task.h>
 #include "../../Peripherals/Pin_Initialization.h"
+#include "../Semaphore_Initialization.h"
 //#include "TRIAD.h"
 
 Task_Struct txDataTask;

@@ -8,9 +8,9 @@
 #ifndef TASKS_CALIBRATION_TASK_H_
 #define TASKS_CALIBRATION_TASK_H_
 
-#include "Shared_Resources.h"
 #include <ti/sysbios/knl/Task.h>
 #include "IMU/LSM9DS1.h"
+#include "Shared_Resources.h"
 
 Task_Struct calibrationTask;
 static uint8_t calibrationTaskStack[450];

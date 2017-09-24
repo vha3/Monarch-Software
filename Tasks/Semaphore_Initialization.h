@@ -5,8 +5,8 @@
  *      Author: hunteradams
  */
 
-#ifndef SEMAPHORE_INITIALIZATION_H_
-#define SEMAPHORE_INITIALIZATION_H_
+#ifndef TASKS_SEMAPHORE_INITIALIZATION_H_
+#define TASKS_SEMAPHORE_INITIALIZATION_H_
 
 #include <ti/sysbios/knl/Semaphore.h>
 
@@ -79,4 +79,4 @@ void semaphoreSetup()
 
 
 
-#endif /* SEMAPHORE_INITIALIZATION_H_ */
+#endif /* TASKS_SEMAPHORE_INITIALIZATION_H_ */

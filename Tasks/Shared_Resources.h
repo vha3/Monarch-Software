@@ -5,11 +5,11 @@
  *      Author: hunteradams
  */
 
-#ifndef SHARED_RESOURCES_H_
-#define SHARED_RESOURCES_H_
+#ifndef TASKS_SHARED_RESOURCES_H_
+#define TASKS_SHARED_RESOURCES_H_
 
 int goodToGo = 0;
 
 
 
-#endif /* SHARED_RESOURCES_H_ */
+#endif /* TASKS_SHARED_RESOURCES_H_ */

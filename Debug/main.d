@@ -108,38 +108,7 @@ main.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Types.h
 main.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IInstance.h
 main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/interfaces/ITimer.h
 main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/package/Clock_TimerProxy.h
-main.obj: /Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/Peripherals/Watchdog_Initialization.h
-main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/Watchdog.h
-main.obj: /Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/Board.h
-main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/ADC.h
-main.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stdbool.h
-main.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
-main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/ADCBuf.h
-main.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
-main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/GPIO.h
-main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/PWM.h
-main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/SPI.h
-main.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
-main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/UART.h
-main.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
-main.obj: /Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/CC1310_LAUNCHXL.h
-main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/PIN.h
-main.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
-main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/ioc.h
-main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_types.h
-main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/../inc/hw_chip_def.h
-main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_memmap.h
-main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_ioc.h
-main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_ints.h
-main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/interrupt.h
-main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_nvic.h
-main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/debug.h
-main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/cpu.h
-main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_cpu_scs.h
-main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../driverlib/rom.h
-main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/gpio.h
-main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_gpio.h
-main.obj: /Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/Semaphore_Initialization.h
+main.obj: /Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/Peripherals/../Tasks/Semaphore_Initialization.h
 main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Semaphore.h
 main.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Types.h
 main.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IInstance.h
@@ -181,7 +150,38 @@ main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packag
 main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Task.h
 main.obj: /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IModule.h
 main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Event__epilogue.h
-main.obj: /Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/Shared_Resources.h
+main.obj: /Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/Peripherals/../Tasks/Shared_Resources.h
+main.obj: /Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/Peripherals/Watchdog_Initialization.h
+main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/Watchdog.h
+main.obj: /Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/Board.h
+main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/ADC.h
+main.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stdbool.h
+main.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
+main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/ADCBuf.h
+main.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
+main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/GPIO.h
+main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/PWM.h
+main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/SPI.h
+main.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
+main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/UART.h
+main.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
+main.obj: /Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/CC1310_LAUNCHXL.h
+main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/PIN.h
+main.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
+main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/ioc.h
+main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_types.h
+main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/../inc/hw_chip_def.h
+main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_memmap.h
+main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_ioc.h
+main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_ints.h
+main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/interrupt.h
+main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_nvic.h
+main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/debug.h
+main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/cpu.h
+main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_cpu_scs.h
+main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../driverlib/rom.h
+main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/gpio.h
+main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_gpio.h
 main.obj: /Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/Peripherals/Pin_Initialization.h
 main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/pin/PINCC26XX.h
 main.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
@@ -382,38 +382,7 @@ main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packag
 /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IInstance.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/interfaces/ITimer.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/package/Clock_TimerProxy.h: 
-/Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/Peripherals/Watchdog_Initialization.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/Watchdog.h: 
-/Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/Board.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/ADC.h: 
-/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stdbool.h: 
-/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/ADCBuf.h: 
-/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/GPIO.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/PWM.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/SPI.h: 
-/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/UART.h: 
-/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 
-/Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/CC1310_LAUNCHXL.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/PIN.h: 
-/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/ioc.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_types.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/../inc/hw_chip_def.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_memmap.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_ioc.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_ints.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/interrupt.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_nvic.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/debug.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/cpu.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_cpu_scs.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../driverlib/rom.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/gpio.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_gpio.h: 
-/Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/Semaphore_Initialization.h: 
+/Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/Peripherals/../Tasks/Semaphore_Initialization.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Semaphore.h: 
 /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/Types.h: 
 /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IInstance.h: 
@@ -455,7 +424,38 @@ main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packag
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Task.h: 
 /Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/IModule.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Event__epilogue.h: 
-/Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/Shared_Resources.h: 
+/Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/Peripherals/../Tasks/Shared_Resources.h: 
+/Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/Peripherals/Watchdog_Initialization.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/Watchdog.h: 
+/Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/Board.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/ADC.h: 
+/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stdbool.h: 
+/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/ADCBuf.h: 
+/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/GPIO.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/PWM.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/SPI.h: 
+/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/UART.h: 
+/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 
+/Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/CC1310_LAUNCHXL.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/PIN.h: 
+/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/ioc.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_types.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/../inc/hw_chip_def.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_memmap.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_ioc.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_ints.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/interrupt.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_nvic.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/debug.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/cpu.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_cpu_scs.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../driverlib/rom.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/gpio.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_gpio.h: 
 /Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/Peripherals/Pin_Initialization.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/pin/PINCC26XX.h: 
 /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 

@@ -10,8 +10,8 @@
 
 #include <ti/drivers/UART.h>
 #include <ti/drivers/uart/UARTCC26XX.h>
-#include "Semaphore_Initialization.h"
 #include <ti/sysbios/knl/Task.h>
+#include "Semaphore_Initialization.h"
 
 UART_Handle uart;
 UART_Params uartParams;

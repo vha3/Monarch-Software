@@ -8,9 +8,9 @@
 #ifndef TASKS_IMU_IMU_TASKS_H_
 #define TASKS_IMU_IMU_TASKS_H_
 
-#include "Semaphore_Initialization.h"
 #include <ti/sysbios/knl/Task.h>
-#include "Shared_Resources.h"
+#include "../Semaphore_Initialization.h"
+#include "../Shared_Resources.h"
 #include "LSM9DS1.h"
 
 Task_Struct magTask;
