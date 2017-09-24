@@ -5,35 +5,36 @@
  */
 
 /* TI-RTOS Header files */
-#include <Peripherals/Clock_Initialization.h>
-#include <Peripherals/Pin_Initialization.h>
-#include <Peripherals/Watchdog_Initialization.h>
 #include <xdc/std.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <xdc/runtime/System.h>
 #include <xdc/runtime/Error.h>
 
-/* Driver header files */
+/* Power header files */
 #include <ti/drivers/Power.h>
 #include <ti/drivers/power/PowerCC26XX.h>
 
 /* BIOS Header files */
 #include <ti/sysbios/BIOS.h>
-#include <Tasks/Semaphore_Initialization.h>
-#include <Tasks/Shared_Resources.h>
 
+/* Peripherals */
+#include <Peripherals/Clock_Initialization.h>
+#include <Peripherals/Pin_Initialization.h>
+#include <Peripherals/Watchdog_Initialization.h>
 
-/* Example/Board Header files */
+/* Board Header file */
 #include "Board.h"
 
-/* Customized Initializations and Resources */
+/* Tasks */
 #include "Tasks/Initialization_Task.h"
 #include "Tasks/Calibration_Task.h"
 #include "Tasks/GPS_Task.h"
 #include "Tasks/Radio/RF_RX_Tasks.h"
 #include "Tasks/Radio/RF_TX_Tasks.h"
 #include "Tasks/IMU/IMU_Tasks.h"
+#include <Tasks/Semaphore_Initialization.h>
+#include <Tasks/Shared_Resources.h>
 
 
 /*

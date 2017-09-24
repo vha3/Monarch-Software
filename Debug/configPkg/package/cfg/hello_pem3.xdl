@@ -9,10 +9,10 @@
  */
 
 
--l"/Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/Debug/configPkg/package/cfg/hello_pem3.oem3"
+-l"/Users/hunteradams/Documents/MSP430/workspace/Sprite/Debug/configPkg/package/cfg/hello_pem3.oem3"
 -l"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/uia/sysbios/lib/release/ti.uia.sysbios.aem3"
 -l"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/uia/loggers/lib/release/ti.uia.loggers.aem3"
--l"/Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/src/sysbios/sysbios.aem3"
+-l"/Users/hunteradams/Documents/MSP430/workspace/Sprite/src/sysbios/sysbios.aem3"
 -l"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/uia/services/lib/release/ti.uia.services.aem3"
 -l"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/uia/runtime/lib/release/ti.uia.runtime.aem3"
 -l"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/uia/events/lib/release/ti.uia.events.aem3"

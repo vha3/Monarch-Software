@@ -1,9 +1,9 @@
 ******************************************************************************
                   TI ARM Linker Unix v16.9.3                   
 ******************************************************************************
->> Linked Sun Sep 24 17:15:55 2017
+>> Linked Sun Sep 24 17:17:52 2017
 
-OUTPUT FILE NAME:   <hello_CC1310_LAUNCHXL_tirtos_ccs.out>
+OUTPUT FILE NAME:   <Sprite.out>
 ENTRY POINT SYMBOL: "ResetISR"  address: 000096e9
 
 
@@ -1068,8 +1068,8 @@ section   page    origin      length       input sections
 .vecs      0    20000000    000000c8     NOLOAD SECTION
                   20000000    000000c8     hello_pem3.oem3 (.vecs)
 
-xdc.meta   0    00000000    0000010a     COPY SECTION
-                  00000000    0000010a     hello_pem3.oem3 (xdc.meta)
+xdc.meta   0    00000000    000000f0     COPY SECTION
+                  00000000    000000f0     hello_pem3.oem3 (xdc.meta)
 
 xdc.noload 
 *          0    00000000    00000000     COPY SECTION
@@ -1098,7 +1098,7 @@ MODULE SUMMARY
     +--+---------------------------------+-------+---------+---------+
        Total:                            3174    17237     1172   
                                                                   
-    /Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/Debug/configPkg/package/cfg/
+    /Users/hunteradams/Documents/MSP430/workspace/Sprite/Debug/configPkg/package/cfg/
        hello_pem3.oem3                   3226    1570      4526   
     +--+---------------------------------+-------+---------+---------+
        Total:                            3226    1570      4526   
@@ -1195,7 +1195,7 @@ MODULE SUMMARY
     +--+---------------------------------+-------+---------+---------+
        Total:                            6380    28        722    
                                                                   
-    /Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/src/sysbios/sysbios.aem3
+    /Users/hunteradams/Documents/MSP430/workspace/Sprite/src/sysbios/sysbios.aem3
        BIOS.obj                          8562    0         0      
        m3_Hwi_asm.obj                    262     0         0      
        m3_TaskSupport_asm.obj            108     0         0      
@@ -1507,11 +1507,11 @@ UNDEFED   SHT$$INIT_ARRAY$$Limit
 0000bf09  Watchdog_setReload                                              
 00000000  __ASM__                                                         
 200023f4  __CIOBUF_                                                       
-00000084  __ISA__                                                         
-00000096  __PLAT__                                                        
+0000006a  __ISA__                                                         
+0000007c  __PLAT__                                                        
 20005000  __STACK_END                                                     
 00000400  __STACK_SIZE                                                    
-000000bd  __TARG__                                                        
+000000a3  __TARG__                                                        
 000110a8  __TI_CINIT_Base                                                 
 000110b8  __TI_CINIT_Limit                                                
 00011090  __TI_Handler_Table_Base                                         
@@ -1529,7 +1529,7 @@ ffffffff  __TI_prof_data_start
 00010cd0  __TI_static_base__                                              
 00008149  __TI_writemsg                                                   
 0000bddd  __TI_zero_init                                                  
-000000e2  __TRDR__                                                        
+000000c8  __TRDR__                                                        
 0000c04b  __abort_execution                                               
 0000a0d1  __aeabi_f2iz                                                    
 00006fc1  __aeabi_fdiv                                                    
@@ -2189,10 +2189,10 @@ address   name
 00000000  ti_sysbios_family_arm_m3_Hwi_resetVectors                       
 00000001  xdc_runtime_Startup__EXECFXN__C                                 
 00000001  xdc_runtime_Startup__RESETFXN__C                                
-00000084  __ISA__                                                         
-00000096  __PLAT__                                                        
-000000bd  __TARG__                                                        
-000000e2  __TRDR__                                                        
+0000006a  __ISA__                                                         
+0000007c  __PLAT__                                                        
+000000a3  __TARG__                                                        
+000000c8  __TRDR__                                                        
 00000400  __STACK_SIZE                                                    
 00000489  EasyLink_init                                                   
 0000084d  HOSTwrite                                                       

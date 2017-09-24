@@ -135,33 +135,33 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXE_OUTPUTS += \
-hello_CC1310_LAUNCHXL_tirtos_ccs.out \
+Sprite.out \
 
 EXE_OUTPUTS__QUOTED += \
-"hello_CC1310_LAUNCHXL_tirtos_ccs.out" \
+"Sprite.out" \
 
 BIN_OUTPUTS += \
-hello_CC1310_LAUNCHXL_tirtos_ccs.hex \
+Sprite.hex \
 
 BIN_OUTPUTS__QUOTED += \
-"hello_CC1310_LAUNCHXL_tirtos_ccs.hex" \
+"Sprite.hex" \
 
 
 # All Target
 all: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
-	@$(MAKE) --no-print-directory -Onone "hello_CC1310_LAUNCHXL_tirtos_ccs.out"
+	@$(MAKE) --no-print-directory -Onone "Sprite.out"
 
 # Tool invocations
-hello_CC1310_LAUNCHXL_tirtos_ccs.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
+Sprite.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: ARM Linker'
-	"/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/bin/armcl" -mv7M3 --code_state=16 --float_support=vfplib -me --define=DeviceFamily_CC13X0 -g --diag_warning=225 --diag_warning=255 --diag_wrap=off --display_error_number --gen_func_subsections=on -z -m"hello_CC1310_LAUNCHXL_tirtos_ccs.map" -i"/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/lib" -i"/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="hello_CC1310_LAUNCHXL_tirtos_ccs_linkInfo.xml" --rom_model -o "hello_CC1310_LAUNCHXL_tirtos_ccs.out" $(ORDERED_OBJS)
+	"/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/bin/armcl" -mv7M3 --code_state=16 --float_support=vfplib -me --define=DeviceFamily_CC13X0 -g --diag_warning=225 --diag_warning=255 --diag_wrap=off --display_error_number --gen_func_subsections=on -z -m"Sprite.map" -i"/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/lib" -i"/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="Sprite_linkInfo.xml" --rom_model -o "Sprite.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-hello_CC1310_LAUNCHXL_tirtos_ccs.hex: $(EXE_OUTPUTS)
+Sprite.hex: $(EXE_OUTPUTS)
 	@echo 'Invoking: ARM Hex Utility'
-	"/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/bin/armhex"  -o "hello_CC1310_LAUNCHXL_tirtos_ccs.hex" $(EXE_OUTPUTS__QUOTED)
+	"/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/bin/armhex"  -o "Sprite.hex" $(EXE_OUTPUTS__QUOTED)
 	@echo 'Finished building: $@'
 	@echo ' '
 

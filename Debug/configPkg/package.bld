@@ -11,7 +11,7 @@ var makeAssembly = false;
 var Executable = xdc.module('xdc.bld.Executable');
 
 var exeOpts = new Executable.Attrs({
-        cfgScript: '/Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/hello.cfg',
+        cfgScript: '/Users/hunteradams/Documents/MSP430/workspace/Sprite/hello.cfg',
         profile: 'release',
         cfgHome: 'configPkg',
 });
@@ -41,7 +41,7 @@ else {
 
 var thisObj = {
     cfg:        '../hello.cfg',
-    outputPath: '/Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/Debug/configPkg',
+    outputPath: '/Users/hunteradams/Documents/MSP430/workspace/Sprite/Debug/configPkg',
     exeName:    'hello' + suffix,
     exeIntName: 'hello' + suffix.replace('.', '_'),
     targ:       targ,
