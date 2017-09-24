@@ -5,8 +5,8 @@
  *      Author: hunteradams
  */
 
-#ifndef TRIAD_H_
-#define TRIAD_H_
+#ifndef TASKS_IMU_TRIAD_H_
+#define TASKS_IMU_TRIAD_H_
 
 //#include "LSM9DS1.h"
 
@@ -129,4 +129,4 @@ float* computeAttitude(int16_t mx, int16_t my, int16_t mz, int16_t ax, int16_t a
 
 
 
-#endif /* TRIAD_H_ */
+#endif /* TASKS_IMU_TRIAD_H_ */
