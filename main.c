@@ -22,6 +22,8 @@
 #include <Peripherals/Clock_Initialization.h>
 #include <Peripherals/Pin_Initialization.h>
 #include <Peripherals/Watchdog_Initialization.h>
+#include <Peripherals/ADC_Initialization.h>
+#include <Peripherals/Display_Initialization.h>
 
 /* Board Header file */
 #include "Board.h"
@@ -35,6 +37,7 @@
 #include "Tasks/IMU/IMU_Tasks.h"
 #include <Tasks/Semaphore_Initialization.h>
 #include <Tasks/Shared_Resources.h>
+#include <Tasks/ADC_Tasks.h>
 
 
 /*
@@ -47,7 +50,11 @@ int main(void)
     Board_initGeneral();
     I2C_init();
     PIN_init(pinTable);
-    UART_init();
+    ADC_init();
+
+    /* Use one or the other of the below. If using GPS, need UART */
+//    UART_init();
+    Display_init();
 
     /* Setup peripherals and semaphores */
     wdtSetup();
@@ -57,13 +64,22 @@ int main(void)
 	semaphoreSetup();
 	pinSetup();
 
+	adc1Setup();
+//	adc0Setup();
+
+	displaySetup();
+
 	/* Construct tasks */
     createInitializationTask();
     createCalibrationTask();
-    createIMUTasks();
-    createGPSTask();
+    createMagTask();
+    createGyroTask();
+    createAccelTask();
+//    createGPSTask();
     createRFRXTasks();
     createRFTXTasks();
+    createADC1Task();
+//    createADC0Task();
 
     /* Start kernel. */
     BIOS_start();

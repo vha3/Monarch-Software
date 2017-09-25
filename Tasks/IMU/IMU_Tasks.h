@@ -57,31 +57,37 @@ Void accelTaskFunc(UArg arg0, UArg arg1)
     }
 }
 
-void createIMUTasks()
+void createMagTask()
 {
 	Task_Params task_params;
 	Task_Params_init(&task_params);
-
 	task_params.stackSize = 450;
 	task_params.priority = 2;
 	task_params.stack = &magTaskStack;
 	Task_construct(&magTask, magTaskFunc,
 					   &task_params, NULL);
+}
 
+void createGyroTask()
+{
+	Task_Params task_params;
+	Task_Params_init(&task_params);
 	task_params.stackSize = 450;
 	task_params.priority = 2;
 	task_params.stack = &gyroTaskStack;
 	Task_construct(&gyroTask, gyroTaskFunc,
 					   &task_params, NULL);
+}
 
+void createAccelTask()
+{
+	Task_Params task_params;
+	Task_Params_init(&task_params);
 	task_params.stackSize = 450;
 	task_params.priority = 2;
 	task_params.stack = &accelTaskStack;
 	Task_construct(&accelTask, accelTaskFunc,
 					   &task_params, NULL);
 }
-
-
-
 
 #endif /* TASKS_IMU_IMU_TASKS_H_ */
