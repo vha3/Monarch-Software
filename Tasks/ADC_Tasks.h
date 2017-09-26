@@ -43,7 +43,8 @@ Void adc1TaskFunc(UArg arg0, UArg arg1)
 				Display_printf(display, 0, 0, "ADC channel 1 convert failed\n");
 			}
     		}
-    		Task_yield();
+    		/* 10 Hz */
+    		Task_sleep(10000);
     }
 }
 
@@ -64,7 +65,8 @@ Void adc0TaskFunc(UArg arg0, UArg arg1)
 				Display_printf(display, 0, 0, "ADC channel 0 convert failed\n");
 			}
     		}
-    		Task_yield();
+    		/* 10 Hz */
+    		Task_sleep(10000);
     }
 }
 
