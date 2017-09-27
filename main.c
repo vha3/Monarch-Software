@@ -1,6 +1,6 @@
 /*
- * I2C communication with LSM9DS1 9-axis IMU
- * Hunter Adams
+ * Software for Sprite chipsat
+ * V. Hunter Adams
  * vha3@cornell.edu
  */
 
@@ -30,8 +30,6 @@
 #include "Board.h"
 
 /* Tasks */
-#include "Tasks/Initialization_Task.h"
-#include "Tasks/Calibration_Task.h"
 #include "Tasks/GPS_Task.h"
 #include "Tasks/Radio/RF_RX_Tasks.h"
 #include "Tasks/Radio/RF_TX_Tasks.h"
@@ -52,12 +50,12 @@ int main(void)
     Board_initGeneral();
     I2C_init();
     PIN_init(pinTable);
-//    ADC_init();
+    ADC_init();
     PWM_init();
 
     /* Use one or the other of the below. If using GPS, need UART */
-//    UART_init();
-    Display_init();
+    UART_init();
+//    Display_init();
 
     /* Setup peripherals and semaphores */
     wdtSetup();
@@ -66,25 +64,20 @@ int main(void)
     clockSetup();
 	semaphoreSetup();
 	pinSetup();
-	pwm2Setup();
-	pwm1Setup();
+	pwmSetup();
 
-//	adc1Setup();
-//	adc0Setup();
+	adcSetup();
 
-	displaySetup();
+//	displaySetup();
 
 	/* Construct tasks */
-    createInitializationTask();
-    createCalibrationTask();
     createMagTask();
     createGyroTask();
     createAccelTask();
-//    createGPSTask();
-//    createRFRXTasks();
+    createGPSTask();
+    createRFRXTasks();
     createRFTXTasks();
-//    createADC1Task();
-//    createADC0Task();
+    createADCTask();
     createPWMTask();
 
     /* Start kernel. */

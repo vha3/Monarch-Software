@@ -44,7 +44,6 @@ Void gpsFunc(UArg arg0, UArg arg1)
     uart = UART_open(Board_UART0, &uartParams);
 
 	if (uart == NULL) {
-		/* UART_open() failed */
 		while (1);
 	}
 	UART_control(uart, UARTCC26XX_CMD_RETURN_PARTIAL_ENABLE, NULL);

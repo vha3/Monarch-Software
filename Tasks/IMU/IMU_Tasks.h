@@ -23,6 +23,23 @@ static uint8_t accelTaskStack[450];
 
 Void magTaskFunc(UArg arg0, UArg arg1)
 {
+	/* Initialization and Calibration */
+    uint16_t workpls = LSM9DS1begin();
+    configInt(XG_INT1, INT_DRDY_G, INT_ACTIVE_HIGH, INT_PUSH_PULL);
+    configInt(XG_INT2, INT_DRDY_XL, INT_ACTIVE_HIGH, INT_PUSH_PULL);
+    //		calibrate(1);
+    //		calibrateMag(1);
+
+    	/* getMagInitial is only required if you're calibrating for the computer attitude */
+    //		getMagInitial();
+
+    /* Unlock other tasks */
+	goodToGo += 1;
+
+	/* Read from each sensor (improves reliability) */
+	readGyro();
+	readAccel();
+	readMag();
     while (1) {
     		Semaphore_pend(magSemaphoreHandle, BIOS_WAIT_FOREVER);
     		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);

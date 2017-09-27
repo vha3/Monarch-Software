@@ -11,11 +11,6 @@
 #include <ti/sysbios/knl/Semaphore.h>
 
 /* Semaphore structs */
-static Semaphore_Struct initSemaphore;
-static Semaphore_Handle initSemaphoreHandle;
-
-static Semaphore_Struct calibSemaphore;
-static Semaphore_Handle calibSemaphoreHandle;
 
 static Semaphore_Struct magSemaphore;
 static Semaphore_Handle magSemaphoreHandle;
@@ -44,34 +39,34 @@ static Semaphore_Handle batonSemaphoreHandle;
 void semaphoreSetup()
 {
     /* Create Semaphores */
-    Semaphore_construct(&initSemaphore, 1, NULL);
-    initSemaphoreHandle = Semaphore_handle(&initSemaphore);
 
-    Semaphore_construct(&calibSemaphore, 0, NULL);
-    calibSemaphoreHandle = Semaphore_handle(&calibSemaphore);
+	Semaphore_Params semparams;
+	Semaphore_Params_init(&semparams);
 
-    Semaphore_construct(&magSemaphore, 0, NULL);
+	semparams.mode = Semaphore_Mode_BINARY_PRIORITY;
+
+    Semaphore_construct(&magSemaphore, 0, &semparams);
     magSemaphoreHandle = Semaphore_handle(&magSemaphore);
 
-    Semaphore_construct(&gyroSemaphore, 0, NULL);
+    Semaphore_construct(&gyroSemaphore, 0, &semparams);
     gyroSemaphoreHandle = Semaphore_handle(&gyroSemaphore);
 
-    Semaphore_construct(&accelSemaphore, 0, NULL);
+    Semaphore_construct(&accelSemaphore, 0, &semparams);
     accelSemaphoreHandle = Semaphore_handle(&accelSemaphore);
 
-	Semaphore_construct(&txDataSemaphore, 0, NULL);
+	Semaphore_construct(&txDataSemaphore, 0, &semparams);
 	txDataSemaphoreHandle = Semaphore_handle(&txDataSemaphore);
 
-	Semaphore_construct(&rxRestartSemaphore, 0, NULL);
+	Semaphore_construct(&rxRestartSemaphore, 0, &semparams);
 	rxRestartSemaphoreHandle = Semaphore_handle(&rxRestartSemaphore);
 
-	Semaphore_construct(&rxBeaconSemaphore, 0, NULL);
+	Semaphore_construct(&rxBeaconSemaphore, 0, &semparams);
 	rxBeaconSemaphoreHandle = Semaphore_handle(&rxBeaconSemaphore);
 
-	Semaphore_construct(&readSemaphore, 0, NULL);
+	Semaphore_construct(&readSemaphore, 0, &semparams);
 	readSemaphoreHandle = Semaphore_handle(&readSemaphore);
 
-    Semaphore_construct(&batonSemaphore, 1, NULL);
+    Semaphore_construct(&batonSemaphore, 1, &semparams);
     batonSemaphoreHandle = Semaphore_handle(&batonSemaphore);
 }
 

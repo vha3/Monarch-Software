@@ -16,7 +16,7 @@
 
 Task_Struct txDataTask;
 
-static uint8_t txDataTaskStack[1024];
+static uint8_t txDataTaskStack[700];
 #pragma DATA_ALIGN(txDataTaskStack, 8)
 
 Void txDataTaskFunc(UArg arg0, UArg arg1)
@@ -96,7 +96,7 @@ void createRFTXTasks()
 {
     Task_Params task_params;
     Task_Params_init(&task_params);
-    task_params.stackSize = 1024;
+    task_params.stackSize = 700;
     task_params.priority = 2;
 	task_params.stack = &txDataTaskStack;
 	Task_construct(&txDataTask, txDataTaskFunc,

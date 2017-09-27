@@ -25,7 +25,7 @@ PWM_Handle pwm1 = NULL;
 PWM_Handle pwm2 = NULL;
 PWM_Params pwmparams;
 
-void pwm1Setup()
+void pwmSetup()
 {
     PWM_Params_init(&pwmparams);
     pwmparams.dutyUnits = PWM_DUTY_US;
@@ -39,23 +39,13 @@ void pwm1Setup()
         while (1);
     }
 
-    PWM_start(pwm1);
-}
-
-void pwm2Setup()
-{
-    PWM_Params_init(&pwmparams);
-    pwmparams.dutyUnits = PWM_DUTY_US;
-    pwmparams.dutyValue = 0;
-    pwmparams.periodUnits = PWM_PERIOD_US;
-    pwmparams.periodValue = pwmPeriod;
-
     pwm2 = PWM_open(Board_PWM3, &pwmparams);
     if (pwm2 == NULL) {
         /* Board_PWM0 did not open */
         while (1);
     }
 
+    PWM_start(pwm1);
     PWM_start(pwm2);
 }
 

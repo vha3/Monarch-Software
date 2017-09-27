@@ -15,7 +15,7 @@
 
 Task_Struct pwmTask;
 
-static uint8_t pwmTaskStack[450];
+static uint8_t pwmTaskStack[300];
 
 Void pwmTaskFunc(UArg arg0, UArg arg1)
 {
@@ -30,8 +30,6 @@ Void pwmTaskFunc(UArg arg0, UArg arg1)
     				PWM_setDuty(pwm1, 0);
     				PWM_setDuty(pwm2, pwmduty);
     			}
-    			Display_printf(display, 0, 0, "%d", polarity);
-
     			pwmduty = (pwmduty + pwmdutyInc);
 
 			if (pwmduty == pwmPeriod || (!pwmduty)) {
@@ -42,7 +40,6 @@ Void pwmTaskFunc(UArg arg0, UArg arg1)
 				polarity = -polarity;
 			}
     		}
-    		/* 10 Hz */
     		Task_sleep(10000);
     }
 }
@@ -51,7 +48,7 @@ void createPWMTask()
 {
 	Task_Params task_params;
 	Task_Params_init(&task_params);
-	task_params.stackSize = 450;
+	task_params.stackSize = 300;
 	task_params.priority = 1;
 	task_params.stack = &pwmTaskStack;
 	Task_construct(&pwmTask, pwmTaskFunc,

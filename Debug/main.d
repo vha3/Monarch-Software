@@ -238,19 +238,6 @@ main.obj: /Users/hunteradams/Documents/MSP430/workspace/Sprite/Peripherals/Displ
 main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/display/Display.h
 main.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stdarg.h
 main.obj: /Users/hunteradams/Documents/MSP430/workspace/Sprite/Peripherals/PWM_Initialization.h
-main.obj: ../Tasks/Initialization_Task.h
-main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Task.h
-main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/package/Task_SupportProxy.h
-main.obj: ../Tasks/IMU/LSM9DS1.h
-main.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/math.h
-main.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/_defs.h
-main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Clock.h
-main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/I2C.h
-main.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
-main.obj: /Users/hunteradams/Documents/MSP430/workspace/Sprite/Tasks/IMU/LSM9DS1_Registers.h
-main.obj: /Users/hunteradams/Documents/MSP430/workspace/Sprite/Tasks/IMU/LSM9DS1_Types.h
-main.obj: ../Tasks/Calibration_Task.h
-main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Task.h
 main.obj: ../Tasks/GPS_Task.h
 main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/uart/UARTCC26XX.h
 main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/utils/RingBuf.h
@@ -262,6 +249,7 @@ main.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stdde
 main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/dpl/SemaphoreP.h
 main.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
 main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Task.h
+main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/package/Task_SupportProxy.h
 main.obj: ../Tasks/Radio/RF_RX_Tasks.h
 main.obj: ../Tasks/Radio/RF_Globals.h
 main.obj: /Users/hunteradams/Documents/MSP430/workspace/Sprite/smartrf_settings/smartrf_settings.h
@@ -278,6 +266,14 @@ main.obj: ../Tasks/Radio/RF_TX_Tasks.h
 main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Task.h
 main.obj: ../Tasks/IMU/IMU_Tasks.h
 main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Task.h
+main.obj: ../Tasks/IMU/LSM9DS1.h
+main.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/math.h
+main.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/_defs.h
+main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Clock.h
+main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/I2C.h
+main.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
+main.obj: /Users/hunteradams/Documents/MSP430/workspace/Sprite/Tasks/IMU/LSM9DS1_Registers.h
+main.obj: /Users/hunteradams/Documents/MSP430/workspace/Sprite/Tasks/IMU/LSM9DS1_Types.h
 main.obj: /Users/hunteradams/Documents/MSP430/workspace/Sprite/Tasks/ADC_Tasks.h
 main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Task.h
 main.obj: /Users/hunteradams/Documents/MSP430/workspace/Sprite/Tasks/PWM_Tasks.h
@@ -521,19 +517,6 @@ main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packag
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/display/Display.h: 
 /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stdarg.h: 
 /Users/hunteradams/Documents/MSP430/workspace/Sprite/Peripherals/PWM_Initialization.h: 
-../Tasks/Initialization_Task.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Task.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/package/Task_SupportProxy.h: 
-../Tasks/IMU/LSM9DS1.h: 
-/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/math.h: 
-/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/_defs.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Clock.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/I2C.h: 
-/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 
-/Users/hunteradams/Documents/MSP430/workspace/Sprite/Tasks/IMU/LSM9DS1_Registers.h: 
-/Users/hunteradams/Documents/MSP430/workspace/Sprite/Tasks/IMU/LSM9DS1_Types.h: 
-../Tasks/Calibration_Task.h: 
-/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Task.h: 
 ../Tasks/GPS_Task.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/uart/UARTCC26XX.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/utils/RingBuf.h: 
@@ -545,6 +528,7 @@ main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packag
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/dpl/SemaphoreP.h: 
 /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Task.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/package/Task_SupportProxy.h: 
 ../Tasks/Radio/RF_RX_Tasks.h: 
 ../Tasks/Radio/RF_Globals.h: 
 /Users/hunteradams/Documents/MSP430/workspace/Sprite/smartrf_settings/smartrf_settings.h: 
@@ -561,6 +545,14 @@ main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packag
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Task.h: 
 ../Tasks/IMU/IMU_Tasks.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Task.h: 
+../Tasks/IMU/LSM9DS1.h: 
+/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/math.h: 
+/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/_defs.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Clock.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/I2C.h: 
+/Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 
+/Users/hunteradams/Documents/MSP430/workspace/Sprite/Tasks/IMU/LSM9DS1_Registers.h: 
+/Users/hunteradams/Documents/MSP430/workspace/Sprite/Tasks/IMU/LSM9DS1_Types.h: 
 /Users/hunteradams/Documents/MSP430/workspace/Sprite/Tasks/ADC_Tasks.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/Task.h: 
 /Users/hunteradams/Documents/MSP430/workspace/Sprite/Tasks/PWM_Tasks.h: 
