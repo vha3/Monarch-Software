@@ -25,7 +25,7 @@ static PIN_State pinState;
 PIN_Config pinTable[] = {
 	CC1310_LAUNCHXL_DIO15  | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_POSEDGE,
 	CC1310_LAUNCHXL_DIO12  | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_POSEDGE,
-	CC1310_LAUNCHXL_DIO22  | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_POSEDGE,
+	IOID_13  | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_POSEDGE,
 	CC1310_LAUNCHXL_PIN_RLED | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
 	CC1310_LAUNCHXL_PIN_GLED | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
     PIN_TERMINATE
@@ -46,7 +46,7 @@ void pinCallback(PIN_Handle handle, PIN_Id pinId) {
 			Semaphore_post(magSemaphoreHandle);
 			break;
 
-		case CC1310_LAUNCHXL_DIO22:
+		case IOID_13:
 //			currVal =  PIN_getOutputValue(Board_PIN_LED1);
 //			PIN_setOutputValue(pinHandle, Board_PIN_LED1, !currVal);
 			Semaphore_post(accelSemaphoreHandle);
