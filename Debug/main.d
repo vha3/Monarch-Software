@@ -233,6 +233,7 @@ main.obj: /Users/hunteradams/Documents/MSP430/workspace/Sprite/Peripherals/Pin_I
 main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/pin/PINCC26XX.h
 main.obj: /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h
 main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/DeviceFamily.h
+main.obj: /Users/hunteradams/Documents/MSP430/workspace/Sprite/Peripherals/Clock_Initialization.h
 main.obj: /Users/hunteradams/Documents/MSP430/workspace/Sprite/Peripherals/ADC_Initialization.h
 main.obj: /Users/hunteradams/Documents/MSP430/workspace/Sprite/Peripherals/Display_Initialization.h
 main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/display/Display.h
@@ -512,6 +513,7 @@ main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packag
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/pin/PINCC26XX.h: 
 /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include/stddef.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/DeviceFamily.h: 
+/Users/hunteradams/Documents/MSP430/workspace/Sprite/Peripherals/Clock_Initialization.h: 
 /Users/hunteradams/Documents/MSP430/workspace/Sprite/Peripherals/ADC_Initialization.h: 
 /Users/hunteradams/Documents/MSP430/workspace/Sprite/Peripherals/Display_Initialization.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/display/Display.h: 

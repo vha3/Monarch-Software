@@ -10,6 +10,8 @@
 
 #include <ti/drivers/PIN.h>
 #include <ti/drivers/pin/PINCC26XX.h>
+#include "Watchdog_Initialization.h"
+#include "Clock_Initialization.h"
 
 /* Example/Board Header files */
 #include "Board.h"
@@ -23,16 +25,19 @@ static PIN_State pinState;
  *   - Interrupts are configured to trigger on rising edge.
  */
 PIN_Config pinTable[] = {
-	CC1310_LAUNCHXL_DIO15  | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_POSEDGE,
+	IOID_14  | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_POSEDGE,
 	CC1310_LAUNCHXL_DIO12  | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_POSEDGE,
 	IOID_13  | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_POSEDGE,
+	IOID_1 | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_POSEDGE,
 	CC1310_LAUNCHXL_PIN_RLED | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
 	CC1310_LAUNCHXL_PIN_GLED | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
+	IOID_15 | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
     PIN_TERMINATE
 };
 
+//int count = 0;
 void pinCallback(PIN_Handle handle, PIN_Id pinId) {
-//    uint32_t currVal = 0;
+    uint32_t currVal = 0;
 	switch (pinId) {
 		case CC1310_LAUNCHXL_DIO12:
 //			currVal =  PIN_getOutputValue(Board_PIN_LED0);
@@ -40,7 +45,7 @@ void pinCallback(PIN_Handle handle, PIN_Id pinId) {
 			Semaphore_post(gyroSemaphoreHandle);
 			break;
 
-		case CC1310_LAUNCHXL_DIO15:
+		case IOID_14:
 //			currVal =  PIN_getOutputValue(Board_PIN_LED1);
 //			PIN_setOutputValue(pinHandle, Board_PIN_LED1, !currVal);
 			Semaphore_post(magSemaphoreHandle);
@@ -51,6 +56,49 @@ void pinCallback(PIN_Handle handle, PIN_Id pinId) {
 //			PIN_setOutputValue(pinHandle, Board_PIN_LED1, !currVal);
 			Semaphore_post(accelSemaphoreHandle);
 			break;
+
+		case IOID_1:
+//			count += 1;
+//			switch (count) {
+//				case 1:
+//					wdtSetup();
+//					Semaphore_post(magLockSemaphoreHandle);
+//					break;
+//				case 2:
+//					Semaphore_post(gyroLockSemaphoreHandle);
+//					break;
+//				case 3:
+//					Semaphore_post(accelLockSemaphoreHandle);
+//					break;
+//				case 4:
+//					Semaphore_post(gpsLockSemaphoreHandle);
+//					break;
+//				case 5:
+//					Semaphore_post(adcLockSemaphoreHandle);
+//					break;
+//				case 6:
+//					Semaphore_post(rxRestartLockSemaphoreHandle);
+//					break;
+//				case 7:
+//					Semaphore_post(txDataLockSemaphoreHandle);
+//					break;
+//				case 8:
+//					Semaphore_post(rxBeaconLockSemaphoreHandle);
+//					break;
+//				case 9:
+//					Semaphore_post(pwmLockSemaphoreHandle);
+//					break;
+//				default:
+//					break;
+//			}
+			currVal =  PIN_getOutputValue(CC1310_LAUNCHXL_PIN_RLED);
+			PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_PIN_RLED, !currVal);
+
+//			Watchdog_clear(watchdogHandle);
+
+
+			break;
+
 
 		default:
 			/* Do nothing */

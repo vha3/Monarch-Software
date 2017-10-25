@@ -21,6 +21,8 @@ static uint8_t txDataTaskStack[700];
 
 Void txDataTaskFunc(UArg arg0, UArg arg1)
 {
+//	Semaphore_pend(txDataLockSemaphoreHandle, BIOS_WAIT_FOREVER);
+
 	EasyLink_init(EasyLink_Phy_Custom);
 	EasyLink_setRfPwr(12);
 	EasyLink_enableRxAddrFilter((uint8_t*)&AddressList, 1, 2);

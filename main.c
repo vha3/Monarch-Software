@@ -48,37 +48,29 @@ int main(void)
 {
 	/* Initialize TI drivers */
     Board_initGeneral();
-    I2C_init();
     PIN_init(pinTable);
-    ADC_init();
-    PWM_init();
 
     /* Use one or the other of the below. If using GPS, need UART */
-    UART_init();
 //    Display_init();
+//    displaySetup();
 
     /* Setup peripherals and semaphores */
     wdtSetup();
-    LSM9DS1init();
-    initI2C();
     clockSetup();
 	semaphoreSetup();
 	pinSetup();
-	pwmSetup();
 
-	adcSetup();
-
-//	displaySetup();
 
 	/* Construct tasks */
     createMagTask();
     createGyroTask();
     createAccelTask();
     createGPSTask();
+    createADCTask();
     createRFRXTasks();
     createRFTXTasks();
-    createADCTask();
     createPWMTask();
+
 
     /* Start kernel. */
     BIOS_start();

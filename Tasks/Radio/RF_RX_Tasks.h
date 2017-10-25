@@ -65,6 +65,7 @@ void rxDoneCb(EasyLink_RxPacket * rxPacket, EasyLink_Status status)
 
 Void rxRestartFunc(UArg arg0, UArg arg1)
 {
+//	Semaphore_pend(rxRestartLockSemaphoreHandle, BIOS_WAIT_FOREVER);
     while(1) {
     		Semaphore_pend(rxRestartSemaphoreHandle, BIOS_WAIT_FOREVER);
     		EasyLink_receiveAsync(rxDoneCb, 0);
@@ -73,6 +74,7 @@ Void rxRestartFunc(UArg arg0, UArg arg1)
 
 Void rxBeaconFunc(UArg arg0, UArg arg1)
 {
+//	Semaphore_pend(rxBeaconLockSemaphoreHandle, BIOS_WAIT_FOREVER);
     while(1) {
     		Semaphore_pend(rxBeaconSemaphoreHandle, BIOS_WAIT_FOREVER);
     		uint8_t senderAddress = globalPacket.payload[1];

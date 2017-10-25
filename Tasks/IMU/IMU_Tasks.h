@@ -23,6 +23,18 @@ static uint8_t accelTaskStack[450];
 
 Void magTaskFunc(UArg arg0, UArg arg1)
 {
+
+//	Semaphore_pend(magLockSemaphoreHandle, BIOS_WAIT_FOREVER);
+
+	I2C_init();
+    LSM9DS1init();
+    initI2C();
+
+//    /* Setup watchdog timer and clock */
+//    wdtSetup();
+//    clockSetup();
+
+
 	/* Initialization and Calibration */
     uint16_t workpls = LSM9DS1begin();
     configInt(XG_INT1, INT_DRDY_G, INT_ACTIVE_HIGH, INT_PUSH_PULL);
@@ -52,6 +64,7 @@ Void magTaskFunc(UArg arg0, UArg arg1)
 
 Void gyroTaskFunc(UArg arg0, UArg arg1)
 {
+//	Semaphore_pend(gyroLockSemaphoreHandle, BIOS_WAIT_FOREVER);
     while (1) {
     		Semaphore_pend(gyroSemaphoreHandle, BIOS_WAIT_FOREVER);
     		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
@@ -64,6 +77,7 @@ Void gyroTaskFunc(UArg arg0, UArg arg1)
 
 Void accelTaskFunc(UArg arg0, UArg arg1)
 {
+//	Semaphore_pend(accelLockSemaphoreHandle, BIOS_WAIT_FOREVER);
     while (1) {
     		Semaphore_pend(accelSemaphoreHandle, BIOS_WAIT_FOREVER);
     		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);

@@ -31,9 +31,13 @@ void Serial_RxDataCallback(UART_Handle handle, void *buffer, size_t size)
 
 Void gpsFunc(UArg arg0, UArg arg1)
 {
+//	Semaphore_pend(gpsLockSemaphoreHandle, BIOS_WAIT_FOREVER);
+
+	UART_init();
+
     UART_Params_init(&uartParams);
     uartParams.writeDataMode = UART_DATA_BINARY;
-    uartParams.readDataMode = UART_DATA_TEXT;
+    uartParams.readDataMode = UART_DATA_BINARY;
     uartParams.readReturnMode = UART_RETURN_FULL;
     uartParams.readEcho = UART_ECHO_OFF;
     uartParams.baudRate = 9600;
@@ -49,6 +53,20 @@ Void gpsFunc(UArg arg0, UArg arg1)
 	UART_control(uart, UARTCC26XX_CMD_RETURN_PARTIAL_ENABLE, NULL);
 	char        input[512] = {0};
 	const char 	newlinePrompt[] = "\r\n";
+
+//	uint8_t query[] = {0xa0, 0xa1, 0x00, 0x04, 0x64, 0x0a, 0x04, 0x01, 0x6e, 0x0d, 0x0a};
+//	uint8_t query[] = {0xa0, 0xa1, 0x00, 0x02, 0x04, 0x00, 0x04, 0x0d, 0x0a};
+//	UART_write(uart, query, sizeof(query));
+//	int i=0;
+//	while(i<sizeof(query)){
+//		UART_write(uart, &query[i], 1);
+//		i+=1;
+//		int j=0;
+//		while(j<5000){
+//			j+=1;
+//		}
+//	}
+
 	while (1) {
 		if(goodToGo){
 			int numBytes = UART_read(uart, &input, sizeof(input));

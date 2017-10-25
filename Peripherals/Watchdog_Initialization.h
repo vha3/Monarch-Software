@@ -25,5 +25,4 @@ void wdtSetup()
 }
 
 
-
 #endif /* PERIPHERALS_WATCHDOG_INITIALIZATION_H_ */

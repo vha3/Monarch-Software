@@ -36,6 +36,33 @@ static Semaphore_Handle readSemaphoreHandle;
 static Semaphore_Struct batonSemaphore;
 static Semaphore_Handle batonSemaphoreHandle;
 
+//static Semaphore_Struct magLockSemaphore;
+//static Semaphore_Handle magLockSemaphoreHandle;
+//
+//static Semaphore_Struct gyroLockSemaphore;
+//static Semaphore_Handle gyroLockSemaphoreHandle;
+//
+//static Semaphore_Struct accelLockSemaphore;
+//static Semaphore_Handle accelLockSemaphoreHandle;
+//
+//static Semaphore_Struct gpsLockSemaphore;
+//static Semaphore_Handle gpsLockSemaphoreHandle;
+//
+//static Semaphore_Struct adcLockSemaphore;
+//static Semaphore_Handle adcLockSemaphoreHandle;
+//
+//static Semaphore_Struct pwmLockSemaphore;
+//static Semaphore_Handle pwmLockSemaphoreHandle;
+//
+//static Semaphore_Struct rxRestartLockSemaphore;
+//static Semaphore_Handle rxRestartLockSemaphoreHandle;
+//
+//static Semaphore_Struct rxBeaconLockSemaphore;
+//static Semaphore_Handle rxBeaconLockSemaphoreHandle;
+//
+//static Semaphore_Struct txDataLockSemaphore;
+//static Semaphore_Handle txDataLockSemaphoreHandle;
+
 void semaphoreSetup()
 {
     /* Create Semaphores */
@@ -68,6 +95,33 @@ void semaphoreSetup()
 
     Semaphore_construct(&batonSemaphore, 1, &semparams);
     batonSemaphoreHandle = Semaphore_handle(&batonSemaphore);
+
+//    Semaphore_construct(&magLockSemaphore, 0, &semparams);
+//    magLockSemaphoreHandle = Semaphore_handle(&magLockSemaphore);
+//
+//    Semaphore_construct(&gyroLockSemaphore, 0, &semparams);
+//    gyroLockSemaphoreHandle = Semaphore_handle(&gyroLockSemaphore);
+//
+//    Semaphore_construct(&accelLockSemaphore, 0, &semparams);
+//    accelLockSemaphoreHandle = Semaphore_handle(&accelLockSemaphore);
+//
+//	Semaphore_construct(&gpsLockSemaphore, 0, &semparams);
+//	gpsLockSemaphoreHandle = Semaphore_handle(&gpsLockSemaphore);
+//
+//	Semaphore_construct(&adcLockSemaphore, 0, &semparams);
+//	adcLockSemaphoreHandle = Semaphore_handle(&adcLockSemaphore);
+//
+//	Semaphore_construct(&pwmLockSemaphore, 0, &semparams);
+//	pwmLockSemaphoreHandle = Semaphore_handle(&pwmLockSemaphore);
+//
+//	Semaphore_construct(&rxRestartLockSemaphore, 0, &semparams);
+//	rxRestartLockSemaphoreHandle = Semaphore_handle(&rxRestartLockSemaphore);
+//
+//	Semaphore_construct(&rxBeaconLockSemaphore, 0, &semparams);
+//	rxBeaconLockSemaphoreHandle = Semaphore_handle(&rxBeaconLockSemaphore);
+//
+//	Semaphore_construct(&txDataLockSemaphore, 0, &semparams);
+//	txDataLockSemaphoreHandle = Semaphore_handle(&txDataLockSemaphore);
 }
 
 

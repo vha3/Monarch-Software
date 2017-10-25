@@ -12,6 +12,7 @@
 #include "../Tasks/Semaphore_Initialization.h"
 #include "../Tasks/Shared_Resources.h"
 #include "Peripherals/Watchdog_Initialization.h"
+#include "Pin_Initialization.h"
 
 
 /* Stuff related to clock */
@@ -19,12 +20,18 @@ Void clk0Fxn(UArg arg0);
 Clock_Struct clk0Struct;
 Clock_Handle clk0Handle;
 
+
+/* Some stuff for simulating nav indicator */
+
 Void clk0Fxn(UArg arg0)
 {
 	if(goodToGo){
 		Watchdog_clear(watchdogHandle);
 		Semaphore_post(txDataSemaphoreHandle);
 	}
+	// Simulate nav indicator
+	int val = PIN_getOutputValue(IOID_15);
+	PIN_setOutputValue(pinHandle, IOID_15, !val);
 }
 
 void clockSetup()
