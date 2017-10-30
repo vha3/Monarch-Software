@@ -26,8 +26,6 @@ uint32_t adcValue0MicroVolt;
 
 Void adcTaskFunc(UArg arg0, UArg arg1)
 {
-//	Semaphore_pend(adcLockSemaphoreHandle, BIOS_WAIT_FOREVER);
-
 	ADC_init();
 	adcSetup();
 

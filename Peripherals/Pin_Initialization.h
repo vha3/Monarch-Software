@@ -35,7 +35,6 @@ PIN_Config pinTable[] = {
     PIN_TERMINATE
 };
 
-//int count = 0;
 void pinCallback(PIN_Handle handle, PIN_Id pinId) {
     uint32_t currVal = 0;
 	switch (pinId) {
@@ -58,45 +57,8 @@ void pinCallback(PIN_Handle handle, PIN_Id pinId) {
 			break;
 
 		case IOID_1:
-//			count += 1;
-//			switch (count) {
-//				case 1:
-//					wdtSetup();
-//					Semaphore_post(magLockSemaphoreHandle);
-//					break;
-//				case 2:
-//					Semaphore_post(gyroLockSemaphoreHandle);
-//					break;
-//				case 3:
-//					Semaphore_post(accelLockSemaphoreHandle);
-//					break;
-//				case 4:
-//					Semaphore_post(gpsLockSemaphoreHandle);
-//					break;
-//				case 5:
-//					Semaphore_post(adcLockSemaphoreHandle);
-//					break;
-//				case 6:
-//					Semaphore_post(rxRestartLockSemaphoreHandle);
-//					break;
-//				case 7:
-//					Semaphore_post(txDataLockSemaphoreHandle);
-//					break;
-//				case 8:
-//					Semaphore_post(rxBeaconLockSemaphoreHandle);
-//					break;
-//				case 9:
-//					Semaphore_post(pwmLockSemaphoreHandle);
-//					break;
-//				default:
-//					break;
-//			}
 			currVal =  PIN_getOutputValue(CC1310_LAUNCHXL_PIN_RLED);
 			PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_PIN_RLED, !currVal);
-
-//			Watchdog_clear(watchdogHandle);
-
-
 			break;
 
 

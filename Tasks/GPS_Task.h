@@ -31,8 +31,6 @@ void Serial_RxDataCallback(UART_Handle handle, void *buffer, size_t size)
 
 Void gpsFunc(UArg arg0, UArg arg1)
 {
-//	Semaphore_pend(gpsLockSemaphoreHandle, BIOS_WAIT_FOREVER);
-
 	UART_init();
 
     UART_Params_init(&uartParams);

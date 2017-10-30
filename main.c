@@ -69,7 +69,7 @@ int main(void)
     createADCTask();
     createRFRXTasks();
     createRFTXTasks();
-    createPWMTask();
+//    createPWMTask();
 
 
     /* Start kernel. */

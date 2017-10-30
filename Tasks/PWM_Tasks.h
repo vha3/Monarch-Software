@@ -19,9 +19,6 @@ static uint8_t pwmTaskStack[300];
 
 Void pwmTaskFunc(UArg arg0, UArg arg1)
 {
-//	Semaphore_pend(pwmLockSemaphoreHandle, BIOS_WAIT_FOREVER);
-//	PWM_init();
-//	pwmSetup();
 	PWM_init();
 	pwmSetup();
 
