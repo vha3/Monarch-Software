@@ -50,6 +50,9 @@ int main(void)
     Board_initGeneral();
     PIN_init(pinTable);
 
+	PWM_init();
+	pwmSetup();
+
     /* Use one or the other of the below. If using GPS, need UART */
 //    Display_init();
 //    displaySetup();
@@ -69,7 +72,7 @@ int main(void)
     createADCTask();
     createRFRXTasks();
     createRFTXTasks();
-//    createPWMTask();
+    createPWMTask();
 
 
     /* Start kernel. */

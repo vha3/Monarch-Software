@@ -13,6 +13,7 @@
 #include "../Tasks/Shared_Resources.h"
 #include "Peripherals/Watchdog_Initialization.h"
 #include "Pin_Initialization.h"
+#include "PWM_Initialization.h"
 
 #define Clock_convertSecondsToTicks(seconds) (((seconds) * 1000000) / (Clock_tickPeriod))
 
@@ -40,6 +41,8 @@ Void clk1Fxn(UArg arg0)
 {
 	if(GPSorRX) {
 		GPSorRX = 0;
+		PWM_setDuty(pwm2, 0);
+		PWM_setDuty(pwm1, 0);
 		PIN_setOutputValue(pinHandle, IOID_15, 1);
 	}
 	else {
@@ -59,10 +62,10 @@ void clockSetup()
 	Clock_construct(&clk0Struct, (Clock_FuncPtr)clk0Fxn,
 					5000/Clock_tickPeriod, &clkParams);
 
-	clkParams.period = Clock_convertSecondsToTicks(60);
+	clkParams.period = Clock_convertSecondsToTicks(10);
 	clkParams.startFlag = TRUE;
 	Clock_construct(&clk1Struct, (Clock_FuncPtr)clk1Fxn,
-			Clock_convertSecondsToTicks(60), &clkParams);
+			Clock_convertSecondsToTicks(10), &clkParams);
 }
 
 
