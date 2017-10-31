@@ -29,8 +29,9 @@ Void txDataTaskFunc(UArg arg0, UArg arg1)
 		Semaphore_pend(txDataSemaphoreHandle, BIOS_WAIT_FOREVER);
 		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
 		if(goodToGo){
+
+			EasyLink_abort();
 			if(GPSorRX){
-				EasyLink_abort();
 				EasyLink_TxPacket txPacket =  { {0}, 0, 0, {0} };
 
 				txPacket.payload[0] = BEACON;
