@@ -23,10 +23,6 @@ Void clk0Fxn(UArg arg0);
 Clock_Struct clk0Struct;
 Clock_Handle clk0Handle;
 
-Void clk1Fxn(UArg arg0);
-Clock_Struct clk1Struct;
-Clock_Handle clk1Handle;
-
 
 /* Some stuff for simulating nav indicator */
 Void clk0Fxn(UArg arg0)
@@ -37,19 +33,6 @@ Void clk0Fxn(UArg arg0)
 	}
 }
 
-Void clk1Fxn(UArg arg0)
-{
-	if(GPSorRX) {
-		GPSorRX = 0;
-		PWM_setDuty(pwm2, 0);
-		PWM_setDuty(pwm1, 0);
-		PIN_setOutputValue(pinHandle, IOID_15, 1);
-	}
-	else {
-		GPSorRX = 1;
-		PIN_setOutputValue(pinHandle, IOID_15, 0);
-	}
-}
 
 void clockSetup()
 {
@@ -61,11 +44,6 @@ void clockSetup()
 	/* Construct a periodic Clock Instance */
 	Clock_construct(&clk0Struct, (Clock_FuncPtr)clk0Fxn,
 					5000/Clock_tickPeriod, &clkParams);
-
-	clkParams.period = Clock_convertSecondsToTicks(10);
-	clkParams.startFlag = TRUE;
-	Clock_construct(&clk1Struct, (Clock_FuncPtr)clk1Fxn,
-			Clock_convertSecondsToTicks(10), &clkParams);
 }
 
 

@@ -67,9 +67,7 @@ Void rxRestartFunc(UArg arg0, UArg arg1)
 {
     while(1) {
     		Semaphore_pend(rxRestartSemaphoreHandle, BIOS_WAIT_FOREVER);
-    		if(GPSorRX){
     			EasyLink_receiveAsync(rxDoneCb, 0);
-    		}
     }
 }
 

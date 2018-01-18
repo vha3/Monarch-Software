@@ -31,65 +31,63 @@ Void txDataTaskFunc(UArg arg0, UArg arg1)
 		if(goodToGo){
 
 			EasyLink_abort();
-			if(GPSorRX){
-				EasyLink_TxPacket txPacket =  { {0}, 0, 0, {0} };
+			EasyLink_TxPacket txPacket =  { {0}, 0, 0, {0} };
 
-				txPacket.payload[0] = BEACON;
-				txPacket.payload[1] = PERSONAL_ADDRESS;
+			txPacket.payload[0] = BEACON;
+			txPacket.payload[1] = PERSONAL_ADDRESS;
 
-	//			txPacket.payload[0] = (uint8_t)(seqNumber >> 8);
-	//			txPacket.payload[1] = (uint8_t)(seqNumber++);
-	//			txPacket.payload[2] = sign(ax);
-	//			txPacket.payload[3] = upperPart(ax);
-	//			txPacket.payload[4] = lowerPart(ax);
-	//			txPacket.payload[5] = sign(ay);
-	//			txPacket.payload[6] = upperPart(ay);
-	//			txPacket.payload[7] = lowerPart(ay);
-	//			txPacket.payload[8] = sign(az);
-	//			txPacket.payload[9] = upperPart(az);
-	//			txPacket.payload[10] = lowerPart(az);
-	//
-	//			txPacket.payload[11] = sign(gx);
-	//			txPacket.payload[12] = upperPart(gx);
-	//			txPacket.payload[13] = lowerPart(gx);
-	//			txPacket.payload[14] = sign(gy);
-	//			txPacket.payload[15] = upperPart(gy);
-	//			txPacket.payload[16] = lowerPart(gy);
-	//			txPacket.payload[17] = sign(gz);
-	//			txPacket.payload[18] = upperPart(gz);
-	//			txPacket.payload[19] = lowerPart(gz);
-	//
-	//			txPacket.payload[20] = sign(mx);
-	//			txPacket.payload[21] = upperPart(mx);
-	//			txPacket.payload[22] = lowerPart(mx);
-	//			txPacket.payload[23] = sign(my);
-	//			txPacket.payload[24] = upperPart(my);
-	//			txPacket.payload[25] = lowerPart(my);
-	//			txPacket.payload[26] = sign(mz);
-	//			txPacket.payload[27] = upperPart(mz);
-	//			txPacket.payload[28] = lowerPart(mz);
-	//			for (i = 0; i < RFEASYLINKTXPAYLOAD_LENGTH; i++)
-	//			{
-	//			  txPacket.payload[i] = message[i];
-	//			}
-				txPacket.len = RFEASYLINKTXPAYLOAD_LENGTH;
-				txPacket.dstAddr[0] = 0xaa;
-				txPacket.absTime = 0;
-				EasyLink_Status result = EasyLink_transmit(&txPacket);
+//			txPacket.payload[0] = (uint8_t)(seqNumber >> 8);
+//			txPacket.payload[1] = (uint8_t)(seqNumber++);
+//			txPacket.payload[2] = sign(ax);
+//			txPacket.payload[3] = upperPart(ax);
+//			txPacket.payload[4] = lowerPart(ax);
+//			txPacket.payload[5] = sign(ay);
+//			txPacket.payload[6] = upperPart(ay);
+//			txPacket.payload[7] = lowerPart(ay);
+//			txPacket.payload[8] = sign(az);
+//			txPacket.payload[9] = upperPart(az);
+//			txPacket.payload[10] = lowerPart(az);
+//
+//			txPacket.payload[11] = sign(gx);
+//			txPacket.payload[12] = upperPart(gx);
+//			txPacket.payload[13] = lowerPart(gx);
+//			txPacket.payload[14] = sign(gy);
+//			txPacket.payload[15] = upperPart(gy);
+//			txPacket.payload[16] = lowerPart(gy);
+//			txPacket.payload[17] = sign(gz);
+//			txPacket.payload[18] = upperPart(gz);
+//			txPacket.payload[19] = lowerPart(gz);
+//
+//			txPacket.payload[20] = sign(mx);
+//			txPacket.payload[21] = upperPart(mx);
+//			txPacket.payload[22] = lowerPart(mx);
+//			txPacket.payload[23] = sign(my);
+//			txPacket.payload[24] = upperPart(my);
+//			txPacket.payload[25] = lowerPart(my);
+//			txPacket.payload[26] = sign(mz);
+//			txPacket.payload[27] = upperPart(mz);
+//			txPacket.payload[28] = lowerPart(mz);
+//			for (i = 0; i < RFEASYLINKTXPAYLOAD_LENGTH; i++)
+//			{
+//			  txPacket.payload[i] = message[i];
+//			}
+			txPacket.len = RFEASYLINKTXPAYLOAD_LENGTH;
+			txPacket.dstAddr[0] = 0xaa;
+			txPacket.absTime = 0;
+			EasyLink_Status result = EasyLink_transmit(&txPacket);
 
-				if (result == EasyLink_Status_Success)
-				{
-					/* Toggle LED1 to indicate TX */
-	//				PIN_setOutputValue(pinHandle, Board_PIN_LED1,!PIN_getOutputValue(Board_PIN_LED1));
-				}
-				else
-				{
-					/* Toggle LED1 and LED2 to indicate error */
-					PIN_setOutputValue(pinHandle, Board_PIN_LED1,!PIN_getOutputValue(Board_PIN_LED1));
-					PIN_setOutputValue(pinHandle, Board_PIN_LED2,!PIN_getOutputValue(Board_PIN_LED2));
-				}
-				Semaphore_post(rxRestartSemaphoreHandle);
+			if (result == EasyLink_Status_Success)
+			{
+				/* Toggle LED1 to indicate TX */
+//				PIN_setOutputValue(pinHandle, Board_PIN_LED1,!PIN_getOutputValue(Board_PIN_LED1));
 			}
+			else
+			{
+				/* Toggle LED1 and LED2 to indicate error */
+				PIN_setOutputValue(pinHandle, Board_PIN_LED1,!PIN_getOutputValue(Board_PIN_LED1));
+				PIN_setOutputValue(pinHandle, Board_PIN_LED2,!PIN_getOutputValue(Board_PIN_LED2));
+			}
+			Semaphore_post(rxRestartSemaphoreHandle);
 		}
 		Semaphore_post(batonSemaphoreHandle);
 	}

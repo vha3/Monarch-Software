@@ -9,7 +9,6 @@
 #define TASKS_SHARED_RESOURCES_H_
 
 int goodToGo = 0;
-int GPSorRX = 1;
 
 
 

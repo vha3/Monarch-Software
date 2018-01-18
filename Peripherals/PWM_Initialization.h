@@ -18,6 +18,7 @@
 uint16_t   pwmPeriod = 3000;
 uint16_t   pwmduty = 0;
 uint16_t   pwmdutyInc = 100;
+int polarity = 1;
 
 /* Sleep time in microseconds */
 uint32_t   pwmtime = 50000;
