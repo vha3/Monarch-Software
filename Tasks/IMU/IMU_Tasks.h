@@ -61,6 +61,7 @@ Void gyroTaskFunc(UArg arg0, UArg arg1)
     		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
     		if(goodToGo){
     			readGyro();
+    			Watchdog_clear(watchdogHandle);
     		}
     		Semaphore_post(batonSemaphoreHandle);
     }
