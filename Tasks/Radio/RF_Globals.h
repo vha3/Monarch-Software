@@ -14,7 +14,7 @@
 
 /* TX quantities */
 #define RFEASYLINKTX_BURST_SIZE         10
-#define RFEASYLINKTXPAYLOAD_LENGTH      29
+#define RFEASYLINKTXPAYLOAD_LENGTH      31
 
 /* Addresses */
 #define UNIVERSAL_ADDRESS 0xaa

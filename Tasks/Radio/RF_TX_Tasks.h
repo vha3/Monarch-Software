@@ -19,22 +19,31 @@ Task_Struct txDataTask;
 static uint8_t txDataTaskStack[700];
 #pragma DATA_ALIGN(txDataTaskStack, 8)
 
+uint8_t message[30] = {0x20, 0x53, 0x50, 0x41, 0x43, 0x45, 0x20, 0x53,
+		0x59, 0x53, 0x54, 0x45, 0x4d, 0x53, 0x20, 0x44, 0x45, 0x53,
+		0x49, 0x47, 0x4e, 0x20, 0x53, 0x54, 0x55, 0x44, 0x49, 0x4f,
+		0x20, 0x20};
+
 Void txDataTaskFunc(UArg arg0, UArg arg1)
 {
-	EasyLink_init(EasyLink_Phy_Custom);
+	//EasyLink_init(EasyLink_Phy_Custom);
+	EasyLink_init(EasyLink_Phy_50kbps2gfsk);
 	EasyLink_setRfPwr(12);
 	EasyLink_enableRxAddrFilter((uint8_t*)&AddressList, 1, 2);
+	EasyLink_setFrequency(915000000);
 
+	uint8_t counter = 0x00;
 	while(1) {
 		Semaphore_pend(txDataSemaphoreHandle, BIOS_WAIT_FOREVER);
 		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
+
 		if(goodToGo){
 
 			EasyLink_abort();
 			EasyLink_TxPacket txPacket =  { {0}, 0, 0, {0} };
 
-			txPacket.payload[0] = BEACON;
-			txPacket.payload[1] = PERSONAL_ADDRESS;
+			//txPacket.payload[0] = BEACON;
+			//txPacket.payload[1] = PERSONAL_ADDRESS;
 
 //			txPacket.payload[0] = (uint8_t)(seqNumber >> 8);
 //			txPacket.payload[1] = (uint8_t)(seqNumber++);
@@ -67,10 +76,19 @@ Void txDataTaskFunc(UArg arg0, UArg arg1)
 //			txPacket.payload[26] = sign(mz);
 //			txPacket.payload[27] = upperPart(mz);
 //			txPacket.payload[28] = lowerPart(mz);
-//			for (i = 0; i < RFEASYLINKTXPAYLOAD_LENGTH; i++)
-//			{
-//			  txPacket.payload[i] = message[i];
-//			}
+			if (counter > 0xfe){
+				counter = 0;
+			}
+			else{
+				counter = counter + 0x01;
+			}
+			int i=0;
+			for (i = 0; i < sizeof(message); i++)
+			{
+			  txPacket.payload[i] = message[i];
+			}
+			txPacket.payload[30] = counter;
+
 			txPacket.len = RFEASYLINKTXPAYLOAD_LENGTH;
 			txPacket.dstAddr[0] = 0xaa;
 			txPacket.absTime = 0;
