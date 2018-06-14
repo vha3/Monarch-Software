@@ -28,7 +28,7 @@ Clock_Handle clk0Handle;
 Void clk0Fxn(UArg arg0)
 {
 	if(goodToGo){
-		//Watchdog_clear(watchdogHandle);
+		Watchdog_clear(watchdogHandle);
 		Semaphore_post(txDataSemaphoreHandle);
 	}
 }

@@ -52,18 +52,18 @@ Void gpsFunc(UArg arg0, UArg arg1)
 	char        input[512] = {0};
 	const char 	newlinePrompt[] = "\r\n";
 
-//	uint8_t query[] = {0xa0, 0xa1, 0x00, 0x04, 0x64, 0x0a, 0x04, 0x01, 0x6e, 0x0d, 0x0a};
+	uint8_t query[] = {0xa0, 0xa1, 0x00, 0x04, 0x64, 0x0a, 0x01, 0x01, 0x6e, 0x0d, 0x0a};
 //	uint8_t query[] = {0xa0, 0xa1, 0x00, 0x02, 0x04, 0x00, 0x04, 0x0d, 0x0a};
-//	UART_write(uart, query, sizeof(query));
-//	int i=0;
-//	while(i<sizeof(query)){
-//		UART_write(uart, &query[i], 1);
-//		i+=1;
+	UART_write(uart, query, sizeof(query));
+	int i=0;
+	while(i<sizeof(query)){
+		UART_write(uart, &query[i], 1);
+		i+=1;
 //		int j=0;
 //		while(j<5000){
 //			j+=1;
 //		}
-//	}
+	}
 
 	while (1) {
 		if(goodToGo){

@@ -52,15 +52,15 @@ void pinCallback(PIN_Handle handle, PIN_Id pinId) {
 			break;
 
 		case IOID_13:
-//			currVal =  PIN_getOutputValue(Board_PIN_LED1);
-//			PIN_setOutputValue(pinHandle, Board_PIN_LED1, !currVal);
+//			currVal =  PIN_getOutputValue(Board_PIN_LED0);
+//			PIN_setOutputValue(pinHandle, Board_PIN_LED0, !currVal);
 //			Semaphore_post(accelSemaphoreHandle);
 			Semaphore_post(gyroSemaphoreHandle);
 			break;
 
 		case IOID_1:
-			currVal =  PIN_getOutputValue(CC1310_LAUNCHXL_PIN_RLED);
-			PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_PIN_RLED, !currVal);
+//			currVal =  PIN_getOutputValue(CC1310_LAUNCHXL_PIN_RLED);
+//			PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_PIN_RLED, !currVal);
 			break;
 
 

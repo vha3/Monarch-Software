@@ -37,8 +37,8 @@ Void adcTaskFunc(UArg arg0, UArg arg1)
 
 				adcValue1MicroVolt = ADC_convertRawToMicroVolts(adc1, adcValue1);
 
-				Display_printf(display, 0, 0,
-						"ADC channel 1 convert result: %d uV\n", adcValue1MicroVolt);
+//				Display_printf(display, 0, 0,
+//						"ADC channel 1 convert result: %d uV\n", adcValue1MicroVolt);
 			}
 			else {
 //				Display_printf(display, 0, 0, "ADC channel 1 convert failed\n");
@@ -49,8 +49,8 @@ Void adcTaskFunc(UArg arg0, UArg arg1)
 
 				adcValue0MicroVolt = ADC_convertRawToMicroVolts(adc0, adcValue0);
 
-				Display_printf(display, 0, 0,
-						"ADC channel 0 convert result: %d uV\n", adcValue0MicroVolt);
+//				Display_printf(display, 0, 0,
+//						"ADC channel 0 convert result: %d uV\n", adcValue0MicroVolt);
 			}
 			else {
 //				Display_printf(display, 0, 0, "ADC channel 0 convert failed\n");

@@ -49,8 +49,8 @@ void rxDoneCb(EasyLink_RxPacket * rxPacket, EasyLink_Status status)
     else if(status == EasyLink_Status_Aborted)
     {
         /* Toggle LED1 to indicate command aborted */
-        PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_PIN_GLED,
-        		!PIN_getOutputValue(CC1310_LAUNCHXL_PIN_GLED));
+//        PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_PIN_GLED,
+//        		!PIN_getOutputValue(CC1310_LAUNCHXL_PIN_GLED));
         Semaphore_post(rxRestartSemaphoreHandle);
     }
     else
@@ -67,7 +67,7 @@ Void rxRestartFunc(UArg arg0, UArg arg1)
 {
     while(1) {
     		Semaphore_pend(rxRestartSemaphoreHandle, BIOS_WAIT_FOREVER);
-    			EasyLink_receiveAsync(rxDoneCb, 0);
+    		EasyLink_receiveAsync(rxDoneCb, 0);
     }
 }
 

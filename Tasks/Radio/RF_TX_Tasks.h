@@ -28,6 +28,7 @@ Void txDataTaskFunc(UArg arg0, UArg arg1)
 {
 	//EasyLink_init(EasyLink_Phy_Custom);
 	EasyLink_init(EasyLink_Phy_50kbps2gfsk);
+	//EasyLink_init(EasyLink_Phy_5kbpsSlLr);
 	EasyLink_setRfPwr(12);
 	EasyLink_enableRxAddrFilter((uint8_t*)&AddressList, 1, 2);
 	EasyLink_setFrequency(915000000);
@@ -97,7 +98,7 @@ Void txDataTaskFunc(UArg arg0, UArg arg1)
 			if (result == EasyLink_Status_Success)
 			{
 				/* Toggle LED1 to indicate TX */
-//				PIN_setOutputValue(pinHandle, Board_PIN_LED1,!PIN_getOutputValue(Board_PIN_LED1));
+				PIN_setOutputValue(pinHandle, Board_PIN_LED1,!PIN_getOutputValue(Board_PIN_LED1));
 			}
 			else
 			{

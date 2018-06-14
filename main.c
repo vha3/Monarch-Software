@@ -54,15 +54,14 @@ int main(void)
 	pwmSetup();
 
     /* Use one or the other of the below. If using GPS, need UART */
-//    Display_init();
-//    displaySetup();
+    //Display_init();
+    //displaySetup();
 
     /* Setup peripherals and semaphores */
     wdtSetup();
     clockSetup();
 	semaphoreSetup();
 	pinSetup();
-
 
 	/* Construct tasks */
     createMagTask();
@@ -72,8 +71,7 @@ int main(void)
     createADCTask();
     createRFRXTasks();
     createRFTXTasks();
-    createPWMTask();
-
+    //createPWMTask();
 
     /* Start kernel. */
     BIOS_start();

@@ -49,6 +49,13 @@ Void magTaskFunc(UArg arg0, UArg arg1)
     		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
     		if(goodToGo){
     			readMag();
+//    			Watchdog_clear(watchdogHandle);
+//    			Display_printf(display, 0, 0,
+//    									"Magnetometer X: %d \n", mx);
+//    			Display_printf(display, 0, 0,
+//    			    						"Magnetometer Y: %d \n", my);
+//    			Display_printf(display, 0, 0,
+//    			    						"Magnetometer Z: %d \n", mz);
     		}
     		Semaphore_post(batonSemaphoreHandle);
     }
@@ -61,7 +68,13 @@ Void gyroTaskFunc(UArg arg0, UArg arg1)
     		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
     		if(goodToGo){
     			readGyro();
-    			Watchdog_clear(watchdogHandle);
+//    			Display_printf(display, 0, 0,
+//									"Gyro X: %d \n", gx);
+//			Display_printf(display, 0, 0,
+//									"Gyro Y: %d \n", gy);
+//			Display_printf(display, 0, 0,
+//									"Gyro Z: %d \n", gz);
+
     		}
     		Semaphore_post(batonSemaphoreHandle);
     }
@@ -74,6 +87,12 @@ Void accelTaskFunc(UArg arg0, UArg arg1)
     		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
     		if(goodToGo){
     			readAccel();
+//    			Display_printf(display, 0, 0,
+//									"Accel X: %d \n", ax);
+//			Display_printf(display, 0, 0,
+//									"Accel Y: %d \n", ay);
+//			Display_printf(display, 0, 0,
+//									"Accel Z: %d \n", az);
     		}
     		Semaphore_post(batonSemaphoreHandle);
     }
