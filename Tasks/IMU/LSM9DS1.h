@@ -72,6 +72,7 @@ int16_t gx, gy, gz;
 int16_t ax, ay, az;
 int16_t mx, my, mz;
 int16_t temperature;
+uint8_t temp_l, temp_h;
 float gBias[3], aBias[3], mBias[3];
 int16_t gBiasRaw[3], aBiasRaw[3], mBiasRaw[3];
 
@@ -673,7 +674,9 @@ void readTemp()
 	uint8_t temp[2]; // We'll read two bytes from the temperature sensor into temp
 	if ( xgReadBytes(OUT_TEMP_L, temp, 2) == 2 ) // Read 2 bytes, start at OUT_TEMP_L
 	{
-		temperature = ((int16_t)temp[1] << 8) | temp[0];
+		temperature = (temp[1] << 8) | temp[0];
+		temp_l = temp[0];
+		temp_h = temp[1];
 	}
 }
 

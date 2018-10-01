@@ -14,7 +14,7 @@
 
 /* TX quantities */
 #define RFEASYLINKTX_BURST_SIZE         10
-#define RFEASYLINKTXPAYLOAD_LENGTH      31
+#define RFEASYLINKTXPAYLOAD_LENGTH      5
 
 /* Addresses */
 #define UNIVERSAL_ADDRESS 0xaa
@@ -50,7 +50,7 @@ uint8_t lowerPart(int16_t x){
 }
 
 uint8_t upperPart(int16_t x){
-	return (x >> 8);
+	return (x >> 8) & 0xff;
 }
 /*
  * ###########################################################

@@ -87,6 +87,12 @@ Void accelTaskFunc(UArg arg0, UArg arg1)
     		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
     		if(goodToGo){
     			readAccel();
+    			while(tempAvailable()){
+    				readTemp();
+				Display_printf(display, 0, 0,
+									"Temperature: %x \n", temperature);
+    			}
+
 //    			Display_printf(display, 0, 0,
 //									"Accel X: %d \n", ax);
 //			Display_printf(display, 0, 0,
