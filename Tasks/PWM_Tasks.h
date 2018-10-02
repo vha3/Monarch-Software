@@ -20,26 +20,15 @@ static uint8_t pwmTaskStack[300];
 Void pwmTaskFunc(UArg arg0, UArg arg1)
 {
     while (1) {
-    		if(goodToGo){
-		   if(polarity==1){
-				PWM_setDuty(pwm2, 0);
-				PWM_setDuty(pwm1, pwmduty);
-		   }
-		   else {
-				PWM_setDuty(pwm1, 0);
-				PWM_setDuty(pwm2, pwmduty);
-			}
-				pwmduty = (pwmduty + pwmdutyInc);
+//    		if(goodToGo){
+			PWM_setDuty(pwm1, pwmduty);
+			pwmduty = (pwmduty + pwmdutyInc);
 
 			if (pwmduty == pwmPeriod || (!pwmduty)) {
 				pwmdutyInc = - pwmdutyInc;
 			}
-
-			if (pwmduty < 100){
-				polarity = -polarity;
-			}
-    		}
-    		Task_sleep(10000);
+//    		}
+    		Task_sleep(1000);
     }
 }
 

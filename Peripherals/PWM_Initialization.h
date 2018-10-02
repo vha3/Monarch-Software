@@ -15,15 +15,15 @@
 #include "Board.h"
 
 /* Period and duty in microseconds */
-uint16_t   pwmPeriod = 3000;
+uint16_t   pwmPeriod = 488;
 uint16_t   pwmduty = 0;
-uint16_t   pwmdutyInc = 100;
-int polarity = 1;
+uint16_t   pwmdutyInc = 1;
+//int polarity = 1;
 
 /* Sleep time in microseconds */
 uint32_t   pwmtime = 50000;
 PWM_Handle pwm1 = NULL;
-PWM_Handle pwm2 = NULL;
+//PWM_Handle pwm2 = NULL;
 PWM_Params pwmparams;
 
 void pwmSetup()
@@ -40,14 +40,14 @@ void pwmSetup()
         while (1);
     }
 
-    pwm2 = PWM_open(Board_PWM3, &pwmparams);
-    if (pwm2 == NULL) {
-        /* Board_PWM0 did not open */
-        while (1);
-    }
+//    pwm2 = PWM_open(Board_PWM3, &pwmparams);
+//    if (pwm2 == NULL) {
+//        /* Board_PWM0 did not open */
+//        while (1);
+//    }
 
     PWM_start(pwm1);
-    PWM_start(pwm2);
+//    PWM_start(pwm2);
 }
 
 

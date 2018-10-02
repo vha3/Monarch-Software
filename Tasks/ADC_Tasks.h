@@ -31,8 +31,9 @@ Void adcTaskFunc(UArg arg0, UArg arg1)
 
 	int_fast16_t res;
     while (1) {
-    		if(goodToGo){
+//    		if(goodToGo){
     			res = ADC_convert(adc1, &adcValue1);
+    			PIN_setOutputValue(pinHandle, Board_PIN_LED1, !PIN_getOutputValue(Board_PIN_LED1));
     			if (res == ADC_STATUS_SUCCESS) {
 
 				adcValue1MicroVolt = ADC_convertRawToMicroVolts(adc1, adcValue1);
@@ -41,7 +42,7 @@ Void adcTaskFunc(UArg arg0, UArg arg1)
 //						"ADC channel 1 convert result: %d uV\n", adcValue1MicroVolt);
 			}
 			else {
-//				Display_printf(display, 0, 0, "ADC channel 1 convert failed\n");
+				Display_printf(display, 0, 0, "ADC channel 1 convert failed\n");
 			}
 
     			res = ADC_convert(adc0, &adcValue0);
@@ -53,9 +54,9 @@ Void adcTaskFunc(UArg arg0, UArg arg1)
 //						"ADC channel 0 convert result: %d uV\n", adcValue0MicroVolt);
 			}
 			else {
-//				Display_printf(display, 0, 0, "ADC channel 0 convert failed\n");
+				Display_printf(display, 0, 0, "ADC channel 0 convert failed\n");
 			}
-    		}
+//    		}
     		/* 10 Hz */
     		Task_sleep(10000);
     }

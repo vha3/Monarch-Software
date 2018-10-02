@@ -38,6 +38,7 @@
 #include <Tasks/Shared_Resources.h>
 #include <Tasks/ADC_Tasks.h>
 #include <Tasks/PWM_Tasks.h>
+#include <Tasks/Humidity/Humidity_Tasks.h>
 
 
 /*
@@ -58,20 +59,21 @@ int main(void)
     displaySetup();
 
     /* Setup peripherals and semaphores */
-    wdtSetup();
-    clockSetup();
+//    wdtSetup();
+//    clockSetup();
 	semaphoreSetup();
 	pinSetup();
 
 	/* Construct tasks */
-    createMagTask();
-    createGyroTask();
-    createAccelTask();
+//    createMagTask();
+//    createGyroTask();
+//    createAccelTask();
 //    createGPSTask();
     createADCTask();
-    createRFRXTasks();
-    createRFTXTasks();
+//    createRFRXTasks();
+//    createRFTXTasks();
     createPWMTask();
+    createHumidityTask();
 
     /* Start kernel. */
     BIOS_start();
