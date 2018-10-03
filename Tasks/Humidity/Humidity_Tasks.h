@@ -24,6 +24,11 @@ Void humidityTaskFunc(UArg arg0, UArg arg1)
 //    LSM9DS1init();
     initI2C();
     uint16_t measurement;
+    float degrees_C;
+    float degrees_F;
+
+    uint16_t rel_hum_measurement;
+    float relative_humidity;
 
     beginHumidity();
 
@@ -32,7 +37,16 @@ Void humidityTaskFunc(UArg arg0, UArg arg1)
 //    		Display_printf(display, 0, 0, "Bang\n");
     		PIN_setOutputValue(pinHandle, Board_PIN_LED0, !PIN_getOutputValue(Board_PIN_LED0));
     		measurement = I2Cwrite1read2HumByte(ADDRESS, 0xE3);
-    		Display_printf(display, 0, 0, "Temperature: %d \n", measurement);
+    		degrees_C = (175.72*measurement/65536)-46.85;
+    		degrees_F = (degrees_C*1.8) + 32;
+    		Display_printf(display, 0, 0, "Temperature: %f deg F \n", degrees_F);
+
+    		rel_hum_measurement = I2Cwrite1read2HumByte(ADDRESS, 0xE5);
+		relative_humidity = (125.0*rel_hum_measurement/65536)-6;
+		Display_printf(display, 0, 0, "Relative Humidity: %f \n", relative_humidity);
+
+
+
     		Task_sleep(10000);
 //    		beginHumidity();
 //    		Semaphore_pend(magSemaphoreHandle, BIOS_WAIT_FOREVER);

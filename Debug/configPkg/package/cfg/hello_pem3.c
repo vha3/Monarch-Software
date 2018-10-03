@@ -2220,14 +2220,66 @@ xdc_Int xdc_runtime_System_printfExtend__I(xdc_Char **pbuf, xdc_CString *pfmt,
     }
 
     if (c == 'f') {
-        /* support arguments _after_ optional float support */
+        xdc_Double d, tmp;
+        xdc_runtime_System_UNum  fract;
+        xdc_Int    negative;
+
         if (parse->aFlag) {
-            (void)va_arg(va, xdc_IArg);
+            xdc_runtime_Assert_isTrue((sizeof(xdc_Float) <= sizeof(xdc_IArg)), 
+                xdc_runtime_System_A_cannotFitIntoArg);
+
+            d = argToFloat(va_arg(va, xdc_IArg));
         }
         else {
-            (void)va_arg(va, double);
+            d = va_arg(va, double);
         }
-    }    
+
+        if (d < 0.0) {
+            d = -d;
+            negative = TRUE;
+            parse->zpad--;
+        }
+        else {
+            negative = FALSE;
+        }
+
+        /*
+         * output (error) if we can't print correct value
+         */
+        if (d > (double) LONG_MAX) {
+            parse->ptr = "(error)";
+            parse->len = 7;                /* strlen("(error)"); */
+            goto end;
+        }
+
+        /* Assumes four digits after decimal point. We are using a temporary
+         * double variable to force double-precision computations without 
+         * using --fp_mode=strict flag. See the description of that flag in
+         * the compiler's doc for a further explanation.
+         */
+        tmp = (d - (xdc_runtime_System_INum)d) * 1e4;
+        fract = (xdc_runtime_System_UNum)tmp;
+
+        parse->ptr = xdc_runtime_System_formatNum__I(parse->end, fract, 4, 10);
+        *(--parse->ptr) = '.';
+
+#if 0
+        /* eliminate trailing zeros */
+        do {
+        } while (*(--parse->end) == '0');
+        ++parse->end;
+#endif
+        parse->len = parse->end - parse->ptr;
+        /* format integer part (right to left!) */
+        parse->ptr = xdc_runtime_System_formatNum__I(parse->ptr,
+            (xdc_runtime_System_INum)d, parse->zpad - parse->len, 10);
+        if (negative) {
+            *(--parse->ptr) = '-';
+        }
+
+        parse->len = parse->end - parse->ptr;
+        found = TRUE;
+    }
 
     if (found == FALSE) {
         /* other character (like %) copy to output */
