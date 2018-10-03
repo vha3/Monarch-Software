@@ -66,13 +66,13 @@ Void gpsFunc(UArg arg0, UArg arg1)
 	}
 
 	while (1) {
-		if(goodToGo){
+//		if(goodToGo){
 			int numBytes = UART_read(uart, &input, sizeof(input));
 			Semaphore_pend(readSemaphoreHandle, BIOS_WAIT_FOREVER);
 			UART_write(uart, &input, bytesRead);
 			UART_write(uart, newlinePrompt, sizeof(newlinePrompt));
 			UART_control(uart, UARTCC26XX_CMD_RX_FIFO_FLUSH, NULL);
-		}
+//		}
 	}
 }
 

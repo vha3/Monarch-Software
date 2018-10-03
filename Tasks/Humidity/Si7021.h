@@ -122,6 +122,30 @@ uint16_t I2Cwrite1read2HumByte(uint8_t address, uint8_t command_code){
 
 }
 
+uint8_t I2Cwrite1read1HumByte(uint8_t address, uint8_t command_code){
+
+    uint8_t txBuffer[0];
+    uint8_t rxBuffer[0];
+    int i=0;
+
+    txBuffer[0] = command_code;
+    i2cTransaction.slaveAddress = address;// 0x1e;
+    i2cTransaction.writeBuf = txBuffer;
+    i2cTransaction.writeCount = 1;
+    i2cTransaction.readBuf = rxBuffer;
+    i2cTransaction.readCount = 1;
+
+
+    if(I2C_transfer(i2c, &i2cTransaction)) {
+    }
+    else{
+//    		GPIO_write(Board_GPIO_LED0, Board_GPIO_LED_ON);
+    }
+
+    return rxBuffer[0];
+
+}
+
 /* Function that performs a burst read of from given address/subaddress */
 uint8_t I2CreadHumBytes(uint8_t address, uint8_t subAddress, uint8_t * dest, uint8_t count){
 
@@ -193,6 +217,44 @@ uint8_t checkID(void)
 		Display_printf(display, 0, 0, "No Devices Detected");
 		//Serial.println(ID_Temp_Hum, HEX);
 }
+
+ float getTempFarenheit(void) {
+	 uint16_t measurement;
+	 float degrees_C;
+	 float degrees_F;
+
+	 measurement = I2Cwrite1read2HumByte(ADDRESS, 0xE3);
+	 degrees_C = (175.72*measurement/65536)-46.85;
+	 degrees_F = (degrees_C*1.8) + 32;
+
+	 return degrees_F;
+ }
+
+ float getRelativeHumidity(void) {
+	 uint16_t rel_hum_measurement;
+	 float relative_humidity;
+
+	 rel_hum_measurement = I2Cwrite1read2HumByte(ADDRESS, 0xE5);
+	 relative_humidity = (125.0*rel_hum_measurement/65536)-6;
+
+	 return relative_humidity;
+ }
+
+ void heaterOn(void) {
+	 uint8_t regVal;
+	 regVal = I2Cwrite1read1HumByte(ADDRESS, 0xE7);
+	 regVal |= _BV(HTRE);
+	 //turn on the heater
+	 I2Cwrite2read1HumByte(ADDRESS, WRITE_USER_REG, regVal);
+ }
+
+ void heaterOff(void) {
+	 uint8_t regVal;
+	 regVal = I2Cwrite1read1HumByte(ADDRESS, 0xE7);
+	 regVal &= ~_BV(HTRE);
+	 //turn on the heater
+	 I2Cwrite2read1HumByte(ADDRESS, WRITE_USER_REG, regVal);
+ }
 
 
 
