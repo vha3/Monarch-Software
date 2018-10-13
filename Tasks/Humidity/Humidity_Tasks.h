@@ -35,10 +35,10 @@ Void humidityTaskFunc(UArg arg0, UArg arg1)
 //    		Display_printf(display, 0, 0, "Bang\n");
     		PIN_setOutputValue(pinHandle, Board_PIN_LED0, !PIN_getOutputValue(Board_PIN_LED0));
     		degrees_F = getTempFarenheit();
-//    		Display_printf(display, 0, 0, "Temperature: %f deg F \n", degrees_F);
+    		Display_printf(display, 0, 0, "Temperature: %f deg F \n", degrees_F);
 
     		relative_humidity = getRelativeHumidity();
-//		Display_printf(display, 0, 0, "Relative Humidity: %f \n", relative_humidity);
+		Display_printf(display, 0, 0, "Relative Humidity: %f \n", relative_humidity);
 
 
 

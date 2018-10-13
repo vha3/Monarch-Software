@@ -55,8 +55,8 @@ int main(void)
 	pwmSetup();
 
     /* Use one or the other of the below. If using GPS, need UART */
-//    Display_init();
-//    displaySetup();
+    Display_init();
+    displaySetup();
 
     /* Setup peripherals and semaphores */
 //    wdtSetup();
@@ -68,7 +68,7 @@ int main(void)
 //    createMagTask();
 //    createGyroTask();
 //    createAccelTask();
-    createGPSTask();
+//    createGPSTask();
     createADCTask();
 //    createRFRXTasks();
 //    createRFTXTasks();
