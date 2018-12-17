@@ -24,20 +24,20 @@ static uint8_t accelTaskStack[450];
 Void magTaskFunc(UArg arg0, UArg arg1)
 {
 	I2C_init();
-    LSM9DS1init();
+	LSM9DS1init();
     initI2C();
 
 	/* Initialization and Calibration */
-    uint16_t workpls = LSM9DS1begin();
-    configInt(XG_INT1, INT_DRDY_G, INT_ACTIVE_HIGH, INT_PUSH_PULL);
-    configInt(XG_INT2, INT_DRDY_XL, INT_ACTIVE_HIGH, INT_PUSH_PULL);
-    //		calibrate(1);
-    //		calibrateMag(1);
+	uint16_t workpls = LSM9DS1begin();
+	configInt(XG_INT1, INT_DRDY_G, INT_ACTIVE_HIGH, INT_PUSH_PULL);
+	configInt(XG_INT2, INT_DRDY_XL, INT_ACTIVE_HIGH, INT_PUSH_PULL);
+	//		calibrate(1);
+	//		calibrateMag(1);
 
-    	/* getMagInitial is only required if you're calibrating for the computer attitude */
-    //		getMagInitial();
+		/* getMagInitial is only required if you're calibrating for the computer attitude */
+	//		getMagInitial();
 
-    /* Unlock other tasks */
+	/* Unlock other tasks */
 	goodToGo += 1;
 
 	/* Read from each sensor (improves reliability) */
@@ -87,11 +87,11 @@ Void accelTaskFunc(UArg arg0, UArg arg1)
     		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
     		if(goodToGo){
     			readAccel();
-    			while(tempAvailable()){
-    				readTemp();
-				Display_printf(display, 0, 0,
-									"Temperature: %x \n", temperature);
-    			}
+//    			while(tempAvailable()){
+//    				readTemp();
+//				Display_printf(display, 0, 0,
+//									"Temperature FROM IMU: %x \n", temperature);
+//    			}
 
 //    			Display_printf(display, 0, 0,
 //									"Accel X: %d \n", ax);

@@ -33,7 +33,7 @@ Void adcTaskFunc(UArg arg0, UArg arg1)
     while (1) {
 //    		if(goodToGo){
     			res = ADC_convert(adc1, &adcValue1);
-    			PIN_setOutputValue(pinHandle, Board_PIN_LED1, !PIN_getOutputValue(Board_PIN_LED1));
+//    			PIN_setOutputValue(pinHandle, Board_PIN_LED1, !PIN_getOutputValue(Board_PIN_LED1));
     			if (res == ADC_STATUS_SUCCESS) {
 
 				adcValue1MicroVolt = ADC_convertRawToMicroVolts(adc1, adcValue1);

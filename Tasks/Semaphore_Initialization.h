@@ -27,9 +27,6 @@ static Semaphore_Handle txDataSemaphoreHandle;
 static Semaphore_Struct rxRestartSemaphore;
 static Semaphore_Handle rxRestartSemaphoreHandle;
 
-static Semaphore_Struct rxBeaconSemaphore;
-static Semaphore_Handle rxBeaconSemaphoreHandle;
-
 static Semaphore_Struct readSemaphore;
 static Semaphore_Handle readSemaphoreHandle;
 
@@ -59,9 +56,6 @@ void semaphoreSetup()
 
 	Semaphore_construct(&rxRestartSemaphore, 0, &semparams);
 	rxRestartSemaphoreHandle = Semaphore_handle(&rxRestartSemaphore);
-
-	Semaphore_construct(&rxBeaconSemaphore, 0, &semparams);
-	rxBeaconSemaphoreHandle = Semaphore_handle(&rxBeaconSemaphore);
 
 	Semaphore_construct(&readSemaphore, 0, &semparams);
 	readSemaphoreHandle = Semaphore_handle(&readSemaphore);

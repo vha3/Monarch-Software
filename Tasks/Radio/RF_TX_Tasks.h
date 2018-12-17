@@ -44,8 +44,8 @@ Void txDataTaskFunc(UArg arg0, UArg arg1)
 			EasyLink_abort();
 			EasyLink_TxPacket txPacket =  { {0}, 0, 0, {0} };
 
-			txPacket.payload[0] = BEACON;
-			txPacket.payload[1] = PERSONAL_ADDRESS;
+//			txPacket.payload[0] = BEACON;
+//			txPacket.payload[1] = PERSONAL_ADDRESS;
 
 //			txPacket.payload[0] = (uint8_t)(seqNumber >> 8);
 //			txPacket.payload[1] = (uint8_t)(seqNumber++);
@@ -80,20 +80,20 @@ Void txDataTaskFunc(UArg arg0, UArg arg1)
 //			txPacket.payload[19] = lowerPart(mz);
 
 //			txPacket.payload[29] = sign(temperature);
-			txPacket.payload[2] = temp_h;
-			txPacket.payload[3] = temp_l;
+//			txPacket.payload[2] = temp_h;
+//			txPacket.payload[3] = temp_l;
 			if (counter > 0xfe){
 				counter = 0;
 			}
 			else{
 				counter = counter + 0x01;
 			}
-//			int i=0;
-//			for (i = 0; i < sizeof(message); i++)
-//			{
-//			  txPacket.payload[i] = message[i];
-//			}
-			txPacket.payload[4] = counter;
+			int i=0;
+			for (i = 0; i < sizeof(message); i++)
+			{
+			  txPacket.payload[i] = message[i];
+			}
+			txPacket.payload[30] = counter;
 
 			txPacket.len = RFEASYLINKTXPAYLOAD_LENGTH;
 			txPacket.dstAddr[0] = 0xaa;
@@ -103,7 +103,7 @@ Void txDataTaskFunc(UArg arg0, UArg arg1)
 			if (result == EasyLink_Status_Success)
 			{
 				/* Toggle LED1 to indicate TX */
-//				PIN_setOutputValue(pinHandle, Board_PIN_LED1,!PIN_getOutputValue(Board_PIN_LED1));
+				PIN_setOutputValue(pinHandle, Board_PIN_LED1,!PIN_getOutputValue(Board_PIN_LED1));
 			}
 			else
 			{

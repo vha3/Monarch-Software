@@ -42,20 +42,20 @@ void pinCallback(PIN_Handle handle, PIN_Id pinId) {
 //			currVal =  PIN_getOutputValue(Board_PIN_LED0);
 //			PIN_setOutputValue(pinHandle, Board_PIN_LED0, !currVal);
 //			Semaphore_post(gyroSemaphoreHandle);
-//			Semaphore_post(accelSemaphoreHandle);
+			Semaphore_post(accelSemaphoreHandle);
 			break;
 
 		case IOID_14:
 //			currVal =  PIN_getOutputValue(Board_PIN_LED1);
 //			PIN_setOutputValue(pinHandle, Board_PIN_LED1, !currVal);
-//			Semaphore_post(magSemaphoreHandle);
+			Semaphore_post(magSemaphoreHandle);
 			break;
 
 		case IOID_13:
 //			currVal =  PIN_getOutputValue(Board_PIN_LED0);
 //			PIN_setOutputValue(pinHandle, Board_PIN_LED0, !currVal);
 //			Semaphore_post(accelSemaphoreHandle);
-//			Semaphore_post(gyroSemaphoreHandle);
+			Semaphore_post(gyroSemaphoreHandle);
 			break;
 
 		case IOID_1:
