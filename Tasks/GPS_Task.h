@@ -67,6 +67,7 @@ Void gpsFunc(UArg arg0, UArg arg1)
 
 	while (1) {
 		if(halt){
+			UART_close(uart);
 			Task_sleep(10000000);
 		}
 		if(goodToGo){

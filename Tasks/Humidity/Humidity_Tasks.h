@@ -45,12 +45,12 @@ Void humidityTaskFunc(UArg arg0, UArg arg1)
     			else {
     				stopper += 1;
 				degrees_F = getTempFarenheit();
-				Display_printf(display, 0, 0, "Temperature: %f deg F \n", degrees_F);
+//				Display_printf(display, 0, 0, "Temperature: %f deg F \n", degrees_F);
 
 				relative_humidity = getRelativeHumidity();
-				Display_printf(display, 0, 0, "Relative Humidity: %f \n", relative_humidity);
+//				Display_printf(display, 0, 0, "Relative Humidity: %f \n", relative_humidity);
 
-				Display_printf(display, 0, 0, "Cound: %d \n", stopper);
+//				Display_printf(display, 0, 0, "Cound: %d \n", stopper);
     			}
     		}
 

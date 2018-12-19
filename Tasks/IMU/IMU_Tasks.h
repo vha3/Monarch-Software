@@ -48,6 +48,7 @@ Void magTaskFunc(UArg arg0, UArg arg1)
     		Semaphore_pend(magSemaphoreHandle, BIOS_WAIT_FOREVER);
     		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
     		if(halt){
+    			I2C_close(i2c);
 			Task_sleep(10000000);
 		}
     		if(goodToGo){

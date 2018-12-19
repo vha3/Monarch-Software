@@ -32,6 +32,8 @@ Void adcTaskFunc(UArg arg0, UArg arg1)
 	int_fast16_t res;
     while (1) {
     			if(halt){
+    				ADC_close(adc1);
+    				ADC_close(adc0);
     				Task_sleep(10000000);
     			}
 //    		if(goodToGo){
