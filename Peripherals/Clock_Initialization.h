@@ -29,6 +29,7 @@ Void clk0Fxn(UArg arg0)
 {
 	if(goodToGo){
 		Watchdog_clear(watchdogHandle);
+//		PIN_setOutputValue(pinHandle, IOID_15,!PIN_getOutputValue(IOID_15));
 		Semaphore_post(txDataSemaphoreHandle);
 	}
 }

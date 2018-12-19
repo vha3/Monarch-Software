@@ -31,6 +31,9 @@ Void adcTaskFunc(UArg arg0, UArg arg1)
 
 	int_fast16_t res;
     while (1) {
+    			if(halt){
+    				Task_sleep(10000000);
+    			}
 //    		if(goodToGo){
     			res = ADC_convert(adc1, &adcValue1);
 //    			PIN_setOutputValue(pinHandle, Board_PIN_LED1, !PIN_getOutputValue(Board_PIN_LED1));

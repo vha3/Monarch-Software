@@ -15,6 +15,7 @@
 #include <ti/drivers/Power.h>
 #include <ti/drivers/power/PowerCC26XX.h>
 
+
 /* BIOS Header files */
 #include <ti/sysbios/BIOS.h>
 
@@ -51,28 +52,34 @@ int main(void)
     Board_initGeneral();
     PIN_init(pinTable);
 
-	PWM_init();
-	pwmSetup();
+//	PWM_init();
+//	pwmSetup();
 
     /* Use one or the other of the below. If using GPS, need UART */
-//    Display_init();
-//    displaySetup();
+    Display_init();
+    displaySetup();
 
     /* Setup peripherals and semaphores */
-    wdtSetup();
-    clockSetup();
+//    wdtSetup();
+//    clockSetup();
 	semaphoreSetup();
 	pinSetup();
+
+	PIN_setOutputValue(pinHandle, IOID_15, 1);
+	int delayer = 0;
+	while(delayer < 10000){
+		delayer += 1;
+	}
 
 	/* Construct tasks */
     createMagTask();
     createGyroTask();
     createAccelTask();
-    createGPSTask();
+//    createGPSTask();
     createADCTask();
     createRFRXTasks();
     createRFTXTasks();
-    createPWMTask();
+//    createPWMTask();
     createHumidityTask();
 
     /* Start kernel. */

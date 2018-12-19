@@ -47,6 +47,9 @@ Void magTaskFunc(UArg arg0, UArg arg1)
     while (1) {
     		Semaphore_pend(magSemaphoreHandle, BIOS_WAIT_FOREVER);
     		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
+    		if(halt){
+			Task_sleep(10000000);
+		}
     		if(goodToGo){
     			readMag();
 //    			Watchdog_clear(watchdogHandle);
@@ -66,6 +69,9 @@ Void gyroTaskFunc(UArg arg0, UArg arg1)
     while (1) {
     		Semaphore_pend(gyroSemaphoreHandle, BIOS_WAIT_FOREVER);
     		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
+    		if(halt){
+			Task_sleep(10000000);
+		}
     		if(goodToGo){
     			readGyro();
 //    			Display_printf(display, 0, 0,
@@ -85,6 +91,9 @@ Void accelTaskFunc(UArg arg0, UArg arg1)
     while (1) {
     		Semaphore_pend(accelSemaphoreHandle, BIOS_WAIT_FOREVER);
     		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
+    		if(halt){
+			Task_sleep(10000000);
+		}
     		if(goodToGo){
     			readAccel();
 //    			while(tempAvailable()){

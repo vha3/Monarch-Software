@@ -66,6 +66,9 @@ Void gpsFunc(UArg arg0, UArg arg1)
 	}
 
 	while (1) {
+		if(halt){
+			Task_sleep(10000000);
+		}
 		if(goodToGo){
 			int numBytes = UART_read(uart, &input, sizeof(input));
 			Semaphore_pend(readSemaphoreHandle, BIOS_WAIT_FOREVER);

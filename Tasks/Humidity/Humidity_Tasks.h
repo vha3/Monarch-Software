@@ -8,6 +8,8 @@
 #ifndef TASKS_HUMIDITY_HUMIDITY_TASKS_H_
 #define TASKS_HUMIDITY_HUMIDITY_TASKS_H_
 
+#include <ti/devices/cc13x0/driverlib/sys_ctrl.h>
+
 
 #include <ti/sysbios/knl/Task.h>
 #include "../Semaphore_Initialization.h"
@@ -41,14 +43,27 @@ Void humidityTaskFunc(UArg arg0, UArg arg1)
 				Task_sleep(1000);
     			}
     			else {
+    				stopper += 1;
 				degrees_F = getTempFarenheit();
-//				Display_printf(display, 0, 0, "Temperature: %f deg F \n", degrees_F);
+				Display_printf(display, 0, 0, "Temperature: %f deg F \n", degrees_F);
 
 				relative_humidity = getRelativeHumidity();
-//				Display_printf(display, 0, 0, "Relative Humidity: %f \n", relative_humidity);
+				Display_printf(display, 0, 0, "Relative Humidity: %f \n", relative_humidity);
+
+				Display_printf(display, 0, 0, "Cound: %d \n", stopper);
     			}
     		}
+
+    		if (stopper > 100){
+    			PIN_setOutputValue(pinHandle, IOID_15,0);
+    			PIN_setOutputValue(pinHandle, Board_PIN_LED0,0);
+    			PIN_setOutputValue(pinHandle, Board_PIN_LED1,0);
+    			halt += 1;
+    			Task_sleep(1000000);
+    			SysCtrlSystemReset();
+    		}
     		Semaphore_post(batonSemaphoreHandle);
+    		Semaphore_post(txDataSemaphoreHandle);
     		Task_sleep(10000);
     }
 }
