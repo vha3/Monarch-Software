@@ -1,12 +1,12 @@
 
-XOPTS = -I"/Applications/xdctools_3_50_02_20_core/packages/" -Dxdc_target_types__=/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/targets/arm/elf/std.h -Dxdc_target_name__=M3
+XOPTS = -I"/Applications/ti/xdctools_3_50_02_20_core/packages/" -Dxdc_target_types__=/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/targets/arm/elf/std.h -Dxdc_target_name__=M3
 
 vpath % /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/
-vpath %.c /Applications/xdctools_3_50_02_20_core/packages/
+vpath %.c /Applications/ti/xdctools_3_50_02_20_core/packages/
 
 CCOPTS    = --endian=little -mv7M3 --abi=eabi -q -ms --opt_for_speed=0  --program_level_compile -o3 -g --optimize_with_debug  -Dti_sysbios_knl_Task_minimizeLatency__D=FALSE -Dti_sysbios_family_arm_cc26xx_Boot_driverlibVersion=2 -Dti_sysbios_knl_Clock_stopCheckNext__D=TRUE -Dti_sysbios_family_arm_m3_Hwi_enableException__D=TRUE -Dti_sysbios_family_arm_m3_Hwi_disablePriority__D=32U -Dti_sysbios_family_arm_m3_Hwi_numSparseInterrupts__D=0U
 
-XDC_ROOT  = /Applications/xdctools_3_50_02_20_core/packages/
+XDC_ROOT  = /Applications/ti/xdctools_3_50_02_20_core/packages/
 
 BIOS_ROOT = /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/
 
@@ -14,11 +14,11 @@ BIOS_DEFS =  -Dti_sysbios_BIOS_swiEnabled__D=TRUE -Dti_sysbios_BIOS_taskEnabled_
 
 BIOS_INC  = -I"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/"
 
-INCS =  $(BIOS_INC) -I"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/" -I"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/" -I"/Applications/ccsv7/ccs_base/" -I"/Applications/xdctools_3_50_02_20_core/packages/" -I"../" -I"/packages//" 
+INCS =  $(BIOS_INC) -I"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/" -I"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/" -I"/Applications/ti/ccsv8/ccs_base/" -I"/Applications/ti/xdctools_3_50_02_20_core/packages/" -I"../" -I"/packages//" 
 
-CC = /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/bin/armcl -c $(CCOPTS) -I /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include
-ASM = /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/bin/armcl -c $(CCOPTS) -I /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/include
-AR = /Applications/ccsv7/tools/compiler/ti-cgt-arm_16.9.3.LTS/bin/armar rq
+CC = /Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/bin/armcl -c $(CCOPTS) -I /Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/include
+ASM = /Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/bin/armcl -c $(CCOPTS) -I /Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/include
+AR = /Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/bin/armar rq
 
 DEL = rm -f
 CP = cp -f

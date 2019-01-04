@@ -20,11 +20,11 @@
 #include <ti/sysbios/BIOS.h>
 
 /* Peripherals */
-#include <Peripherals/Clock_Initialization.h>
+//#include <Peripherals/Clock_Initialization.h>
 #include <Peripherals/Pin_Initialization.h>
-#include <Peripherals/Watchdog_Initialization.h>
+//#include <Peripherals/Watchdog_Initialization.h>
 #include <Peripherals/ADC_Initialization.h>
-#include <Peripherals/Display_Initialization.h>
+//#include <Peripherals/Display_Initialization.h>
 #include <Peripherals/PWM_Initialization.h>
 
 /* Board Header file */
@@ -38,7 +38,7 @@
 #include <Tasks/Semaphore_Initialization.h>
 #include <Tasks/Shared_Resources.h>
 #include <Tasks/ADC_Tasks.h>
-#include <Tasks/PWM_Tasks.h>
+//#include <Tasks/PWM_Tasks.h>
 #include <Tasks/Humidity/Humidity_Tasks.h>
 
 
@@ -64,6 +64,8 @@ int main(void)
 //    clockSetup();
 	semaphoreSetup();
 	pinSetup();
+
+	CC1310_LAUNCHXL_shutDownExtFlash();
 
 	PIN_setOutputValue(pinHandle, IOID_15, 1);
 	int delayer = 0;

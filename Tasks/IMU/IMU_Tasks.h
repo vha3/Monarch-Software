@@ -27,10 +27,12 @@ Void magTaskFunc(UArg arg0, UArg arg1)
 	LSM9DS1init();
     initI2C();
 
+    Task_sleep(1000);
+
 	/* Initialization and Calibration */
 	uint16_t workpls = LSM9DS1begin();
-	configInt(XG_INT1, INT_DRDY_G, INT_ACTIVE_HIGH, INT_PUSH_PULL);
-	configInt(XG_INT2, INT_DRDY_XL, INT_ACTIVE_HIGH, INT_PUSH_PULL);
+	configInt(XG_INT1, INT_DRDY_G, INT_ACTIVE_LOW, INT_PUSH_PULL);
+	configInt(XG_INT2, INT_DRDY_XL, INT_ACTIVE_LOW, INT_PUSH_PULL);
 	//		calibrate(1);
 	//		calibrateMag(1);
 
@@ -49,9 +51,9 @@ Void magTaskFunc(UArg arg0, UArg arg1)
     		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
     		if(halt){
     			I2C_close(i2c);
-			Task_sleep(10000000);
-		}
-    		if(goodToGo){
+    			Task_sleep(10000000);
+    		}
+    		else if(goodToGo){
     			readMag();
 //    			Watchdog_clear(watchdogHandle);
 //    			Display_printf(display, 0, 0,
@@ -72,15 +74,15 @@ Void gyroTaskFunc(UArg arg0, UArg arg1)
     		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
     		if(halt){
 			Task_sleep(10000000);
-		}
-    		if(goodToGo){
+    		}
+    		else if(goodToGo){
     			readGyro();
 //    			Display_printf(display, 0, 0,
 //									"Gyro X: %d \n", gx);
-//			Display_printf(display, 0, 0,
-//									"Gyro Y: %d \n", gy);
-//			Display_printf(display, 0, 0,
-//									"Gyro Z: %d \n", gz);
+//				Display_printf(display, 0, 0,
+//										"Gyro Y: %d \n", gy);
+//				Display_printf(display, 0, 0,
+//										"Gyro Z: %d \n", gz);
 
     		}
     		Semaphore_post(batonSemaphoreHandle);
@@ -93,22 +95,17 @@ Void accelTaskFunc(UArg arg0, UArg arg1)
     		Semaphore_pend(accelSemaphoreHandle, BIOS_WAIT_FOREVER);
     		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
     		if(halt){
-			Task_sleep(10000000);
-		}
-    		if(goodToGo){
+    			Task_sleep(10000000);
+    		}
+    		else if(goodToGo){
     			readAccel();
-//    			while(tempAvailable()){
-//    				readTemp();
-//				Display_printf(display, 0, 0,
-//									"Temperature FROM IMU: %x \n", temperature);
-//    			}
 
 //    			Display_printf(display, 0, 0,
 //									"Accel X: %d \n", ax);
-//			Display_printf(display, 0, 0,
-//									"Accel Y: %d \n", ay);
-//			Display_printf(display, 0, 0,
-//									"Accel Z: %d \n", az);
+//				Display_printf(display, 0, 0,
+//										"Accel Y: %d \n", ay);
+//				Display_printf(display, 0, 0,
+//										"Accel Z: %d \n", az);
     		}
     		Semaphore_post(batonSemaphoreHandle);
     }

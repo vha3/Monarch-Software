@@ -39,18 +39,18 @@ Void humidityTaskFunc(UArg arg0, UArg arg1)
     				stopper += 1;
     				beginHumidity();
     				Task_sleep(1000);
-				heaterOff();
-				Task_sleep(1000);
+					heaterOff();
+					Task_sleep(1000);
     			}
     			else {
     				stopper += 1;
-				degrees_F = getTempFarenheit();
-//				Display_printf(display, 0, 0, "Temperature: %f deg F \n", degrees_F);
+					degrees_F = getTempFarenheit();
+//					Display_printf(display, 0, 0, "Temperature: %f deg F \n", degrees_F);
 
-				relative_humidity = getRelativeHumidity();
-//				Display_printf(display, 0, 0, "Relative Humidity: %f \n", relative_humidity);
-
-//				Display_printf(display, 0, 0, "Cound: %d \n", stopper);
+					relative_humidity = getRelativeHumidity();
+//					Display_printf(display, 0, 0, "Relative Humidity: %f \n", relative_humidity);
+//
+//					Display_printf(display, 0, 0, "Cound: %d \n", stopper);
     			}
     		}
 
@@ -58,6 +58,7 @@ Void humidityTaskFunc(UArg arg0, UArg arg1)
     			PIN_setOutputValue(pinHandle, IOID_15,0);
     			PIN_setOutputValue(pinHandle, Board_PIN_LED0,0);
     			PIN_setOutputValue(pinHandle, Board_PIN_LED1,0);
+//    			Display_close(display);
     			halt += 1;
     			Task_sleep(1000000);
     			SysCtrlSystemReset();

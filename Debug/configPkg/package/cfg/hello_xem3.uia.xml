@@ -677,133 +677,133 @@
    <modIdMap id="1">
       <moduleName>xdc.runtime.Assert</moduleName>
       <packageVersion>2,1,0,1494429108347</packageVersion>
-      <packageBase>/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
+      <packageBase>/Applications/ti/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
       <cFileName>Assert.c</cFileName>
    </modIdMap>
    <modIdMap id="2">
       <moduleName>xdc.runtime.Core</moduleName>
       <packageVersion>2,1,0,1494429108347</packageVersion>
-      <packageBase>/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
+      <packageBase>/Applications/ti/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
       <cFileName>null</cFileName>
    </modIdMap>
    <modIdMap id="3">
       <moduleName>xdc.runtime.Defaults</moduleName>
       <packageVersion>2,1,0,1494429108347</packageVersion>
-      <packageBase>/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
+      <packageBase>/Applications/ti/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
       <cFileName>null</cFileName>
    </modIdMap>
    <modIdMap id="4">
       <moduleName>xdc.runtime.Diags</moduleName>
       <packageVersion>2,1,0,1494429108347</packageVersion>
-      <packageBase>/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
+      <packageBase>/Applications/ti/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
       <cFileName>Diags.c</cFileName>
    </modIdMap>
    <modIdMap id="5">
       <moduleName>xdc.runtime.Error</moduleName>
       <packageVersion>2,1,0,1494429108347</packageVersion>
-      <packageBase>/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
+      <packageBase>/Applications/ti/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
       <cFileName>Error.c</cFileName>
    </modIdMap>
    <modIdMap id="6">
       <moduleName>xdc.runtime.Gate</moduleName>
       <packageVersion>2,1,0,1494429108347</packageVersion>
-      <packageBase>/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
+      <packageBase>/Applications/ti/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
       <cFileName>Gate.c</cFileName>
    </modIdMap>
    <modIdMap id="7">
       <moduleName>xdc.runtime.Log</moduleName>
       <packageVersion>2,1,0,1494429108347</packageVersion>
-      <packageBase>/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
+      <packageBase>/Applications/ti/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
       <cFileName>Log.c</cFileName>
    </modIdMap>
    <modIdMap id="8">
       <moduleName>xdc.runtime.Main</moduleName>
       <packageVersion>2,1,0,1494429108347</packageVersion>
-      <packageBase>/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
+      <packageBase>/Applications/ti/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
       <cFileName>null</cFileName>
    </modIdMap>
    <modIdMap id="9">
       <moduleName>xdc.runtime.Memory</moduleName>
       <packageVersion>2,1,0,1494429108347</packageVersion>
-      <packageBase>/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
+      <packageBase>/Applications/ti/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
       <cFileName>Memory.c</cFileName>
    </modIdMap>
    <modIdMap id="10">
       <moduleName>xdc.runtime.Registry</moduleName>
       <packageVersion>2,1,0,1494429108347</packageVersion>
-      <packageBase>/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
+      <packageBase>/Applications/ti/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
       <cFileName>Registry.c</cFileName>
    </modIdMap>
    <modIdMap id="11">
       <moduleName>xdc.runtime.Startup</moduleName>
       <packageVersion>2,1,0,1494429108347</packageVersion>
-      <packageBase>/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
+      <packageBase>/Applications/ti/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
       <cFileName>Startup.c</cFileName>
    </modIdMap>
    <modIdMap id="12">
       <moduleName>xdc.runtime.System</moduleName>
       <packageVersion>2,1,0,1494429108347</packageVersion>
-      <packageBase>/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
+      <packageBase>/Applications/ti/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
       <cFileName>System.c</cFileName>
    </modIdMap>
    <modIdMap id="13">
       <moduleName>xdc.runtime.SysCallback</moduleName>
       <packageVersion>2,1,0,1494429108347</packageVersion>
-      <packageBase>/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
+      <packageBase>/Applications/ti/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
       <cFileName>SysCallback.c</cFileName>
    </modIdMap>
    <modIdMap id="14">
       <moduleName>xdc.runtime.SysMin</moduleName>
       <packageVersion>2,1,0,1494429108347</packageVersion>
-      <packageBase>/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
+      <packageBase>/Applications/ti/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
       <cFileName>SysMin.c</cFileName>
    </modIdMap>
    <modIdMap id="15">
       <moduleName>xdc.runtime.Text</moduleName>
       <packageVersion>2,1,0,1494429108347</packageVersion>
-      <packageBase>/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
+      <packageBase>/Applications/ti/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
       <cFileName>Text.c</cFileName>
    </modIdMap>
    <modIdMap id="16">
       <moduleName>xdc.runtime.Timestamp</moduleName>
       <packageVersion>2,1,0,1494429108347</packageVersion>
-      <packageBase>/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
+      <packageBase>/Applications/ti/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
       <cFileName>Timestamp.c</cFileName>
    </modIdMap>
    <modIdMap id="17">
       <moduleName>xdc.runtime.Types</moduleName>
       <packageVersion>2,1,0,1494429108347</packageVersion>
-      <packageBase>/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
+      <packageBase>/Applications/ti/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
       <cFileName>null</cFileName>
    </modIdMap>
    <modIdMap id="18">
       <moduleName>xdc.runtime.Main_Module_GateProxy</moduleName>
       <packageVersion>2,1,0,1494429108347</packageVersion>
-      <packageBase>/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
+      <packageBase>/Applications/ti/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
       <cFileName>null</cFileName>
    </modIdMap>
    <modIdMap id="19">
       <moduleName>xdc.runtime.Memory_HeapProxy</moduleName>
       <packageVersion>2,1,0,1494429108347</packageVersion>
-      <packageBase>/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
+      <packageBase>/Applications/ti/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
       <cFileName>null</cFileName>
    </modIdMap>
    <modIdMap id="20">
       <moduleName>xdc.runtime.System_SupportProxy</moduleName>
       <packageVersion>2,1,0,1494429108347</packageVersion>
-      <packageBase>/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
+      <packageBase>/Applications/ti/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
       <cFileName>null</cFileName>
    </modIdMap>
    <modIdMap id="21">
       <moduleName>xdc.runtime.System_Module_GateProxy</moduleName>
       <packageVersion>2,1,0,1494429108347</packageVersion>
-      <packageBase>/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
+      <packageBase>/Applications/ti/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
       <cFileName>null</cFileName>
    </modIdMap>
    <modIdMap id="22">
       <moduleName>xdc.runtime.Timestamp_SupportProxy</moduleName>
       <packageVersion>2,1,0,1494429108347</packageVersion>
-      <packageBase>/Applications/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
+      <packageBase>/Applications/ti/xdctools_3_50_02_20_core/packages/xdc/runtime/</packageBase>
       <cFileName>null</cFileName>
    </modIdMap>
    <modIdMap id="23">

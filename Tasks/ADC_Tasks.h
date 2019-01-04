@@ -47,7 +47,7 @@ Void adcTaskFunc(UArg arg0, UArg arg1)
 //						"ADC channel 1 convert result: %d uV\n", adcValue1MicroVolt);
 			}
 			else {
-				Display_printf(display, 0, 0, "ADC channel 1 convert failed\n");
+//				Display_printf(display, 0, 0, "ADC channel 1 convert failed\n");
 			}
 
     			res = ADC_convert(adc0, &adcValue0);
@@ -59,7 +59,7 @@ Void adcTaskFunc(UArg arg0, UArg arg1)
 //						"ADC channel 0 convert result: %d uV\n", adcValue0MicroVolt);
 			}
 			else {
-				Display_printf(display, 0, 0, "ADC channel 0 convert failed\n");
+//				Display_printf(display, 0, 0, "ADC channel 0 convert failed\n");
 			}
 //    		}
     		/* 10 Hz */

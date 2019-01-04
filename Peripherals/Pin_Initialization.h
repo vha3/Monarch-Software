@@ -25,24 +25,22 @@ static PIN_State pinState;
  *   - Interrupts are configured to trigger on rising edge.
  */
 PIN_Config pinTable[] = {
-	IOID_14  | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_POSEDGE,
-	CC1310_LAUNCHXL_DIO12  | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_POSEDGE,
-	IOID_13  | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_POSEDGE,
-	IOID_1 | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_POSEDGE,
+	IOID_14  | PIN_INPUT_EN | PIN_PULLUP | PIN_IRQ_POSEDGE,
+	CC1310_LAUNCHXL_DIO12  | PIN_INPUT_EN | PIN_PULLUP | PIN_IRQ_NEGEDGE,
+	IOID_13  | PIN_INPUT_EN | PIN_PULLUP | PIN_IRQ_NEGEDGE,
+	IOID_1 | PIN_INPUT_EN | PIN_PULLUP | PIN_IRQ_POSEDGE,
 	IOID_15 | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
 	CC1310_LAUNCHXL_PIN_RLED | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
 	CC1310_LAUNCHXL_PIN_GLED | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
-	IOID_15 | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
     PIN_TERMINATE
 };
 
 void pinCallback(PIN_Handle handle, PIN_Id pinId) {
-    uint32_t currVal = 0;
+//    uint32_t currVal = 0;
 	switch (pinId) {
 		case CC1310_LAUNCHXL_DIO12:
 //			currVal =  PIN_getOutputValue(Board_PIN_LED0);
 //			PIN_setOutputValue(pinHandle, Board_PIN_LED0, !currVal);
-//			Semaphore_post(gyroSemaphoreHandle);
 			Semaphore_post(accelSemaphoreHandle);
 			break;
 
@@ -55,7 +53,6 @@ void pinCallback(PIN_Handle handle, PIN_Id pinId) {
 		case IOID_13:
 //			currVal =  PIN_getOutputValue(Board_PIN_LED0);
 //			PIN_setOutputValue(pinHandle, Board_PIN_LED0, !currVal);
-//			Semaphore_post(accelSemaphoreHandle);
 			Semaphore_post(gyroSemaphoreHandle);
 			break;
 
