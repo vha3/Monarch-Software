@@ -65,7 +65,7 @@ Void rxRestartFunc(UArg arg0, UArg arg1)
     			EasyLink_abort();
     			PIN_setOutputValue(pinHandle, Board_PIN_LED0,0);
     			PIN_setOutputValue(pinHandle, Board_PIN_LED1,0);
-			Task_sleep(10000000);
+    			Task_sleep(600000000);
 		}
     		Semaphore_pend(rxRestartSemaphoreHandle, BIOS_WAIT_FOREVER);
     		EasyLink_receiveAsync(rxDoneCb, 0);

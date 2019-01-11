@@ -24,7 +24,7 @@
 #include <Peripherals/Pin_Initialization.h>
 //#include <Peripherals/Watchdog_Initialization.h>
 #include <Peripherals/ADC_Initialization.h>
-//#include <Peripherals/Display_Initialization.h>
+#include <Peripherals/Display_Initialization.h>
 #include <Peripherals/PWM_Initialization.h>
 
 /* Board Header file */
@@ -56,8 +56,8 @@ int main(void)
 //	pwmSetup();
 
     /* Use one or the other of the below. If using GPS, need UART */
-//    Display_init();
-//    displaySetup();
+    Display_init();
+    displaySetup();
 
     /* Setup peripherals and semaphores */
 //    wdtSetup();
@@ -67,17 +67,18 @@ int main(void)
 
 	CC1310_LAUNCHXL_shutDownExtFlash();
 
-	PIN_setOutputValue(pinHandle, IOID_15, 1);
-	int delayer = 0;
-	while(delayer < 10000){
-		delayer += 1;
-	}
+	PIN_setOutputValue(pinHandle, IOID_15, 0);
+//	int delayer = 0;
+//	while(delayer < 10000){
+//		delayer += 1;
+//	}
+
 
 	/* Construct tasks */
     createMagTask();
     createGyroTask();
     createAccelTask();
-    createGPSTask();
+//    createGPSTask();
     createADCTask();
     createRFRXTasks();
     createRFTXTasks();

@@ -31,6 +31,8 @@ void Serial_RxDataCallback(UART_Handle handle, void *buffer, size_t size)
 
 Void gpsFunc(UArg arg0, UArg arg1)
 {
+	Semaphore_pend(gpsLockSemaphoreHandle, BIOS_WAIT_FOREVER);
+
 	UART_init();
 
     UART_Params_init(&uartParams);
@@ -68,7 +70,7 @@ Void gpsFunc(UArg arg0, UArg arg1)
 	while (1) {
 		if(halt){
 			UART_close(uart);
-			Task_sleep(10000000);
+			Task_sleep(600000000);
 		}
 		if(goodToGo){
 			int numBytes = UART_read(uart, &input, sizeof(input));

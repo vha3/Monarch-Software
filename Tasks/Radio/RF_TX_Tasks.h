@@ -27,7 +27,7 @@ uint8_t message[30] = {0x20, 0x53, 0x50, 0x41, 0x43, 0x45, 0x20, 0x53,
 
 Void txDataTaskFunc(UArg arg0, UArg arg1)
 {
-	PIN_setOutputValue(pinHandle, IOID_15,1);
+//	PIN_setOutputValue(pinHandle, IOID_15,1);
 	//EasyLink_init(EasyLink_Phy_Custom);
 	EasyLink_init(EasyLink_Phy_50kbps2gfsk);
 	//EasyLink_init(EasyLink_Phy_5kbpsSlLr);
@@ -41,7 +41,7 @@ Void txDataTaskFunc(UArg arg0, UArg arg1)
 		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
 
 		if(halt){
-			Task_sleep(10000000);
+			Task_sleep(600000000);
 		}
 
 		if(goodToGo){

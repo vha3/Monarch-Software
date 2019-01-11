@@ -31,32 +31,46 @@ Void adcTaskFunc(UArg arg0, UArg arg1)
 
 	int_fast16_t res;
     while (1) {
-    			if(halt){
-    				ADC_close(adc1);
-    				ADC_close(adc0);
-    				Task_sleep(10000000);
-    			}
+			if(halt){
+				ADC_close(adc1);
+				ADC_close(adc0);
+				Task_sleep(600000000);
+			}
 //    		if(goodToGo){
     			res = ADC_convert(adc1, &adcValue1);
 //    			PIN_setOutputValue(pinHandle, Board_PIN_LED1, !PIN_getOutputValue(Board_PIN_LED1));
-    			if (res == ADC_STATUS_SUCCESS) {
+    		if (res == ADC_STATUS_SUCCESS) {
 
 				adcValue1MicroVolt = ADC_convertRawToMicroVolts(adc1, adcValue1);
 
-//				Display_printf(display, 0, 0,
-//						"ADC channel 1 convert result: %d uV\n", adcValue1MicroVolt);
+				Display_printf(display, 0, 0,
+						"ADC channel 1 convert result: %d uV\n", adcValue1MicroVolt);
 			}
 			else {
 //				Display_printf(display, 0, 0, "ADC channel 1 convert failed\n");
 			}
 
-    			res = ADC_convert(adc0, &adcValue0);
-    			if (res == ADC_STATUS_SUCCESS) {
+    		res = ADC_convert(adc0, &adcValue0);
+    		if (res == ADC_STATUS_SUCCESS) {
 
 				adcValue0MicroVolt = ADC_convertRawToMicroVolts(adc0, adcValue0);
 
-//				Display_printf(display, 0, 0,
-//						"ADC channel 0 convert result: %d uV\n", adcValue0MicroVolt);
+				if (adcValue0MicroVolt > 1000000){
+					if (goodToGo){
+						continue;
+					}
+					else {
+						PIN_setOutputValue(pinHandle, IOID_15, 1);
+						int delayer = 0;
+						while(delayer < 10000){
+							delayer += 1;
+						}
+						Semaphore_post(magLockSemaphoreHandle);
+					}
+				}
+
+				Display_printf(display, 0, 0,
+						"ADC channel 0 convert result: %d uV\n", adcValue0MicroVolt);
 			}
 			else {
 //				Display_printf(display, 0, 0, "ADC channel 0 convert failed\n");

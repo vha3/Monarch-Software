@@ -233,6 +233,8 @@ main.obj: /Users/hunteradams/Documents/MSP430/workspace/Sprite/Peripherals/../Ta
 main.obj: /Users/hunteradams/Documents/MSP430/workspace/Sprite/Peripherals/Pin_Initialization.h
 main.obj: /Users/hunteradams/Documents/MSP430/workspace/Sprite/Peripherals/PWM_Initialization.h
 main.obj: /Users/hunteradams/Documents/MSP430/workspace/Sprite/Peripherals/ADC_Initialization.h
+main.obj: /Users/hunteradams/Documents/MSP430/workspace/Sprite/Peripherals/Display_Initialization.h
+main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/display/Display.h
 main.obj: ../Tasks/GPS_Task.h
 main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/uart/UARTCC26XX.h
 main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/utils/RingBuf.h
@@ -532,6 +534,8 @@ main.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packag
 /Users/hunteradams/Documents/MSP430/workspace/Sprite/Peripherals/Pin_Initialization.h: 
 /Users/hunteradams/Documents/MSP430/workspace/Sprite/Peripherals/PWM_Initialization.h: 
 /Users/hunteradams/Documents/MSP430/workspace/Sprite/Peripherals/ADC_Initialization.h: 
+/Users/hunteradams/Documents/MSP430/workspace/Sprite/Peripherals/Display_Initialization.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/display/Display.h: 
 ../Tasks/GPS_Task.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/uart/UARTCC26XX.h: 
 /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/utils/RingBuf.h: 

@@ -22,11 +22,8 @@ static uint8_t humidityTaskStack[450];
 
 Void humidityTaskFunc(UArg arg0, UArg arg1)
 {
-//	I2C_init();
-//	Task_sleep(10000);
-////    LSM9DS1init();
-//    initI2C();
-//    Task_sleep(10000);
+
+	Semaphore_pend(humidityLockSemaphoreHandle, BIOS_WAIT_FOREVER);
 
     float degrees_F;
     float relative_humidity;
@@ -45,22 +42,22 @@ Void humidityTaskFunc(UArg arg0, UArg arg1)
     			else {
     				stopper += 1;
 					degrees_F = getTempFarenheit();
-//					Display_printf(display, 0, 0, "Temperature: %f deg F \n", degrees_F);
+					Display_printf(display, 0, 0, "Temperature: %f deg F \n", degrees_F);
 
 					relative_humidity = getRelativeHumidity();
-//					Display_printf(display, 0, 0, "Relative Humidity: %f \n", relative_humidity);
+					Display_printf(display, 0, 0, "Relative Humidity: %f \n", relative_humidity);
 //
 //					Display_printf(display, 0, 0, "Cound: %d \n", stopper);
     			}
     		}
 
-    		if (stopper > 100){
+    		if (stopper > 10){
     			PIN_setOutputValue(pinHandle, IOID_15,0);
     			PIN_setOutputValue(pinHandle, Board_PIN_LED0,0);
     			PIN_setOutputValue(pinHandle, Board_PIN_LED1,0);
 //    			Display_close(display);
     			halt += 1;
-    			Task_sleep(1000000);
+    			Task_sleep(60000000);
     			SysCtrlSystemReset();
     		}
     		Semaphore_post(batonSemaphoreHandle);

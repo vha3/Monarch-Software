@@ -33,6 +33,21 @@ static Semaphore_Handle readSemaphoreHandle;
 static Semaphore_Struct batonSemaphore;
 static Semaphore_Handle batonSemaphoreHandle;
 
+static Semaphore_Struct magLockSemaphore;
+static Semaphore_Handle magLockSemaphoreHandle;
+
+static Semaphore_Struct gyroLockSemaphore;
+static Semaphore_Handle gyroLockSemaphoreHandle;
+
+static Semaphore_Struct accelLockSemaphore;
+static Semaphore_Handle accelLockSemaphoreHandle;
+
+static Semaphore_Struct gpsLockSemaphore;
+static Semaphore_Handle gpsLockSemaphoreHandle;
+
+static Semaphore_Struct humidityLockSemaphore;
+static Semaphore_Handle humidityLockSemaphoreHandle;
+
 void semaphoreSetup()
 {
     /* Create Semaphores */
@@ -62,6 +77,21 @@ void semaphoreSetup()
 
     Semaphore_construct(&batonSemaphore, 1, &semparams);
     batonSemaphoreHandle = Semaphore_handle(&batonSemaphore);
+
+    Semaphore_construct(&magLockSemaphore, 0, &semparams);
+    magLockSemaphoreHandle = Semaphore_handle(&magLockSemaphore);
+
+	Semaphore_construct(&gyroLockSemaphore, 0, &semparams);
+	gyroLockSemaphoreHandle = Semaphore_handle(&gyroLockSemaphore);
+
+	Semaphore_construct(&accelLockSemaphore, 0, &semparams);
+	accelLockSemaphoreHandle = Semaphore_handle(&accelLockSemaphore);
+
+	Semaphore_construct(&gpsLockSemaphore, 0, &semparams);
+	gpsLockSemaphoreHandle = Semaphore_handle(&gpsLockSemaphore);
+
+	Semaphore_construct(&humidityLockSemaphore, 0, &semparams);
+	humidityLockSemaphoreHandle = Semaphore_handle(&humidityLockSemaphore);
 }
 
 
