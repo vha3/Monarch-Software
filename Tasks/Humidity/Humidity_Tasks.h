@@ -42,22 +42,33 @@ Void humidityTaskFunc(UArg arg0, UArg arg1)
     			else {
     				stopper += 1;
 					degrees_F = getTempFarenheit();
-					Display_printf(display, 0, 0, "Temperature: %f deg F \n", degrees_F);
+//					Display_printf(display, 0, 0, "Temperature: %f deg F \n", degrees_F);
 
 					relative_humidity = getRelativeHumidity();
-					Display_printf(display, 0, 0, "Relative Humidity: %f \n", relative_humidity);
+//					Display_printf(display, 0, 0, "Relative Humidity: %f \n", relative_humidity);
 //
 //					Display_printf(display, 0, 0, "Cound: %d \n", stopper);
     			}
     		}
 
-    		if (stopper > 10){
+    		if (stopper > 100){
     			PIN_setOutputValue(pinHandle, IOID_15,0);
     			PIN_setOutputValue(pinHandle, Board_PIN_LED0,0);
     			PIN_setOutputValue(pinHandle, Board_PIN_LED1,0);
+    			I2C_close(i2c);
+    			PIN_close(&pinState);
+    			PIN_init(pinTable2);
+    			pinHandle = PIN_open(&pinState, pinTable2);
+    			if(!pinHandle) {
+					/* Error initializing button pins */
+    				PIN_setOutputValue(pinHandle, Board_PIN_LED0,1);
+    				PIN_setOutputValue(pinHandle, Board_PIN_LED1,1);
+					while(1);
+				}
 //    			Display_close(display);
     			halt += 1;
-    			Task_sleep(60000000);
+    			PIN_close(&pinState);
+    			Task_sleep(6000000);
     			SysCtrlSystemReset();
     		}
     		Semaphore_post(batonSemaphoreHandle);
