@@ -20,6 +20,9 @@
 static PIN_Handle pinHandle;
 static PIN_State pinState;
 
+static PIN_Handle pinHandle2;
+static PIN_State pinState2;
+
 /*
  * Application button pin configuration table:
  *   - Interrupts are configured to trigger on rising edge.
@@ -36,15 +39,17 @@ PIN_Config pinTable[] = {
 };
 
 PIN_Config pinTable2[] = {
-	IOID_14  | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
-	CC1310_LAUNCHXL_DIO12  | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
-	IOID_13  | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
-	IOID_1 | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
+	IOID_14  | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_DIS,
+	CC1310_LAUNCHXL_DIO12  | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_DIS,
+	IOID_13  | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_DIS,
+	IOID_1 | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_DIS,
 	IOID_15 | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
 	CC1310_LAUNCHXL_PIN_RLED | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
 	CC1310_LAUNCHXL_PIN_GLED | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
 //	CC1310_LAUNCHXL_I2C0_SCL0  | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
 //	CC1310_LAUNCHXL_I2C0_SDA0  | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
+//	CC1310_LAUNCHXL_I2C0_SCL0  | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_DIS,
+//	CC1310_LAUNCHXL_I2C0_SDA0  | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_DIS,
     PIN_TERMINATE
 };
 
@@ -91,6 +96,21 @@ void pinSetup()
 
     /* Setup callback for button pins */
     if (PIN_registerIntCb(pinHandle, &pinCallback) != 0) {
+        /* Error registering button callback function */
+        while(1);
+    }
+}
+
+void pinSetup2()
+{
+    pinHandle2 = PIN_open(&pinState2, pinTable2);
+	if(!pinHandle2) {
+		/* Error initializing button pins */
+		while(1);
+	}
+
+    /* Setup callback for button pins */
+    if (PIN_registerIntCb(pinHandle2, &pinCallback) != 0) {
         /* Error registering button callback function */
         while(1);
     }

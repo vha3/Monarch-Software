@@ -56,18 +56,26 @@ Void humidityTaskFunc(UArg arg0, UArg arg1)
     			PIN_setOutputValue(pinHandle, Board_PIN_LED0,0);
     			PIN_setOutputValue(pinHandle, Board_PIN_LED1,0);
     			I2C_close(i2c);
-    			PIN_close(&pinState);
-    			PIN_init(pinTable2);
-    			pinHandle = PIN_open(&pinState, pinTable2);
-    			if(!pinHandle) {
-					/* Error initializing button pins */
-    				PIN_setOutputValue(pinHandle, Board_PIN_LED0,1);
-    				PIN_setOutputValue(pinHandle, Board_PIN_LED1,1);
-					while(1);
-				}
-//    			Display_close(display);
     			halt += 1;
     			PIN_close(&pinState);
+
+//    			Task_sleep(600000);
+//    			PIN_init(pinTable2);
+//    			pinSetup2();
+//    			pinHandle = PIN_open(&pinState, pinTable2);
+//    			if(!pinHandle) {
+//					/* Error initializing button pins */
+//    				PIN_setOutputValue(pinHandle, Board_PIN_LED0,1);
+//    				PIN_setOutputValue(pinHandle, Board_PIN_LED1,1);
+//					while(1);
+//				}
+//    			Display_close(display);
+//    			halt += 1;
+//    			PIN_setOutputValue(pinHandle2, CC1310_LAUNCHXL_I2C0_SCL0,0);
+//    			PIN_setOutputValue(pinHandle2, CC1310_LAUNCHXL_I2C0_SDA0,0);
+//    			GPIO_write(IOID_4, 0);
+//    			GPIO_write(IOID_5, 0);
+//    			PIN_close(&pinState2);
     			Task_sleep(6000000);
     			SysCtrlSystemReset();
     		}
