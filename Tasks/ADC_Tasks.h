@@ -69,6 +69,10 @@ Void adcTaskFunc(UArg arg0, UArg arg1)
 					}
 				}
 
+				else {
+					Task_sleep(6000000);
+				}
+
 //				Display_printf(display, 0, 0,
 //						"ADC channel 0 convert result: %d uV\n", adcValue0MicroVolt);
 			}
