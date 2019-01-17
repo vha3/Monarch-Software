@@ -52,7 +52,7 @@ Void humidityTaskFunc(UArg arg0, UArg arg1)
     		}
 
     		if (stopper > 100){
-    			PIN_setOutputValue(pinHandle, IOID_15,0);
+    			PIN_setOutputValue(pinHandle, IOID_21,0);
     			PIN_setOutputValue(pinHandle, Board_PIN_LED0,0);
     			PIN_setOutputValue(pinHandle, Board_PIN_LED1,0);
     			I2C_close(i2c);

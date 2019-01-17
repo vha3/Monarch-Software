@@ -60,7 +60,7 @@ Void adcTaskFunc(UArg arg0, UArg arg1)
 						continue;
 					}
 					else {
-						PIN_setOutputValue(pinHandle, IOID_15, 1);
+						PIN_setOutputValue(pinHandle, IOID_21, 1);
 						int delayer = 0;
 						while(delayer < 10000){
 							delayer += 1;

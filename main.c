@@ -68,7 +68,7 @@ int main(void)
 
 	CC1310_LAUNCHXL_shutDownExtFlash();
 
-	PIN_setOutputValue(pinHandle, IOID_15, 0);
+	PIN_setOutputValue(pinHandle, IOID_21, 0);
 //	int delayer = 0;
 //	while(delayer < 10000){
 //		delayer += 1;
