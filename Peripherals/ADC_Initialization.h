@@ -14,6 +14,7 @@
 
 ADC_Handle   adc1;
 ADC_Handle   adc0;
+ADC_Handle	 adc3;
 ADC_Params   params;
 
 void adcSetup()
@@ -31,6 +32,13 @@ void adcSetup()
     if (adc1 == NULL) {
         while (1);
     }
+
+    ADC_Params_init(&params);
+	adc3 = ADC_open(Board_ADC3, &params);
+
+	if (adc3 == NULL) {
+		while (1);
+	}
 }
 
 #endif /* PERIPHERALS_ADC_INITIALIZATION_H_ */
