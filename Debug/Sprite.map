@@ -1,7 +1,7 @@
 ******************************************************************************
                   TI ARM Linker Unix v18.1.4                   
 ******************************************************************************
->> Linked Sat Jan 19 14:33:31 2019
+>> Linked Thu Feb  7 10:50:04 2019
 
 OUTPUT FILE NAME:   <Sprite.out>
 ENTRY POINT SYMBOL: "ResetISR"  address: 00009be1
