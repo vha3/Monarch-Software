@@ -4,5 +4,5 @@
 
 USER_OBJS :=
 
-LIBS := -l"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/display/lib/display.aem3" -l"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/mw/lcd/lib/lcd.aem3" -l"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/grlib/lib/grlib.aem3" -l"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/rf/lib/rf_multiMode_cc13x0.aem3" -l"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/lib/drivers_cc13x0.aem3" -l"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/pdm/lib/pdm_cc13x0.aem3" -l"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/dpl/lib/dpl_cc13x0.aem3" -l"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/bin/ccs/driverlib.lib" -llibc.a
+LIBS := -l"ti/display/lib/display.aem3" -l"ti/grlib/lib/ccs/m3/grlib.a" -l"third_party/spiffs/lib/ccs/m3/spiffs_cc26xx.a" -l"ti/drivers/rf/lib/rf_multiMode_cc13x0.aem3" -l"ti/drivers/lib/drivers_cc13x0.aem3" -l"ti/dpl/lib/dpl_cc13x0.aem3" -l"ti/devices/cc13x0/driverlib/bin/ccs/driverlib.lib" -llibc.a
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015-2017, Texas Instruments Incorporated
+ * Copyright (c) 2015-2018, Texas Instruments Incorporated
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,22 +33,17 @@
 #ifndef __BOARD_H
 #define __BOARD_H
 
+#define Board_CC1310_LAUNCHXL
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include <ti/drivers/ADC.h>
-#include <ti/drivers/ADCBuf.h>
-#include <ti/drivers/GPIO.h>
-#include <ti/drivers/PWM.h>
-#include <ti/drivers/SPI.h>
-#include <ti/drivers/UART.h>
-#include <ti/drivers/Watchdog.h>
 
 #include "CC1310_LAUNCHXL.h"
 
 #define Board_initGeneral()     CC1310_LAUNCHXL_initGeneral()
 #define Board_shutDownExtFlash() CC1310_LAUNCHXL_shutDownExtFlash()
+#define Board_wakeUpExtFlash() CC1310_LAUNCHXL_wakeUpExtFlash()
 
 /* These #defines allow us to reuse TI-RTOS across other device families */
 
@@ -60,6 +55,7 @@ extern "C" {
 #define Board_ADCBUF0CHANNEL1   CC1310_LAUNCHXL_ADCBUF0CHANNEL1
 
 #define Board_CRYPTO0           CC1310_LAUNCHXL_CRYPTO0
+#define Board_TRNG0             CC1310_LAUNCHXL_TRNG0
 
 #define Board_DIO0              CC1310_LAUNCHXL_DIO0
 #define Board_DIO1              CC1310_LAUNCHXL_DIO1
@@ -93,8 +89,8 @@ extern "C" {
 #define Board_I2C0              CC1310_LAUNCHXL_I2C0
 #define Board_I2C_TMP           CC1310_LAUNCHXL_I2C0
 
-#define Board_NVS0              CC1310_LAUNCHXL_NVSCC26XX0
-#define Board_NVS1              CC1310_LAUNCHXL_NVSSPI25X0
+#define Board_NVSINTERNAL       CC1310_LAUNCHXL_NVSCC26XX0
+#define Board_NVSEXTERNAL       CC1310_LAUNCHXL_NVSSPI25X0
 
 #define Board_PIN_BUTTON0       CC1310_LAUNCHXL_PIN_BTN1
 #define Board_PIN_BUTTON1       CC1310_LAUNCHXL_PIN_BTN2
@@ -115,11 +111,18 @@ extern "C" {
 #define Board_PWM6              CC1310_LAUNCHXL_PWM6
 #define Board_PWM7              CC1310_LAUNCHXL_PWM7
 
+#define Board_SD0               CC1310_LAUNCHXL_SDSPI0
+
 #define Board_SPI0              CC1310_LAUNCHXL_SPI0
 #define Board_SPI1              CC1310_LAUNCHXL_SPI1
 #define Board_SPI_FLASH_CS      CC1310_LAUNCHXL_SPI_FLASH_CS
 #define Board_FLASH_CS_ON       0
 #define Board_FLASH_CS_OFF      1
+
+#define Board_SPI_MASTER        CC1310_LAUNCHXL_SPI0
+#define Board_SPI_SLAVE         CC1310_LAUNCHXL_SPI0
+#define Board_SPI_MASTER_READY  CC1310_LAUNCHXL_SPI_MASTER_READY
+#define Board_SPI_SLAVE_READY   CC1310_LAUNCHXL_SPI_SLAVE_READY
 
 #define Board_UART0             CC1310_LAUNCHXL_UART0
 
@@ -128,38 +131,6 @@ extern "C" {
 /* Board specific I2C addresses */
 #define Board_TMP_ADDR          (0x40)
 #define Board_SENSORS_BP_TMP_ADDR Board_TMP_ADDR
-
-/*
- * These macros are provided for backwards compatibility.
- * Please use the <Driver>_init functions directly rather
- * than Board_init<Driver>.
- */
-#define Board_initADC()         ADC_init()
-#define Board_initADCBuf()      ADCBuf_init()
-#define Board_initGPIO()        GPIO_init()
-#define Board_initPWM()         PWM_init()
-#define Board_initSPI()         SPI_init()
-#define Board_initUART()        UART_init()
-#define Board_initWatchdog()    Watchdog_init()
-
-/*
- * These macros are provided for backwards compatibility.
- * Please use the 'Board_PIN_xxx' macros to differentiate
- * them from the 'Board_GPIO_xxx' macros.
- */
-#define Board_BUTTON0           Board_PIN_BUTTON0
-#define Board_BUTTON1           Board_PIN_BUTTON1
-#define Board_BTN1              Board_PIN_BTN1
-#define Board_BTN2              Board_PIN_BTN2
-#define Board_LED0              Board_PIN_LED0
-#define Board_LED1              Board_PIN_LED1
-#define Board_LED2              Board_PIN_LED2
-#define Board_RLED              Board_PIN_RLED
-#define Board_GLED              Board_PIN_GLED
-#define Board_LED_ON            Board_GPIO_LED_ON
-#define Board_LED_OFF           Board_GPIO_LED_OFF
-#define Board_ADCBUFCHANNEL0    Board_ADCBUF0CHANNEL0
-#define Board_ADCBUFCHANNEL1    Board_ADCBUF0CHANNEL1
 
 #ifdef __cplusplus
 }

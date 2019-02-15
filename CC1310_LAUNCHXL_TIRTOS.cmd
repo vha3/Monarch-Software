@@ -69,15 +69,15 @@ MEMORY
 
 SECTIONS
 {
-    .text           :   > FLASH
+    .text           :   >> FLASH
     .TI.ramfunc     : {} load=FLASH, run=SRAM, table(BINIT)
-    .const          :   > FLASH
-    .constdata      :   > FLASH
-    .rodata         :   > FLASH
+    .const          :   >> FLASH
+    .constdata      :   >> FLASH
+    .rodata         :   >> FLASH
     .cinit          :   > FLASH
     .pinit          :   > FLASH
     .init_array     :   > FLASH
-    .emb_text       :   > FLASH
+    .emb_text       :   >> FLASH
     .ccfg           :   > FLASH (HIGH)
 
     .data           :   > SRAM

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015-2017, Texas Instruments Incorporated
+ * Copyright (c) 2015-2018, Texas Instruments Incorporated
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -247,6 +247,30 @@ const CryptoCC26XX_Config CryptoCC26XX_config[CC1310_LAUNCHXL_CRYPTOCOUNT] = {
 };
 
 /*
+ *  =============================== TRNG ===============================
+ */
+#include <ti/drivers/TRNG.h>
+#include <ti/drivers/trng/TRNGCC26X0.h>
+
+TRNGCC26X0_Object trngCC26X2Objects[CC1310_LAUNCHXL_TRNGCOUNT];
+
+const TRNGCC26X0_HWAttrs trngCC26X2HWAttrs[CC1310_LAUNCHXL_TRNGCOUNT] = {
+    {
+        .intPriority       = ~0,
+        .swiPriority       = 0,
+    }
+};
+
+const TRNG_Config TRNG_config[CC1310_LAUNCHXL_TRNGCOUNT] = {
+    {
+         .object  = &trngCC26X2Objects[CC1310_LAUNCHXL_TRNG0],
+         .hwAttrs = &trngCC26X2HWAttrs[CC1310_LAUNCHXL_TRNG0]
+    },
+};
+
+const uint_least8_t TRNG_count = CC1310_LAUNCHXL_TRNGCOUNT;
+
+/*
  *  =============================== Display ===============================
  */
 #include <ti/display/Display.h>
@@ -257,9 +281,8 @@ const CryptoCC26XX_Config CryptoCC26XX_config[CC1310_LAUNCHXL_CRYPTOCOUNT] = {
 #define BOARD_DISPLAY_UART_STRBUF_SIZE    128
 #endif
 
-#ifndef BOARD_DISPLAY_SHARP_SIZE
-#define BOARD_DISPLAY_SHARP_SIZE    96
-#endif
+/* This value can be changed to 96 for use with the 430BOOST-SHARP96 BoosterPack. */
+#define BOARD_DISPLAY_SHARP_SIZE    128
 
 DisplayUart_Object     displayUartObject;
 DisplaySharp_Object    displaySharpObject;
@@ -275,12 +298,11 @@ const DisplayUart_HWAttrs displayUartHWAttrs = {
     .strBufLen    = BOARD_DISPLAY_UART_STRBUF_SIZE,
 };
 
-const DisplaySharp_HWAttrs displaySharpHWattrs = {
+const DisplaySharp_HWAttrsV1 displaySharpHWattrs = {
     .spiIndex    = CC1310_LAUNCHXL_SPI0,
-    .csPin       = CC1310_LAUNCHXL_LCD_CS,
-    .extcominPin = CC1310_LAUNCHXL_LCD_EXTCOMIN,
-    .powerPin    = CC1310_LAUNCHXL_LCD_POWER,
-    .enablePin   = CC1310_LAUNCHXL_LCD_ENABLE,
+    .csPin       = CC1310_LAUNCHXL_GPIO_LCD_CS,
+    .powerPin    = CC1310_LAUNCHXL_GPIO_LCD_POWER,
+    .enablePin   = CC1310_LAUNCHXL_GPIO_LCD_ENABLE,
     .pixelWidth  = BOARD_DISPLAY_SHARP_SIZE,
     .pixelHeight = BOARD_DISPLAY_SHARP_SIZE,
     .displayBuf  = sharpDisplayBuf,
@@ -349,15 +371,27 @@ const uint_least8_t Display_count = 0;
  */
 GPIO_PinConfig gpioPinConfigs[] = {
     /* Input pins */
-    //GPIOCC26XX_DIO_13 | GPIO_CFG_IN_PU | GPIO_CFG_IN_INT_RISING,  /* Button 0 */
-    //GPIOCC26XX_DIO_14 | GPIO_CFG_IN_PU | GPIO_CFG_IN_INT_RISING,  /* Button 1 */
+    GPIOCC26XX_DIO_13 | GPIO_DO_NOT_CONFIG,  /* Button 0 */
+    GPIOCC26XX_DIO_14 | GPIO_DO_NOT_CONFIG,  /* Button 1 */
+
+    GPIOCC26XX_DIO_15 | GPIO_DO_NOT_CONFIG,  /* CC1310_LAUNCHXL_SPI_MASTER_READY */
+    GPIOCC26XX_DIO_21 | GPIO_DO_NOT_CONFIG,  /* CC1310_LAUNCHXL_SPI_SLAVE_READY */
 
     /* Output pins */
-    GPIOCC26XX_DIO_07 | GPIO_CFG_OUT_STD | GPIO_CFG_OUT_STR_HIGH | GPIO_CFG_OUT_LOW,  /* Green LED */
-    GPIOCC26XX_DIO_06 | GPIO_CFG_OUT_STD | GPIO_CFG_OUT_STR_HIGH | GPIO_CFG_OUT_LOW,  /* Red LED */
+    GPIOCC26XX_DIO_07 | GPIO_DO_NOT_CONFIG,  /* Green LED */
+    GPIOCC26XX_DIO_06 | GPIO_DO_NOT_CONFIG,  /* Red LED */
 
     /* SPI Flash CSN */
-    GPIOCC26XX_DIO_20 | GPIO_CFG_OUT_STD | GPIO_CFG_OUT_STR_HIGH | GPIO_CFG_OUT_HIGH,
+    GPIOCC26XX_DIO_20 | GPIO_DO_NOT_CONFIG,
+
+    /* SD CS */
+    GPIOCC26XX_DIO_21 | GPIO_DO_NOT_CONFIG,
+
+    /* Sharp Display - GPIO configurations will be done in the Display files */
+    GPIOCC26XX_DIO_24 | GPIO_DO_NOT_CONFIG, /* SPI chip select */
+    GPIOCC26XX_DIO_22 | GPIO_DO_NOT_CONFIG, /* LCD power control */
+    GPIOCC26XX_DIO_23 | GPIO_DO_NOT_CONFIG, /*LCD enable */
+
 };
 
 /*
@@ -370,6 +404,8 @@ GPIO_PinConfig gpioPinConfigs[] = {
 GPIO_CallbackFxn gpioCallbackFunctions[] = {
     NULL,  /* Button 0 */
     NULL,  /* Button 1 */
+    NULL,  /* CC1310_LAUNCHXL_SPI_MASTER_READY */
+    NULL,  /* CC1310_LAUNCHXL_SPI_SLAVE_READY */
 };
 
 const GPIOCC26XX_Config GPIOCC26XX_config = {
@@ -447,10 +483,11 @@ const uint_least8_t I2C_count = CC1310_LAUNCHXL_I2CCOUNT;
 #include <ti/drivers/nvs/NVSSPI25X.h>
 #include <ti/drivers/nvs/NVSCC26XX.h>
 
-#define SECTORSIZE 0x1000
-#define NVS_REGIONS_BASE 0x1B000
+#define NVS_REGIONS_BASE 0x1A000
+#define SECTORSIZE       0x1000
+#define REGIONSIZE       (SECTORSIZE * 4)
 
-static uint8_t verifyBuf[64];
+#ifndef Board_EXCLUDE_NVS_INTERNAL_FLASH
 
 /*
  * Reserve flash sectors for NVS driver use by placing an uninitialized byte
@@ -463,47 +500,64 @@ static uint8_t verifyBuf[64];
  */
 #pragma LOCATION(flashBuf, NVS_REGIONS_BASE);
 #pragma NOINIT(flashBuf);
-static char flashBuf[SECTORSIZE * 4];
+static char flashBuf[REGIONSIZE];
 
 #elif defined(__IAR_SYSTEMS_ICC__)
 
 /*
  * Place uninitialized array at NVS_REGIONS_BASE
  */
-__no_init static char flashBuf[SECTORSIZE * 4] @ NVS_REGIONS_BASE;
+static __no_init char flashBuf[REGIONSIZE] @ NVS_REGIONS_BASE;
 
 #elif defined(__GNUC__)
 
 /*
- * Place the reserved flash buffers in the .nvs section.
- * The nvs section will be placed at address NVS_REGIONS_BASE by
- * the gcc linker cmd file.
+ * Place the flash buffers in the .nvs section created in the gcc linker file.
+ * The .nvs section enforces alignment on a sector boundary but may
+ * be placed anywhere in flash memory.  If desired the .nvs section can be set
+ * to a fixed address by changing the following in the gcc linker file:
+ *
+ * .nvs (FIXED_FLASH_ADDR) (NOLOAD) : AT (FIXED_FLASH_ADDR) {
+ *      *(.nvs)
+ * } > REGION_TEXT
  */
 __attribute__ ((section (".nvs")))
-static char flashBuf[SECTORSIZE * 4];
+static char flashBuf[REGIONSIZE];
 
 #endif
 
-/* Allocate objects for NVS and NVS SPI */
+/* Allocate objects for NVS Internal Regions */
 NVSCC26XX_Object nvsCC26xxObjects[1];
-NVSSPI25X_Object nvsSPI25XObjects[1];
 
-/* Hardware attributes for NVS */
+/* Hardware attributes for NVS Internal Regions */
 const NVSCC26XX_HWAttrs nvsCC26xxHWAttrs[1] = {
     {
         .regionBase = (void *)flashBuf,
-        .regionSize = SECTORSIZE * 4,
+        .regionSize = REGIONSIZE,
     },
 };
 
-/* Hardware attributes for NVS SPI */
+#endif /* Board_EXCLUDE_NVS_INTERNAL_FLASH */
+
+#ifndef Board_EXCLUDE_NVS_EXTERNAL_FLASH
+
+#define SPISECTORSIZE    0x1000
+#define SPIREGIONSIZE    (SPISECTORSIZE * 32)
+#define VERIFYBUFSIZE    64
+
+static uint8_t verifyBuf[VERIFYBUFSIZE];
+
+/* Allocate objects for NVS External Regions */
+NVSSPI25X_Object nvsSPI25XObjects[1];
+
+/* Hardware attributes for NVS External Regions */
 const NVSSPI25X_HWAttrs nvsSPI25XHWAttrs[1] = {
     {
         .regionBaseOffset = 0,
-        .regionSize = SECTORSIZE * 4,
-        .sectorSize = SECTORSIZE,
+        .regionSize = SPIREGIONSIZE,
+        .sectorSize = SPISECTORSIZE,
         .verifyBuf = verifyBuf,
-        .verifyBufSize = 64,
+        .verifyBufSize = VERIFYBUFSIZE,
         .spiHandle = NULL,
         .spiIndex = 0,
         .spiBitRate = 4000000,
@@ -511,18 +565,24 @@ const NVSSPI25X_HWAttrs nvsSPI25XHWAttrs[1] = {
     },
 };
 
+#endif /* Board_EXCLUDE_NVS_EXTERNAL_FLASH */
+
 /* NVS Region index 0 and 1 refer to NVS and NVS SPI respectively */
 const NVS_Config NVS_config[CC1310_LAUNCHXL_NVSCOUNT] = {
+#ifndef Board_EXCLUDE_NVS_INTERNAL_FLASH
     {
         .fxnTablePtr = &NVSCC26XX_fxnTable,
         .object = &nvsCC26xxObjects[0],
         .hwAttrs = &nvsCC26xxHWAttrs[0],
     },
+#endif
+#ifndef Board_EXCLUDE_NVS_EXTERNAL_FLASH
     {
         .fxnTablePtr = &NVSSPI25X_fxnTable,
         .object = &nvsSPI25XObjects[0],
         .hwAttrs = &nvsSPI25XHWAttrs[0],
     },
+#endif
 };
 
 const uint_least8_t NVS_count = CC1310_LAUNCHXL_NVSCOUNT;
@@ -607,12 +667,38 @@ const uint_least8_t PWM_count = CC1310_LAUNCHXL_PWMCOUNT;
  */
 #include <ti/drivers/rf/RF.h>
 
-const RFCC26XX_HWAttrs RFCC26XX_hwAttrs = {
-    .hwiCpe0Priority = ~0,
-    .hwiHwPriority   = ~0,
-    .swiCpe0Priority =  0,
-    .swiHwPriority   =  0,
+const RFCC26XX_HWAttrsV2 RFCC26XX_hwAttrs = {
+    .hwiPriority        = ~0,       /* Lowest HWI priority */
+    .swiPriority        = 0,        /* Lowest SWI priority */
+    .xoscHfAlwaysNeeded = true,     /* Keep XOSC dependency while in stanby */
+    .globalCallback     = NULL,     /* No board specific callback */
+    .globalEventMask    = 0         /* No events subscribed to */
 };
+
+/*
+ *  =============================== SD ===============================
+ */
+#include <ti/drivers/SD.h>
+#include <ti/drivers/sd/SDSPI.h>
+
+SDSPI_Object sdspiObjects[CC1310_LAUNCHXL_SDCOUNT];
+
+const SDSPI_HWAttrs sdspiHWAttrs[CC1310_LAUNCHXL_SDCOUNT] = {
+    {
+        .spiIndex = CC1310_LAUNCHXL_SPI0,
+        .spiCsGpioIndex = CC1310_LAUNCHXL_SDSPI_CS
+    }
+};
+
+const SD_Config SD_config[CC1310_LAUNCHXL_SDCOUNT] = {
+    {
+        .fxnTablePtr = &SDSPI_fxnTable,
+        .object = &sdspiObjects[CC1310_LAUNCHXL_SDSPI0],
+        .hwAttrs = &sdspiHWAttrs[CC1310_LAUNCHXL_SDSPI0]
+    },
+};
+
+const uint_least8_t SD_count = CC1310_LAUNCHXL_SDCOUNT;
 
 /*
  *  =============================== SPI DMA ===============================
@@ -622,6 +708,11 @@ const RFCC26XX_HWAttrs RFCC26XX_hwAttrs = {
 
 SPICC26XXDMA_Object spiCC26XXDMAObjects[CC1310_LAUNCHXL_SPICOUNT];
 
+/*
+ * NOTE: The SPI instances below can be used by the SD driver to communicate
+ * with a SD card via SPI.  The 'defaultTxBufValue' fields below are set to 0xFF
+ * to satisfy the SDSPI driver requirement.
+ */
 const SPICC26XXDMA_HWAttrsV1 spiCC26XXDMAHWAttrs[CC1310_LAUNCHXL_SPICOUNT] = {
     {
         .baseAddr           = SSI0_BASE,
@@ -629,13 +720,14 @@ const SPICC26XXDMA_HWAttrsV1 spiCC26XXDMAHWAttrs[CC1310_LAUNCHXL_SPICOUNT] = {
         .intPriority        = ~0,
         .swiPriority        = 0,
         .powerMngrId        = PowerCC26XX_PERIPH_SSI0,
-        .defaultTxBufValue  = 0,
+        .defaultTxBufValue  = 0xFF,
         .rxChannelBitMask   = 1<<UDMA_CHAN_SSI0_RX,
         .txChannelBitMask   = 1<<UDMA_CHAN_SSI0_TX,
         .mosiPin            = CC1310_LAUNCHXL_SPI0_MOSI,
         .misoPin            = CC1310_LAUNCHXL_SPI0_MISO,
         .clkPin             = CC1310_LAUNCHXL_SPI0_CLK,
-        .csnPin             = CC1310_LAUNCHXL_SPI0_CSN
+        .csnPin             = CC1310_LAUNCHXL_SPI0_CSN,
+        .minDmaTransferSize = 10
     },
     {
         .baseAddr           = SSI1_BASE,
@@ -643,13 +735,14 @@ const SPICC26XXDMA_HWAttrsV1 spiCC26XXDMAHWAttrs[CC1310_LAUNCHXL_SPICOUNT] = {
         .intPriority        = ~0,
         .swiPriority        = 0,
         .powerMngrId        = PowerCC26XX_PERIPH_SSI1,
-        .defaultTxBufValue  = 0,
+        .defaultTxBufValue  = 0xFF,
         .rxChannelBitMask   = 1<<UDMA_CHAN_SSI1_RX,
         .txChannelBitMask   = 1<<UDMA_CHAN_SSI1_TX,
         .mosiPin            = CC1310_LAUNCHXL_SPI1_MOSI,
         .misoPin            = CC1310_LAUNCHXL_SPI1_MISO,
         .clkPin             = CC1310_LAUNCHXL_SPI1_CLK,
-        .csnPin             = CC1310_LAUNCHXL_SPI1_CSN
+        .csnPin             = CC1310_LAUNCHXL_SPI1_CSN,
+        .minDmaTransferSize = 10
     }
 };
 
@@ -676,6 +769,8 @@ const uint_least8_t SPI_count = CC1310_LAUNCHXL_SPICOUNT;
 
 UARTCC26XX_Object uartCC26XXObjects[CC1310_LAUNCHXL_UARTCOUNT];
 
+uint8_t uartCC26XXRingBuffer[CC1310_LAUNCHXL_UARTCOUNT][32];
+
 const UARTCC26XX_HWAttrsV2 uartCC26XXHWAttrs[CC1310_LAUNCHXL_UARTCOUNT] = {
     {
         .baseAddr       = UART0_BASE,
@@ -686,7 +781,12 @@ const UARTCC26XX_HWAttrsV2 uartCC26XXHWAttrs[CC1310_LAUNCHXL_UARTCOUNT] = {
         .txPin          = CC1310_LAUNCHXL_UART_TX,
         .rxPin          = CC1310_LAUNCHXL_UART_RX,
         .ctsPin         = PIN_UNASSIGNED,
-        .rtsPin         = PIN_UNASSIGNED
+        .rtsPin         = PIN_UNASSIGNED,
+        .ringBufPtr     = uartCC26XXRingBuffer[CC1310_LAUNCHXL_UART0],
+        .ringBufSize    = sizeof(uartCC26XXRingBuffer[CC1310_LAUNCHXL_UART0]),
+        .txIntFifoThr   = UARTCC26XX_FIFO_THRESHOLD_1_8,
+        .rxIntFifoThr   = UARTCC26XX_FIFO_THRESHOLD_4_8,
+        .errorFxn       = NULL
     }
 };
 
@@ -749,6 +849,12 @@ const Watchdog_Config Watchdog_config[CC1310_LAUNCHXL_WATCHDOGCOUNT] = {
 const uint_least8_t Watchdog_count = CC1310_LAUNCHXL_WATCHDOGCOUNT;
 
 /*
+ *  Board-specific initialization function to disable external flash.
+ *  This function is defined in the file CC1310_LAUNCHXL_fxns.c
+ */
+extern void Board_initHook(void);
+
+/*
  *  ======== CC1310_LAUNCHXL_initGeneral ========
  */
 void CC1310_LAUNCHXL_initGeneral(void)
@@ -759,43 +865,7 @@ void CC1310_LAUNCHXL_initGeneral(void)
         /* Error with PIN_init */
         while (1);
     }
-}
 
-/*
- *  ======== CC1310_LAUNCHXL_sendExtFlashByte ========
- */
-void CC1310_LAUNCHXL_sendExtFlashByte(PIN_Handle pinHandle, uint8_t byte)
-{
-    PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_SPI_FLASH_CS, 0);
-    uint8_t i;
-    for(i = 0; i < 8; i++){
-        PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_SPI0_CLK, 0);
-        PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_SPI0_MOSI, (byte >> (7 - i)) & 0x01);
-        PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_SPI0_CLK, 1);
-    }
-    PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_SPI_FLASH_CS, 1);
-}
-
-/*
- *  ======== CC1310_LAUNCHXL_shutDownExtFlash ========
- */
-void CC1310_LAUNCHXL_shutDownExtFlash(void)
-{
-    PIN_Config extFlashPinTable[] = {
-        CC1310_LAUNCHXL_SPI_FLASH_CS | PIN_GPIO_OUTPUT_EN | PIN_GPIO_HIGH | PIN_PUSHPULL | PIN_INPUT_DIS | PIN_DRVSTR_MED,
-        CC1310_LAUNCHXL_SPI0_CLK | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_INPUT_DIS | PIN_DRVSTR_MED,
-        CC1310_LAUNCHXL_SPI0_MOSI | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_INPUT_DIS | PIN_DRVSTR_MED,
-        CC1310_LAUNCHXL_SPI0_MISO | PIN_INPUT_EN | PIN_PULLDOWN,
-        PIN_TERMINATE
-    };
-    PIN_State extFlashPinState;
-    PIN_Handle extFlashPinHandle = PIN_open(&extFlashPinState, extFlashPinTable);
-
-    uint8_t extFlashStartup = 0xAB;
-    uint8_t extFlashShutdown = 0xB9;
-
-    CC1310_LAUNCHXL_sendExtFlashByte(extFlashPinHandle, extFlashStartup);
-    CC1310_LAUNCHXL_sendExtFlashByte(extFlashPinHandle, extFlashShutdown);
-
-    PIN_close(extFlashPinHandle);
+    /* Perform board-specific initialization */
+    Board_initHook();
 }
