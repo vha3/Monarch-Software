@@ -9,6 +9,7 @@ GEN_CMDS__FLAG := -l"configPkg/linker.cmd"
 
 ORDERED_OBJS += \
 "./CC1310_LAUNCHXL.obj" \
+"./CC1310_LAUNCHXL_fxns.obj" \
 "./ccfg.obj" \
 "./main.obj" \
 "./easylink/EasyLink.obj" \
@@ -16,14 +17,13 @@ ORDERED_OBJS += \
 "./smartrf_settings/smartrf_settings_predefined.obj" \
 "../CC1310_LAUNCHXL_TIRTOS.cmd" \
 $(GEN_CMDS__FLAG) \
--l"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/display/lib/display.aem3" \
--l"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/mw/lcd/lib/lcd.aem3" \
--l"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/grlib/lib/grlib.aem3" \
--l"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/rf/lib/rf_multiMode_cc13x0.aem3" \
--l"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/lib/drivers_cc13x0.aem3" \
--l"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/pdm/lib/pdm_cc13x0.aem3" \
--l"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/dpl/lib/dpl_cc13x0.aem3" \
--l"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/bin/ccs/driverlib.lib" \
+-l"ti/display/lib/display.aem3" \
+-l"ti/grlib/lib/ccs/m3/grlib.a" \
+-l"third_party/spiffs/lib/ccs/m3/spiffs_cc26xx.a" \
+-l"ti/drivers/rf/lib/rf_multiMode_cc13x0.aem3" \
+-l"ti/drivers/lib/drivers_cc13x0.aem3" \
+-l"ti/dpl/lib/dpl_cc13x0.aem3" \
+-l"ti/devices/cc13x0/driverlib/bin/ccs/driverlib.lib" \
 -llibc.a \
 
 -include ../makefile.init
@@ -135,42 +135,42 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXE_OUTPUTS += \
-Sprite.out \
+hello_CC1310_LAUNCHXL_tirtos_ccs.out \
 
 EXE_OUTPUTS__QUOTED += \
-"Sprite.out" \
+"hello_CC1310_LAUNCHXL_tirtos_ccs.out" \
 
 BIN_OUTPUTS += \
-Sprite.hex \
+hello_CC1310_LAUNCHXL_tirtos_ccs.hex \
 
 BIN_OUTPUTS__QUOTED += \
-"Sprite.hex" \
+"hello_CC1310_LAUNCHXL_tirtos_ccs.hex" \
 
 
 # All Target
 all: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
-	@$(MAKE) --no-print-directory -Onone "Sprite.out"
+	@$(MAKE) --no-print-directory -Onone "hello_CC1310_LAUNCHXL_tirtos_ccs.out"
 
 # Tool invocations
-Sprite.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
+hello_CC1310_LAUNCHXL_tirtos_ccs.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: ARM Linker'
-	"/Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/bin/armcl" -mv7M3 --code_state=16 --float_support=vfplib -me --define=DeviceFamily_CC13X0 -g --diag_warning=225 --diag_warning=255 --diag_wrap=off --display_error_number --gen_func_subsections=on -z -m"Sprite.map" -i"/Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/lib" -i"/Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="Sprite_linkInfo.xml" --rom_model -o "Sprite.out" $(ORDERED_OBJS)
+	"/Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/bin/armcl" -mv7M3 --code_state=16 --float_support=vfplib -me --define=DeviceFamily_CC13X0 -g --diag_warning=225 --diag_warning=255 --diag_wrap=off --display_error_number --gen_func_subsections=on -z -m"hello_CC1310_LAUNCHXL_tirtos_ccs.map" -i"/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source" -i"/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages" -i"/Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/lib" --diag_wrap=off --display_error_number --warn_sections --xml_link_info="hello_CC1310_LAUNCHXL_tirtos_ccs_linkInfo.xml" --rom_model -o "hello_CC1310_LAUNCHXL_tirtos_ccs.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: "$@"'
 	@echo ' '
 
-Sprite.hex: $(EXE_OUTPUTS)
+hello_CC1310_LAUNCHXL_tirtos_ccs.hex: $(EXE_OUTPUTS)
 	@echo 'Building files: $(strip $(EXE_OUTPUTS__QUOTED))'
 	@echo 'Invoking: ARM Hex Utility'
-	"/Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/bin/armhex"  -o "Sprite.hex" $(EXE_OUTPUTS__QUOTED)
+	"/Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/bin/armhex"  -o "hello_CC1310_LAUNCHXL_tirtos_ccs.hex" $(EXE_OUTPUTS__QUOTED)
 	@echo 'Finished building: $(strip $(EXE_OUTPUTS__QUOTED))'
 	@echo ' '
 
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(GEN_FILES__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "CC1310_LAUNCHXL.obj" "ccfg.obj" "main.obj" "easylink/EasyLink.obj" "smartrf_settings/smartrf_settings.obj" "smartrf_settings/smartrf_settings_predefined.obj" 
-	-$(RM) "CC1310_LAUNCHXL.d" "ccfg.d" "main.d" "easylink/EasyLink.d" "smartrf_settings/smartrf_settings.d" "smartrf_settings/smartrf_settings_predefined.d" 
+	-$(RM) "CC1310_LAUNCHXL.obj" "CC1310_LAUNCHXL_fxns.obj" "ccfg.obj" "main.obj" "easylink/EasyLink.obj" "smartrf_settings/smartrf_settings.obj" "smartrf_settings/smartrf_settings_predefined.obj" 
+	-$(RM) "CC1310_LAUNCHXL.d" "CC1310_LAUNCHXL_fxns.d" "ccfg.d" "main.d" "easylink/EasyLink.d" "smartrf_settings/smartrf_settings.d" "smartrf_settings/smartrf_settings_predefined.d" 
 	-$(RMDIR) $(GEN_MISC_DIRS__QUOTED)
 	-@echo 'Finished clean'
 	-@echo ' '

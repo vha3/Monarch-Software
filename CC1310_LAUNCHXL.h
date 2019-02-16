@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015-2017, Texas Instruments Incorporated
+ * Copyright (c) 2015-2018, Texas Instruments Incorporated
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -95,14 +95,6 @@ extern const PIN_Config BoardGpioInitTable[];
 #define CC1310_LAUNCHXL_I2C0_SCL0             IOID_4
 #define CC1310_LAUNCHXL_I2C0_SDA0             IOID_5
 
-/* LCD (430BOOST - Sharp96 Rev 1.1) */
-#define CC1310_LAUNCHXL_LCD_CS                IOID_24  /* SPI chip select */
-#define CC1310_LAUNCHXL_LCD_EXTCOMIN          IOID_12  /* External COM inversion */
-#define CC1310_LAUNCHXL_LCD_ENABLE            IOID_22  /* LCD enable */
-#define CC1310_LAUNCHXL_LCD_POWER             IOID_23  /* LCD power control */
-#define CC1310_LAUNCHXL_LCD_CS_ON             1
-#define CC1310_LAUNCHXL_LCD_CS_OFF            0
-
 /* LEDs */
 #define CC1310_LAUNCHXL_PIN_LED_ON            1
 #define CC1310_LAUNCHXL_PIN_LED_OFF           0
@@ -152,6 +144,14 @@ void CC1310_LAUNCHXL_initGeneral(void);
  *
  */
 void CC1310_LAUNCHXL_shutDownExtFlash(void);
+
+/*!
+ *  @brief  Wake up the external flash present on the board files
+ *
+ *  This function toggles the chip select for the amount of time needed
+ *  to wake the chip up.
+ */
+void CC1310_LAUNCHXL_wakeUpExtFlash(void);
 
 /*!
  *  @def    CC1310_LAUNCHXL_ADCBufName
@@ -214,16 +214,31 @@ typedef enum CC1310_LAUNCHXL_CryptoName {
 } CC1310_LAUNCHXL_CryptoName;
 
 /*!
+ *  @def    CC1310_LAUNCHXL_TRNGName
+ *  @brief  Enum of TRNG names
+ */
+typedef enum CC1310_LAUNCHXL_TRNGName {
+    CC1310_LAUNCHXL_TRNG0 = 0,
+
+    CC1310_LAUNCHXL_TRNGCOUNT
+} CC1310_LAUNCHXL_TRNGName;
+
+/*!
  *  @def    CC1310_LAUNCHXL_GPIOName
  *  @brief  Enum of GPIO names
  */
 typedef enum CC1310_LAUNCHXL_GPIOName {
     CC1310_LAUNCHXL_GPIO_S1 = 0,
     CC1310_LAUNCHXL_GPIO_S2,
+    CC1310_LAUNCHXL_SPI_MASTER_READY,
+    CC1310_LAUNCHXL_SPI_SLAVE_READY,
     CC1310_LAUNCHXL_GPIO_LED_GREEN,
     CC1310_LAUNCHXL_GPIO_LED_RED,
     CC1310_LAUNCHXL_GPIO_SPI_FLASH_CS,
-
+    CC1310_LAUNCHXL_SDSPI_CS,
+    CC1310_LAUNCHXL_GPIO_LCD_CS,
+    CC1310_LAUNCHXL_GPIO_LCD_POWER,
+    CC1310_LAUNCHXL_GPIO_LCD_ENABLE,
     CC1310_LAUNCHXL_GPIOCOUNT
 } CC1310_LAUNCHXL_GPIOName;
 
@@ -272,8 +287,12 @@ typedef enum CC1310_LAUNCHXL_I2CName {
  *  @brief  Enum of NVS names
  */
 typedef enum CC1310_LAUNCHXL_NVSName {
+#ifndef Board_EXCLUDE_NVS_INTERNAL_FLASH
     CC1310_LAUNCHXL_NVSCC26XX0 = 0,
+#endif
+#ifndef Board_EXCLUDE_NVS_EXTERNAL_FLASH
     CC1310_LAUNCHXL_NVSSPI25X0,
+#endif
 
     CC1310_LAUNCHXL_NVSCOUNT
 } CC1310_LAUNCHXL_NVSName;
@@ -294,6 +313,16 @@ typedef enum CC1310_LAUNCHXL_PWMName {
 
     CC1310_LAUNCHXL_PWMCOUNT
 } CC1310_LAUNCHXL_PWMName;
+
+/*!
+ *  @def    CC1310_LAUNCHXL_SDName
+ *  @brief  Enum of SD names
+ */
+typedef enum CC1310_LAUNCHXL_SDName {
+    CC1310_LAUNCHXL_SDSPI0 = 0,
+
+    CC1310_LAUNCHXL_SDCOUNT
+} CC1310_LAUNCHXL_SDName;
 
 /*!
  *  @def    CC1310_LAUNCHXL_SPIName

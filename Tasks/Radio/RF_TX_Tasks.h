@@ -27,11 +27,22 @@ uint8_t message[30] = {0x20, 0x53, 0x50, 0x41, 0x43, 0x45, 0x20, 0x53,
 
 Void txDataTaskFunc(UArg arg0, UArg arg1)
 {
-//	PIN_setOutputValue(pinHandle, IOID_15,1);
+	EasyLink_Params easyLink_params;
+	EasyLink_Params_init(&easyLink_params);
+
+	easyLink_params.ui32ModType = EasyLink_Phy_50kbps2gfsk;
+
+	/* Initialize EasyLink */
+	if(EasyLink_init(&easyLink_params) != EasyLink_Status_Success)
+	{
+		System_abort("EasyLink_init failed");
+	}
+
+
 	//EasyLink_init(EasyLink_Phy_Custom);
-	EasyLink_init(EasyLink_Phy_50kbps2gfsk);
+//	EasyLink_init(EasyLink_Phy_50kbps2gfsk);
 	//EasyLink_init(EasyLink_Phy_5kbpsSlLr);
-	EasyLink_setRfPwr(14);
+	EasyLink_setRfPower(14);
 	EasyLink_enableRxAddrFilter((uint8_t*)&AddressList, 1, 2);
 	EasyLink_setFrequency(915000000);
 

@@ -233,17 +233,17 @@
     <logger>null</logger>
     <diagsMask>0000110000000000</diagsMask>
   </modMap>
-  <modMap key="ti.uia.loggers.LoggerStopMode">
+  <modMap key="ti.sysbios.gates.GateHwi">
     <id>54</id>
     <logger>null</logger>
     <diagsMask>0000110000000000</diagsMask>
   </modMap>
-  <modMap key="ti.sysbios.gates.GateHwi">
+  <modMap key="ti.sysbios.gates.GateMutex">
     <id>55</id>
     <logger>null</logger>
     <diagsMask>0000110000000000</diagsMask>
   </modMap>
-  <modMap key="ti.sysbios.gates.GateMutex">
+  <modMap key="ti.uia.loggers.LoggerStopMode">
     <id>56</id>
     <logger>null</logger>
     <diagsMask>0000110000000000</diagsMask>

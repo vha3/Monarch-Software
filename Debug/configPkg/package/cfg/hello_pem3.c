@@ -956,7 +956,7 @@ const ti_sysbios_gates_GateHwi_Fxns__ ti_sysbios_gates_GateHwi_Module__FXNS__C =
         ti_sysbios_gates_GateHwi_Object__create__S,
         ti_sysbios_gates_GateHwi_Object__delete__S,
         ti_sysbios_gates_GateHwi_Handle__label__S,
-        0x37, /* __mid */
+        0x36, /* __mid */
     } /* __sfxns */
 };
 
@@ -977,7 +977,7 @@ const ti_sysbios_gates_GateMutex_Fxns__ ti_sysbios_gates_GateMutex_Module__FXNS_
         ti_sysbios_gates_GateMutex_Object__create__S,
         ti_sysbios_gates_GateMutex_Object__delete__S,
         ti_sysbios_gates_GateMutex_Handle__label__S,
-        0x38, /* __mid */
+        0x37, /* __mid */
     } /* __sfxns */
 };
 
@@ -1071,7 +1071,7 @@ const ti_uia_loggers_LoggerStopMode_Fxns__ ti_uia_loggers_LoggerStopMode_Module_
         ti_uia_loggers_LoggerStopMode_Object__create__S,
         ti_uia_loggers_LoggerStopMode_Object__delete__S,
         ti_uia_loggers_LoggerStopMode_Handle__label__S,
-        0x36, /* __mid */
+        0x38, /* __mid */
     } /* __sfxns */
 };
 
@@ -1905,7 +1905,7 @@ __FAR__ const xdc_SizeT ti_sysbios_knl_Task_Module_State_terminatedQ__O = offset
  *  Define absolute path prefix for this executable's
  *  configuration generated files.
  */
-xdc__META(__ASM__, "@(#)__ASM__ = /Users/hunteradams/Documents/MSP430/workspace/Sprite/Debug/configPkg/package/cfg/hello_pem3");
+xdc__META(__ASM__, "@(#)__ASM__ = /Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/Debug/configPkg/package/cfg/hello_pem3");
 
 /*
  *  ======== __ISA__ ========
@@ -2563,7 +2563,8 @@ Void ti_sysbios_family_arm_m3_Hwi_initIsrStackSize()
 {
     #pragma section = "CSTACK"
     ti_sysbios_family_arm_m3_Hwi_Module__state__V.isrStackBase = (Void *)__section_begin("CSTACK");
-    ti_sysbios_family_arm_m3_Hwi_Module__state__V.isrStackSize = (Void *)__section_size("CSTACK");
+    size_t size = (uint8_t *)__section_end("CSTACK") - (uint8_t *)__section_begin("CSTACK");
+    ti_sysbios_family_arm_m3_Hwi_Module__state__V.isrStackSize = (Void *)size;
 }
 #endif
 
@@ -2701,6 +2702,241 @@ Void ti_sysbios_rom_cortexm_cc13xx_CC13xx_checkRevision__E()
 	ti_sysbios_rom_cortexm_cc13xx_CC13xx_badRomRevision__E();
     }
 }
+
+
+/*
+ * ======== ti.sysbios.rts.MemAlloc TEMPLATE ========
+ */
+
+
+
+#if defined(__ti__)
+
+#pragma FUNC_EXT_CALLED(malloc);
+#pragma FUNC_EXT_CALLED(memalign);
+#pragma FUNC_EXT_CALLED(free);
+#pragma FUNC_EXT_CALLED(calloc);
+#pragma FUNC_EXT_CALLED(realloc);
+
+#define ATTRIBUTE
+
+#elif defined(__IAR_SYSTEMS_ICC__)
+
+#define ATTRIBUTE
+
+#else
+
+#define ATTRIBUTE __attribute__ ((used))
+
+#endif
+
+
+#include <xdc/std.h>
+
+#include <xdc/runtime/Memory.h>
+#include <xdc/runtime/Error.h>
+
+#include <string.h>
+
+#if defined(__GNUC__) && !defined(__ti__)
+
+#include <reent.h>
+
+#endif
+
+/*
+ * Header is a union to make sure that the size is a power of 2.
+ *
+ * On the MSP430 small model (MSP430X), size_t is 2 bytes, which makes
+ * the size of this struct 6 bytes.
+ */
+typedef union Header {
+    struct {
+        Ptr   actualBuf;
+        SizeT size;
+    } header;
+    UArg pad[2];	/* 4 words on 28L, 8 bytes on most others */
+} Header;
+
+/*
+ *  ======== ti_sysbios_rts_gnu_MemAlloc_alloc ========
+ */
+static Void *ti_sysbios_rts_gnu_MemAlloc_alloc(SizeT size)
+{
+    Header *packet;
+    xdc_runtime_Error_Block eb;
+
+    xdc_runtime_Error_init(&eb);
+
+    if (size == 0) {
+        return (NULL);
+    }
+
+    packet = (Header *)xdc_runtime_Memory_alloc(NULL,
+        (SizeT)(size + sizeof(Header)), 0, &eb);
+
+    if (packet == NULL) {
+        return (NULL);
+    }
+
+    packet->header.actualBuf = (Ptr)packet;
+    packet->header.size = size + sizeof(Header);
+
+    return (packet + 1);
+}
+
+/*
+ *  ======== malloc ========
+ */
+Void ATTRIBUTE *malloc(SizeT size)
+{
+    return (ti_sysbios_rts_gnu_MemAlloc_alloc(size));
+}
+
+/*
+ *  ======== memalign ========
+ *  mirrors the memalign() function from the TI run-time library
+ */
+Void ATTRIBUTE *memalign(SizeT alignment, SizeT size)
+{
+    Header                      *packet;
+    Void                        *tmp;
+    xdc_runtime_Error_Block     eb;
+
+    xdc_runtime_Error_init(&eb);
+
+    if (alignment < sizeof(Header)) {
+        alignment = sizeof(Header);
+    }
+
+    /*
+     * return NULL if size is 0, or alignment is not a power of 2
+     */
+    if (size == 0 || (alignment & (alignment - 1))) {
+        return (NULL);
+    }
+
+    /*
+     * Allocate 'align + size' so that we have room for the 'packet'
+     * and can return an aligned buffer.
+     */
+    tmp = xdc_runtime_Memory_alloc(NULL, alignment + size, alignment, &eb);
+
+    if (tmp == NULL) {
+        return (NULL);
+    }
+
+    packet = (Header *)((char *)tmp + alignment - sizeof(Header));
+
+    packet->header.actualBuf = tmp;
+    packet->header.size = size + sizeof(Header);
+
+    return (packet + 1);
+}
+
+/*
+ *  ======== calloc ========
+ */
+Void ATTRIBUTE *calloc(SizeT nmemb, SizeT size)
+{
+    SizeT       nbytes;
+    Ptr         retval;
+
+    nbytes = nmemb * size;
+
+    /* return NULL if there's an overflow */
+    if (nmemb && size != (nbytes / nmemb)) {
+        return (NULL);
+    }
+
+    retval = ti_sysbios_rts_gnu_MemAlloc_alloc(nbytes);
+    if (retval != NULL) {
+        (Void)memset(retval, (Int)'\0', nbytes);
+    }
+
+    return (retval);
+}
+
+/*
+ *  ======== free ========
+ */
+Void ATTRIBUTE free(Void *ptr)
+{
+    Header      *packet;
+
+    if (ptr != NULL) {
+        packet = ((Header *)ptr) - 1;
+
+        xdc_runtime_Memory_free(NULL, (Ptr)packet->header.actualBuf,
+            (packet->header.size +
+            ((char*)packet - (char*)packet->header.actualBuf)));
+    }
+}
+
+/*
+ *  ======== realloc ========
+ */
+Void ATTRIBUTE *realloc(Void *ptr, SizeT size)
+{
+    Ptr         retval;
+    Header      *packet;
+    SizeT       oldSize;
+
+    if (ptr == NULL) {
+        retval = malloc(size);
+    }
+    else if (size == 0) {
+        free(ptr);
+        retval = NULL;
+    }
+    else {
+        packet = (Header *)ptr - 1;
+        retval = malloc(size);
+        if (retval != NULL) {
+            oldSize = packet->header.size - sizeof(Header);
+            (Void)memcpy(retval, ptr, (size < oldSize) ? size : oldSize);
+            free(ptr);
+        }
+    }
+
+    return (retval);
+}
+
+#if defined(__GNUC__) && !defined(__ti__)
+
+/*
+ *  ======== _malloc_r ========
+ */
+Void ATTRIBUTE *_malloc_r(struct _reent *rptr, SizeT size)
+{
+    return malloc(size);
+}
+
+/*
+ *  ======== _calloc_r ========
+ */
+Void ATTRIBUTE *_calloc_r(struct _reent *rptr, SizeT nmemb, SizeT size)
+{
+    return calloc(nmemb, size);
+}
+
+/*
+ *  ======== _free_r ========
+ */
+Void ATTRIBUTE _free_r(struct _reent *rptr, Void *ptr)
+{
+    free(ptr);
+}
+
+/*
+ *  ======== _realloc_r ========
+ */
+Void ATTRIBUTE *_realloc_r(struct _reent *rptr, Void *ptr, SizeT size)
+{
+    return realloc(ptr, size);
+}
+
+#endif
 
 
 /*
@@ -3143,241 +3379,6 @@ Void ti_uia_loggers_LoggerStopMode_writeMemoryRange__E(ti_uia_loggers_LoggerStop
     }
     obj->write = writePtr;
 }
-
-/*
- * ======== ti.sysbios.rts.MemAlloc TEMPLATE ========
- */
-
-
-
-#if defined(__ti__)
-
-#pragma FUNC_EXT_CALLED(malloc);
-#pragma FUNC_EXT_CALLED(memalign);
-#pragma FUNC_EXT_CALLED(free);
-#pragma FUNC_EXT_CALLED(calloc);
-#pragma FUNC_EXT_CALLED(realloc);
-
-#define ATTRIBUTE
-
-#elif defined(__IAR_SYSTEMS_ICC__)
-
-#define ATTRIBUTE
-
-#else
-
-#define ATTRIBUTE __attribute__ ((used))
-
-#endif
-
-
-#include <xdc/std.h>
-
-#include <xdc/runtime/Memory.h>
-#include <xdc/runtime/Error.h>
-
-#include <string.h>
-
-#if defined(__GNUC__) && !defined(__ti__)
-
-#include <reent.h>
-
-#endif
-
-/*
- * Header is a union to make sure that the size is a power of 2.
- *
- * On the MSP430 small model (MSP430X), size_t is 2 bytes, which makes
- * the size of this struct 6 bytes.
- */
-typedef union Header {
-    struct {
-        Ptr   actualBuf;
-        SizeT size;
-    } header;
-    UArg pad[2];	/* 4 words on 28L, 8 bytes on most others */
-} Header;
-
-/*
- *  ======== ti_sysbios_rts_gnu_MemAlloc_alloc ========
- */
-static Void *ti_sysbios_rts_gnu_MemAlloc_alloc(SizeT size)
-{
-    Header *packet;
-    xdc_runtime_Error_Block eb;
-
-    xdc_runtime_Error_init(&eb);
-
-    if (size == 0) {
-        return (NULL);
-    }
-
-    packet = (Header *)xdc_runtime_Memory_alloc(NULL,
-        (SizeT)(size + sizeof(Header)), 0, &eb);
-
-    if (packet == NULL) {
-        return (NULL);
-    }
-
-    packet->header.actualBuf = (Ptr)packet;
-    packet->header.size = size + sizeof(Header);
-
-    return (packet + 1);
-}
-
-/*
- *  ======== malloc ========
- */
-Void ATTRIBUTE *malloc(SizeT size)
-{
-    return (ti_sysbios_rts_gnu_MemAlloc_alloc(size));
-}
-
-/*
- *  ======== memalign ========
- *  mirrors the memalign() function from the TI run-time library
- */
-Void ATTRIBUTE *memalign(SizeT alignment, SizeT size)
-{
-    Header                      *packet;
-    Void                        *tmp;
-    xdc_runtime_Error_Block     eb;
-
-    xdc_runtime_Error_init(&eb);
-
-    if (alignment < sizeof(Header)) {
-        alignment = sizeof(Header);
-    }
-
-    /*
-     * return NULL if size is 0, or alignment is not a power of 2
-     */
-    if (size == 0 || (alignment & (alignment - 1))) {
-        return (NULL);
-    }
-
-    /*
-     * Allocate 'align + size' so that we have room for the 'packet'
-     * and can return an aligned buffer.
-     */
-    tmp = xdc_runtime_Memory_alloc(NULL, alignment + size, alignment, &eb);
-
-    if (tmp == NULL) {
-        return (NULL);
-    }
-
-    packet = (Header *)((char *)tmp + alignment - sizeof(Header));
-
-    packet->header.actualBuf = tmp;
-    packet->header.size = size + sizeof(Header);
-
-    return (packet + 1);
-}
-
-/*
- *  ======== calloc ========
- */
-Void ATTRIBUTE *calloc(SizeT nmemb, SizeT size)
-{
-    SizeT       nbytes;
-    Ptr         retval;
-
-    nbytes = nmemb * size;
-
-    /* return NULL if there's an overflow */
-    if (nmemb && size != (nbytes / nmemb)) {
-        return (NULL);
-    }
-
-    retval = ti_sysbios_rts_gnu_MemAlloc_alloc(nbytes);
-    if (retval != NULL) {
-        (Void)memset(retval, (Int)'\0', nbytes);
-    }
-
-    return (retval);
-}
-
-/*
- *  ======== free ========
- */
-Void ATTRIBUTE free(Void *ptr)
-{
-    Header      *packet;
-
-    if (ptr != NULL) {
-        packet = ((Header *)ptr) - 1;
-
-        xdc_runtime_Memory_free(NULL, (Ptr)packet->header.actualBuf,
-            (packet->header.size +
-            ((char*)packet - (char*)packet->header.actualBuf)));
-    }
-}
-
-/*
- *  ======== realloc ========
- */
-Void ATTRIBUTE *realloc(Void *ptr, SizeT size)
-{
-    Ptr         retval;
-    Header      *packet;
-    SizeT       oldSize;
-
-    if (ptr == NULL) {
-        retval = malloc(size);
-    }
-    else if (size == 0) {
-        free(ptr);
-        retval = NULL;
-    }
-    else {
-        packet = (Header *)ptr - 1;
-        retval = malloc(size);
-        if (retval != NULL) {
-            oldSize = packet->header.size - sizeof(Header);
-            (Void)memcpy(retval, ptr, (size < oldSize) ? size : oldSize);
-            free(ptr);
-        }
-    }
-
-    return (retval);
-}
-
-#if defined(__GNUC__) && !defined(__ti__)
-
-/*
- *  ======== _malloc_r ========
- */
-Void ATTRIBUTE *_malloc_r(struct _reent *rptr, SizeT size)
-{
-    return malloc(size);
-}
-
-/*
- *  ======== _calloc_r ========
- */
-Void ATTRIBUTE *_calloc_r(struct _reent *rptr, SizeT nmemb, SizeT size)
-{
-    return calloc(nmemb, size);
-}
-
-/*
- *  ======== _free_r ========
- */
-Void ATTRIBUTE _free_r(struct _reent *rptr, Void *ptr)
-{
-    free(ptr);
-}
-
-/*
- *  ======== _realloc_r ========
- */
-Void ATTRIBUTE *_realloc_r(struct _reent *rptr, Void *ptr, SizeT size)
-{
-    return realloc(ptr, size);
-}
-
-#endif
-
 
 /*
  * ======== ti.sysbios.BIOS INITIALIZERS ========
@@ -4367,7 +4368,7 @@ __FAR__ const CT__ti_sysbios_gates_GateHwi_Module__gatePrms ti_sysbios_gates_Gat
 
 /* Module__id__C */
 #pragma DATA_SECTION(ti_sysbios_gates_GateHwi_Module__id__C, ".const:ti_sysbios_gates_GateHwi_Module__id__C");
-__FAR__ const CT__ti_sysbios_gates_GateHwi_Module__id ti_sysbios_gates_GateHwi_Module__id__C = (xdc_Bits16)0x37;
+__FAR__ const CT__ti_sysbios_gates_GateHwi_Module__id ti_sysbios_gates_GateHwi_Module__id__C = (xdc_Bits16)0x36;
 
 /* Module__loggerDefined__C */
 #pragma DATA_SECTION(ti_sysbios_gates_GateHwi_Module__loggerDefined__C, ".const:ti_sysbios_gates_GateHwi_Module__loggerDefined__C");
@@ -4496,7 +4497,7 @@ __FAR__ const CT__ti_sysbios_gates_GateMutex_Module__gatePrms ti_sysbios_gates_G
 
 /* Module__id__C */
 #pragma DATA_SECTION(ti_sysbios_gates_GateMutex_Module__id__C, ".const:ti_sysbios_gates_GateMutex_Module__id__C");
-__FAR__ const CT__ti_sysbios_gates_GateMutex_Module__id ti_sysbios_gates_GateMutex_Module__id__C = (xdc_Bits16)0x38;
+__FAR__ const CT__ti_sysbios_gates_GateMutex_Module__id ti_sysbios_gates_GateMutex_Module__id__C = (xdc_Bits16)0x37;
 
 /* Module__loggerDefined__C */
 #pragma DATA_SECTION(ti_sysbios_gates_GateMutex_Module__loggerDefined__C, ".const:ti_sysbios_gates_GateMutex_Module__loggerDefined__C");
@@ -6748,7 +6749,7 @@ __FAR__ const CT__ti_uia_loggers_LoggerStopMode_Module__gatePrms ti_uia_loggers_
 
 /* Module__id__C */
 #pragma DATA_SECTION(ti_uia_loggers_LoggerStopMode_Module__id__C, ".const:ti_uia_loggers_LoggerStopMode_Module__id__C");
-__FAR__ const CT__ti_uia_loggers_LoggerStopMode_Module__id ti_uia_loggers_LoggerStopMode_Module__id__C = (xdc_Bits16)0x36;
+__FAR__ const CT__ti_uia_loggers_LoggerStopMode_Module__id ti_uia_loggers_LoggerStopMode_Module__id__C = (xdc_Bits16)0x38;
 
 /* Module__loggerDefined__C */
 #pragma DATA_SECTION(ti_uia_loggers_LoggerStopMode_Module__loggerDefined__C, ".const:ti_uia_loggers_LoggerStopMode_Module__loggerDefined__C");
@@ -6828,7 +6829,7 @@ __FAR__ const CT__ti_uia_loggers_LoggerStopMode_L_test ti_uia_loggers_LoggerStop
 
 /* E_badLevel__C */
 #pragma DATA_SECTION(ti_uia_loggers_LoggerStopMode_E_badLevel__C, ".const:ti_uia_loggers_LoggerStopMode_E_badLevel__C");
-__FAR__ const CT__ti_uia_loggers_LoggerStopMode_E_badLevel ti_uia_loggers_LoggerStopMode_E_badLevel__C = (((xdc_runtime_Error_Id)39) << 16 | 0);
+__FAR__ const CT__ti_uia_loggers_LoggerStopMode_E_badLevel ti_uia_loggers_LoggerStopMode_E_badLevel__C = (((xdc_runtime_Error_Id)40) << 16 | 0);
 
 /* numCores__C */
 #pragma DATA_SECTION(ti_uia_loggers_LoggerStopMode_numCores__C, ".const:ti_uia_loggers_LoggerStopMode_numCores__C");
@@ -9683,7 +9684,7 @@ xdc_Bool ti_uia_loggers_LoggerStopMode_Module__startupDone__S( void )
 xdc_runtime_Types_Label *ti_uia_loggers_LoggerStopMode_Handle__label__S(xdc_Ptr obj, xdc_runtime_Types_Label *lab) 
 {
     lab->handle = obj;
-    lab->modId = 54;
+    lab->modId = 56;
     xdc_runtime_Core_assignLabel(lab, 0, 0);
 
     return lab;
