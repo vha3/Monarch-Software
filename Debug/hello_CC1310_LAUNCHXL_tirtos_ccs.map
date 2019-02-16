@@ -1,7 +1,7 @@
 ******************************************************************************
                   TI ARM Linker Unix v18.1.4                   
 ******************************************************************************
->> Linked Sat Feb 16 10:12:47 2019
+>> Linked Sat Feb 16 11:29:13 2019
 
 OUTPUT FILE NAME:   <hello_CC1310_LAUNCHXL_tirtos_ccs.out>
 ENTRY POINT SYMBOL: "ResetISR"  address: 000093d1

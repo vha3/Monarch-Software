@@ -23,10 +23,10 @@ easylink/EasyLink.obj: /Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.L
 easylink/EasyLink.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/rf_prop_cmd.h
 easylink/EasyLink.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/rf_ble_cmd.h
 easylink/EasyLink.obj: /Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/include/stdlib.h
-easylink/EasyLink.obj: /Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/smartrf_settings/smartrf_settings_predefined.h
+easylink/EasyLink.obj: /Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/smartrf_settings/smartrf_settings_predefined.h
 easylink/EasyLink.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/rf_hs_mailbox.h
 easylink/EasyLink.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/rf_hs_cmd.h
-easylink/EasyLink.obj: /Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/smartrf_settings/smartrf_settings.h
+easylink/EasyLink.obj: /Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/smartrf_settings/smartrf_settings.h
 easylink/EasyLink.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/Clock.h
 easylink/EasyLink.obj: /Applications/ti/xdctools_3_50_02_20_core/packages/xdc/std.h
 easylink/EasyLink.obj: /Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/include/stdarg.h
@@ -188,8 +188,8 @@ easylink/EasyLink.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/ke
 easylink/EasyLink.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/package/BIOS_RtsGateProxy.h
 easylink/EasyLink.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/Task.h
 easylink/EasyLink.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/package/Task_SupportProxy.h
-easylink/EasyLink.obj: /Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/Board.h
-easylink/EasyLink.obj: /Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/CC1310_LAUNCHXL.h
+easylink/EasyLink.obj: /Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/Board.h
+easylink/EasyLink.obj: /Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/CC1310_LAUNCHXL.h
 easylink/EasyLink.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/PIN.h
 easylink/EasyLink.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/ioc.h
 easylink/EasyLink.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_types.h
@@ -236,10 +236,10 @@ easylink/EasyLink.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/so
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/rf_prop_cmd.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/rf_ble_cmd.h: 
 /Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/include/stdlib.h: 
-/Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/smartrf_settings/smartrf_settings_predefined.h: 
+/Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/smartrf_settings/smartrf_settings_predefined.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/rf_hs_mailbox.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/rf_hs_cmd.h: 
-/Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/smartrf_settings/smartrf_settings.h: 
+/Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/smartrf_settings/smartrf_settings.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/Clock.h: 
 /Applications/ti/xdctools_3_50_02_20_core/packages/xdc/std.h: 
 /Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/include/stdarg.h: 
@@ -401,8 +401,8 @@ easylink/EasyLink.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/so
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/package/BIOS_RtsGateProxy.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/Task.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/package/Task_SupportProxy.h: 
-/Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/Board.h: 
-/Users/hunteradams/Documents/MSP430/workspace/hello_CC1310_LAUNCHXL_tirtos_ccs/CC1310_LAUNCHXL.h: 
+/Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/Board.h: 
+/Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/CC1310_LAUNCHXL.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/PIN.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/ioc.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_types.h: 
