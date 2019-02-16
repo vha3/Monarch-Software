@@ -7,7 +7,7 @@
         <srcFile name="package/cfg/hello_pem3.c"/>
     </sources>
     <configscripts>
-        <srcFile name="/Users/hunteradams/Documents/MSP430/workspace/Monarch/hello.cfg"/>
+        <srcFile name="/Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/hello.cfg"/>
     </configscripts>
     <makefiles>
         <srcFile name="package.mak" src="package.bld"/>
@@ -44,7 +44,7 @@
         isPartial="false"
         xCfgScript="package/cfg/hello_pem3.cfg"
         xCfgPrefix="package/cfg/hello_pem3"
-        cfgScript="/Users/hunteradams/Documents/MSP430/workspace/Monarch/hello.cfg"
+        cfgScript="/Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/hello.cfg"
         cfgArgs="null"
         />
     </configurations>
@@ -56,7 +56,7 @@
         profile="release"
         xCfgScript="package/cfg/hello_pem3.cfg"
         xCfgPrefix="package/cfg/hello_pem3"
-        cfgScript="/Users/hunteradams/Documents/MSP430/workspace/Monarch/hello.cfg"
+        cfgScript="/Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/hello.cfg"
         cfgArgs="null"
         />
     </executables>
