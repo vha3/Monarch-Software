@@ -42,7 +42,7 @@ Void txDataTaskFunc(UArg arg0, UArg arg1)
 	EasyLink_enableRxAddrFilter((uint8_t*)&AddressList, 1, 2);
 	EasyLink_setFrequency(915000000);
 
-	uint8_t counter = 0x00;
+	uint16_t counter = 0x00;
 	while(1) {
 		Semaphore_pend(txDataSemaphoreHandle, BIOS_WAIT_FOREVER);
 		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
@@ -60,53 +60,29 @@ Void txDataTaskFunc(UArg arg0, UArg arg1)
 //			txPacket.payload[0] = BEACON;
 //			txPacket.payload[1] = PERSONAL_ADDRESS;
 
-//			txPacket.payload[0] = (uint8_t)(seqNumber >> 8);
-//			txPacket.payload[1] = (uint8_t)(seqNumber++);
-//			txPacket.payload[2] = sign(ax);
-//			txPacket.payload[2] = upperPart(ax);
-//			txPacket.payload[3] = lowerPart(ax);
-//			txPacket.payload[5] = sign(ay);
-//			txPacket.payload[4] = upperPart(ay);
-//			txPacket.payload[5] = lowerPart(ay);
-//			txPacket.payload[8] = sign(az);
-//			txPacket.payload[6] = upperPart(az);
-//			txPacket.payload[7] = lowerPart(az);
+			txPacket.payload[0] = (counter>>8)&0xff;
+			txPacket.payload[1] =  counter&0xff;
+			txPacket.payload[2] = upperPart(ax);
+			txPacket.payload[3] = lowerPart(ax);
+			txPacket.payload[4] = upperPart(ay);
+			txPacket.payload[5] = lowerPart(ay);
+			txPacket.payload[6] = upperPart(az);
+			txPacket.payload[7] = lowerPart(az);
 
-//			txPacket.payload[11] = sign(gx);
-//			txPacket.payload[8] = upperPart(gx);
-//			txPacket.payload[9] = lowerPart(gx);
-//			txPacket.payload[14] = sign(gy);
-//			txPacket.payload[10] = upperPart(gy);
-//			txPacket.payload[11] = lowerPart(gy);
-//			txPacket.payload[17] = sign(gz);
-//			txPacket.payload[12] = upperPart(gz);
-//			txPacket.payload[13] = lowerPart(gz);
 
-//			txPacket.payload[20] = sign(mx);
-//			txPacket.payload[14] = upperPart(mx);
-//			txPacket.payload[15] = lowerPart(mx);
-//			txPacket.payload[23] = sign(my);
-//			txPacket.payload[16] = upperPart(my);
-//			txPacket.payload[17] = lowerPart(my);
-//			txPacket.payload[26] = sign(mz);
-//			txPacket.payload[18] = upperPart(mz);
-//			txPacket.payload[19] = lowerPart(mz);
-
-//			txPacket.payload[29] = sign(temperature);
-//			txPacket.payload[2] = temp_h;
-//			txPacket.payload[3] = temp_l;
-			if (counter > 0xfe){
+			if (counter > 0xfffe){
 				counter = 0;
 			}
 			else{
 				counter = counter + 0x01;
 			}
-			int i=0;
-			for (i = 0; i < sizeof(message); i++)
-			{
-			  txPacket.payload[i] = message[i];
-			}
-			txPacket.payload[30] = counter;
+
+//			int i=0;
+//			for (i = 0; i < sizeof(message); i++)
+//			{
+//			  txPacket.payload[i] = message[i];
+//			}
+//			txPacket.payload[30] = counter;
 
 			txPacket.len = RFEASYLINKTXPAYLOAD_LENGTH;
 			txPacket.dstAddr[0] = 0xaa;

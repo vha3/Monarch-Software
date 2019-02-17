@@ -42,7 +42,7 @@ Void humidityTaskFunc(UArg arg0, UArg arg1)
     			else {
     				Watchdog_clear(watchdogHandle);
     				Watchdog_close(watchdogHandle);
-    				PIN_setOutputValue(pinHandle, Board_PIN_LED0,!PIN_getOutputValue(Board_PIN_LED0));
+//    				PIN_setOutputValue(pinHandle, Board_PIN_LED0,!PIN_getOutputValue(Board_PIN_LED0));
     				stopper += 1;
 					degrees_F = getTempFarenheit();
 //					Display_printf(display, 0, 0, "Temperature: %f deg F \n", degrees_F);
@@ -89,7 +89,6 @@ Void humidityTaskFunc(UArg arg0, UArg arg1)
     			SysCtrlSystemReset();
     		}
     		Semaphore_post(batonSemaphoreHandle);
-    		Semaphore_post(txDataSemaphoreHandle);
     		Task_sleep(10000);
     }
 }

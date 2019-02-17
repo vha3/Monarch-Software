@@ -76,7 +76,7 @@ int main(void)
     createAccelTask();
     createGPSTask();
     createADCTask();
-//    createRFRXTasks();
+    createRFRXTasks();
     createRFTXTasks();
 //    createPWMTask();
     createHumidityTask();

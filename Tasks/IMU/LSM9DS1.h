@@ -133,7 +133,7 @@ void LSM9DS1init(void)
 	// 1 = 10 Hz    4 = 238 Hz
 	// 2 = 50 Hz    5 = 476 Hz
 	// 3 = 119 Hz   6 = 952 Hz
-	settings.accel.sampleRate = 0x01;
+	settings.accel.sampleRate = 2;
 	// Accel cutoff freqeuncy can be any value between -1 - 3.
 	// -1 = bandwidth determined by sample rate
 	// 0 = 408 Hz   2 = 105 Hz

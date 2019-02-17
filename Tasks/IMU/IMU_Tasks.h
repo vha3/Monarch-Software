@@ -126,6 +126,7 @@ Void accelTaskFunc(UArg arg0, UArg arg1)
 	//										"Accel Z: %d \n", az);
 				}
     		}
+    		Semaphore_post(txDataSemaphoreHandle);
     		Semaphore_post(batonSemaphoreHandle);
     }
 }
