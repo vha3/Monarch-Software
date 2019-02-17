@@ -83,6 +83,7 @@ Void humidityTaskFunc(UArg arg0, UArg arg1)
 //    			GPIO_write(IOID_5, 0);
 //    			PIN_close(&pinState2);
     			Semaphore_post(readSemaphoreHandle);
+    			Semaphore_post(txDataSemaphoreHandle);
     			Semaphore_post(batonSemaphoreHandle);
     			Task_sleep(6000000);
     			SysCtrlSystemReset();
