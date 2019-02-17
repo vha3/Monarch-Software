@@ -19,11 +19,10 @@
 /* BIOS Header files */
 #include <ti/sysbios/BIOS.h>
 
-
 /* Peripherals */
 //#include <Peripherals/Clock_Initialization.h>
 #include <Peripherals/Pin_Initialization.h>
-//#include <Peripherals/Watchdog_Initialization.h>
+#include <Peripherals/Watchdog_Initialization.h>
 #include <Peripherals/ADC_Initialization.h>
 #include <Peripherals/Display_Initialization.h>
 #include <Peripherals/PWM_Initialization.h>
@@ -61,7 +60,7 @@ int main(void)
 //    displaySetup();
 
     /* Setup peripherals and semaphores */
-//    wdtSetup();
+    wdtSetup();
 //    clockSetup();
 	semaphoreSetup();
 	pinSetup();
@@ -69,20 +68,16 @@ int main(void)
 	CC1310_LAUNCHXL_shutDownExtFlash();
 
 	PIN_setOutputValue(pinHandle, IOID_21, 0);
-//	int delayer = 0;
-//	while(delayer < 10000){
-//		delayer += 1;
-//	}
 
 
 	/* Construct tasks */
     createMagTask();
     createGyroTask();
     createAccelTask();
-    createGPSTask();
+//    createGPSTask();
     createADCTask();
-    createRFRXTasks();
-    createRFTXTasks();
+//    createRFRXTasks();
+//    createRFTXTasks();
 //    createPWMTask();
     createHumidityTask();
 

@@ -53,22 +53,26 @@ Void magTaskFunc(UArg arg0, UArg arg1)
 	Semaphore_post(accelLockSemaphoreHandle);
 	Semaphore_post(humidityLockSemaphoreHandle);
 	Semaphore_post(gpsLockSemaphoreHandle);
+
     while (1) {
     		Semaphore_pend(magSemaphoreHandle, BIOS_WAIT_FOREVER);
     		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
     		if(halt){
 //    			I2C_close(i2c);
+    			Semaphore_post(batonSemaphoreHandle);
     			Task_sleep(600000000);
     		}
-    		else if(goodToGo){
-    			readMag();
-//    			Watchdog_clear(watchdogHandle);
-//    			Display_printf(display, 0, 0,
-//    									"Magnetometer X: %d \n", mx);
-//    			Display_printf(display, 0, 0,
-//    			    						"Magnetometer Y: %d \n", my);
-//    			Display_printf(display, 0, 0,
-//    			    						"Magnetometer Z: %d \n", mz);
+    		else {
+				if(goodToGo){
+					readMag();
+	//    			Watchdog_clear(watchdogHandle);
+	//    			Display_printf(display, 0, 0,
+	//    									"Magnetometer X: %d \n", mx);
+	//    			Display_printf(display, 0, 0,
+	//    			    						"Magnetometer Y: %d \n", my);
+	//    			Display_printf(display, 0, 0,
+	//    			    						"Magnetometer Z: %d \n", mz);
+				}
     		}
     		Semaphore_post(batonSemaphoreHandle);
     }
@@ -81,17 +85,20 @@ Void gyroTaskFunc(UArg arg0, UArg arg1)
     		Semaphore_pend(gyroSemaphoreHandle, BIOS_WAIT_FOREVER);
     		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
     		if(halt){
-			Task_sleep(600000000);
+    			Semaphore_post(batonSemaphoreHandle);
+    			Task_sleep(600000000);
     		}
-    		else if(goodToGo){
-    			readGyro();
-//    			Display_printf(display, 0, 0,
-//									"Gyro X: %d \n", gx);
-//				Display_printf(display, 0, 0,
-//										"Gyro Y: %d \n", gy);
-//				Display_printf(display, 0, 0,
-//										"Gyro Z: %d \n", gz);
+    		else{
+				if(goodToGo){
+					readGyro();
+	//    			Display_printf(display, 0, 0,
+	//									"Gyro X: %d \n", gx);
+	//				Display_printf(display, 0, 0,
+	//										"Gyro Y: %d \n", gy);
+	//				Display_printf(display, 0, 0,
+	//										"Gyro Z: %d \n", gz);
 
+				}
     		}
     		Semaphore_post(batonSemaphoreHandle);
     }
@@ -104,17 +111,20 @@ Void accelTaskFunc(UArg arg0, UArg arg1)
     		Semaphore_pend(accelSemaphoreHandle, BIOS_WAIT_FOREVER);
     		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
     		if(halt){
+    			Semaphore_post(batonSemaphoreHandle);
     			Task_sleep(600000000);
     		}
-    		else if(goodToGo){
-    			readAccel();
+    		else{
+				if(goodToGo){
+					readAccel();
 
-//    			Display_printf(display, 0, 0,
-//									"Accel X: %d \n", ax);
-//				Display_printf(display, 0, 0,
-//										"Accel Y: %d \n", ay);
-//				Display_printf(display, 0, 0,
-//										"Accel Z: %d \n", az);
+	//    			Display_printf(display, 0, 0,
+	//									"Accel X: %d \n", ax);
+	//				Display_printf(display, 0, 0,
+	//										"Accel Y: %d \n", ay);
+	//				Display_printf(display, 0, 0,
+	//										"Accel Z: %d \n", az);
+				}
     		}
     		Semaphore_post(batonSemaphoreHandle);
     }

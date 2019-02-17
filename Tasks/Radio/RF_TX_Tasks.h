@@ -38,10 +38,6 @@ Void txDataTaskFunc(UArg arg0, UArg arg1)
 		System_abort("EasyLink_init failed");
 	}
 
-
-	//EasyLink_init(EasyLink_Phy_Custom);
-//	EasyLink_init(EasyLink_Phy_50kbps2gfsk);
-	//EasyLink_init(EasyLink_Phy_5kbpsSlLr);
 	EasyLink_setRfPower(14);
 	EasyLink_enableRxAddrFilter((uint8_t*)&AddressList, 1, 2);
 	EasyLink_setFrequency(915000000);
@@ -52,6 +48,7 @@ Void txDataTaskFunc(UArg arg0, UArg arg1)
 		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
 
 		if(halt){
+			EasyLink_abort();
 			Task_sleep(600000000);
 		}
 

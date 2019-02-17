@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <?ccsproject version="1.0"?>
 <projectOptions>
-	<ccsVersion value="7.2.0"/>
+	<ccsVersion value="8.3.0"/>
 	<deviceVariant value="Cortex M.CC1310F128"/>
 	<deviceFamily value="TMS470"/>
 	<deviceEndianness value="little"/>
-	<codegenToolVersion value="16.9.3.LTS"/>
+	<codegenToolVersion value="18.1.4.LTS"/>
 	<isElfFormat value="true"/>
 	<connection value="common/targetdb/connections/TIXDS110_Connection.xml"/>
-	<rts value="libc.a"/>
+	<rts value=""/>
 	<createSlaveProjects value=""/>
 	<ignoreDefaultDeviceSettings value="true"/>
-	<templateProperties value="id=hello_CC1310_LAUNCHXL_tirtos_ccs.projectspec.hello_CC1310_LAUNCHXL_tirtos_ccs,type=rtsc,xdcToolsVersion=3_50_02_20_core,target=ti.targets.arm.elf.M3,platform=ti.platforms.simplelink:CC1310F128,buildProfile=release,isHybrid=true,configuroOptions= --compileOptions &quot;${COMPILER_FLAGS} &quot;,"/>
-	<origin value="/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/examples/rtos/CC1310_LAUNCHXL/sysbios/hello/tirtos/ccs/hello_CC1310_LAUNCHXL_tirtos_ccs.projectspec"/>
+	<ignoreDefaultCCSSettings value="true"/>
+	<templateProperties value="id=hello_CC1310_LAUNCHXL_tirtos_ccs.projectspec.hello_CC1310_LAUNCHXL_tirtos_ccs,type=rtsc,xdcToolsVersion=3.50.08.24.core,target=ti.targets.arm.elf.M3,platform=ti.platforms.simplelink:CC1310F128,buildProfile=release,isHybrid=true,configuroOptions= --compileOptions &quot;${COMPILER_FLAGS} -std=c99 &quot;"/>
+	<origin value="/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/examples/rtos/CC1310_LAUNCHXL/sysbios/hello/tirtos/ccs/hello_CC1310_LAUNCHXL_tirtos_ccs.projectspec"/>
 	<filesToOpen value=""/>
 </projectOptions>
