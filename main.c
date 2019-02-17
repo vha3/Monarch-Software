@@ -74,7 +74,7 @@ int main(void)
     createMagTask();
     createGyroTask();
     createAccelTask();
-//    createGPSTask();
+    createGPSTask();
     createADCTask();
 //    createRFRXTasks();
 //    createRFTXTasks();
