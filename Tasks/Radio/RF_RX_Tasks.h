@@ -26,8 +26,8 @@ void rxDoneCb(EasyLink_RxPacket * rxPacket, EasyLink_Status status)
     if (status == EasyLink_Status_Success)
     {
         /* Toggle LED2 to indicate RX */
-        PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_PIN_RLED,
-        		!PIN_getOutputValue(CC1310_LAUNCHXL_PIN_RLED));
+//        PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_PIN_RLED,
+//        		!PIN_getOutputValue(CC1310_LAUNCHXL_PIN_RLED));
         globalPacket.dstAddr[0] = rxPacket->dstAddr[0];
         globalPacket.rssi = rxPacket->rssi;
         globalPacket.absTime = rxPacket->absTime;

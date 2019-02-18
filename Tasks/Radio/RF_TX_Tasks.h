@@ -103,7 +103,6 @@ Void txDataTaskFunc(UArg arg0, UArg arg1)
 			Semaphore_post(rxRestartSemaphoreHandle);
 		}
 		Semaphore_post(batonSemaphoreHandle);
-		Task_sleep(10000);
 	}
 }
 

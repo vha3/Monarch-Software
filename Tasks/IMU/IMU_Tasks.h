@@ -126,6 +126,8 @@ Void accelTaskFunc(UArg arg0, UArg arg1)
 	//										"Accel Z: %d \n", az);
 				}
     		}
+            PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_PIN_RLED,
+            		!PIN_getOutputValue(CC1310_LAUNCHXL_PIN_RLED));
     		Semaphore_post(txDataSemaphoreHandle);
     		Semaphore_post(batonSemaphoreHandle);
     }
