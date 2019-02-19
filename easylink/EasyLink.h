@@ -181,7 +181,7 @@ extern "C"
 #define EASYLINK_MAX_CCA_BACKOFF_WINDOW     8
 
 //! \brief The back-off time units in microseconds
-#define EASYLINK_CCA_BACKOFF_TIMEUNITS      250
+#define EASYLINK_CCA_BACKOFF_TIMEUNITS      10
 
 //! \brief RSSI threshold for Clear Channel Assessment (CCA)
 #define EASYLINK_CS_RSSI_THRESHOLD_DBM      -80

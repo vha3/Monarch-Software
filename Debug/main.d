@@ -255,6 +255,8 @@ main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devic
 main.obj: /Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/easylink/EasyLink.h
 main.obj: /Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/include/stdlib.h
 main.obj: ../Tasks/Radio/Network_Types.h
+main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/trng.h
+main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_trng.h
 main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/Task.h
 main.obj: ../Tasks/Radio/RF_TX_Tasks.h
 main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/Task.h
@@ -556,6 +558,8 @@ main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/p
 /Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/easylink/EasyLink.h: 
 /Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/include/stdlib.h: 
 ../Tasks/Radio/Network_Types.h: 
+/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/trng.h: 
+/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_trng.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/Task.h: 
 ../Tasks/Radio/RF_TX_Tasks.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/Task.h: 

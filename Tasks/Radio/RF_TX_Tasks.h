@@ -20,17 +20,65 @@ Task_Struct txDataTask;
 static uint8_t txDataTaskStack[700];
 #pragma DATA_ALIGN(txDataTaskStack, 8)
 
+/*
+ * Set to 1 if you want to attempt to retransmit a packet that couldn't be
+ * transmitted after the CCA
+ */
+#define RFEASYLINKLBT_RETRANSMIT_PACKETS    1
+
+#if RFEASYLINKLBT_RETRANSMIT_PACKETS
+bool bAttemptRetransmission = false;
+#endif // RFEASYLINKLBT_RETRANSMIT_PACKETS
+
 uint8_t message[30] = {0x20, 0x53, 0x50, 0x41, 0x43, 0x45, 0x20, 0x53,
 		0x59, 0x53, 0x54, 0x45, 0x4d, 0x53, 0x20, 0x44, 0x45, 0x53,
 		0x49, 0x47, 0x4e, 0x20, 0x53, 0x54, 0x55, 0x44, 0x49, 0x4f,
 		0x20, 0x20};
 
+int done = 1;
+
+void lbtDoneCb(EasyLink_Status status)
+{
+    if (status == EasyLink_Status_Success)
+    {
+        /* Toggle LED1 to indicate TX */
+        PIN_setOutputValue(pinHandle, Board_PIN_LED1, !PIN_getOutputValue(Board_PIN_LED1));
+#if RFEASYLINKLBT_RETRANSMIT_PACKETS
+        bAttemptRetransmission = false;
+        done = 0;
+#endif // RFEASYLINKLBT_RETRANSMIT_PACKETS
+    }
+    else if (status == EasyLink_Status_Busy_Error)
+    {
+        /* Toggle LED2 to indicate maximum retries reached */
+        PIN_setOutputValue(pinHandle, Board_PIN_LED2, !PIN_getOutputValue(Board_PIN_LED2));
+        done = 1;
+
+#if RFEASYLINKLBT_RETRANSMIT_PACKETS
+        bAttemptRetransmission = true;
+#endif // RFEASYLINKLBT_RETRANSMIT_PACKETS
+    }
+    else
+    {
+        /* Toggle LED1 and LED2 to indicate error */
+        PIN_setOutputValue(pinHandle, Board_PIN_LED1, !PIN_getOutputValue(Board_PIN_LED1));
+        PIN_setOutputValue(pinHandle, Board_PIN_LED2, !PIN_getOutputValue(Board_PIN_LED2));
+    }
+
+    Semaphore_post(lbtDoneSemaphoreHandle);
+}
+
 Void txDataTaskFunc(UArg arg0, UArg arg1)
 {
+	uint32_t absTime;
+	Power_setDependency(PowerCC26XX_PERIPH_TRNG);
+
 	EasyLink_Params easyLink_params;
 	EasyLink_Params_init(&easyLink_params);
 
-	easyLink_params.ui32ModType = EasyLink_Phy_50kbps2gfsk;
+//	easyLink_params.ui32ModType = EasyLink_Phy_50kbps2gfsk;
+	easyLink_params.ui32ModType = EasyLink_Phy_Custom;
+	easyLink_params.pGrnFxn = (EasyLink_GetRandomNumber)HalTRNG_GetTRNG;
 
 	/* Initialize EasyLink */
 	if(EasyLink_init(&easyLink_params) != EasyLink_Status_Success)
@@ -43,6 +91,7 @@ Void txDataTaskFunc(UArg arg0, UArg arg1)
 	EasyLink_setFrequency(915000000);
 
 	uint16_t counter = 0x00;
+	EasyLink_TxPacket txPacket =  { {0}, 0, 0, {0} };
 	while(1) {
 		Semaphore_pend(txDataSemaphoreHandle, BIOS_WAIT_FOREVER);
 		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
@@ -53,53 +102,71 @@ Void txDataTaskFunc(UArg arg0, UArg arg1)
 		}
 
 		if(goodToGo){
+			if(bAttemptRetransmission == false){
 
-			EasyLink_abort();
-			EasyLink_TxPacket txPacket =  { {0}, 0, 0, {0} };
-
-//			txPacket.payload[0] = BEACON;
-//			txPacket.payload[1] = PERSONAL_ADDRESS;
-
-			txPacket.payload[0] = (counter>>8)&0xff;
-			txPacket.payload[1] =  counter&0xff;
-			txPacket.payload[2] = upperPart(ax);
-			txPacket.payload[3] = lowerPart(ax);
-			txPacket.payload[4] = upperPart(ay);
-			txPacket.payload[5] = lowerPart(ay);
-			txPacket.payload[6] = upperPart(az);
-			txPacket.payload[7] = lowerPart(az);
+				EasyLink_abort();
 
 
-			if (counter > 0xfffe){
-				counter = 0;
+	//			txPacket.payload[0] = BEACON;
+	//			txPacket.payload[1] = PERSONAL_ADDRESS;
+
+				txPacket.payload[0] = (counter>>8)&0xff;
+				txPacket.payload[1] =  counter&0xff;
+				txPacket.payload[2] = upperPart(ax);
+				txPacket.payload[3] = lowerPart(ax);
+				txPacket.payload[4] = upperPart(ay);
+				txPacket.payload[5] = lowerPart(ay);
+				txPacket.payload[6] = upperPart(az);
+				txPacket.payload[7] = lowerPart(az);
+
+
+				if (counter > 0xfffe){
+					counter = 0;
+				}
+				else{
+					counter = counter + 0x01;
+				}
+
+	//			int i=0;
+	//			for (i = 0; i < sizeof(message); i++)
+	//			{
+	//			  txPacket.payload[i] = message[i];
+	//			}
+	//			txPacket.payload[30] = counter;
+
+				txPacket.len = RFEASYLINKTXPAYLOAD_LENGTH;
+				txPacket.dstAddr[0] = 0xaa;
+//				txPacket.absTime = 0;
+				/* Set Tx absolute time to current time + 100ms */
+				if(EasyLink_getAbsTime(&absTime) != EasyLink_Status_Success)
+				{
+					// Problem getting absolute time
+				}
+				txPacket.absTime = absTime + EasyLink_ms_To_RadioTime(0);
 			}
-			else{
-				counter = counter + 0x01;
-			}
 
-//			int i=0;
-//			for (i = 0; i < sizeof(message); i++)
+			while (done){
+				EasyLink_transmitCcaAsync(&txPacket, lbtDoneCb);
+				Semaphore_pend(lbtDoneSemaphoreHandle, BIOS_WAIT_FOREVER);
+			}
+			done = 1;
+
+
+//			EasyLink_Status result = EasyLink_transmit(&txPacket);
+//
+//			if (result == EasyLink_Status_Success)
 //			{
-//			  txPacket.payload[i] = message[i];
+//				/* Toggle LED1 to indicate TX */
+//				PIN_setOutputValue(pinHandle, Board_PIN_LED1,!PIN_getOutputValue(Board_PIN_LED1));
 //			}
-//			txPacket.payload[30] = counter;
+//			else
+//			{
+//				/* Toggle LED1 and LED2 to indicate error */
+//				PIN_setOutputValue(pinHandle, Board_PIN_LED1,!PIN_getOutputValue(Board_PIN_LED1));
+//				PIN_setOutputValue(pinHandle, Board_PIN_LED2,!PIN_getOutputValue(Board_PIN_LED2));
+//			}
 
-			txPacket.len = RFEASYLINKTXPAYLOAD_LENGTH;
-			txPacket.dstAddr[0] = 0xaa;
-			txPacket.absTime = 0;
-			EasyLink_Status result = EasyLink_transmit(&txPacket);
 
-			if (result == EasyLink_Status_Success)
-			{
-				/* Toggle LED1 to indicate TX */
-				PIN_setOutputValue(pinHandle, Board_PIN_LED1,!PIN_getOutputValue(Board_PIN_LED1));
-			}
-			else
-			{
-				/* Toggle LED1 and LED2 to indicate error */
-				PIN_setOutputValue(pinHandle, Board_PIN_LED1,!PIN_getOutputValue(Board_PIN_LED1));
-				PIN_setOutputValue(pinHandle, Board_PIN_LED2,!PIN_getOutputValue(Board_PIN_LED2));
-			}
 			Semaphore_post(rxRestartSemaphoreHandle);
 		}
 		Semaphore_post(batonSemaphoreHandle);

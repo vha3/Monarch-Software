@@ -48,6 +48,9 @@ static Semaphore_Handle gpsLockSemaphoreHandle;
 static Semaphore_Struct humidityLockSemaphore;
 static Semaphore_Handle humidityLockSemaphoreHandle;
 
+static Semaphore_Struct lbtDoneSemaphore;
+static Semaphore_Handle lbtDoneSemaphoreHandle;
+
 void semaphoreSetup()
 {
     /* Create Semaphores */
@@ -92,6 +95,9 @@ void semaphoreSetup()
 
 	Semaphore_construct(&humidityLockSemaphore, 0, &semparams);
 	humidityLockSemaphoreHandle = Semaphore_handle(&humidityLockSemaphore);
+
+	Semaphore_construct(&lbtDoneSemaphore, 0, &semparams);
+	lbtDoneSemaphoreHandle = Semaphore_handle(&lbtDoneSemaphore);
 }
 
 
