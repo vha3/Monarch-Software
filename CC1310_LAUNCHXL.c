@@ -50,51 +50,51 @@
 /*
  *  =============================== ADCBuf ===============================
  */
-#include <ti/drivers/ADCBuf.h>
-#include <ti/drivers/adcbuf/ADCBufCC26XX.h>
-
-ADCBufCC26XX_Object adcBufCC26xxObjects[CC1310_LAUNCHXL_ADCBUFCOUNT];
-
-/*
- *  This table converts a virtual adc channel into a dio and internal analogue
- *  input signal. This table is necessary for the functioning of the adcBuf
- *  driver. Comment out unused entries to save flash. Dio and internal signal
- *  pairs are hardwired. Do not remap them in the table. You may reorder entire
- *  entries. The mapping of dio and internal signals is package dependent.
- */
-const ADCBufCC26XX_AdcChannelLutEntry ADCBufCC26XX_adcChannelLut[CC1310_LAUNCHXL_ADCBUF0CHANNELCOUNT] = {
-    {CC1310_LAUNCHXL_DIO23_ANALOG, ADC_COMPB_IN_AUXIO7},
-    {CC1310_LAUNCHXL_DIO24_ANALOG, ADC_COMPB_IN_AUXIO6},
-    {CC1310_LAUNCHXL_DIO25_ANALOG, ADC_COMPB_IN_AUXIO5},
-    {CC1310_LAUNCHXL_DIO26_ANALOG, ADC_COMPB_IN_AUXIO4},
-    {CC1310_LAUNCHXL_DIO27_ANALOG, ADC_COMPB_IN_AUXIO3},
-    {CC1310_LAUNCHXL_DIO28_ANALOG, ADC_COMPB_IN_AUXIO2},
-    {CC1310_LAUNCHXL_DIO29_ANALOG, ADC_COMPB_IN_AUXIO1},
-    {CC1310_LAUNCHXL_DIO30_ANALOG, ADC_COMPB_IN_AUXIO0},
-    {PIN_UNASSIGNED, ADC_COMPB_IN_VDDS},
-    {PIN_UNASSIGNED, ADC_COMPB_IN_DCOUPL},
-    {PIN_UNASSIGNED, ADC_COMPB_IN_VSS},
-};
-
-const ADCBufCC26XX_HWAttrs adcBufCC26xxHWAttrs[CC1310_LAUNCHXL_ADCBUFCOUNT] = {
-    {
-        .intPriority       = ~0,
-        .swiPriority       = 0,
-        .adcChannelLut     = ADCBufCC26XX_adcChannelLut,
-        .gpTimerUnit       = CC1310_LAUNCHXL_GPTIMER0A,
-        .gptDMAChannelMask = 1 << UDMA_CHAN_TIMER0_A,
-    }
-};
-
-const ADCBuf_Config ADCBuf_config[CC1310_LAUNCHXL_ADCBUFCOUNT] = {
-    {
-        &ADCBufCC26XX_fxnTable,
-        &adcBufCC26xxObjects[CC1310_LAUNCHXL_ADCBUF0],
-        &adcBufCC26xxHWAttrs[CC1310_LAUNCHXL_ADCBUF0]
-    },
-};
-
-const uint_least8_t ADCBuf_count = CC1310_LAUNCHXL_ADCBUFCOUNT;
+//#include <ti/drivers/ADCBuf.h>
+//#include <ti/drivers/adcbuf/ADCBufCC26XX.h>
+//
+//ADCBufCC26XX_Object adcBufCC26xxObjects[CC1310_LAUNCHXL_ADCBUFCOUNT];
+//
+///*
+// *  This table converts a virtual adc channel into a dio and internal analogue
+// *  input signal. This table is necessary for the functioning of the adcBuf
+// *  driver. Comment out unused entries to save flash. Dio and internal signal
+// *  pairs are hardwired. Do not remap them in the table. You may reorder entire
+// *  entries. The mapping of dio and internal signals is package dependent.
+// */
+//const ADCBufCC26XX_AdcChannelLutEntry ADCBufCC26XX_adcChannelLut[CC1310_LAUNCHXL_ADCBUF0CHANNELCOUNT] = {
+//    {CC1310_LAUNCHXL_DIO23_ANALOG, ADC_COMPB_IN_AUXIO7},
+//    {CC1310_LAUNCHXL_DIO24_ANALOG, ADC_COMPB_IN_AUXIO6},
+//    {CC1310_LAUNCHXL_DIO25_ANALOG, ADC_COMPB_IN_AUXIO5},
+//    {CC1310_LAUNCHXL_DIO26_ANALOG, ADC_COMPB_IN_AUXIO4},
+//    {CC1310_LAUNCHXL_DIO27_ANALOG, ADC_COMPB_IN_AUXIO3},
+//    {CC1310_LAUNCHXL_DIO28_ANALOG, ADC_COMPB_IN_AUXIO2},
+//    {CC1310_LAUNCHXL_DIO29_ANALOG, ADC_COMPB_IN_AUXIO1},
+//    {CC1310_LAUNCHXL_DIO30_ANALOG, ADC_COMPB_IN_AUXIO0},
+//    {PIN_UNASSIGNED, ADC_COMPB_IN_VDDS},
+//    {PIN_UNASSIGNED, ADC_COMPB_IN_DCOUPL},
+//    {PIN_UNASSIGNED, ADC_COMPB_IN_VSS},
+//};
+//
+//const ADCBufCC26XX_HWAttrs adcBufCC26xxHWAttrs[CC1310_LAUNCHXL_ADCBUFCOUNT] = {
+//    {
+//        .intPriority       = ~0,
+//        .swiPriority       = 0,
+//        .adcChannelLut     = ADCBufCC26XX_adcChannelLut,
+//        .gpTimerUnit       = CC1310_LAUNCHXL_GPTIMER0A,
+//        .gptDMAChannelMask = 1 << UDMA_CHAN_TIMER0_A,
+//    }
+//};
+//
+//const ADCBuf_Config ADCBuf_config[CC1310_LAUNCHXL_ADCBUFCOUNT] = {
+//    {
+//        &ADCBufCC26XX_fxnTable,
+//        &adcBufCC26xxObjects[CC1310_LAUNCHXL_ADCBUF0],
+//        &adcBufCC26xxHWAttrs[CC1310_LAUNCHXL_ADCBUF0]
+//    },
+//};
+//
+//const uint_least8_t ADCBuf_count = CC1310_LAUNCHXL_ADCBUFCOUNT;
 
 /*
  *  =============================== ADC ===============================
