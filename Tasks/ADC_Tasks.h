@@ -46,8 +46,8 @@ Void adcTaskFunc(UArg arg0, UArg arg1)
 
 				adcValue1MicroVolt = ADC_convertRawToMicroVolts(adc1, adcValue1);
 
-				Display_printf(display, 0, 0,
-						"ADC channel 1 convert result: %d uV\n", adcValue1MicroVolt);
+//				Display_printf(display, 0, 0,
+//						"ADC channel 1 convert result: %d uV\n", adcValue1MicroVolt);
 			}
 			else {
 //				Display_printf(display, 0, 0, "ADC channel 1 convert failed\n");
@@ -58,8 +58,8 @@ Void adcTaskFunc(UArg arg0, UArg arg1)
 
 				adcValue3MicroVolt = ADC_convertRawToMicroVolts(adc3, adcValue3);
 
-				Display_printf(display, 0, 0,
-						"ADC channel 3 convert result: %d uV\n", adcValue3MicroVolt);
+//				Display_printf(display, 0, 0,
+//						"ADC channel 3 convert result: %d uV\n", adcValue3MicroVolt);
 			}
 			else {
 //				Display_printf(display, 0, 0, "ADC channel 1 convert failed\n");
@@ -69,8 +69,8 @@ Void adcTaskFunc(UArg arg0, UArg arg1)
     		if (res == ADC_STATUS_SUCCESS) {
 
 				adcValue0MicroVolt = ADC_convertRawToMicroVolts(adc0, adcValue0);
-				Display_printf(display, 0, 0,
-					"ADC channel 0 convert result: %d uV\n", adcValue0MicroVolt);
+//				Display_printf(display, 0, 0,
+//					"ADC channel 0 convert result: %d uV\n", adcValue0MicroVolt);
 
 				if (adcValue0MicroVolt > 800000){
 					if (goodToGo){
