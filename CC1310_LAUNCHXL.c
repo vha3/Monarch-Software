@@ -249,26 +249,26 @@ const CryptoCC26XX_Config CryptoCC26XX_config[CC1310_LAUNCHXL_CRYPTOCOUNT] = {
 /*
  *  =============================== TRNG ===============================
  */
-#include <ti/drivers/TRNG.h>
-#include <ti/drivers/trng/TRNGCC26X0.h>
-
-TRNGCC26X0_Object trngCC26X2Objects[CC1310_LAUNCHXL_TRNGCOUNT];
-
-const TRNGCC26X0_HWAttrs trngCC26X2HWAttrs[CC1310_LAUNCHXL_TRNGCOUNT] = {
-    {
-        .intPriority       = ~0,
-        .swiPriority       = 0,
-    }
-};
-
-const TRNG_Config TRNG_config[CC1310_LAUNCHXL_TRNGCOUNT] = {
-    {
-         .object  = &trngCC26X2Objects[CC1310_LAUNCHXL_TRNG0],
-         .hwAttrs = &trngCC26X2HWAttrs[CC1310_LAUNCHXL_TRNG0]
-    },
-};
-
-const uint_least8_t TRNG_count = CC1310_LAUNCHXL_TRNGCOUNT;
+//#include <ti/drivers/TRNG.h>
+//#include <ti/drivers/trng/TRNGCC26X0.h>
+//
+//TRNGCC26X0_Object trngCC26X2Objects[CC1310_LAUNCHXL_TRNGCOUNT];
+//
+//const TRNGCC26X0_HWAttrs trngCC26X2HWAttrs[CC1310_LAUNCHXL_TRNGCOUNT] = {
+//    {
+//        .intPriority       = ~0,
+//        .swiPriority       = 0,
+//    }
+//};
+//
+//const TRNG_Config TRNG_config[CC1310_LAUNCHXL_TRNGCOUNT] = {
+//    {
+//         .object  = &trngCC26X2Objects[CC1310_LAUNCHXL_TRNG0],
+//         .hwAttrs = &trngCC26X2HWAttrs[CC1310_LAUNCHXL_TRNG0]
+//    },
+//};
+//
+//const uint_least8_t TRNG_count = CC1310_LAUNCHXL_TRNGCOUNT;
 
 /*
  *  =============================== Display ===============================

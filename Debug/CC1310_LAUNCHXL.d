@@ -46,10 +46,6 @@ CC1310_LAUNCHXL.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/sour
 CC1310_LAUNCHXL.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/crypto.h
 CC1310_LAUNCHXL.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_crypto.h
 CC1310_LAUNCHXL.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/dpl/SemaphoreP.h
-CC1310_LAUNCHXL.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/TRNG.h
-CC1310_LAUNCHXL.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/cryptoutils/cryptokey/CryptoKey.h
-CC1310_LAUNCHXL.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/trng/TRNGCC26X0.h
-CC1310_LAUNCHXL.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/dpl/SwiP.h
 CC1310_LAUNCHXL.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/display/Display.h
 CC1310_LAUNCHXL.obj: /Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/include/stdarg.h
 CC1310_LAUNCHXL.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/display/DisplayUart.h
@@ -68,6 +64,7 @@ CC1310_LAUNCHXL.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/sour
 CC1310_LAUNCHXL.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/timer.h
 CC1310_LAUNCHXL.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/I2C.h
 CC1310_LAUNCHXL.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/i2c/I2CCC26XX.h
+CC1310_LAUNCHXL.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/dpl/SwiP.h
 CC1310_LAUNCHXL.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/NVS.h
 CC1310_LAUNCHXL.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/nvs/NVSSPI25X.h
 CC1310_LAUNCHXL.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/nvs/NVSCC26XX.h
@@ -136,10 +133,6 @@ CC1310_LAUNCHXL.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/sour
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/crypto.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_crypto.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/dpl/SemaphoreP.h: 
-/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/TRNG.h: 
-/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/cryptoutils/cryptokey/CryptoKey.h: 
-/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/trng/TRNGCC26X0.h: 
-/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/dpl/SwiP.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/display/Display.h: 
 /Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/include/stdarg.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/display/DisplayUart.h: 
@@ -158,6 +151,7 @@ CC1310_LAUNCHXL.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/sour
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/timer.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/I2C.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/i2c/I2CCC26XX.h: 
+/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/dpl/SwiP.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/NVS.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/nvs/NVSSPI25X.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/nvs/NVSCC26XX.h: 
