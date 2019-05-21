@@ -41,7 +41,7 @@
 #include <Tasks/Startup_Task.h>
 #include <Tasks/I2C_Shutdown_Task.h>
 //#include <Tasks/PWM_Tasks.h>
-//#include <Tasks/Humidity/Humidity_Tasks.h>
+#include <Tasks/Humidity/Humidity_Tasks.h>
 
 
 /*
@@ -81,7 +81,7 @@ int main(void)
 //    createRFRXTasks();
 //    createRFTXTasks();
 //    createPWMTask();
-//    createHumidityTask();
+    createHumidityTask();
     createStartupTask();
     createi2cShutdownTask();
 

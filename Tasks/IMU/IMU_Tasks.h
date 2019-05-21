@@ -27,6 +27,10 @@ int magN = 0;
 int gyroN = 0;
 int accelN = 0;
 
+int16_t gx_out, gy_out, gz_out;
+int16_t ax_out, ay_out, az_out;
+int16_t mx_out, my_out, mz_out;
+
 Void magTaskFunc(UArg arg0, UArg arg1)
 {
 	/* Wait for startup task to unlock */
@@ -52,7 +56,7 @@ Void magTaskFunc(UArg arg0, UArg arg1)
 
 	Semaphore_post(gyroLockSemaphoreHandle);
 	Semaphore_post(accelLockSemaphoreHandle);
-//	Semaphore_post(humidityLockSemaphoreHandle);
+	Semaphore_post(humidityLockSemaphoreHandle);
 //	Semaphore_post(gpsLockSemaphoreHandle);
 
 
@@ -63,6 +67,9 @@ Void magTaskFunc(UArg arg0, UArg arg1)
     		magN += 1;
 
 			readMag();
+			mx_out = mx;
+			my_out = my;
+			mz_out = mz;
 	//    			Watchdog_clear(watchdogHandle);
 //			Display_printf(display, 0, 0,
 //										"Magnetometer X: %d \n", mx);
@@ -91,6 +98,9 @@ Void gyroTaskFunc(UArg arg0, UArg arg1)
     		gyroN += 1;
 
 			readGyro();
+			gx_out = gx;
+			gy_out = gy;
+			gz_out = gz;
 //			Display_printf(display, 0, 0,
 //									"Gyro X: %d \n", gx);
 //			Display_printf(display, 0, 0,
@@ -119,6 +129,9 @@ Void accelTaskFunc(UArg arg0, UArg arg1)
     		accelN += 1;
 
 			readAccel();
+			ax_out = ax;
+			ay_out = ay;
+			az_out = az;
 
 //			Display_printf(display, 0, 0,
 //								"Accel X: %d \n", ax);
@@ -143,7 +156,7 @@ void createMagTask()
 	Task_Params task_params;
 	Task_Params_init(&task_params);
 	task_params.stackSize = 450;
-	task_params.priority = 1;
+	task_params.priority = 2;
 	task_params.stack = &magTaskStack;
 	Task_construct(&magTask, magTaskFunc,
 					   &task_params, NULL);
@@ -154,7 +167,7 @@ void createGyroTask()
 	Task_Params task_params;
 	Task_Params_init(&task_params);
 	task_params.stackSize = 450;
-	task_params.priority = 2;
+	task_params.priority = 3;
 	task_params.stack = &gyroTaskStack;
 	Task_construct(&gyroTask, gyroTaskFunc,
 					   &task_params, NULL);
@@ -165,7 +178,7 @@ void createAccelTask()
 	Task_Params task_params;
 	Task_Params_init(&task_params);
 	task_params.stackSize = 450;
-	task_params.priority = 3;
+	task_params.priority = 4;
 	task_params.stack = &accelTaskStack;
 	Task_construct(&accelTask, accelTaskFunc,
 					   &task_params, NULL);

@@ -20,75 +20,48 @@ Task_Struct humidityTask;
 
 static uint8_t humidityTaskStack[450];
 
+uint16_t raw_temp;
+uint16_t raw_humidity;
+//float degrees_F;
+//float relative_humidity;
+
+int temphumidityN = 0;
+
 Void humidityTaskFunc(UArg arg0, UArg arg1)
 {
 
 	Semaphore_pend(humidityLockSemaphoreHandle, BIOS_WAIT_FOREVER);
 
-    float degrees_F;
-    float relative_humidity;
-    int stopper = 0;
+	Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
+	beginHumidity();
+	Task_sleep(1000);
+	heaterOff();
+	Task_sleep(1000);
+	Semaphore_post(batonSemaphoreHandle);
 
     while (1) {
     		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
-    		if (goodToGo){
-    			if (stopper == 0){
-    				stopper += 1;
-    				beginHumidity();
-    				Task_sleep(1000);
-					heaterOff();
-					Task_sleep(1000);
-    			}
-    			else {
-    				Watchdog_clear(watchdogHandle);
-    				Watchdog_close(watchdogHandle);
-//    				PIN_setOutputValue(pinHandle, Board_PIN_LED0,!PIN_getOutputValue(Board_PIN_LED0));
-    				stopper += 1;
-					degrees_F = getTempFarenheit();
-//					Display_printf(display, 0, 0, "Temperature: %f deg F \n", degrees_F);
 
-					relative_humidity = getRelativeHumidity();
-//					Display_printf(display, 0, 0, "Relative Humidity: %f \n", relative_humidity);
+    		temphumidityN += 1;
+
+			raw_temp = getRawTemp();
+			raw_humidity = getRawHumidity();
+//			degrees_F = getTempFarenheit();
+//			relative_humidity = getRelativeHumidity();
+
+//			Display_printf(display, 0, 0,
+//							"Temp: %d \n", raw_temp);
 //
-//					Display_printf(display, 0, 0, "Cound: %d \n", stopper);
-    			}
+//			Display_printf(display, 0, 0,
+//							"Humidity: %d \n", raw_humidity);
+
+			Semaphore_post(batonSemaphoreHandle);
+
+			if (temphumidityN > 20) {
+				Semaphore_post(temphumidityDoneSemaphoreHandle);
+				Task_sleep(360000000);
     		}
-
-    		if (stopper > 100){
-
-    			// Power off sensors
-    			PIN_setOutputValue(pinHandle, IOID_21,0);
-
-    			// Turn off LED's
-    			PIN_setOutputValue(pinHandle, Board_PIN_LED0,0);
-    			PIN_setOutputValue(pinHandle, Board_PIN_LED1,0);
-
-    			////////////////////////////////////////////////////////////////
-    			// Comment out if you're not using GPS, else CPU won't sleep //
-    			UART_readCancel(uart);
-    			UART_writeCancel(uart);
-    			////////////////////////////////////////////////////////////////
-
-    			// Close i2c channel
-    			I2C_close(i2c);
-    			halt += 1;
-
-    			// Close pins
-    			PIN_close(&pinState);
-
-    			// Post semaphores so that other tasks continue to run until they
-    			// reach their sleep conditions
-    			Semaphore_post(readSemaphoreHandle);
-    			Semaphore_post(txDataSemaphoreHandle);
-    			Semaphore_post(batonSemaphoreHandle);
-
-    			// Sleep the CPU
-    			Task_sleep(6000000);
-
-    			// Reset the CPU
-    			SysCtrlSystemReset();
-    		}
-    		Semaphore_post(batonSemaphoreHandle);
+//    		SysCtrlSystemReset();
     		Task_sleep(10000);
     }
 }
@@ -99,7 +72,7 @@ void createHumidityTask()
 	Task_Params task_params;
 	Task_Params_init(&task_params);
 	task_params.stackSize = 450;
-	task_params.priority = 2;
+	task_params.priority = 1;
 	task_params.stack = &humidityTaskStack;
 	Task_construct(&humidityTask, humidityTaskFunc,
 					   &task_params, NULL);

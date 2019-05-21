@@ -60,6 +60,9 @@ static Semaphore_Handle gyroDoneSemaphoreHandle;
 static Semaphore_Struct accelDoneSemaphore;
 static Semaphore_Handle accelDoneSemaphoreHandle;
 
+static Semaphore_Struct temphumidityDoneSemaphore;
+static Semaphore_Handle temphumidityDoneSemaphoreHandle;
+
 void semaphoreSetup()
 {
     /* Create Semaphores */
@@ -116,6 +119,9 @@ void semaphoreSetup()
 
 	Semaphore_construct(&accelDoneSemaphore, 0, &semparams);
 	accelDoneSemaphoreHandle = Semaphore_handle(&accelDoneSemaphore);
+
+	Semaphore_construct(&temphumidityDoneSemaphore, 0, &semparams);
+	temphumidityDoneSemaphoreHandle = Semaphore_handle(&temphumidityDoneSemaphore);
 }
 
 

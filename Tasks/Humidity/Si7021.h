@@ -220,6 +220,18 @@ uint8_t checkID(void)
 	  }
 }
 
+ uint16_t getRawTemp(void) {
+	 uint16_t measurement;
+	 measurement = I2Cwrite1read2HumByte(ADDRESS, 0xE3);
+	 return measurement;
+ }
+
+ uint16_t getRawHumidity(void) {
+	 uint16_t measurement;
+	 measurement = I2Cwrite1read2HumByte(ADDRESS, 0xE5);
+	 return measurement;
+ }
+
  float getTempFarenheit(void) {
 	 uint16_t measurement;
 	 float degrees_C;

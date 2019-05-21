@@ -20,9 +20,12 @@ Void i2cShutdownTaskFunc(UArg arg0, UArg arg1)
 	Semaphore_pend(magDoneSemaphoreHandle, BIOS_WAIT_FOREVER);
 	Semaphore_pend(gyroDoneSemaphoreHandle, BIOS_WAIT_FOREVER);
 	Semaphore_pend(accelDoneSemaphoreHandle, BIOS_WAIT_FOREVER);
+	Semaphore_pend(temphumidityDoneSemaphoreHandle, BIOS_WAIT_FOREVER);
 
 	I2C_close(i2c);
 	Display_printf(display, 0, 0,"Done! \n");
+	Display_close(display);
+	PIN_setOutputValue(pinHandle, IOID_21, 0);
 	Task_sleep(360000000);
 
 }
