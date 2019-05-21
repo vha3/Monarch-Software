@@ -10,6 +10,7 @@
 
 #include <ti/sysbios/knl/Task.h>
 #include "Semaphore_Initialization.h"
+#include "Shared_Resources.h"
 
 Task_Struct i2cShutdownTask;
 
@@ -17,6 +18,7 @@ static uint8_t i2cShutdownTaskStack[800];
 
 Void i2cShutdownTaskFunc(UArg arg0, UArg arg1)
 {
+
 	Semaphore_pend(magDoneSemaphoreHandle, BIOS_WAIT_FOREVER);
 	Semaphore_pend(gyroDoneSemaphoreHandle, BIOS_WAIT_FOREVER);
 	Semaphore_pend(accelDoneSemaphoreHandle, BIOS_WAIT_FOREVER);

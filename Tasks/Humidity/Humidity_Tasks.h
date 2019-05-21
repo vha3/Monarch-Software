@@ -22,6 +22,7 @@ static uint8_t humidityTaskStack[450];
 
 uint16_t raw_temp;
 uint16_t raw_humidity;
+
 //float degrees_F;
 //float relative_humidity;
 
@@ -49,15 +50,19 @@ Void humidityTaskFunc(UArg arg0, UArg arg1)
 //			degrees_F = getTempFarenheit();
 //			relative_humidity = getRelativeHumidity();
 
+			average_temp += (raw_temp >> 4);
+			average_humidity += (raw_humidity >> 4);
+
+
 //			Display_printf(display, 0, 0,
-//							"Temp: %d \n", raw_temp);
+//							"Temp: %f \n", degrees_F);
 //
 //			Display_printf(display, 0, 0,
-//							"Humidity: %d \n", raw_humidity);
+//							"Humidity: %f \n", relative_humidity);
 
 			Semaphore_post(batonSemaphoreHandle);
 
-			if (temphumidityN > 20) {
+			if (temphumidityN >= 16) {
 				Semaphore_post(temphumidityDoneSemaphoreHandle);
 				Task_sleep(360000000);
     		}
