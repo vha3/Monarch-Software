@@ -12,17 +12,14 @@
 #include "Semaphore_Initialization.h"
 #include "Shared_Resources.h"
 
+/* Task struct */
 Task_Struct adcTask;
 
+/* Task memory allocation */
 static uint8_t adcTaskStack[400];
 
-
-/* ADC conversion result variables */
 uint16_t adcValue1;
 uint32_t adcValue1MicroVolt;
-
-uint16_t adcValue0;
-uint32_t adcValue0MicroVolt;
 
 uint16_t adcValue3;
 uint32_t adcValue3MicroVolt;
@@ -30,7 +27,8 @@ uint32_t adcValue3MicroVolt;
 Void adcTaskFunc(UArg arg0, UArg arg1)
 {
 	ADC_init();
-	adcSetup();
+	adc1Setup();
+	adc3Setup();
 
 	int_fast16_t res;
     while (1) {
@@ -63,37 +61,6 @@ Void adcTaskFunc(UArg arg0, UArg arg1)
 			}
 			else {
 //				Display_printf(display, 0, 0, "ADC channel 1 convert failed\n");
-			}
-
-    		res = ADC_convert(adc0, &adcValue0);
-    		if (res == ADC_STATUS_SUCCESS) {
-
-				adcValue0MicroVolt = ADC_convertRawToMicroVolts(adc0, adcValue0);
-//				Display_printf(display, 0, 0,
-//					"ADC channel 0 convert result: %d uV\n", adcValue0MicroVolt);
-
-				if (adcValue0MicroVolt > 800000){
-					if (goodToGo){
-						continue;
-					}
-					else {
-						PIN_setOutputValue(pinHandle, IOID_21, 1);
-						int delayer = 0;
-						while(delayer < 10000){
-							delayer += 1;
-						}
-						Semaphore_post(magLockSemaphoreHandle);
-					}
-				}
-
-				else {
-					Task_sleep(6000000);
-				}
-
-
-			}
-			else {
-//				Display_printf(display, 0, 0, "ADC channel 0 convert failed\n");
 			}
 //    		}
     		/* 10 Hz */

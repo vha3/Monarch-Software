@@ -17,23 +17,29 @@ ADC_Handle   adc0;
 ADC_Handle	 adc3;
 ADC_Params   params;
 
-void adcSetup()
+void adc0Setup()
 {
-    ADC_Params_init(&params);
-    adc0 = ADC_open(Board_ADC0, &params);
+	ADC_Params_init(&params);
+	adc0 = ADC_open(Board_ADC0, &params);
 
-    if (adc0 == NULL) {
-        while (1);
-    }
+	if (adc0 == NULL) {
+		while (1);
+	}
+}
 
-    ADC_Params_init(&params);
-    adc1 = ADC_open(Board_ADC1, &params);
+void adc1Setup()
+{
+	ADC_Params_init(&params);
+	adc1 = ADC_open(Board_ADC1, &params);
 
-    if (adc1 == NULL) {
-        while (1);
-    }
+	if (adc1 == NULL) {
+		while (1);
+	}
+}
 
-    ADC_Params_init(&params);
+void adc3Setup()
+{
+	ADC_Params_init(&params);
 	adc3 = ADC_open(Board_ADC3, &params);
 
 	if (adc3 == NULL) {

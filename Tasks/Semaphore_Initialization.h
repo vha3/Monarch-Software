@@ -51,6 +51,15 @@ static Semaphore_Handle humidityLockSemaphoreHandle;
 static Semaphore_Struct lbtDoneSemaphore;
 static Semaphore_Handle lbtDoneSemaphoreHandle;
 
+static Semaphore_Struct magDoneSemaphore;
+static Semaphore_Handle magDoneSemaphoreHandle;
+
+static Semaphore_Struct gyroDoneSemaphore;
+static Semaphore_Handle gyroDoneSemaphoreHandle;
+
+static Semaphore_Struct accelDoneSemaphore;
+static Semaphore_Handle accelDoneSemaphoreHandle;
+
 void semaphoreSetup()
 {
     /* Create Semaphores */
@@ -98,6 +107,15 @@ void semaphoreSetup()
 
 	Semaphore_construct(&lbtDoneSemaphore, 0, &semparams);
 	lbtDoneSemaphoreHandle = Semaphore_handle(&lbtDoneSemaphore);
+
+	Semaphore_construct(&magDoneSemaphore, 0, &semparams);
+	magDoneSemaphoreHandle = Semaphore_handle(&magDoneSemaphore);
+
+	Semaphore_construct(&gyroDoneSemaphore, 0, &semparams);
+	gyroDoneSemaphoreHandle = Semaphore_handle(&gyroDoneSemaphore);
+
+	Semaphore_construct(&accelDoneSemaphore, 0, &semparams);
+	accelDoneSemaphoreHandle = Semaphore_handle(&accelDoneSemaphore);
 }
 
 

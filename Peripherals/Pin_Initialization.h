@@ -11,7 +11,8 @@
 #include <ti/drivers/PIN.h>
 #include <ti/drivers/pin/PINCC26XX.h>
 #include "Watchdog_Initialization.h"
-#include "Clock_Initialization.h"
+#include "./../Tasks/Semaphore_Initialization.h"
+//#include "Clock_Initialization.h"
 
 /* Example/Board Header files */
 #include "Board.h"

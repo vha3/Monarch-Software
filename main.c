@@ -22,24 +22,26 @@
 /* Peripherals */
 //#include <Peripherals/Clock_Initialization.h>
 #include <Peripherals/Pin_Initialization.h>
-#include <Peripherals/Watchdog_Initialization.h>
+//#include <Peripherals/Watchdog_Initialization.h>
 #include <Peripherals/ADC_Initialization.h>
 #include <Peripherals/Display_Initialization.h>
-#include <Peripherals/PWM_Initialization.h>
+//#include <Peripherals/PWM_Initialization.h>
 
 /* Board Header file */
 #include "Board.h"
 
 /* Tasks */
-#include "Tasks/GPS_Task.h"
-#include "Tasks/Radio/RF_RX_Tasks.h"
-#include "Tasks/Radio/RF_TX_Tasks.h"
+//#include "Tasks/GPS_Task.h"
+//#include "Tasks/Radio/RF_RX_Tasks.h"
+//#include "Tasks/Radio/RF_TX_Tasks.h"
 #include "Tasks/IMU/IMU_Tasks.h"
 #include <Tasks/Semaphore_Initialization.h>
-#include <Tasks/Shared_Resources.h>
-#include <Tasks/ADC_Tasks.h>
+//#include <Tasks/Shared_Resources.h>
+//#include <Tasks/ADC_Tasks.h>
+#include <Tasks/Startup_Task.h>
+#include <Tasks/I2C_Shutdown_Task.h>
 //#include <Tasks/PWM_Tasks.h>
-#include <Tasks/Humidity/Humidity_Tasks.h>
+//#include <Tasks/Humidity/Humidity_Tasks.h>
 
 
 /*
@@ -56,11 +58,11 @@ int main(void)
 //	pwmSetup();
 
     /* Use one or the other of the below. If using GPS, need UART */
-//    Display_init();
-//    displaySetup();
+    Display_init();
+    displaySetup();
 
     /* Setup peripherals and semaphores */
-    wdtSetup();
+//    wdtSetup();
 //    clockSetup();
 	semaphoreSetup();
 	pinSetup();
@@ -74,12 +76,14 @@ int main(void)
     createMagTask();
     createGyroTask();
     createAccelTask();
-    createGPSTask();
-    createADCTask();
-    createRFRXTasks();
-    createRFTXTasks();
+//    createGPSTask();
+//    createADCTask();
+//    createRFRXTasks();
+//    createRFTXTasks();
 //    createPWMTask();
-    createHumidityTask();
+//    createHumidityTask();
+    createStartupTask();
+    createi2cShutdownTask();
 
     /* Start kernel. */
     BIOS_start();
