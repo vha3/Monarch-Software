@@ -37,7 +37,7 @@
 #include "Tasks/IMU/IMU_Tasks.h"
 #include <Tasks/Semaphore_Initialization.h>
 //#include <Tasks/Shared_Resources.h>
-//#include <Tasks/ADC_Tasks.h>
+#include <Tasks/ADC_Tasks.h>
 #include <Tasks/Startup_Task.h>
 #include <Tasks/I2C_Shutdown_Task.h>
 //#include <Tasks/PWM_Tasks.h>
@@ -62,7 +62,7 @@ int main(void)
     displaySetup();
 
     /* Setup peripherals and semaphores */
-//    wdtSetup();
+    wdtSetup();
 //    clockSetup();
 	semaphoreSetup();
 	pinSetup();
@@ -77,7 +77,7 @@ int main(void)
     createGyroTask();
     createAccelTask();
 //    createGPSTask();
-//    createADCTask();
+    createADCTask();
 //    createRFRXTasks();
 //    createRFTXTasks();
 //    createPWMTask();

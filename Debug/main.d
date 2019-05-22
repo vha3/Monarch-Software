@@ -239,6 +239,8 @@ main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/p
 main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/I2C.h
 main.obj: /Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/Tasks/IMU/LSM9DS1_Registers.h
 main.obj: /Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/Tasks/IMU/LSM9DS1_Types.h
+main.obj: /Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/Tasks/ADC_Tasks.h
+main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/Task.h
 main.obj: /Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/Tasks/Startup_Task.h
 main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/Task.h
 main.obj: /Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/Tasks/I2C_Shutdown_Task.h
@@ -514,6 +516,8 @@ main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/p
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/I2C.h: 
 /Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/Tasks/IMU/LSM9DS1_Registers.h: 
 /Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/Tasks/IMU/LSM9DS1_Types.h: 
+/Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/Tasks/ADC_Tasks.h: 
+/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/Task.h: 
 /Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/Tasks/Startup_Task.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/Task.h: 
 /Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/Tasks/I2C_Shutdown_Task.h: 

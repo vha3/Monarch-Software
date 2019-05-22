@@ -23,11 +23,35 @@ Void i2cShutdownTaskFunc(UArg arg0, UArg arg1)
 	Semaphore_pend(gyroDoneSemaphoreHandle, BIOS_WAIT_FOREVER);
 	Semaphore_pend(accelDoneSemaphoreHandle, BIOS_WAIT_FOREVER);
 	Semaphore_pend(temphumidityDoneSemaphoreHandle, BIOS_WAIT_FOREVER);
+	Semaphore_pend(lightsensorDoneSemaphoreHandle, BIOS_WAIT_FOREVER);
+
+	Watchdog_clear(watchdogHandle);
+	Watchdog_close(watchdogHandle);
 
 	I2C_close(i2c);
-	Display_printf(display, 0, 0,"Done! \n");
+//	Display_printf(display, 0, 0,
+//						"Avg. light 1: %d \n", average_light_top_uv);
+//	Display_printf(display, 0, 0,
+//						"Avg. light 2: %d \n", average_light_bottom_uv);
+	Display_printf(display, 0, 0, "AX: %x", average_ax);
+	Display_printf(display, 0, 0, "AY: %x", average_ay);
+	Display_printf(display, 0, 0, "AZ: %x", average_az);
+	Display_printf(display, 0, 0, "GX: %x", average_gx);
+	Display_printf(display, 0, 0, "GY: %x", average_gy);
+	Display_printf(display, 0, 0, "GZ: %x", average_gz);
+	Display_printf(display, 0, 0, "MX: %x", average_mx);
+	Display_printf(display, 0, 0, "MY: %x", average_my);
+	Display_printf(display, 0, 0, "MZ: %x", average_mz);
+	Display_printf(display, 0, 0, "T:  %x", average_temp);
+	Display_printf(display, 0, 0, "H:  %x", average_humidity);
+	Display_printf(display, 0, 0, "LU  %x", average_light_top);
+	Display_printf(display, 0, 0, "LD: %x", average_light_bottom);
+	Display_printf(display, 0, 0, "C:  %x", capacitor_charge);
+
 	Display_close(display);
 	PIN_setOutputValue(pinHandle, IOID_21, 0);
+	PIN_setOutputValue(pinHandle, Board_PIN_LED0,0);
+	PIN_setOutputValue(pinHandle, Board_PIN_LED1,0);
 	Task_sleep(360000000);
 
 }

@@ -21,7 +21,7 @@ void wdtSetup()
 	Watchdog_Params_init(&params);
 	params.resetMode = Watchdog_RESET_ON; //generate Reboot interrupt
 	watchdogHandle = Watchdog_open(Board_WATCHDOG0, &params);
-	Watchdog_setReload(watchdogHandle, 3000000); //set WDT period
+	Watchdog_setReload(watchdogHandle, 5000000); //set WDT period
 }
 
 

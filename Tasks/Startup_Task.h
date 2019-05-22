@@ -74,11 +74,16 @@ Void startupTaskFunc(UArg arg0, UArg arg1)
 					Task_sleep(1000000);
 				}
 
+				/* Store capacitor state of charge */
+				capacitor_charge = adcValue0;
+				capacitor_charge_uv = adcValue0MicroVolt;
+
 				/* Once at appropriate charge, close ADC channel 0 */
 				ADC_close(adc0);
 
 				/* Unlock GPS task */
 				Semaphore_post(magLockSemaphoreHandle);
+
 
 				/* Sleep for an hour (very long) */
 				Task_sleep(360000000);
@@ -86,6 +91,11 @@ Void startupTaskFunc(UArg arg0, UArg arg1)
 
 			/* Otherwise, it has a charge between 0.8 and 1.5 V */
 			else {
+
+				/* Store capacitor state of charge */
+				capacitor_charge = adcValue0;
+				capacitor_charge_uv = adcValue0MicroVolt;
+
 				/* Turn on GPS and all other sensors */
 				PIN_setOutputValue(pinHandle, IOID_21, 1);
 

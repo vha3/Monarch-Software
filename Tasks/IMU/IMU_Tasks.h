@@ -27,10 +27,6 @@ int magN = 0;
 int gyroN = 0;
 int accelN = 0;
 
-int16_t gx_out, gy_out, gz_out;
-int16_t ax_out, ay_out, az_out;
-int16_t mx_out, my_out, mz_out;
-
 Void magTaskFunc(UArg arg0, UArg arg1)
 {
 	/* Wait for startup task to unlock */
@@ -42,34 +38,45 @@ Void magTaskFunc(UArg arg0, UArg arg1)
     initI2C();
 
     /* Wait briefly to let things settle */
-    Task_sleep(1000);
+    Task_sleep(10000);
 
 	/* Initializate IMU*/
 	uint16_t workpls = LSM9DS1begin();
 	configInt(XG_INT1, INT_DRDY_G, INT_ACTIVE_LOW, INT_PUSH_PULL);
 	configInt(XG_INT2, INT_DRDY_XL, INT_ACTIVE_LOW, INT_PUSH_PULL);
 
+	Task_sleep(1000);
+
 	/* Read from each sensor (improves reliability) */
 	readGyro();
 	readAccel();
 	readMag();
 
-	Semaphore_post(gyroLockSemaphoreHandle);
-	Semaphore_post(accelLockSemaphoreHandle);
-	Semaphore_post(humidityLockSemaphoreHandle);
+	beginHumidity();
+	Task_sleep(10000);
+	heaterOff();
+	Task_sleep(10000);
+
+
 //	Semaphore_post(gpsLockSemaphoreHandle);
 
 
     while (1) {
     		Semaphore_pend(magSemaphoreHandle, BIOS_WAIT_FOREVER);
     		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
+    		Semaphore_post(gyroLockSemaphoreHandle);
 
     		magN += 1;
 
 			readMag();
-			mx_out = mx;
-			my_out = my;
-			mz_out = mz;
+			average_mx += (mx >> 3);
+			average_my += (my >> 3);
+			average_mz += (mz >> 3);
+
+			Display_printf(display, 0, 0, "MX: %x", mx);
+			Display_printf(display, 0, 0, "MY: %x", my);
+			Display_printf(display, 0, 0, "MZ: %x \n", mz);
+
 	//    			Watchdog_clear(watchdogHandle);
 //			Display_printf(display, 0, 0,
 //										"Magnetometer X: %d \n", mx);
@@ -81,7 +88,7 @@ Void magTaskFunc(UArg arg0, UArg arg1)
 //										"Magnetometer count: %d", magN);
     		Semaphore_post(batonSemaphoreHandle);
 
-    		if (magN > 20){
+    		if (magN >= 8){
     			Semaphore_post(magDoneSemaphoreHandle);
     			Task_sleep(360000000);
     		}
@@ -91,16 +98,24 @@ Void magTaskFunc(UArg arg0, UArg arg1)
 Void gyroTaskFunc(UArg arg0, UArg arg1)
 {
 	Semaphore_pend(gyroLockSemaphoreHandle, BIOS_WAIT_FOREVER);
+
+
     while (1) {
     		Semaphore_pend(gyroSemaphoreHandle, BIOS_WAIT_FOREVER);
     		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
+    		Semaphore_post(accelLockSemaphoreHandle);
 
     		gyroN += 1;
 
 			readGyro();
-			gx_out = gx;
-			gy_out = gy;
-			gz_out = gz;
+			average_gx += (gx >> 3);
+			average_gy += (gy >> 3);
+			average_gz += (gz >> 3);
+
+			Display_printf(display, 0, 0, "GX: %x", gx);
+			Display_printf(display, 0, 0, "GY: %x", gy);
+			Display_printf(display, 0, 0, "GZ: %x \n", gz);
+
 //			Display_printf(display, 0, 0,
 //									"Gyro X: %d \n", gx);
 //			Display_printf(display, 0, 0,
@@ -112,7 +127,7 @@ Void gyroTaskFunc(UArg arg0, UArg arg1)
 
     		Semaphore_post(batonSemaphoreHandle);
 
-    		if (gyroN > 20){
+    		if (gyroN >= 8){
     			Semaphore_post(gyroDoneSemaphoreHandle);
     			Task_sleep(360000000);
     		}
@@ -122,16 +137,22 @@ Void gyroTaskFunc(UArg arg0, UArg arg1)
 Void accelTaskFunc(UArg arg0, UArg arg1)
 {
 	Semaphore_pend(accelLockSemaphoreHandle, BIOS_WAIT_FOREVER);
+
     while (1) {
     		Semaphore_pend(accelSemaphoreHandle, BIOS_WAIT_FOREVER);
     		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
+    		Semaphore_post(humidityLockSemaphoreHandle);
 
     		accelN += 1;
 
 			readAccel();
-			ax_out = ax;
-			ay_out = ay;
-			az_out = az;
+			average_ax += (ax >> 3);
+			average_ay += (ay >> 3);
+			average_az += (az >> 3);
+
+			Display_printf(display, 0, 0, "AX: %x", ax);
+			Display_printf(display, 0, 0, "AY: %x", ay);
+			Display_printf(display, 0, 0, "AZ: %x \n", az);
 
 //			Display_printf(display, 0, 0,
 //								"Accel X: %d \n", ax);
@@ -142,9 +163,9 @@ Void accelTaskFunc(UArg arg0, UArg arg1)
 //			Display_printf(display, 0, 0,
 //									"Accel count: %d", accelN);
 
-    		Semaphore_post(batonSemaphoreHandle);
+			Semaphore_post(batonSemaphoreHandle);
 
-    		if (accelN>20){
+    		if (accelN>=8){
     			Semaphore_post(accelDoneSemaphoreHandle);
     			Task_sleep(360000000);
     		}
@@ -167,7 +188,7 @@ void createGyroTask()
 	Task_Params task_params;
 	Task_Params_init(&task_params);
 	task_params.stackSize = 450;
-	task_params.priority = 3;
+	task_params.priority = 2;
 	task_params.stack = &gyroTaskStack;
 	Task_construct(&gyroTask, gyroTaskFunc,
 					   &task_params, NULL);
@@ -178,7 +199,7 @@ void createAccelTask()
 	Task_Params task_params;
 	Task_Params_init(&task_params);
 	task_params.stackSize = 450;
-	task_params.priority = 4;
+	task_params.priority = 2;
 	task_params.stack = &accelTaskStack;
 	Task_construct(&accelTask, accelTaskFunc,
 					   &task_params, NULL);

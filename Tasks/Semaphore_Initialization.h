@@ -48,6 +48,9 @@ static Semaphore_Handle gpsLockSemaphoreHandle;
 static Semaphore_Struct humidityLockSemaphore;
 static Semaphore_Handle humidityLockSemaphoreHandle;
 
+static Semaphore_Struct lightsensorLockSemaphore;
+static Semaphore_Handle lightsensorLockSemaphoreHandle;
+
 static Semaphore_Struct lbtDoneSemaphore;
 static Semaphore_Handle lbtDoneSemaphoreHandle;
 
@@ -62,6 +65,9 @@ static Semaphore_Handle accelDoneSemaphoreHandle;
 
 static Semaphore_Struct temphumidityDoneSemaphore;
 static Semaphore_Handle temphumidityDoneSemaphoreHandle;
+
+static Semaphore_Struct lightsensorDoneSemaphore;
+static Semaphore_Handle lightsensorDoneSemaphoreHandle;
 
 void semaphoreSetup()
 {
@@ -108,6 +114,9 @@ void semaphoreSetup()
 	Semaphore_construct(&humidityLockSemaphore, 0, &semparams);
 	humidityLockSemaphoreHandle = Semaphore_handle(&humidityLockSemaphore);
 
+	Semaphore_construct(&lightsensorLockSemaphore, 0, &semparams);
+	lightsensorLockSemaphoreHandle = Semaphore_handle(&lightsensorLockSemaphore);
+
 	Semaphore_construct(&lbtDoneSemaphore, 0, &semparams);
 	lbtDoneSemaphoreHandle = Semaphore_handle(&lbtDoneSemaphore);
 
@@ -122,6 +131,9 @@ void semaphoreSetup()
 
 	Semaphore_construct(&temphumidityDoneSemaphore, 0, &semparams);
 	temphumidityDoneSemaphoreHandle = Semaphore_handle(&temphumidityDoneSemaphore);
+
+	Semaphore_construct(&lightsensorDoneSemaphore, 0, &semparams);
+	lightsensorDoneSemaphoreHandle = Semaphore_handle(&lightsensorDoneSemaphore);
 }
 
 
