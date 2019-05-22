@@ -42,10 +42,10 @@ Void humidityTaskFunc(UArg arg0, UArg arg1)
 
     		Task_sleep(6000);
 			raw_temp = getRawTemp();
-			Display_printf(display, 0, 0, "T:  %x", raw_temp);
+//			Display_printf(display, 0, 0, "T:  %x", raw_temp);
 			Task_sleep(6000);
 			raw_humidity = getRawHumidity();
-			Display_printf(display, 0, 0, "H:  %x \n", raw_humidity);
+//			Display_printf(display, 0, 0, "H:  %x \n", raw_humidity);
 
 //			degrees_F = getTempFarenheit();
 //			relative_humidity = getRelativeHumidity();

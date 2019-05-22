@@ -73,8 +73,8 @@ Void adcTaskFunc(UArg arg0, UArg arg1)
 //				Display_printf(display, 0, 0, "ADC channel 1 convert failed\n");
 			}
 
-    		Display_printf(display, 0, 0, "LU: %x", adcValue1);
-    		Display_printf(display, 0, 0, "LD: %x \n", adcValue3);
+//    		Display_printf(display, 0, 0, "LU: %x", adcValue1);
+//    		Display_printf(display, 0, 0, "LD: %x \n", adcValue3);
 
     		if (lightsensorN >= 8) {
     			ADC_close(adc1);

@@ -12,6 +12,7 @@
 #include "../Semaphore_Initialization.h"
 #include "../Shared_Resources.h"
 #include "LSM9DS1.h"
+#include "../Humidity/Si7021.h"
 
 /* Task structs */
 Task_Struct magTask;
@@ -73,9 +74,9 @@ Void magTaskFunc(UArg arg0, UArg arg1)
 			average_my += (my >> 3);
 			average_mz += (mz >> 3);
 
-			Display_printf(display, 0, 0, "MX: %x", mx);
-			Display_printf(display, 0, 0, "MY: %x", my);
-			Display_printf(display, 0, 0, "MZ: %x \n", mz);
+//			Display_printf(display, 0, 0, "MX: %x", mx);
+//			Display_printf(display, 0, 0, "MY: %x", my);
+//			Display_printf(display, 0, 0, "MZ: %x \n", mz);
 
 	//    			Watchdog_clear(watchdogHandle);
 //			Display_printf(display, 0, 0,
@@ -112,9 +113,9 @@ Void gyroTaskFunc(UArg arg0, UArg arg1)
 			average_gy += (gy >> 3);
 			average_gz += (gz >> 3);
 
-			Display_printf(display, 0, 0, "GX: %x", gx);
-			Display_printf(display, 0, 0, "GY: %x", gy);
-			Display_printf(display, 0, 0, "GZ: %x \n", gz);
+//			Display_printf(display, 0, 0, "GX: %x", gx);
+//			Display_printf(display, 0, 0, "GY: %x", gy);
+//			Display_printf(display, 0, 0, "GZ: %x \n", gz);
 
 //			Display_printf(display, 0, 0,
 //									"Gyro X: %d \n", gx);
@@ -150,9 +151,9 @@ Void accelTaskFunc(UArg arg0, UArg arg1)
 			average_ay += (ay >> 3);
 			average_az += (az >> 3);
 
-			Display_printf(display, 0, 0, "AX: %x", ax);
-			Display_printf(display, 0, 0, "AY: %x", ay);
-			Display_printf(display, 0, 0, "AZ: %x \n", az);
+//			Display_printf(display, 0, 0, "AX: %x", ax);
+//			Display_printf(display, 0, 0, "AY: %x", ay);
+//			Display_printf(display, 0, 0, "AZ: %x \n", az);
 
 //			Display_printf(display, 0, 0,
 //								"Accel X: %d \n", ax);

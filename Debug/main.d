@@ -239,6 +239,8 @@ main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/p
 main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/I2C.h
 main.obj: /Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/Tasks/IMU/LSM9DS1_Registers.h
 main.obj: /Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/Tasks/IMU/LSM9DS1_Types.h
+main.obj: ../Tasks/IMU/../Humidity/Si7021.h
+main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/Clock.h
 main.obj: /Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/Tasks/ADC_Tasks.h
 main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/Task.h
 main.obj: /Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/Tasks/Startup_Task.h
@@ -274,8 +276,6 @@ main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devic
 main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/vims.h
 main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_vims.h
 main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/Task.h
-main.obj: /Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/Tasks/Humidity/Si7021.h
-main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/Clock.h
 
 ../main.c: 
 /Applications/ti/xdctools_3_50_02_20_core/packages/xdc/std.h: 
@@ -516,6 +516,8 @@ main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/p
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/I2C.h: 
 /Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/Tasks/IMU/LSM9DS1_Registers.h: 
 /Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/Tasks/IMU/LSM9DS1_Types.h: 
+../Tasks/IMU/../Humidity/Si7021.h: 
+/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/Clock.h: 
 /Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/Tasks/ADC_Tasks.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/Task.h: 
 /Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/Tasks/Startup_Task.h: 
@@ -551,5 +553,3 @@ main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/p
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/vims.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_vims.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/Task.h: 
-/Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/Tasks/Humidity/Si7021.h: 
-/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/Clock.h: 
