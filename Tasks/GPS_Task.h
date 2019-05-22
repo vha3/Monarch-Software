@@ -12,6 +12,7 @@
 #include <ti/drivers/uart/UARTCC26XX.h>
 #include <ti/sysbios/knl/Task.h>
 #include "Semaphore_Initialization.h"
+#include "Shared_Resources.h"
 
 UART_Handle uart;
 UART_Params uartParams;
@@ -19,7 +20,7 @@ UART_Params uartParams;
 int bytesRead = 0;
 
 Task_Struct gpsTask;
-static uint8_t gpsTaskStack[1024];
+static uint8_t gpsTaskStack[2000];
 
 void Serial_RxDataCallback(UART_Handle handle, void *buffer, size_t size)
 {
@@ -63,21 +64,39 @@ Void gpsFunc(UArg arg0, UArg arg1)
 	}
 
 	while (1) {
-		if(halt){
-			UART_readCancel(uart);
-			UART_writeCancel(uart);
-			UART_close(uart);
-			Task_sleep(600000000);
+
+
+
+		int i=0;
+		for (i=0; i<2; i++){
+			UART_control(uart, UARTCC26XX_CMD_RX_FIFO_FLUSH, NULL);
+			int numBytes = UART_read(uart, &input, sizeof(input));
+			Semaphore_pend(readSemaphoreHandle, BIOS_WAIT_FOREVER);
+			UART_write(uart, &input, bytesRead);
+			UART_write(uart, newlinePrompt, sizeof(newlinePrompt));
+			UART_control(uart, UARTCC26XX_CMD_RX_FIFO_FLUSH, NULL);
+
+			bytes_read = numBytes;
 		}
-		else{
-			if(goodToGo){
-				int numBytes = UART_read(uart, &input, sizeof(input));
-				Semaphore_pend(readSemaphoreHandle, BIOS_WAIT_FOREVER);
-				UART_write(uart, &input, bytesRead);
-				UART_write(uart, newlinePrompt, sizeof(newlinePrompt));
-				UART_control(uart, UARTCC26XX_CMD_RX_FIFO_FLUSH, NULL);
-			}
-		}
+
+
+
+//		numBytes = UART_read(uart, &input, sizeof(input));
+//		Semaphore_pend(readSemaphoreHandle, BIOS_WAIT_FOREVER);
+//		UART_write(uart, &input, bytesRead);
+//		UART_write(uart, newlinePrompt, sizeof(newlinePrompt));
+//		UART_control(uart, UARTCC26XX_CMD_RX_FIFO_FLUSH, NULL);
+
+		UART_readCancel(uart);
+		UART_writeCancel(uart);
+		UART_close(uart);
+
+		PIN_setOutputValue(pinHandle, IOID_21, 0);
+		PIN_setOutputValue(pinHandle, Board_PIN_LED0,0);
+		PIN_setOutputValue(pinHandle, Board_PIN_LED1,0);
+
+		/* Sleep (1 hr) */
+		Task_sleep(360000000);
 	}
 }
 
@@ -85,8 +104,8 @@ void createGPSTask()
 {
 	Task_Params task_params;
 	Task_Params_init(&task_params);
-	task_params.stackSize = 1024;
-	task_params.priority = 1;
+	task_params.stackSize = 2000;
+	task_params.priority = 2;
 	task_params.stack = &gpsTaskStack;
 	Task_construct(&gpsTask, gpsFunc,
 				   &task_params, NULL);

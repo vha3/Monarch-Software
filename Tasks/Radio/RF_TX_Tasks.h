@@ -11,8 +11,8 @@
 #include "RF_Globals.h"
 #include <ti/sysbios/knl/Task.h>
 #include "../../Peripherals/Pin_Initialization.h"
+#include "../I2C/LSM9DS1.h"
 #include "../Semaphore_Initialization.h"
-#include "../IMU/LSM9DS1.h"
 //#include "TRIAD.h"
 
 Task_Struct txDataTask;

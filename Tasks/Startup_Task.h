@@ -105,7 +105,7 @@ Void startupTaskFunc(UArg arg0, UArg arg1)
 				/* Close ADC channel 0 */
 				ADC_close(adc0);
 
-				/* Unlock GPS task */
+				/* Unlock i2c task */
 				Semaphore_post(magLockSemaphoreHandle);
 
 				/* Sleep for an hour (very long) */

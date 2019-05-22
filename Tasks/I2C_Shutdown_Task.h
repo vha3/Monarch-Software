@@ -19,39 +19,33 @@ static uint8_t i2cShutdownTaskStack[800];
 Void i2cShutdownTaskFunc(UArg arg0, UArg arg1)
 {
 
-	Semaphore_pend(magDoneSemaphoreHandle, BIOS_WAIT_FOREVER);
-	Semaphore_pend(gyroDoneSemaphoreHandle, BIOS_WAIT_FOREVER);
-	Semaphore_pend(accelDoneSemaphoreHandle, BIOS_WAIT_FOREVER);
-	Semaphore_pend(temphumidityDoneSemaphoreHandle, BIOS_WAIT_FOREVER);
+	Semaphore_pend(i2cDoneSemaphoreHandle, BIOS_WAIT_FOREVER);
 	Semaphore_pend(lightsensorDoneSemaphoreHandle, BIOS_WAIT_FOREVER);
 
 	Watchdog_clear(watchdogHandle);
 	Watchdog_close(watchdogHandle);
 
-	I2C_close(i2c);
-//	Display_printf(display, 0, 0,
-//						"Avg. light 1: %d \n", average_light_top_uv);
-//	Display_printf(display, 0, 0,
-//						"Avg. light 2: %d \n", average_light_bottom_uv);
-	Display_printf(display, 0, 0, "AX: %x", average_ax);
-	Display_printf(display, 0, 0, "AY: %x", average_ay);
-	Display_printf(display, 0, 0, "AZ: %x", average_az);
-	Display_printf(display, 0, 0, "GX: %x", average_gx);
-	Display_printf(display, 0, 0, "GY: %x", average_gy);
-	Display_printf(display, 0, 0, "GZ: %x", average_gz);
-	Display_printf(display, 0, 0, "MX: %x", average_mx);
-	Display_printf(display, 0, 0, "MY: %x", average_my);
-	Display_printf(display, 0, 0, "MZ: %x", average_mz);
-	Display_printf(display, 0, 0, "T:  %x", average_temp);
-	Display_printf(display, 0, 0, "H:  %x", average_humidity);
-	Display_printf(display, 0, 0, "LU  %x", average_light_top);
-	Display_printf(display, 0, 0, "LD: %x", average_light_bottom);
-	Display_printf(display, 0, 0, "C:  %x", capacitor_charge);
+//	I2C_close(i2c);
+
+	Display_printf(display, 0, 0, "AX: %x", tx_ax);
+	Display_printf(display, 0, 0, "AY: %x", tx_ay);
+	Display_printf(display, 0, 0, "AZ: %x", tx_az);
+	Display_printf(display, 0, 0, "GX: %x", tx_gx);
+	Display_printf(display, 0, 0, "GY: %x", tx_gy);
+	Display_printf(display, 0, 0, "GZ: %x", tx_gz);
+	Display_printf(display, 0, 0, "MX: %x", tx_mx);
+	Display_printf(display, 0, 0, "MY: %x", tx_my);
+	Display_printf(display, 0, 0, "MZ: %x", tx_mz);
+	Display_printf(display, 0, 0, "T:  %x", tx_temp);
+	Display_printf(display, 0, 0, "H:  %x", tx_humidity);
+	Display_printf(display, 0, 0, "LU  %x", tx_light_top);
+	Display_printf(display, 0, 0, "LD: %x", tx_light_bottom);
+	Display_printf(display, 0, 0, "C:  %x \n", capacitor_charge);
 
 	Display_close(display);
-	PIN_setOutputValue(pinHandle, IOID_21, 0);
-	PIN_setOutputValue(pinHandle, Board_PIN_LED0,0);
-	PIN_setOutputValue(pinHandle, Board_PIN_LED1,0);
+
+	Semaphore_post(gpsLockSemaphoreHandle);
+
 	Task_sleep(360000000);
 
 }

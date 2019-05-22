@@ -23,7 +23,8 @@ Distributed as-is; no warranty is given.
 #define __LSM9DS1_Types_H__
 
 #include <xdc/std.h>
-#include "Tasks/IMU/LSM9DS1_Registers.h"
+
+#include "../I2C/LSM9DS1_Registers.h"
 
 // accel_scale defines all possible FSR's of the accelerometer:
 typedef enum

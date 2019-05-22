@@ -5,8 +5,8 @@
  *      Author: hunteradams
  */
 
-#ifndef TASKS_IMU_LSM9DS1_H_
-#define TASKS_IMU_LSM9DS1_H_
+#ifndef TASKS_I2C_LSM9DS1_H_
+#define TASKS_I2C_LSM9DS1_H_
 
 
 /* ===============================================================
@@ -21,10 +21,10 @@
 #include <ti/sysbios/knl/Clock.h>
 #include <ti/drivers/I2C.h>
 
+#include "../I2C/LSM9DS1_Registers.h"
+#include "../I2C/LSM9DS1_Types.h"
 /* Include board file for access to pin definitions */
 #include "Board.h"
-#include "Tasks/IMU/LSM9DS1_Registers.h"
-#include "Tasks/IMU/LSM9DS1_Types.h"
 
 
 /* ===============================================================
@@ -1218,4 +1218,4 @@ uint16_t LSM9DS1begin(void)
 	// Once everything is initialized, return the WHO_AM_I registers we read:
 	return whoAmICombined;
 }
-#endif /* TASKS_IMU_LSM9DS1_H_ */
+#endif /* TASKS_I2C_LSM9DS1_H_ */

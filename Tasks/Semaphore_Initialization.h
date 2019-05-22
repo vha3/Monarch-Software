@@ -54,8 +54,8 @@ static Semaphore_Handle lightsensorLockSemaphoreHandle;
 static Semaphore_Struct lbtDoneSemaphore;
 static Semaphore_Handle lbtDoneSemaphoreHandle;
 
-static Semaphore_Struct magDoneSemaphore;
-static Semaphore_Handle magDoneSemaphoreHandle;
+static Semaphore_Struct i2cDoneSemaphore;
+static Semaphore_Handle i2cDoneSemaphoreHandle;
 
 static Semaphore_Struct gyroDoneSemaphore;
 static Semaphore_Handle gyroDoneSemaphoreHandle;
@@ -120,8 +120,8 @@ void semaphoreSetup()
 	Semaphore_construct(&lbtDoneSemaphore, 0, &semparams);
 	lbtDoneSemaphoreHandle = Semaphore_handle(&lbtDoneSemaphore);
 
-	Semaphore_construct(&magDoneSemaphore, 0, &semparams);
-	magDoneSemaphoreHandle = Semaphore_handle(&magDoneSemaphore);
+	Semaphore_construct(&i2cDoneSemaphore, 0, &semparams);
+	i2cDoneSemaphoreHandle = Semaphore_handle(&i2cDoneSemaphore);
 
 	Semaphore_construct(&gyroDoneSemaphore, 0, &semparams);
 	gyroDoneSemaphoreHandle = Semaphore_handle(&gyroDoneSemaphore);
