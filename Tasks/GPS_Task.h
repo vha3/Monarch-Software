@@ -54,30 +54,35 @@ Void gpsFunc(UArg arg0, UArg arg1)
 	UART_control(uart, UARTCC26XX_CMD_RETURN_PARTIAL_ENABLE, NULL);
 	char        input[512] = {0};
 	const char 	newlinePrompt[] = "\r\n";
+	const char  startind[] = "Starting now\r\n";
+	const char  endind[] = "Ending now\r\n";
 
-	uint8_t query[] = {0xa0, 0xa1, 0x00, 0x04, 0x64, 0x0a, 0x01, 0x01, 0x6e, 0x0d, 0x0a};
-	UART_write(uart, query, sizeof(query));
-	int i=0;
-	while(i<sizeof(query)){
-		UART_write(uart, &query[i], 1);
-		i+=1;
-	}
+//	uint8_t query[] = {0xa0, 0xa1, 0x00, 0x04, 0x64, 0x0a, 0x01, 0x01, 0x6e, 0x0d, 0x0a};
+//	UART_write(uart, query, sizeof(query));
+//	int i=0;
+//	while(i<sizeof(query)){
+//		UART_write(uart, &query[i], 1);
+//		i+=1;
+//	}
 
 	while (1) {
-
-
+		Task_sleep(10000);
 
 		int i=0;
-		for (i=0; i<2; i++){
+		for (i=0; i<1; i++){
 			UART_control(uart, UARTCC26XX_CMD_RX_FIFO_FLUSH, NULL);
+			UART_write(uart, startind, sizeof(startind));
 			int numBytes = UART_read(uart, &input, sizeof(input));
 			Semaphore_pend(readSemaphoreHandle, BIOS_WAIT_FOREVER);
 			UART_write(uart, &input, bytesRead);
-			UART_write(uart, newlinePrompt, sizeof(newlinePrompt));
+			UART_write(uart, endind, sizeof(endind));
 			UART_control(uart, UARTCC26XX_CMD_RX_FIFO_FLUSH, NULL);
 
 			bytes_read = numBytes;
 		}
+
+		Watchdog_clear(watchdogHandle);
+		Watchdog_close(watchdogHandle);
 
 
 

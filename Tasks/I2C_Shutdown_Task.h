@@ -23,24 +23,24 @@ Void i2cShutdownTaskFunc(UArg arg0, UArg arg1)
 	Semaphore_pend(lightsensorDoneSemaphoreHandle, BIOS_WAIT_FOREVER);
 
 	Watchdog_clear(watchdogHandle);
-	Watchdog_close(watchdogHandle);
+//	Watchdog_close(watchdogHandle);
 
 //	I2C_close(i2c);
 
-	Display_printf(display, 0, 0, "AX: %x", tx_ax);
-	Display_printf(display, 0, 0, "AY: %x", tx_ay);
-	Display_printf(display, 0, 0, "AZ: %x", tx_az);
-	Display_printf(display, 0, 0, "GX: %x", tx_gx);
-	Display_printf(display, 0, 0, "GY: %x", tx_gy);
-	Display_printf(display, 0, 0, "GZ: %x", tx_gz);
-	Display_printf(display, 0, 0, "MX: %x", tx_mx);
-	Display_printf(display, 0, 0, "MY: %x", tx_my);
-	Display_printf(display, 0, 0, "MZ: %x", tx_mz);
-	Display_printf(display, 0, 0, "T:  %x", tx_temp);
-	Display_printf(display, 0, 0, "H:  %x", tx_humidity);
-	Display_printf(display, 0, 0, "LU  %x", tx_light_top);
-	Display_printf(display, 0, 0, "LD: %x", tx_light_bottom);
-	Display_printf(display, 0, 0, "C:  %x \n", capacitor_charge);
+//	Display_printf(display, 0, 0, "AX: %x", tx_ax);
+//	Display_printf(display, 0, 0, "AY: %x", tx_ay);
+//	Display_printf(display, 0, 0, "AZ: %x", tx_az);
+//	Display_printf(display, 0, 0, "GX: %x", tx_gx);
+//	Display_printf(display, 0, 0, "GY: %x", tx_gy);
+//	Display_printf(display, 0, 0, "GZ: %x", tx_gz);
+//	Display_printf(display, 0, 0, "MX: %x", tx_mx);
+//	Display_printf(display, 0, 0, "MY: %x", tx_my);
+//	Display_printf(display, 0, 0, "MZ: %x", tx_mz);
+//	Display_printf(display, 0, 0, "T:  %x", tx_temp);
+//	Display_printf(display, 0, 0, "H:  %x", tx_humidity);
+//	Display_printf(display, 0, 0, "LU  %x", tx_light_top);
+//	Display_printf(display, 0, 0, "LD: %x", tx_light_bottom);
+//	Display_printf(display, 0, 0, "C:  %x \n", capacitor_charge);
 
 	Display_close(display);
 
