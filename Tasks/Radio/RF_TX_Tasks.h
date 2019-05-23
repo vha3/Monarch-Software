@@ -13,7 +13,8 @@
 #include "../../Peripherals/Pin_Initialization.h"
 #include "../I2C/LSM9DS1.h"
 #include "../Semaphore_Initialization.h"
-//#include "TRIAD.h"
+#include "../Shared_Resources.h"
+#include <ti/devices/cc13x0/driverlib/sys_ctrl.h>
 
 Task_Struct txDataTask;
 
@@ -70,6 +71,9 @@ void lbtDoneCb(EasyLink_Status status)
 
 Void txDataTaskFunc(UArg arg0, UArg arg1)
 {
+
+	Semaphore_pend(txDataSemaphoreHandle, BIOS_WAIT_FOREVER);
+
 	uint32_t absTime;
 	Power_setDependency(PowerCC26XX_PERIPH_TRNG);
 
@@ -90,86 +94,82 @@ Void txDataTaskFunc(UArg arg0, UArg arg1)
 	EasyLink_enableRxAddrFilter((uint8_t*)&AddressList, 1, 2);
 	EasyLink_setFrequency(915000000);
 
-	uint16_t counter = 0x00;
 	EasyLink_TxPacket txPacket =  { {0}, 0, 0, {0} };
 	while(1) {
-		Semaphore_pend(txDataSemaphoreHandle, BIOS_WAIT_FOREVER);
-		Semaphore_pend(batonSemaphoreHandle, BIOS_WAIT_FOREVER);
 
-		if(halt){
+		if(bAttemptRetransmission == false){
+
 			EasyLink_abort();
-			Task_sleep(600000000);
-		}
 
-		if(goodToGo){
-			if(bAttemptRetransmission == false){
+			txPacket.payload[0] = upperPart(ax);
+			txPacket.payload[1] = lowerPart(ax);
+			txPacket.payload[2] = upperPart(ay);
+			txPacket.payload[3] = lowerPart(ay);
+			txPacket.payload[4] = upperPart(az);
+			txPacket.payload[5] = lowerPart(az);
 
-				EasyLink_abort();
+			txPacket.payload[6] = upperPart(gx);
+			txPacket.payload[7] = lowerPart(gx);
+			txPacket.payload[8] = upperPart(gy);
+			txPacket.payload[9] = lowerPart(gy);
+			txPacket.payload[10] = upperPart(gz);
+			txPacket.payload[11] = lowerPart(gz);
 
+			txPacket.payload[12] = upperPart(mx);
+			txPacket.payload[13] = lowerPart(mx);
+			txPacket.payload[14] = upperPart(my);
+			txPacket.payload[15] = lowerPart(my);
+			txPacket.payload[16] = upperPart(mz);
+			txPacket.payload[17] = lowerPart(mz);
 
-	//			txPacket.payload[0] = BEACON;
-	//			txPacket.payload[1] = PERSONAL_ADDRESS;
+			txPacket.payload[18] = upperPart(tx_temp);
+			txPacket.payload[19] = lowerPart(tx_temp);
 
-				txPacket.payload[0] = (counter>>8)&0xff;
-				txPacket.payload[1] =  counter&0xff;
-				txPacket.payload[2] = upperPart(ax);
-				txPacket.payload[3] = lowerPart(ax);
-				txPacket.payload[4] = upperPart(ay);
-				txPacket.payload[5] = lowerPart(ay);
-				txPacket.payload[6] = upperPart(az);
-				txPacket.payload[7] = lowerPart(az);
+			txPacket.payload[20] = upperPart(tx_humidity);
+			txPacket.payload[21] = lowerPart(tx_humidity);
 
+			txPacket.payload[22] = upperPart(tx_light_top);
+			txPacket.payload[23] = lowerPart(tx_light_top);
+			txPacket.payload[24] = upperPart(tx_light_bottom);
+			txPacket.payload[25] = lowerPart(tx_light_bottom);
 
-				if (counter > 0xfffe){
-					counter = 0;
-				}
-				else{
-					counter = counter + 0x01;
-				}
+			txPacket.payload[26] = upperPart(capacitor_charge);
+			txPacket.payload[27] = lowerPart(capacitor_charge);
 
-	//			int i=0;
-	//			for (i = 0; i < sizeof(message); i++)
-	//			{
-	//			  txPacket.payload[i] = message[i];
-	//			}
-	//			txPacket.payload[30] = counter;
+//			int i=0;
+//			for (i = 0; i < sizeof(message); i++)
+//			{
+//			  txPacket.payload[i] = message[i];
+//			}
+//			txPacket.payload[30] = counter;
 
-				txPacket.len = RFEASYLINKTXPAYLOAD_LENGTH;
-				txPacket.dstAddr[0] = 0xaa;
+			txPacket.len = RFEASYLINKTXPAYLOAD_LENGTH;
+			txPacket.dstAddr[0] = 0xaa;
 //				txPacket.absTime = 0;
-				/* Set Tx absolute time to current time + 100ms */
-				if(EasyLink_getAbsTime(&absTime) != EasyLink_Status_Success)
-				{
-					// Problem getting absolute time
-				}
-				txPacket.absTime = absTime + EasyLink_ms_To_RadioTime(0);
+			/* Set Tx absolute time to current time + 100ms */
+			if(EasyLink_getAbsTime(&absTime) != EasyLink_Status_Success)
+			{
+				// Problem getting absolute time
 			}
-
-			while (done){
-				EasyLink_transmitCcaAsync(&txPacket, lbtDoneCb);
-				Semaphore_pend(lbtDoneSemaphoreHandle, BIOS_WAIT_FOREVER);
-			}
-			done = 1;
-
-
-//			EasyLink_Status result = EasyLink_transmit(&txPacket);
-//
-//			if (result == EasyLink_Status_Success)
-//			{
-//				/* Toggle LED1 to indicate TX */
-//				PIN_setOutputValue(pinHandle, Board_PIN_LED1,!PIN_getOutputValue(Board_PIN_LED1));
-//			}
-//			else
-//			{
-//				/* Toggle LED1 and LED2 to indicate error */
-//				PIN_setOutputValue(pinHandle, Board_PIN_LED1,!PIN_getOutputValue(Board_PIN_LED1));
-//				PIN_setOutputValue(pinHandle, Board_PIN_LED2,!PIN_getOutputValue(Board_PIN_LED2));
-//			}
-
-
-			Semaphore_post(rxRestartSemaphoreHandle);
+			txPacket.absTime = absTime + EasyLink_ms_To_RadioTime(0);
 		}
-		Semaphore_post(batonSemaphoreHandle);
+
+		while (done){
+			EasyLink_transmitCcaAsync(&txPacket, lbtDoneCb);
+			Semaphore_pend(lbtDoneSemaphoreHandle, BIOS_WAIT_FOREVER);
+		}
+		done = 1;
+
+
+		Task_sleep(10000);
+		PIN_setOutputValue(pinHandle, Board_PIN_LED0,0);
+		PIN_setOutputValue(pinHandle, Board_PIN_LED1,0);
+
+		Task_sleep(5000);
+
+		SysCtrlSystemReset();
+
+		Task_sleep(360000000);
 	}
 }
 

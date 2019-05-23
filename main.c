@@ -31,9 +31,9 @@
 #include "Board.h"
 
 /* Tasks */
-#include "Tasks/GPS_Task.h"
+//#include "Tasks/GPS_Task.h"
 //#include "Tasks/Radio/RF_RX_Tasks.h"
-//#include "Tasks/Radio/RF_TX_Tasks.h"
+#include "Tasks/Radio/RF_TX_Tasks.h"
 #include <Tasks/Semaphore_Initialization.h>
 #include <Tasks/Shared_Resources.h>
 #include <Tasks/ADC_Tasks.h>
@@ -73,10 +73,10 @@ int main(void)
 
 	/* Construct tasks */
     createi2cTask();
-    createGPSTask();
+//    createGPSTask();
     createADCTask();
 //    createRFRXTasks();
-//    createRFTXTasks();
+    createRFTXTasks();
 //    createPWMTask();
     createStartupTask();
     createi2cShutdownTask();

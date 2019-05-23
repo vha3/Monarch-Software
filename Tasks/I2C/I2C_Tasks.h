@@ -100,6 +100,7 @@ Void i2cTaskFunc(UArg arg0, UArg arg1)
 			/* Signal that we're finished with the i2c interface */
 			Semaphore_post(i2cDoneSemaphoreHandle);
 
+
 			/* Sleep (1 hr) */
 			Task_sleep(360000000);
     }
