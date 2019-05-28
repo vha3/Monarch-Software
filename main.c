@@ -31,7 +31,7 @@
 #include "Board.h"
 
 /* Tasks */
-//#include "Tasks/GPS_Task.h"
+#include "Tasks/GPS_Task.h"
 //#include "Tasks/Radio/RF_RX_Tasks.h"
 #include "Tasks/Radio/RF_TX_Tasks.h"
 #include <Tasks/Semaphore_Initialization.h>
@@ -57,8 +57,8 @@ int main(void)
 //	pwmSetup();
 
     /* Use one or the other of the below. If using GPS, need UART */
-    Display_init();
-    displaySetup();
+//    Display_init();
+//    displaySetup();
 
     /* Setup peripherals and semaphores */
     wdtSetup();
@@ -73,13 +73,13 @@ int main(void)
 
 	/* Construct tasks */
     createi2cTask();
-//    createGPSTask();
+    createGPSTask();
     createADCTask();
 //    createRFRXTasks();
     createRFTXTasks();
 //    createPWMTask();
     createStartupTask();
-    createi2cShutdownTask();
+//    createi2cShutdownTask();
 
     /* Start kernel. */
     BIOS_start();

@@ -226,6 +226,17 @@ main.obj: /Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/Periphe
 main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/ADC.h
 main.obj: /Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/Peripherals/Display_Initialization.h
 main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/display/Display.h
+main.obj: ../Tasks/GPS_Task.h
+main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/UART.h
+main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/uart/UARTCC26XX.h
+main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/utils/RingBuf.h
+main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/uart.h
+main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_uart.h
+main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/dpl/SwiP.h
+main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/dpl/SemaphoreP.h
+main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/Task.h
+main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/package/Task_SupportProxy.h
+main.obj: ../Tasks/Shared_Resources.h
 main.obj: ../Tasks/Radio/RF_TX_Tasks.h
 main.obj: ../Tasks/Radio/RF_Globals.h
 main.obj: /Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/smartrf_settings/smartrf_settings.h
@@ -234,7 +245,6 @@ main.obj: /Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/include/st
 main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/rf_common_cmd.h
 main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/rf_prop_cmd.h
 main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/rf/RF.h
-main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/dpl/SemaphoreP.h
 main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/rf_ble_cmd.h
 main.obj: /Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/easylink/EasyLink.h
 main.obj: /Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/include/stdlib.h
@@ -242,7 +252,6 @@ main.obj: ../Tasks/Radio/Network_Types.h
 main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/trng.h
 main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_trng.h
 main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/Task.h
-main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/package/Task_SupportProxy.h
 main.obj: ../Tasks/Radio/../I2C/LSM9DS1.h
 main.obj: /Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/include/math.h
 main.obj: /Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/include/_defs.h
@@ -252,7 +261,6 @@ main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/p
 main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/I2C.h
 main.obj: ../Tasks/Radio/../I2C/../I2C/LSM9DS1_Registers.h
 main.obj: ../Tasks/Radio/../I2C/../I2C/LSM9DS1_Types.h
-main.obj: ../Tasks/Radio/../Shared_Resources.h
 main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/sys_ctrl.h
 main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_sysctl.h
 main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_prcm.h
@@ -274,7 +282,6 @@ main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devic
 main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/prcm.h
 main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/aon_ioc.h
 main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/adi.h
-main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_uart.h
 main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_adi.h
 main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/aux_wuc.h
 main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/aon_wuc.h
@@ -517,6 +524,17 @@ main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/p
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/ADC.h: 
 /Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/Peripherals/Display_Initialization.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/display/Display.h: 
+../Tasks/GPS_Task.h: 
+/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/UART.h: 
+/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/uart/UARTCC26XX.h: 
+/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/utils/RingBuf.h: 
+/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/uart.h: 
+/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_uart.h: 
+/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/dpl/SwiP.h: 
+/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/dpl/SemaphoreP.h: 
+/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/Task.h: 
+/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/package/Task_SupportProxy.h: 
+../Tasks/Shared_Resources.h: 
 ../Tasks/Radio/RF_TX_Tasks.h: 
 ../Tasks/Radio/RF_Globals.h: 
 /Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/smartrf_settings/smartrf_settings.h: 
@@ -525,7 +543,6 @@ main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/p
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/rf_common_cmd.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/rf_prop_cmd.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/rf/RF.h: 
-/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/dpl/SemaphoreP.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/rf_ble_cmd.h: 
 /Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/easylink/EasyLink.h: 
 /Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/include/stdlib.h: 
@@ -533,7 +550,6 @@ main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/p
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/trng.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_trng.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/Task.h: 
-/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/package/Task_SupportProxy.h: 
 ../Tasks/Radio/../I2C/LSM9DS1.h: 
 /Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/include/math.h: 
 /Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/include/_defs.h: 
@@ -543,7 +559,6 @@ main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/p
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/I2C.h: 
 ../Tasks/Radio/../I2C/../I2C/LSM9DS1_Registers.h: 
 ../Tasks/Radio/../I2C/../I2C/LSM9DS1_Types.h: 
-../Tasks/Radio/../Shared_Resources.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/sys_ctrl.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_sysctl.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_prcm.h: 
@@ -565,7 +580,6 @@ main.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/p
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/prcm.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/aon_ioc.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/adi.h: 
-/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_uart.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_adi.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/aux_wuc.h: 
 /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/aon_wuc.h: 

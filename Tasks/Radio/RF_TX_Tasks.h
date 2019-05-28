@@ -136,14 +136,14 @@ Void txDataTaskFunc(UArg arg0, UArg arg1)
 			txPacket.payload[26] = upperPart(capacitor_charge);
 			txPacket.payload[27] = lowerPart(capacitor_charge);
 
-//			int i=0;
-//			for (i = 0; i < sizeof(message); i++)
-//			{
-//			  txPacket.payload[i] = message[i];
-//			}
-//			txPacket.payload[30] = counter;
+			int i=0;
+			for (i = 0; i < bytes_read; i++)
+			{
+			  txPacket.payload[i+28] = input[i];
+			}
 
-			txPacket.len = RFEASYLINKTXPAYLOAD_LENGTH;
+			int packetlen = RFEASYLINKTXPAYLOAD_LENGTH + bytes_read;
+			txPacket.len = packetlen;
 			txPacket.dstAddr[0] = 0xaa;
 //				txPacket.absTime = 0;
 			/* Set Tx absolute time to current time + 100ms */
@@ -167,7 +167,7 @@ Void txDataTaskFunc(UArg arg0, UArg arg1)
 
 		Task_sleep(5000);
 
-		SysCtrlSystemReset();
+//		SysCtrlSystemReset();
 
 		Task_sleep(360000000);
 	}

@@ -64,8 +64,13 @@ Void adcTaskFunc(UArg arg0, UArg arg1)
 		ADC_close(adc1);
 		ADC_close(adc3);
 
+		Watchdog_clear(watchdogHandle);
+		PIN_setOutputValue(pinHandle, Board_PIN_LED0,0);
+		PIN_setOutputValue(pinHandle, Board_PIN_LED1,0);
+		Semaphore_post(gpsLockSemaphoreHandle);
+
 		/* Signal that light sensors are finished */
-		Semaphore_post(lightsensorDoneSemaphoreHandle);
+//		Semaphore_post(lightsensorDoneSemaphoreHandle);
 
 		/* Sleep (1 hr) */
 		Task_sleep(360000000);

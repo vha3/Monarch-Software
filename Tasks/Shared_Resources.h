@@ -40,6 +40,7 @@ int16_t tx_mz = 0;
 
 // GPS Data
 int bytes_read = 0;
+char input[512] = {0};
 // Checksum
 
 
