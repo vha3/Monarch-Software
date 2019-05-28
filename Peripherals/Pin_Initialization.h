@@ -29,7 +29,7 @@ PIN_Config pinTable[] = {
 	IOID_14  | PIN_INPUT_EN | PIN_PULLUP | PIN_IRQ_POSEDGE,
 	CC1310_LAUNCHXL_DIO12  | PIN_INPUT_EN | PIN_PULLUP | PIN_IRQ_NEGEDGE,
 	IOID_13  | PIN_INPUT_EN | PIN_PULLUP | PIN_IRQ_NEGEDGE,
-	IOID_1 | PIN_INPUT_EN | PIN_PULLUP | PIN_IRQ_POSEDGE,
+	IOID_1 | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_POSEDGE,
 	IOID_21 | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
 	IOID_25 | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
 	CC1310_LAUNCHXL_PIN_RLED | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MAX,
@@ -38,7 +38,7 @@ PIN_Config pinTable[] = {
 };
 
 void pinCallback(PIN_Handle handle, PIN_Id pinId) {
-//    uint32_t currVal = 0;
+    uint32_t currVal = 0;
 	switch (pinId) {
 		case CC1310_LAUNCHXL_DIO12:
 //			currVal =  PIN_getOutputValue(Board_PIN_LED0);
@@ -59,8 +59,8 @@ void pinCallback(PIN_Handle handle, PIN_Id pinId) {
 			break;
 
 		case IOID_1:
-//			currVal =  PIN_getOutputValue(CC1310_LAUNCHXL_PIN_RLED);
-//			PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_PIN_RLED, !currVal);
+			currVal =  PIN_getOutputValue(CC1310_LAUNCHXL_PIN_RLED);
+			PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_PIN_RLED, !currVal);
 			break;
 
 

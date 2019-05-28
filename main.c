@@ -39,7 +39,7 @@
 #include <Tasks/ADC_Tasks.h>
 #include <Tasks/I2C/I2C_Tasks.h>
 #include <Tasks/Startup_Task.h>
-#include <Tasks/I2C_Shutdown_Task.h>
+//#include <Tasks/I2C_Shutdown_Task.h>
 //#include <Tasks/PWM_Tasks.h>
 
 
@@ -72,13 +72,13 @@ int main(void)
 
 
 	/* Construct tasks */
+	createStartupTask();
     createi2cTask();
-    createGPSTask();
     createADCTask();
-//    createRFRXTasks();
+    createGPSTask();
     createRFTXTasks();
+//    createRFRXTasks();
 //    createPWMTask();
-    createStartupTask();
 //    createi2cShutdownTask();
 
     /* Start kernel. */
