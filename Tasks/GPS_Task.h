@@ -97,7 +97,7 @@ Void gpsFunc(UArg arg0, UArg arg1)
 			}
 
 			Watchdog_clear(watchdogHandle);
-			Watchdog_close(watchdogHandle);
+//			Watchdog_close(watchdogHandle);
 
 			UART_readCancel(uart);
 			UART_writeCancel(uart);

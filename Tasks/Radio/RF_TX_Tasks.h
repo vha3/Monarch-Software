@@ -165,11 +165,16 @@ Void txDataTaskFunc(UArg arg0, UArg arg1)
 		PIN_setOutputValue(pinHandle, Board_PIN_LED0,0);
 		PIN_setOutputValue(pinHandle, Board_PIN_LED1,0);
 
-		Task_sleep(5000);
+		Watchdog_clear(watchdogHandle);
+		Watchdog_close(watchdogHandle);
 
-//		SysCtrlSystemReset();
 
-		Task_sleep(360000000);
+		// Make this longer, every 10 sec for debugging
+		Task_sleep(1000000);
+
+		SysCtrlSystemReset();
+
+//		Task_sleep(360000000);
 	}
 }
 
