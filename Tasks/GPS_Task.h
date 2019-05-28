@@ -55,8 +55,8 @@ Void gpsFunc(UArg arg0, UArg arg1)
 	UART_control(uart, UARTCC26XX_CMD_RETURN_PARTIAL_ENABLE, NULL);
 //	char        input[512] = {0};
 //	const char 	newlinePrompt[] = "\r\n";
-	const char  startind[] = "Starting now\r\n";
-	const char  endind[] = "Ending now\r\n";
+//	const char  startind[] = "Starting now\r\n";
+//	const char  endind[] = "Ending now\r\n";
 
 //	uint8_t query[] = {0xa0, 0xa1, 0x00, 0x04, 0x64, 0x0a, 0x01, 0x01, 0x6e, 0x0d, 0x0a};
 //	uint8_t factory_defaults[] = {0xa0, 0xa1, 0x00, 0x02, 0x04, 0x00, 0x04, 0x0d, 0x0a};
@@ -73,43 +73,49 @@ Void gpsFunc(UArg arg0, UArg arg1)
 //	}
 
 	bool gotData;
+	bool gotFix;
 
 	while (1) {
-//		Task_sleep(10000);
+		gotFix = Semaphore_pend(gpsfixSemaphoreHandle, 100);
+		if (gotFix) {
+			int i=0;
+			for (i=0; i<1; i++){
+				Watchdog_clear(watchdogHandle);
+				UART_control(uart, UARTCC26XX_CMD_RX_FIFO_FLUSH, NULL);
+	//			UART_write(uart, startind, sizeof(startind));
+				int numBytes = UART_read(uart, &input, sizeof(input));
+	//			bytes_read = bytesRead;
+				gotData = Semaphore_pend(readSemaphoreHandle, 200000);
+				if (gotData) {
+					UART_write(uart, &input, bytesRead);
+					UART_control(uart, UARTCC26XX_CMD_RX_FIFO_FLUSH, NULL);
+				}
+	//			UART_write(uart, endind, sizeof(endind));
+				else {
+					UART_control(uart, UARTCC26XX_CMD_RX_FIFO_FLUSH, NULL);
+				}
+			}
 
-		int i=0;
-		for (i=0; i<10; i++){
 			Watchdog_clear(watchdogHandle);
-			UART_control(uart, UARTCC26XX_CMD_RX_FIFO_FLUSH, NULL);
-//			UART_write(uart, startind, sizeof(startind));
-			int numBytes = UART_read(uart, &input, sizeof(input));
-//			bytes_read = bytesRead;
-			gotData = Semaphore_pend(readSemaphoreHandle, 200000);
-			if (gotData) {
-				UART_write(uart, &input, bytesRead);
-				UART_control(uart, UARTCC26XX_CMD_RX_FIFO_FLUSH, NULL);
-			}
-//			UART_write(uart, endind, sizeof(endind));
-			else {
-				UART_control(uart, UARTCC26XX_CMD_RX_FIFO_FLUSH, NULL);
-			}
+			Watchdog_close(watchdogHandle);
+
+			UART_readCancel(uart);
+			UART_writeCancel(uart);
+			UART_close(uart);
+
+			PIN_setOutputValue(pinHandle, IOID_21, 0);
+			PIN_setOutputValue(pinHandle, Board_PIN_LED0,0);
+			PIN_setOutputValue(pinHandle, Board_PIN_LED1,0);
+
+			Semaphore_post(txDataSemaphoreHandle);
+
+			/* Sleep (1 hr) */
+			Task_sleep(360000000);
 		}
-
-		Watchdog_clear(watchdogHandle);
-		Watchdog_close(watchdogHandle);
-
-		UART_readCancel(uart);
-		UART_writeCancel(uart);
-		UART_close(uart);
-
-		PIN_setOutputValue(pinHandle, IOID_21, 0);
-		PIN_setOutputValue(pinHandle, Board_PIN_LED0,0);
-		PIN_setOutputValue(pinHandle, Board_PIN_LED1,0);
-
-		Semaphore_post(txDataSemaphoreHandle);
-
-		/* Sleep (1 hr) */
-		Task_sleep(360000000);
+		else{
+			Watchdog_clear(watchdogHandle);
+			Task_sleep(100);
+		}
 	}
 }
 
