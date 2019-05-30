@@ -37,6 +37,7 @@ PIN_Config pinTable[] = {
     PIN_TERMINATE
 };
 
+int error = 0;
 void pinCallback(PIN_Handle handle, PIN_Id pinId) {
     uint32_t currVal = 0;
 	switch (pinId) {
@@ -59,9 +60,12 @@ void pinCallback(PIN_Handle handle, PIN_Id pinId) {
 			break;
 
 		case IOID_1:
-			currVal =  PIN_getOutputValue(CC1310_LAUNCHXL_PIN_RLED);
-			PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_PIN_RLED, !currVal);
-			Semaphore_post(gpsfixSemaphoreHandle);
+			error += 1;
+			if (error >= 2){
+				currVal =  PIN_getOutputValue(CC1310_LAUNCHXL_PIN_RLED);
+				PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_PIN_RLED, !currVal);
+				Semaphore_post(gpsfixSemaphoreHandle);
+			}
 			break;
 
 

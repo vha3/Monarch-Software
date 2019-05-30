@@ -75,33 +75,45 @@ Void gpsFunc(UArg arg0, UArg arg1)
 	bool gotData;
 	bool gotFix;
 
+	/* ADC conversion result variables */
+	uint16_t adcValue0;
+	uint32_t adcValue0MicroVolt;
+	/* Variable to hold ADC status */
+	int_fast16_t res;
+
+	/* Start adc channel 0 (connected to supercap)*/
+	adc0Setup();
+
 	while (1) {
+
+		/* Clear the watchdog timer */
+		Watchdog_clear(watchdogHandle);
+		/* Check whether the GPS has a navigation fix */
 		gotFix = Semaphore_pend(gpsfixSemaphoreHandle, 100);
+
+		/* Clear UART FIFO */
+		UART_control(uart, UARTCC26XX_CMD_RX_FIFO_FLUSH, NULL);
+		/* Read UART from GPS */
+		int numBytes = UART_read(uart, &input, sizeof(input));
+		/* Pend on a semaphore indicating data received */
+		gotData = Semaphore_pend(readSemaphoreHandle, 200000);
+		/* If data was received, write the data to the terminal and flush */
+		if (gotData) {
+			UART_write(uart, &input, bytesRead);
+			UART_control(uart, UARTCC26XX_CMD_RX_FIFO_FLUSH, NULL);
+		}
+		/* Otherwise, just flush */
+		else {
+			UART_control(uart, UARTCC26XX_CMD_RX_FIFO_FLUSH, NULL);
+		}
+
+		/* If GPS has a fix, close everything and transmit */
 		if (gotFix) {
-			int i=0;
-			for (i=0; i<1; i++){
-				Watchdog_clear(watchdogHandle);
-				UART_control(uart, UARTCC26XX_CMD_RX_FIFO_FLUSH, NULL);
-	//			UART_write(uart, startind, sizeof(startind));
-				int numBytes = UART_read(uart, &input, sizeof(input));
-	//			bytes_read = bytesRead;
-				gotData = Semaphore_pend(readSemaphoreHandle, 200000);
-				if (gotData) {
-					UART_write(uart, &input, bytesRead);
-					UART_control(uart, UARTCC26XX_CMD_RX_FIFO_FLUSH, NULL);
-				}
-	//			UART_write(uart, endind, sizeof(endind));
-				else {
-					UART_control(uart, UARTCC26XX_CMD_RX_FIFO_FLUSH, NULL);
-				}
-			}
-
-			Watchdog_clear(watchdogHandle);
-//			Watchdog_close(watchdogHandle);
-
 			UART_readCancel(uart);
 			UART_writeCancel(uart);
 			UART_close(uart);
+
+			ADC_close(adc0);
 
 			PIN_setOutputValue(pinHandle, IOID_21, 0);
 			PIN_setOutputValue(pinHandle, Board_PIN_LED0,0);
@@ -112,8 +124,42 @@ Void gpsFunc(UArg arg0, UArg arg1)
 			/* Sleep (1 hr) */
 			Task_sleep(360000000);
 		}
+
+		/* Otherwise ... */
 		else{
+			/* Clear the watchdog */
 			Watchdog_clear(watchdogHandle);
+
+			/* Retrieve ADC measurement from channel 0, store in adcValue0 */
+			res = ADC_convert(adc0, &adcValue0);
+
+			if (res == ADC_STATUS_SUCCESS) {
+				/* Convert measured value to microvolts, store in adcValue0MicroVolt */
+				adcValue0MicroVolt = ADC_convertRawToMicroVolts(adc0, adcValue0);
+
+				/* If cap is below 0.7V, close everything and transmit */
+				if (adcValue0MicroVolt < 700000) {
+					UART_readCancel(uart);
+					UART_writeCancel(uart);
+					UART_close(uart);
+
+					ADC_close(adc0);
+
+					PIN_setOutputValue(pinHandle, IOID_21, 0);
+					PIN_setOutputValue(pinHandle, Board_PIN_LED0,0);
+					PIN_setOutputValue(pinHandle, Board_PIN_LED1,0);
+
+					Semaphore_post(txDataSemaphoreHandle);
+
+					/* Sleep (1 hr) */
+					Task_sleep(360000000);
+				}
+				/* Otherwise, do nothing */
+				else {
+				}
+			}
+			else {
+			}
 			Task_sleep(100);
 		}
 	}
