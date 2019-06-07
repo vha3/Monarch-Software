@@ -85,9 +85,6 @@ Void gpsFunc(UArg arg0, UArg arg1)
 	adc0Setup();
 
 	while (1) {
-
-		/* Clear the watchdog timer */
-		Watchdog_clear(watchdogHandle);
 		/* Check whether the GPS has a navigation fix */
 		gotFix = Semaphore_pend(gpsfixSemaphoreHandle, 100);
 
@@ -98,7 +95,9 @@ Void gpsFunc(UArg arg0, UArg arg1)
 		/* Pend on a semaphore indicating data received */
 		gotData = Semaphore_pend(readSemaphoreHandle, 200000);
 		/* If data was received, write the data to the terminal and flush */
-		if (gotData) {
+		if (gotData & (bytesRead==72)) {
+			/* Clear the watchdog timer */
+			Watchdog_clear(watchdogHandle);
 			UART_write(uart, &input, bytesRead);
 			UART_control(uart, UARTCC26XX_CMD_RX_FIFO_FLUSH, NULL);
 		}
@@ -108,7 +107,8 @@ Void gpsFunc(UArg arg0, UArg arg1)
 		}
 
 		/* If GPS has a fix, close everything and transmit */
-		if (gotFix) {
+		/* bytesRead==72?*/
+		if (gotFix & (bytesRead==72)) {
 			UART_readCancel(uart);
 			UART_writeCancel(uart);
 			UART_close(uart);
@@ -128,7 +128,7 @@ Void gpsFunc(UArg arg0, UArg arg1)
 		/* Otherwise ... */
 		else{
 			/* Clear the watchdog */
-			Watchdog_clear(watchdogHandle);
+//			Watchdog_clear(watchdogHandle);
 
 			/* Retrieve ADC measurement from channel 0, store in adcValue0 */
 			res = ADC_convert(adc0, &adcValue0);
