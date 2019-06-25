@@ -101,50 +101,52 @@ Void txDataTaskFunc(UArg arg0, UArg arg1)
 
 			EasyLink_abort();
 
-			txPacket.payload[0] = upperPart(ax);
-			txPacket.payload[1] = lowerPart(ax);
-			txPacket.payload[2] = upperPart(ay);
-			txPacket.payload[3] = lowerPart(ay);
-			txPacket.payload[4] = upperPart(az);
-			txPacket.payload[5] = lowerPart(az);
+			txPacket.payload[0] = 1;
 
-			txPacket.payload[6] = upperPart(gx);
-			txPacket.payload[7] = lowerPart(gx);
-			txPacket.payload[8] = upperPart(gy);
-			txPacket.payload[9] = lowerPart(gy);
-			txPacket.payload[10] = upperPart(gz);
-			txPacket.payload[11] = lowerPart(gz);
+			txPacket.payload[1] = upperPart(ax);
+			txPacket.payload[2] = lowerPart(ax);
+			txPacket.payload[3] = upperPart(ay);
+			txPacket.payload[4] = lowerPart(ay);
+			txPacket.payload[5] = upperPart(az);
+			txPacket.payload[6] = lowerPart(az);
 
-			txPacket.payload[12] = upperPart(mx);
-			txPacket.payload[13] = lowerPart(mx);
-			txPacket.payload[14] = upperPart(my);
-			txPacket.payload[15] = lowerPart(my);
-			txPacket.payload[16] = upperPart(mz);
-			txPacket.payload[17] = lowerPart(mz);
+			txPacket.payload[7] = upperPart(gx);
+			txPacket.payload[8] = lowerPart(gx);
+			txPacket.payload[9] = upperPart(gy);
+			txPacket.payload[10] = lowerPart(gy);
+			txPacket.payload[11] = upperPart(gz);
+			txPacket.payload[12] = lowerPart(gz);
 
-			txPacket.payload[18] = upperPart(tx_temp);
-			txPacket.payload[19] = lowerPart(tx_temp);
+			txPacket.payload[13] = upperPart(mx);
+			txPacket.payload[14] = lowerPart(mx);
+			txPacket.payload[15] = upperPart(my);
+			txPacket.payload[16] = lowerPart(my);
+			txPacket.payload[17] = upperPart(mz);
+			txPacket.payload[18] = lowerPart(mz);
 
-			txPacket.payload[20] = upperPart(tx_humidity);
-			txPacket.payload[21] = lowerPart(tx_humidity);
+			txPacket.payload[19] = upperPart(tx_temp);
+			txPacket.payload[20] = lowerPart(tx_temp);
 
-			txPacket.payload[22] = upperPart(tx_light_top);
-			txPacket.payload[23] = lowerPart(tx_light_top);
-			txPacket.payload[24] = upperPart(tx_light_bottom);
-			txPacket.payload[25] = lowerPart(tx_light_bottom);
+			txPacket.payload[21] = upperPart(tx_humidity);
+			txPacket.payload[22] = lowerPart(tx_humidity);
 
-			txPacket.payload[26] = upperPart(capacitor_charge);
-			txPacket.payload[27] = lowerPart(capacitor_charge);
+			txPacket.payload[23] = upperPart(tx_light_top);
+			txPacket.payload[24] = lowerPart(tx_light_top);
+			txPacket.payload[25] = upperPart(tx_light_bottom);
+			txPacket.payload[26] = lowerPart(tx_light_bottom);
+
+			txPacket.payload[27] = upperPart(capacitor_charge);
+			txPacket.payload[28] = lowerPart(capacitor_charge);
 
 			int i=0;
 			for (i = 0; i < bytes_read; i++)
 			{
-			  txPacket.payload[i+28] = input[i];
+			  txPacket.payload[i+29] = input[i];
 			}
 
 			int packetlen = RFEASYLINKTXPAYLOAD_LENGTH + bytes_read;
 			txPacket.len = packetlen;
-			txPacket.dstAddr[0] = 0xaa;
+			txPacket.dstAddr[0] = 0x00;
 //				txPacket.absTime = 0;
 			/* Set Tx absolute time to current time + 100ms */
 			if(EasyLink_getAbsTime(&absTime) != EasyLink_Status_Success)
@@ -169,8 +171,8 @@ Void txDataTaskFunc(UArg arg0, UArg arg1)
 		Watchdog_close(watchdogHandle);
 
 
-		// Make this longer, every 10 sec for debugging
-		Task_sleep(1000000);
+		// Sleep for 5 min
+		Task_sleep(30000000);
 
 		SysCtrlSystemReset();
 

@@ -69,6 +69,7 @@ int main(void)
 	CC1310_LAUNCHXL_shutDownExtFlash();
 
 	PIN_setOutputValue(pinHandle, IOID_21, 0);
+	Watchdog_clear(watchdogHandle);
 
 
 	/* Construct tasks */

@@ -47,6 +47,7 @@ Void i2cTaskFunc(UArg arg0, UArg arg1)
 	Task_sleep(10000);
 	heaterOff();
 	Task_sleep(1000);
+	heaterOff();
 
 	/* Read once from each sensor (improves reliability) */
 	readGyro();
@@ -86,6 +87,11 @@ Void i2cTaskFunc(UArg arg0, UArg arg1)
     		raw_temp = getRawTemp();
     		tx_temp = raw_temp;
     		Task_sleep(1000);
+
+//    		float tempf = getTempFarenheit();
+//    		float humid = getRelativeHumidity();
+//    		Display_printf(display, 0, 0, "temp: %f", tempf);
+//    		Display_printf(display, 0, 0, "humidity: %f", humid);
 
     		/* Read humidity, store data */
     		raw_humidity = getRawHumidity();
