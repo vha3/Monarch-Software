@@ -11,6 +11,9 @@
 // Name
 // Payload Size
 
+UART_Handle uart;
+UART_Params uartParams;
+
 /* Capacitor state of charge */
 uint16_t capacitor_charge;
 uint32_t capacitor_charge_uv;

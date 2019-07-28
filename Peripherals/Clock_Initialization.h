@@ -9,11 +9,11 @@
 #define PERIPHERALS_CLOCK_INITIALIZATION_H_
 
 #include <ti/sysbios/knl/Clock.h>
-#include "../Tasks/Semaphore_Initialization.h"
-#include "../Tasks/Shared_Resources.h"
-#include "Peripherals/Watchdog_Initialization.h"
+//#include "../Tasks/Semaphore_Initialization.h"
+//#include "../Tasks/Shared_Resources.h"
+//#include "Peripherals/Watchdog_Initialization.h"
 #include "Pin_Initialization.h"
-#include "PWM_Initialization.h"
+//#include "PWM_Initialization.h"
 
 #define Clock_convertSecondsToTicks(seconds) (((seconds) * 1000000) / (Clock_tickPeriod))
 
@@ -27,11 +27,9 @@ Clock_Handle clk0Handle;
 /* Some stuff for simulating nav indicator */
 Void clk0Fxn(UArg arg0)
 {
-	if(goodToGo){
-		Watchdog_clear(watchdogHandle);
-//		PIN_setOutputValue(pinHandle, IOID_15,!PIN_getOutputValue(IOID_15));
-		Semaphore_post(txDataSemaphoreHandle);
-	}
+//		Watchdog_clear(watchdogHandle);
+		PIN_setOutputValue(pinHandle, Board_PIN_LED1, !PIN_getOutputValue(Board_PIN_LED1));
+//		Semaphore_post(txDataSemaphoreHandle);
 }
 
 

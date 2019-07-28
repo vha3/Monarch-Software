@@ -25,38 +25,37 @@ uint16_t raw_humidity;
 
 Void i2cTaskFunc(UArg arg0, UArg arg1)
 {
-	/* Wait for startup task to unlock */
-	Semaphore_pend(magLockSemaphoreHandle, BIOS_WAIT_FOREVER);
-
-	/* Open i2c channel, setup IMU, initialize I2C channel */
-	I2C_init();
-	LSM9DS1init();
-    initI2C();
-
-    /* Wait briefly to let things settle */
-    Task_sleep(10000);
-
-	/* Initializate IMU*/
-	uint16_t workpls = LSM9DS1begin();
-	configInt(XG_INT1, INT_DRDY_G, INT_ACTIVE_LOW, INT_PUSH_PULL);
-	configInt(XG_INT2, INT_DRDY_XL, INT_ACTIVE_LOW, INT_PUSH_PULL);
-	Task_sleep(1000);
-
-	/* Initialize the temp/humidity sensor */
-	beginHumidity();
-	Task_sleep(10000);
-	heaterOff();
-	Task_sleep(1000);
-	heaterOff();
-
-	/* Read once from each sensor (improves reliability) */
-	readGyro();
-	readAccel();
-	readMag();
-	raw_temp = getRawTemp();
-	raw_humidity = getRawHumidity();
 
     while (1) {
+			/* Wait for startup task to unlock */
+			Semaphore_pend(magLockSemaphoreHandle, BIOS_WAIT_FOREVER);
+
+			/* Open i2c channel, setup IMU, initialize I2C channel */
+			initI2C();
+
+			/* Wait briefly to let things settle */
+			Task_sleep(10000);
+
+			/* Initializate IMU*/
+			uint16_t workpls = LSM9DS1begin();
+			configInt(XG_INT1, INT_DRDY_G, INT_ACTIVE_LOW, INT_PUSH_PULL);
+			configInt(XG_INT2, INT_DRDY_XL, INT_ACTIVE_LOW, INT_PUSH_PULL);
+			Task_sleep(1000);
+
+			/* Initialize the temp/humidity sensor */
+			beginHumidity();
+			Task_sleep(10000);
+			heaterOff();
+			Task_sleep(1000);
+			heaterOff();
+
+			/* Read once from each sensor (improves reliability) */
+			readGyro();
+			readAccel();
+			readMag();
+			raw_temp = getRawTemp();
+			raw_humidity = getRawHumidity();
+
     		/* Wait for data to be available from gyro, accel, and mag */
     		Semaphore_pend(magSemaphoreHandle, BIOS_WAIT_FOREVER);
     		Semaphore_pend(gyroSemaphoreHandle, BIOS_WAIT_FOREVER);
@@ -108,7 +107,7 @@ Void i2cTaskFunc(UArg arg0, UArg arg1)
 
 
 			/* Sleep (1 hr) */
-			Task_sleep(360000000);
+//			Task_sleep(360000000);
     }
 }
 

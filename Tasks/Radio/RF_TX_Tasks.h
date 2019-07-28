@@ -72,36 +72,38 @@ void lbtDoneCb(EasyLink_Status status)
 Void txDataTaskFunc(UArg arg0, UArg arg1)
 {
 
-	Semaphore_pend(txDataSemaphoreHandle, BIOS_WAIT_FOREVER);
 
-	uint32_t absTime;
-	Power_setDependency(PowerCC26XX_PERIPH_TRNG);
-
-	EasyLink_Params easyLink_params;
-	EasyLink_Params_init(&easyLink_params);
-
-//	easyLink_params.ui32ModType = EasyLink_Phy_50kbps2gfsk;
-	easyLink_params.ui32ModType = EasyLink_Phy_Custom;
-	easyLink_params.pGrnFxn = (EasyLink_GetRandomNumber)HalTRNG_GetTRNG;
-
-	/* Initialize EasyLink */
-	if(EasyLink_init(&easyLink_params) != EasyLink_Status_Success)
-	{
-		System_abort("EasyLink_init failed");
-	}
-
-	EasyLink_setRfPower(14);
-	EasyLink_enableRxAddrFilter((uint8_t*)&AddressList, 1, 2);
-	EasyLink_setFrequency(915000000);
-
-	EasyLink_TxPacket txPacket =  { {0}, 0, 0, {0} };
 	while(1) {
+
+		Semaphore_pend(txDataSemaphoreHandle, BIOS_WAIT_FOREVER);
+
+		uint32_t absTime;
+		Power_setDependency(PowerCC26XX_PERIPH_TRNG);
+
+		EasyLink_Params easyLink_params;
+		EasyLink_Params_init(&easyLink_params);
+
+	//	easyLink_params.ui32ModType = EasyLink_Phy_50kbps2gfsk;
+		easyLink_params.ui32ModType = EasyLink_Phy_Custom;
+		easyLink_params.pGrnFxn = (EasyLink_GetRandomNumber)HalTRNG_GetTRNG;
+
+		/* Initialize EasyLink */
+		if(EasyLink_init(&easyLink_params) != EasyLink_Status_Success)
+		{
+			System_abort("EasyLink_init failed");
+		}
+
+		EasyLink_setRfPower(14);
+		EasyLink_enableRxAddrFilter((uint8_t*)&AddressList, 1, 2);
+		EasyLink_setFrequency(915000000);
+
+		EasyLink_TxPacket txPacket =  { {0}, 0, 0, {0} };
 
 		if(bAttemptRetransmission == false){
 
 			EasyLink_abort();
 
-			txPacket.payload[0] = 1;
+			txPacket.payload[0] = 0x01;
 
 			txPacket.payload[1] = upperPart(ax);
 			txPacket.payload[2] = lowerPart(ax);
@@ -167,14 +169,18 @@ Void txDataTaskFunc(UArg arg0, UArg arg1)
 		PIN_setOutputValue(pinHandle, Board_PIN_LED0,0);
 		PIN_setOutputValue(pinHandle, Board_PIN_LED1,0);
 
+
 		Watchdog_clear(watchdogHandle);
 		Watchdog_close(watchdogHandle);
 
 
-		// Sleep for 5 min
-		Task_sleep(30000000);
+		// Sleep for 20 min
+//		Task_sleep(30000000);
+		Task_sleep(120000000);
+//		Task_sleep(1000000);
+		Semaphore_post(startSemaphoreHandle);
 
-		SysCtrlSystemReset();
+//		SysCtrlSystemReset();
 
 //		Task_sleep(360000000);
 	}

@@ -27,16 +27,17 @@ uint32_t adcValue3MicroVolt;
 
 Void adcTaskFunc(UArg arg0, UArg arg1)
 {
-	Semaphore_pend(lightsensorLockSemaphoreHandle, BIOS_WAIT_FOREVER);
-
-	adc1Setup();
-	adc3Setup();
-
-	Task_sleep(1000);
-
-	int_fast16_t res;
 
     while (1) {
+
+    	Semaphore_pend(lightsensorLockSemaphoreHandle, BIOS_WAIT_FOREVER);
+
+    	adc1Setup();
+    	adc3Setup();
+
+    	Task_sleep(1000);
+
+    	int_fast16_t res;
 
 		/* Read top light sensor, store data */
 		res = ADC_convert(adc1, &adcValue1);
@@ -64,7 +65,7 @@ Void adcTaskFunc(UArg arg0, UArg arg1)
 		ADC_close(adc1);
 		ADC_close(adc3);
 
-		Watchdog_clear(watchdogHandle);
+//		Watchdog_clear(watchdogHandle);
 		PIN_setOutputValue(pinHandle, Board_PIN_LED0,0);
 		PIN_setOutputValue(pinHandle, Board_PIN_LED1,0);
 		Semaphore_post(gpsLockSemaphoreHandle);
@@ -73,7 +74,7 @@ Void adcTaskFunc(UArg arg0, UArg arg1)
 //		Semaphore_post(lightsensorDoneSemaphoreHandle);
 
 		/* Sleep (1 hr) */
-		Task_sleep(360000000);
+//		Task_sleep(360000000);
     }
 }
 

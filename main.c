@@ -53,6 +53,10 @@ int main(void)
     Board_initGeneral();
     PIN_init(pinTable);
 
+    /* Setup watchdog */
+//	wdtSetup();
+//	Watchdog_clear(watchdogHandle);
+
 //	PWM_init();
 //	pwmSetup();
 
@@ -61,7 +65,6 @@ int main(void)
 //    displaySetup();
 
     /* Setup peripherals and semaphores */
-    wdtSetup();
 //    clockSetup();
 	semaphoreSetup();
 	pinSetup();
@@ -69,7 +72,7 @@ int main(void)
 	CC1310_LAUNCHXL_shutDownExtFlash();
 
 	PIN_setOutputValue(pinHandle, IOID_21, 0);
-	Watchdog_clear(watchdogHandle);
+
 
 
 	/* Construct tasks */
@@ -78,6 +81,7 @@ int main(void)
     createADCTask();
     createGPSTask();
     createRFTXTasks();
+
 //    createRFRXTasks();
 //    createPWMTask();
 //    createi2cShutdownTask();

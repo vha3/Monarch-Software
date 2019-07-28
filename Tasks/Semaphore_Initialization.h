@@ -72,6 +72,9 @@ static Semaphore_Handle lightsensorDoneSemaphoreHandle;
 static Semaphore_Struct gpsfixSemaphore;
 static Semaphore_Handle gpsfixSemaphoreHandle;
 
+static Semaphore_Struct startSemaphore;
+static Semaphore_Handle startSemaphoreHandle;
+
 void semaphoreSetup()
 {
     /* Create Semaphores */
@@ -140,6 +143,9 @@ void semaphoreSetup()
 
 	Semaphore_construct(&gpsfixSemaphore, 0, &semparams);
 	gpsfixSemaphoreHandle = Semaphore_handle(&gpsfixSemaphore);
+
+	Semaphore_construct(&startSemaphore, 1, &semparams);
+	startSemaphoreHandle = Semaphore_handle(&startSemaphore);
 }
 
 
