@@ -103,7 +103,7 @@ Void txDataTaskFunc(UArg arg0, UArg arg1)
 
 			EasyLink_abort();
 
-			txPacket.payload[0] = 0x01;
+			txPacket.payload[0] = 0x1e;
 
 			txPacket.payload[1] = upperPart(ax);
 			txPacket.payload[2] = lowerPart(ax);

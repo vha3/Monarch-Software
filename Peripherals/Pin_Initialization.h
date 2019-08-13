@@ -61,7 +61,7 @@ void pinCallback(PIN_Handle handle, PIN_Id pinId) {
 
 		case IOID_1:
 			error += 1;
-			if (error >= 2){
+			if (error >= 3){
 				currVal =  PIN_getOutputValue(CC1310_LAUNCHXL_PIN_RLED);
 				PIN_setOutputValue(pinHandle, CC1310_LAUNCHXL_PIN_RLED, !currVal);
 				Semaphore_post(gpsfixSemaphoreHandle);
