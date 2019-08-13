@@ -670,7 +670,7 @@
    <evtMap id="65">
       <longName>ti.uia.loggers.LoggerStopMode.L_test</longName>
       <shortName>LoggerStopMode_L_test</shortName>
-      <moduleId>56</moduleId>
+      <moduleId>54</moduleId>
       <diagMask>256</diagMask>
       <msg>LoggerStopMode+Test</msg>
    </evtMap>
@@ -809,206 +809,206 @@
    <modIdMap id="23">
       <moduleName>ti.sysbios.knl.Clock</moduleName>
       <packageVersion>2,0,0,0,0</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/</packageBase>
       <cFileName>Clock.c</cFileName>
    </modIdMap>
    <modIdMap id="24">
       <moduleName>ti.sysbios.knl.Idle</moduleName>
       <packageVersion>2,0,0,0,0</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/</packageBase>
       <cFileName>Idle.c</cFileName>
    </modIdMap>
    <modIdMap id="25">
       <moduleName>ti.sysbios.knl.Intrinsics</moduleName>
       <packageVersion>2,0,0,0,0</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/</packageBase>
       <cFileName>Intrinsics.c</cFileName>
    </modIdMap>
    <modIdMap id="26">
       <moduleName>ti.sysbios.knl.Event</moduleName>
       <packageVersion>2,0,0,0,0</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/</packageBase>
       <cFileName>Event.c</cFileName>
    </modIdMap>
    <modIdMap id="27">
       <moduleName>ti.sysbios.knl.Mailbox</moduleName>
       <packageVersion>2,0,0,0,0</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/</packageBase>
       <cFileName>Mailbox.c</cFileName>
    </modIdMap>
    <modIdMap id="28">
       <moduleName>ti.sysbios.knl.Queue</moduleName>
       <packageVersion>2,0,0,0,0</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/</packageBase>
       <cFileName>Queue.c</cFileName>
    </modIdMap>
    <modIdMap id="29">
       <moduleName>ti.sysbios.knl.Semaphore</moduleName>
       <packageVersion>2,0,0,0,0</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/</packageBase>
       <cFileName>Semaphore.c</cFileName>
    </modIdMap>
    <modIdMap id="30">
       <moduleName>ti.sysbios.knl.Swi</moduleName>
       <packageVersion>2,0,0,0,0</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/</packageBase>
       <cFileName>Swi.c</cFileName>
    </modIdMap>
    <modIdMap id="31">
       <moduleName>ti.sysbios.knl.Task</moduleName>
       <packageVersion>2,0,0,0,0</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/</packageBase>
       <cFileName>Task.c</cFileName>
    </modIdMap>
    <modIdMap id="32">
       <moduleName>ti.sysbios.knl.Clock_TimerProxy</moduleName>
       <packageVersion>2,0,0,0,0</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/</packageBase>
       <cFileName>null</cFileName>
    </modIdMap>
    <modIdMap id="33">
       <moduleName>ti.sysbios.knl.Intrinsics_SupportProxy</moduleName>
       <packageVersion>2,0,0,0,0</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/</packageBase>
       <cFileName>null</cFileName>
    </modIdMap>
    <modIdMap id="34">
       <moduleName>ti.sysbios.knl.Task_SupportProxy</moduleName>
       <packageVersion>2,0,0,0,0</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/knl/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/knl/</packageBase>
       <cFileName>null</cFileName>
    </modIdMap>
    <modIdMap id="35">
       <moduleName>ti.sysbios.BIOS</moduleName>
       <packageVersion>2,0,0,0,0</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/</packageBase>
       <cFileName>BIOS.c</cFileName>
    </modIdMap>
    <modIdMap id="36">
       <moduleName>ti.sysbios.BIOS_RtsGateProxy</moduleName>
       <packageVersion>2,0,0,0,0</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/</packageBase>
       <cFileName>null</cFileName>
    </modIdMap>
    <modIdMap id="37">
       <moduleName>ti.sysbios.family.arm.m3.Hwi</moduleName>
       <packageVersion>2,0,0,0,0</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/family/arm/m3/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/family/arm/m3/</packageBase>
       <cFileName>Hwi.c</cFileName>
    </modIdMap>
    <modIdMap id="38">
       <moduleName>ti.sysbios.family.arm.m3.IntrinsicsSupport</moduleName>
       <packageVersion>2,0,0,0,0</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/family/arm/m3/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/family/arm/m3/</packageBase>
       <cFileName>null</cFileName>
    </modIdMap>
    <modIdMap id="39">
       <moduleName>ti.sysbios.family.arm.m3.TaskSupport</moduleName>
       <packageVersion>2,0,0,0,0</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/family/arm/m3/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/family/arm/m3/</packageBase>
       <cFileName>TaskSupport.c</cFileName>
    </modIdMap>
    <modIdMap id="40">
       <moduleName>ti.sysbios.family.arm.cc26xx.Boot</moduleName>
       <packageVersion>1,0,0,0,0</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/family/arm/cc26xx/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/family/arm/cc26xx/</packageBase>
       <cFileName>Boot.c</cFileName>
    </modIdMap>
    <modIdMap id="41">
       <moduleName>ti.sysbios.family.arm.cc26xx.Timer</moduleName>
       <packageVersion>1,0,0,0,0</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/family/arm/cc26xx/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/family/arm/cc26xx/</packageBase>
       <cFileName>Timer.c</cFileName>
    </modIdMap>
    <modIdMap id="42">
       <moduleName>ti.sysbios.family.arm.cc26xx.TimestampProvider</moduleName>
       <packageVersion>1,0,0,0,0</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/family/arm/cc26xx/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/family/arm/cc26xx/</packageBase>
       <cFileName>TimestampProvider.c</cFileName>
    </modIdMap>
    <modIdMap id="43">
       <moduleName>ti.sysbios.hal.Hwi</moduleName>
       <packageVersion>2,0,0,0,0</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/hal/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/hal/</packageBase>
       <cFileName>Hwi.c</cFileName>
    </modIdMap>
    <modIdMap id="44">
       <moduleName>ti.sysbios.hal.Hwi_HwiProxy</moduleName>
       <packageVersion>2,0,0,0,0</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/hal/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/hal/</packageBase>
       <cFileName>null</cFileName>
    </modIdMap>
    <modIdMap id="45">
       <moduleName>ti.sysbios.heaps.HeapMem</moduleName>
       <packageVersion>2,0,0,0,0</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/heaps/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/heaps/</packageBase>
       <cFileName>HeapMem.c</cFileName>
    </modIdMap>
    <modIdMap id="46">
       <moduleName>ti.sysbios.heaps.HeapMem_Module_GateProxy</moduleName>
       <packageVersion>2,0,0,0,0</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/heaps/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/heaps/</packageBase>
       <cFileName>null</cFileName>
    </modIdMap>
    <modIdMap id="47">
       <moduleName>ti.sysbios.rom.cortexm.cc13xx.CC13xx</moduleName>
       <packageVersion>1,0,0,0,0</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/rom/cortexm/cc13xx/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/rom/cortexm/cc13xx/</packageBase>
       <cFileName>null</cFileName>
    </modIdMap>
    <modIdMap id="48">
       <moduleName>ti.uia.events.DvtTypes</moduleName>
       <packageVersion>1,0,0,2,0</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/uia/events/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/uia/events/</packageBase>
       <cFileName>null</cFileName>
    </modIdMap>
    <modIdMap id="49">
       <moduleName>ti.uia.events.UIAErr</moduleName>
       <packageVersion>1,0,0,2,0</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/uia/events/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/uia/events/</packageBase>
       <cFileName>null</cFileName>
    </modIdMap>
    <modIdMap id="50">
       <moduleName>ti.uia.events.UIAEvt</moduleName>
       <packageVersion>1,0,0,2,0</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/uia/events/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/uia/events/</packageBase>
       <cFileName>null</cFileName>
    </modIdMap>
    <modIdMap id="51">
       <moduleName>ti.uia.runtime.EventHdr</moduleName>
       <packageVersion>1,0,0,2,0</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/uia/runtime/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/uia/runtime/</packageBase>
       <cFileName>null</cFileName>
    </modIdMap>
    <modIdMap id="52">
       <moduleName>ti.uia.runtime.QueueDescriptor</moduleName>
       <packageVersion>1,0,0,2,0</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/uia/runtime/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/uia/runtime/</packageBase>
       <cFileName>QueueDescriptor.c</cFileName>
    </modIdMap>
    <modIdMap id="53">
       <moduleName>ti.uia.runtime.UIAMetaData</moduleName>
       <packageVersion>1,0,0,2,0</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/uia/runtime/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/uia/runtime/</packageBase>
       <cFileName>null</cFileName>
    </modIdMap>
    <modIdMap id="54">
-      <moduleName>ti.sysbios.gates.GateHwi</moduleName>
-      <packageVersion>2,0,0,0,1494429108347</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/gates/</packageBase>
-      <cFileName>GateHwi.c</cFileName>
-   </modIdMap>
-   <modIdMap id="55">
-      <moduleName>ti.sysbios.gates.GateMutex</moduleName>
-      <packageVersion>2,0,0,0,1494429108347</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/gates/</packageBase>
-      <cFileName>GateMutex.c</cFileName>
-   </modIdMap>
-   <modIdMap id="56">
       <moduleName>ti.uia.loggers.LoggerStopMode</moduleName>
       <packageVersion>1,0,0,2,1494429108347</packageVersion>
-      <packageBase>/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/uia/loggers/</packageBase>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/uia/loggers/</packageBase>
       <cFileName>LoggerStopMode.c</cFileName>
+   </modIdMap>
+   <modIdMap id="55">
+      <moduleName>ti.sysbios.gates.GateHwi</moduleName>
+      <packageVersion>2,0,0,0,1494429108347</packageVersion>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/gates/</packageBase>
+      <cFileName>GateHwi.c</cFileName>
+   </modIdMap>
+   <modIdMap id="56">
+      <moduleName>ti.sysbios.gates.GateMutex</moduleName>
+      <packageVersion>2,0,0,0,1494429108347</packageVersion>
+      <packageBase>/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/gates/</packageBase>
+      <cFileName>GateMutex.c</cFileName>
    </modIdMap>
    <transport2>
       <uploadMode>JTAGSTOPMODE</uploadMode>

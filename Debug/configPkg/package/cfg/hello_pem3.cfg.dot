@@ -386,6 +386,22 @@ digraph configuration {
     }
     subgraph cluster40 {
         label="";
+        ti_uia_loggers__top [shape=box,label="ti.uia.loggers\n1,0,0,2,1494429108347", color=white];
+        ti_uia_loggers__bot [shape=point,label="", style=invis];
+        ti_uia_loggers_LoggerStopMode [style=filled,fillcolor=lightgray, label="LoggerStopMode"];
+        ti_uia_loggers__top -> ti_uia_loggers_LoggerStopMode[style=invis];
+        ti_uia_loggers_LoggerStopMode -> ti_uia_loggers__bot[style=invis];
+    }
+    subgraph cluster41 {
+        label="";
+        ti_uia_sysbios__top [shape=box,label="ti.uia.sysbios\n1,0,0,0,0", color=white];
+        ti_uia_sysbios__bot [shape=point,label="", style=invis];
+        ti_uia_sysbios_LoggingSetup [style=filled,fillcolor=lightgray, label="LoggingSetup"];
+        ti_uia_sysbios__top -> ti_uia_sysbios_LoggingSetup[style=invis];
+        ti_uia_sysbios_LoggingSetup -> ti_uia_sysbios__bot[style=invis];
+    }
+    subgraph cluster42 {
+        label="";
         ti_sysbios_gates__top [shape=box,label="ti.sysbios.gates\n2,0,0,0,1494429108347", color=white];
         ti_sysbios_gates__bot [shape=point,label="", style=invis];
         ti_sysbios_gates_GateHwi [style=filled,fillcolor=lightgray, label="GateHwi"];
@@ -395,7 +411,7 @@ digraph configuration {
         ti_sysbios_gates__top -> ti_sysbios_gates_GateMutex[style=invis];
         ti_sysbios_gates_GateMutex -> ti_sysbios_gates__bot[style=invis];
     }
-    subgraph cluster41 {
+    subgraph cluster43 {
         label="";
         ti_sysbios_heaps__top [shape=box,label="ti.sysbios.heaps\n2,0,0,0,0", color=white];
         ti_sysbios_heaps__bot [shape=point,label="", style=invis];
@@ -406,7 +422,7 @@ digraph configuration {
         ti_sysbios_heaps__top -> ti_sysbios_heaps_HeapMem_Module_GateProxy[style=invis];
         ti_sysbios_heaps_HeapMem_Module_GateProxy -> ti_sysbios_heaps__bot[style=invis];
     }
-    subgraph cluster42 {
+    subgraph cluster44 {
         label="";
         ti_sysbios_rom_cortexm_cc13xx__top [shape=box,label="ti.sysbios.rom.cortexm.cc13xx\n1,0,0,0,0", color=white];
         ti_sysbios_rom_cortexm_cc13xx__bot [shape=point,label="", style=invis];
@@ -414,29 +430,13 @@ digraph configuration {
         ti_sysbios_rom_cortexm_cc13xx__top -> ti_sysbios_rom_cortexm_cc13xx_CC13xx[style=invis];
         ti_sysbios_rom_cortexm_cc13xx_CC13xx -> ti_sysbios_rom_cortexm_cc13xx__bot[style=invis];
     }
-    subgraph cluster43 {
+    subgraph cluster45 {
         label="";
         ti_sysbios_xdcruntime__top [shape=box,label="ti.sysbios.xdcruntime\n1,0,0,1494429108347", color=white];
         ti_sysbios_xdcruntime__bot [shape=point,label="", style=invis];
         ti_sysbios_xdcruntime_Settings [style=filled,fillcolor=lightgray, label="Settings"];
         ti_sysbios_xdcruntime__top -> ti_sysbios_xdcruntime_Settings[style=invis];
         ti_sysbios_xdcruntime_Settings -> ti_sysbios_xdcruntime__bot[style=invis];
-    }
-    subgraph cluster44 {
-        label="";
-        ti_uia_loggers__top [shape=box,label="ti.uia.loggers\n1,0,0,2,1494429108347", color=white];
-        ti_uia_loggers__bot [shape=point,label="", style=invis];
-        ti_uia_loggers_LoggerStopMode [style=filled,fillcolor=lightgray, label="LoggerStopMode"];
-        ti_uia_loggers__top -> ti_uia_loggers_LoggerStopMode[style=invis];
-        ti_uia_loggers_LoggerStopMode -> ti_uia_loggers__bot[style=invis];
-    }
-    subgraph cluster45 {
-        label="";
-        ti_uia_sysbios__top [shape=box,label="ti.uia.sysbios\n1,0,0,0,0", color=white];
-        ti_uia_sysbios__bot [shape=point,label="", style=invis];
-        ti_uia_sysbios_LoggingSetup [style=filled,fillcolor=lightgray, label="LoggingSetup"];
-        ti_uia_sysbios__top -> ti_uia_sysbios_LoggingSetup[style=invis];
-        ti_uia_sysbios_LoggingSetup -> ti_uia_sysbios__bot[style=invis];
     }
     subgraph cluster46 {
         label="";
@@ -454,40 +454,40 @@ digraph configuration {
     }
   }
   node [font=Helvetica, fontsize=10];
-    ti_targets_arm_elf_M3__1_0_18__1_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,18.1,3",style=filled, fillcolor=lightgrey];
-    ti_targets_arm_rtsarm__bot -> ti_targets_arm_elf_M3__1_0_18__1_3 [ltail=cluster14];
-    ti_targets_arm_elf_M3__1_0_18__1_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,18.1,3",style=filled, fillcolor=lightgrey];
-    ti_uia_events__bot -> ti_targets_arm_elf_M3__1_0_18__1_3 [ltail=cluster21];
-    ti_targets_arm_elf_M3__1_0_18__1_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,18.1,3",style=filled, fillcolor=lightgrey];
-    ti_uia_runtime__bot -> ti_targets_arm_elf_M3__1_0_18__1_3 [ltail=cluster22];
-    ti_targets_arm_elf_M3__1_0_18__1_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,18.1,3",style=filled, fillcolor=lightgrey];
-    ti_uia_services__bot -> ti_targets_arm_elf_M3__1_0_18__1_3 [ltail=cluster25];
-    ti_targets_arm_elf_M3__1_0_18__1_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,18.1,3",style=filled, fillcolor=lightgrey];
-    ti_sysbios_hal__bot -> ti_targets_arm_elf_M3__1_0_18__1_3 [ltail=cluster34];
-    ti_targets_arm_elf_M3__1_0_18__1_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,18.1,3",style=filled, fillcolor=lightgrey];
-    ti_sysbios_family_arm_cc26xx__bot -> ti_targets_arm_elf_M3__1_0_18__1_3 [ltail=cluster35];
-    ti_targets_arm_elf_M3__1_0_18__1_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,18.1,3",style=filled, fillcolor=lightgrey];
-    ti_sysbios_family_arm_m3__bot -> ti_targets_arm_elf_M3__1_0_18__1_3 [ltail=cluster36];
-    ti_targets_arm_elf_M3__1_0_18__1_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,18.1,3",style=filled, fillcolor=lightgrey];
-    ti_sysbios_knl__bot -> ti_targets_arm_elf_M3__1_0_18__1_3 [ltail=cluster37];
-    ti_targets_arm_elf_M3__1_0_18__1_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,18.1,3",style=filled, fillcolor=lightgrey];
-    ti_sysbios__bot -> ti_targets_arm_elf_M3__1_0_18__1_3 [ltail=cluster38];
-    ti_targets_arm_elf_M3__1_0_18__1_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,18.1,3",style=filled, fillcolor=lightgrey];
-    ti_sysbios_syncs__bot -> ti_targets_arm_elf_M3__1_0_18__1_3 [ltail=cluster39];
-    ti_targets_arm_elf_M3__1_0_18__1_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,18.1,3",style=filled, fillcolor=lightgrey];
-    ti_sysbios_gates__bot -> ti_targets_arm_elf_M3__1_0_18__1_3 [ltail=cluster40];
-    ti_targets_arm_elf_M3__1_0_18__1_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,18.1,3",style=filled, fillcolor=lightgrey];
-    ti_sysbios_heaps__bot -> ti_targets_arm_elf_M3__1_0_18__1_3 [ltail=cluster41];
+    ti_targets_arm_elf_M3__1_0_16__9_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,16.9,3",style=filled, fillcolor=lightgrey];
+    ti_targets_arm_rtsarm__bot -> ti_targets_arm_elf_M3__1_0_16__9_3 [ltail=cluster14];
+    ti_targets_arm_elf_M3__1_0_16__9_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,16.9,3",style=filled, fillcolor=lightgrey];
+    ti_uia_events__bot -> ti_targets_arm_elf_M3__1_0_16__9_3 [ltail=cluster21];
+    ti_targets_arm_elf_M3__1_0_16__9_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,16.9,3",style=filled, fillcolor=lightgrey];
+    ti_uia_runtime__bot -> ti_targets_arm_elf_M3__1_0_16__9_3 [ltail=cluster22];
+    ti_targets_arm_elf_M3__1_0_16__9_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,16.9,3",style=filled, fillcolor=lightgrey];
+    ti_uia_services__bot -> ti_targets_arm_elf_M3__1_0_16__9_3 [ltail=cluster25];
+    ti_targets_arm_elf_M3__1_0_16__9_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,16.9,3",style=filled, fillcolor=lightgrey];
+    ti_sysbios_hal__bot -> ti_targets_arm_elf_M3__1_0_16__9_3 [ltail=cluster34];
+    ti_targets_arm_elf_M3__1_0_16__9_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,16.9,3",style=filled, fillcolor=lightgrey];
+    ti_sysbios_family_arm_cc26xx__bot -> ti_targets_arm_elf_M3__1_0_16__9_3 [ltail=cluster35];
+    ti_targets_arm_elf_M3__1_0_16__9_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,16.9,3",style=filled, fillcolor=lightgrey];
+    ti_sysbios_family_arm_m3__bot -> ti_targets_arm_elf_M3__1_0_16__9_3 [ltail=cluster36];
+    ti_targets_arm_elf_M3__1_0_16__9_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,16.9,3",style=filled, fillcolor=lightgrey];
+    ti_sysbios_knl__bot -> ti_targets_arm_elf_M3__1_0_16__9_3 [ltail=cluster37];
+    ti_targets_arm_elf_M3__1_0_16__9_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,16.9,3",style=filled, fillcolor=lightgrey];
+    ti_sysbios__bot -> ti_targets_arm_elf_M3__1_0_16__9_3 [ltail=cluster38];
+    ti_targets_arm_elf_M3__1_0_16__9_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,16.9,3",style=filled, fillcolor=lightgrey];
+    ti_sysbios_syncs__bot -> ti_targets_arm_elf_M3__1_0_16__9_3 [ltail=cluster39];
+    ti_targets_arm_elf_M3__1_0_16__9_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,16.9,3",style=filled, fillcolor=lightgrey];
+    ti_uia_loggers__bot -> ti_targets_arm_elf_M3__1_0_16__9_3 [ltail=cluster40];
+    ti_targets_arm_elf_M3__1_0_16__9_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,16.9,3",style=filled, fillcolor=lightgrey];
+    ti_uia_sysbios__bot -> ti_targets_arm_elf_M3__1_0_16__9_3 [ltail=cluster41];
+    ti_targets_arm_elf_M3__1_0_16__9_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,16.9,3",style=filled, fillcolor=lightgrey];
+    ti_sysbios_gates__bot -> ti_targets_arm_elf_M3__1_0_16__9_3 [ltail=cluster42];
+    ti_targets_arm_elf_M3__1_0_16__9_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,16.9,3",style=filled, fillcolor=lightgrey];
+    ti_sysbios_heaps__bot -> ti_targets_arm_elf_M3__1_0_16__9_3 [ltail=cluster43];
     ti_targets_arm_elf_M3__1_0_16__9_0 [shape=record,label="ti.targets.arm.elf.M3|1,0,16.9,0",style=filled, fillcolor=lightgrey];
-    ti_sysbios_rom_cortexm_cc13xx__bot -> ti_targets_arm_elf_M3__1_0_16__9_0 [ltail=cluster42];
-    ti_targets_arm_elf_M3__1_0_18__1_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,18.1,3",style=filled, fillcolor=lightgrey];
-    ti_sysbios_xdcruntime__bot -> ti_targets_arm_elf_M3__1_0_18__1_3 [ltail=cluster43];
-    ti_targets_arm_elf_M3__1_0_18__1_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,18.1,3",style=filled, fillcolor=lightgrey];
-    ti_uia_loggers__bot -> ti_targets_arm_elf_M3__1_0_18__1_3 [ltail=cluster44];
-    ti_targets_arm_elf_M3__1_0_18__1_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,18.1,3",style=filled, fillcolor=lightgrey];
-    ti_uia_sysbios__bot -> ti_targets_arm_elf_M3__1_0_18__1_3 [ltail=cluster45];
-    ti_targets_arm_elf_M3__1_0_18__1_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,18.1,3",style=filled, fillcolor=lightgrey];
-    ti_sysbios_utils__bot -> ti_targets_arm_elf_M3__1_0_18__1_3 [ltail=cluster46];
+    ti_sysbios_rom_cortexm_cc13xx__bot -> ti_targets_arm_elf_M3__1_0_16__9_0 [ltail=cluster44];
+    ti_targets_arm_elf_M3__1_0_16__9_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,16.9,3",style=filled, fillcolor=lightgrey];
+    ti_sysbios_xdcruntime__bot -> ti_targets_arm_elf_M3__1_0_16__9_3 [ltail=cluster45];
+    ti_targets_arm_elf_M3__1_0_16__9_3 [shape=record,label="ti.targets.arm.elf.M3|1,0,16.9,3",style=filled, fillcolor=lightgrey];
+    ti_sysbios_utils__bot -> ti_targets_arm_elf_M3__1_0_16__9_3 [ltail=cluster46];
     ti_targets_arm_elf_M3__1_0_18__1_4 [shape=record,label="ti.targets.arm.elf.M3|1,0,18.1,4",style=filled, fillcolor=lightgrey];
     configPkg__top -> ti_targets_arm_elf_M3__1_0_18__1_4 [ltail=cluster47];
 }

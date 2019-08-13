@@ -10,24 +10,24 @@ CC1310_LAUNCHXL_fxns.obj: /Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.
 CC1310_LAUNCHXL_fxns.obj: /Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/include/machine/_types.h
 CC1310_LAUNCHXL_fxns.obj: /Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/include/machine/_stdint.h
 CC1310_LAUNCHXL_fxns.obj: /Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/include/sys/_stdint.h
-CC1310_LAUNCHXL_fxns.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/ioc.h
-CC1310_LAUNCHXL_fxns.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_types.h
-CC1310_LAUNCHXL_fxns.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/../inc/hw_chip_def.h
-CC1310_LAUNCHXL_fxns.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_memmap.h
-CC1310_LAUNCHXL_fxns.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_ioc.h
-CC1310_LAUNCHXL_fxns.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_ints.h
-CC1310_LAUNCHXL_fxns.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/interrupt.h
-CC1310_LAUNCHXL_fxns.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_nvic.h
-CC1310_LAUNCHXL_fxns.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/debug.h
-CC1310_LAUNCHXL_fxns.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/cpu.h
-CC1310_LAUNCHXL_fxns.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_cpu_scs.h
-CC1310_LAUNCHXL_fxns.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../driverlib/rom.h
-CC1310_LAUNCHXL_fxns.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/gpio.h
-CC1310_LAUNCHXL_fxns.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_gpio.h
-CC1310_LAUNCHXL_fxns.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/pin/PINCC26XX.h
-CC1310_LAUNCHXL_fxns.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/dpl/HwiP.h
-CC1310_LAUNCHXL_fxns.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/PIN.h
-CC1310_LAUNCHXL_fxns.obj: /Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/DeviceFamily.h
+CC1310_LAUNCHXL_fxns.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/ioc.h
+CC1310_LAUNCHXL_fxns.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_types.h
+CC1310_LAUNCHXL_fxns.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/../inc/hw_chip_def.h
+CC1310_LAUNCHXL_fxns.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_memmap.h
+CC1310_LAUNCHXL_fxns.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_ioc.h
+CC1310_LAUNCHXL_fxns.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_ints.h
+CC1310_LAUNCHXL_fxns.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/interrupt.h
+CC1310_LAUNCHXL_fxns.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_nvic.h
+CC1310_LAUNCHXL_fxns.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/debug.h
+CC1310_LAUNCHXL_fxns.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/cpu.h
+CC1310_LAUNCHXL_fxns.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_cpu_scs.h
+CC1310_LAUNCHXL_fxns.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../driverlib/rom.h
+CC1310_LAUNCHXL_fxns.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/gpio.h
+CC1310_LAUNCHXL_fxns.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_gpio.h
+CC1310_LAUNCHXL_fxns.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/pin/PINCC26XX.h
+CC1310_LAUNCHXL_fxns.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/dpl/HwiP.h
+CC1310_LAUNCHXL_fxns.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/PIN.h
+CC1310_LAUNCHXL_fxns.obj: /Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/DeviceFamily.h
 CC1310_LAUNCHXL_fxns.obj: ../Board.h
 CC1310_LAUNCHXL_fxns.obj: ../CC1310_LAUNCHXL.h
 
@@ -41,23 +41,23 @@ CC1310_LAUNCHXL_fxns.obj: ../CC1310_LAUNCHXL.h
 /Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/include/machine/_types.h: 
 /Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/include/machine/_stdint.h: 
 /Applications/ti/ccsv8/tools/compiler/ti-cgt-arm_18.1.4.LTS/include/sys/_stdint.h: 
-/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/ioc.h: 
-/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_types.h: 
-/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/../inc/hw_chip_def.h: 
-/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_memmap.h: 
-/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_ioc.h: 
-/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_ints.h: 
-/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/interrupt.h: 
-/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_nvic.h: 
-/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/debug.h: 
-/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/cpu.h: 
-/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_cpu_scs.h: 
-/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../driverlib/rom.h: 
-/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/gpio.h: 
-/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/cc13x0/driverlib/../inc/hw_gpio.h: 
-/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/pin/PINCC26XX.h: 
-/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/dpl/HwiP.h: 
-/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/drivers/PIN.h: 
-/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/source/ti/devices/DeviceFamily.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/ioc.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_types.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/../inc/hw_chip_def.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_memmap.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_ioc.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_ints.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/interrupt.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_nvic.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/debug.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/cpu.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_cpu_scs.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../driverlib/rom.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/gpio.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/cc13x0/driverlib/../inc/hw_gpio.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/pin/PINCC26XX.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/dpl/HwiP.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/drivers/PIN.h: 
+/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/source/ti/devices/DeviceFamily.h: 
 ../Board.h: 
 ../CC1310_LAUNCHXL.h: 

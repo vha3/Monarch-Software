@@ -10,14 +10,14 @@
 
 
 -l"/Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/Debug/configPkg/package/cfg/hello_pem3.oem3"
--l"/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/uia/sysbios/lib/release/ti.uia.sysbios.aem3"
--l"/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/uia/loggers/lib/release/ti.uia.loggers.aem3"
+-l"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/uia/sysbios/lib/release/ti.uia.sysbios.aem3"
+-l"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/uia/loggers/lib/release/ti.uia.loggers.aem3"
 -l"/Users/hunteradams/Documents/MSP430/workspace/Monarch_Software/src/sysbios/rom_sysbios.aem3"
--l"/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/uia/services/lib/release/ti.uia.services.aem3"
--l"/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/uia/runtime/lib/release/ti.uia.runtime.aem3"
--l"/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/uia/events/lib/release/ti.uia.events.aem3"
--l"/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/targets/arm/rtsarm/lib/boot.aem3"
--l"/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/targets/arm/rtsarm/lib/auto_init.aem3"
+-l"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/uia/services/lib/release/ti.uia.services.aem3"
+-l"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/uia/runtime/lib/release/ti.uia.runtime.aem3"
+-l"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/uia/events/lib/release/ti.uia.events.aem3"
+-l"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/targets/arm/rtsarm/lib/boot.aem3"
+-l"/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/targets/arm/rtsarm/lib/auto_init.aem3"
 
 --retain="*(xdc.meta)"
 
@@ -116,11 +116,15 @@ ti_sysbios_family_arm_m3_Hwi_nvic = 0xe000e000;
 
 /* Content from ti.sysbios.syncs (null): */
 
+/* Content from ti.uia.loggers (null): */
+
+/* Content from ti.uia.sysbios (null): */
+
 /* Content from ti.sysbios.gates (null): */
 
 /* Content from ti.sysbios.heaps (null): */
 
-/* Content from ti.sysbios.rom.cortexm.cc13xx (/Users/hunteradams/ti/simplelink_cc13x0_sdk_2_30_00_20/kernel/tirtos/packages/ti/sysbios/rom/cortexm/cc13xx/golden/CC13xx/CC13xx_link_ti.xdt): */
+/* Content from ti.sysbios.rom.cortexm.cc13xx (/Applications/ti/simplelink_cc13x0_sdk_1_40_00_10/kernel/tirtos/packages/ti/sysbios/rom/cortexm/cc13xx/golden/CC13xx/CC13xx_link_ti.xdt): */
 
 -u xdc_runtime_Error_policy__C
 -u xdc_runtime_IModule_Interface__BASE__C
@@ -688,10 +692,6 @@ SECTIONS
 }
 
 /* Content from ti.sysbios.xdcruntime (null): */
-
-/* Content from ti.uia.loggers (null): */
-
-/* Content from ti.uia.sysbios (null): */
 
 /* Content from ti.sysbios.utils (null): */
 

@@ -23,7 +23,7 @@ __obj = [
     [],    // #20 ti.sysbios.gates.GateHwi/configNameMap$/'xdc.runtime/Asserts'/fields
     {},    // #21 ti.sysbios.gates.GateHwi/configNameMap$/'xdc.runtime/Errors'
     [],    // #22 ti.sysbios.gates.GateHwi/configNameMap$/'xdc.runtime/Errors'/fields
-    {},    // #23 xdc.rov.ViewInfo.Instance#42
+    {},    // #23 xdc.rov.ViewInfo.Instance#45
     {},    // #24 xdc.rov.ViewInfo
     [],    // #25 xdc.rov.ViewInfo/$instances
     {},    // #26 xdc.rov.ViewInfo.Instance#0
@@ -186,50 +186,50 @@ __obj = [
     [],    // #183 xdc.rov.ViewInfo.Instance#41/viewMap
     {},    // #184 xdc.rov.ViewInfo.Instance#41/viewMap/'Module'
     {},    // #185 xdc.rov.ViewInfo.Instance#41/viewMap/'Records'
-    {},    // #186 xdc.rov.ViewInfo.Instance#43
-    [],    // #187 xdc.rov.ViewInfo.Instance#43/viewMap
-    {},    // #188 xdc.rov.ViewInfo.Instance#43/viewMap/'Basic'
-    {},    // #189 xdc.rov.ViewInfo.Instance#44
-    [],    // #190 xdc.rov.ViewInfo.Instance#44/viewMap
-    {},    // #191 xdc.rov.ViewInfo.Instance#44/viewMap/'Basic'
-    {},    // #192 xdc.rov.ViewInfo.Instance#45
-    [],    // #193 xdc.rov.ViewInfo.Instance#45/viewMap
-    {},    // #194 xdc.rov.ViewInfo.Instance#45/viewMap/'Basic'
-    {},    // #195 xdc.rov.ViewInfo.Instance#46
-    [],    // #196 xdc.rov.ViewInfo.Instance#46/viewMap
-    {},    // #197 xdc.rov.ViewInfo.Instance#46/viewMap/'Basic'
-    {},    // #198 xdc.rov.ViewInfo.Instance#46/viewMap/'Detailed'
-    {},    // #199 xdc.rov.ViewInfo.Instance#47
-    [],    // #200 xdc.rov.ViewInfo.Instance#47/viewMap
-    {},    // #201 xdc.rov.ViewInfo.Instance#47/viewMap/'Basic'
-    {},    // #202 xdc.rov.ViewInfo.Instance#48
-    [],    // #203 xdc.rov.ViewInfo.Instance#48/viewMap
-    {},    // #204 xdc.rov.ViewInfo.Instance#48/viewMap/'Basic'
-    {},    // #205 xdc.rov.ViewInfo.Instance#49
-    [],    // #206 xdc.rov.ViewInfo.Instance#49/viewMap
-    {},    // #207 xdc.rov.ViewInfo.Instance#49/viewMap/'Basic'
-    {},    // #208 xdc.rov.ViewInfo.Instance#50
-    [],    // #209 xdc.rov.ViewInfo.Instance#50/viewMap
-    {},    // #210 xdc.rov.ViewInfo.Instance#50/viewMap/'Module'
-    {},    // #211 xdc.rov.ViewInfo.Instance#50/viewMap/'Instances'
-    {},    // #212 xdc.rov.ViewInfo.Instance#50/viewMap/'Records'
-    {},    // #213 xdc.rov.ViewInfo.Instance#51
-    [],    // #214 xdc.rov.ViewInfo.Instance#51/viewMap
-    {},    // #215 xdc.rov.ViewInfo.Instance#51/viewMap/'Module'
-    {},    // #216 xdc.rov.ViewInfo.Instance#51/viewMap/'Instances'
-    {},    // #217 xdc.rov.ViewInfo.Instance#51/viewMap/'Records'
-    {},    // #218 xdc.rov.ViewInfo.Instance#52
-    [],    // #219 xdc.rov.ViewInfo.Instance#52/viewMap
-    {},    // #220 xdc.rov.ViewInfo.Instance#52/viewMap/'Module'
-    {},    // #221 xdc.rov.ViewInfo.Instance#52/viewMap/'Records'
+    {},    // #186 xdc.rov.ViewInfo.Instance#42
+    [],    // #187 xdc.rov.ViewInfo.Instance#42/viewMap
+    {},    // #188 xdc.rov.ViewInfo.Instance#42/viewMap/'Module'
+    {},    // #189 xdc.rov.ViewInfo.Instance#42/viewMap/'Instances'
+    {},    // #190 xdc.rov.ViewInfo.Instance#42/viewMap/'Records'
+    {},    // #191 xdc.rov.ViewInfo.Instance#43
+    [],    // #192 xdc.rov.ViewInfo.Instance#43/viewMap
+    {},    // #193 xdc.rov.ViewInfo.Instance#43/viewMap/'Module'
+    {},    // #194 xdc.rov.ViewInfo.Instance#43/viewMap/'Instances'
+    {},    // #195 xdc.rov.ViewInfo.Instance#43/viewMap/'Records'
+    {},    // #196 xdc.rov.ViewInfo.Instance#44
+    [],    // #197 xdc.rov.ViewInfo.Instance#44/viewMap
+    {},    // #198 xdc.rov.ViewInfo.Instance#44/viewMap/'Module'
+    {},    // #199 xdc.rov.ViewInfo.Instance#44/viewMap/'Records'
+    {},    // #200 xdc.rov.ViewInfo.Instance#46
+    [],    // #201 xdc.rov.ViewInfo.Instance#46/viewMap
+    {},    // #202 xdc.rov.ViewInfo.Instance#46/viewMap/'Basic'
+    {},    // #203 xdc.rov.ViewInfo.Instance#47
+    [],    // #204 xdc.rov.ViewInfo.Instance#47/viewMap
+    {},    // #205 xdc.rov.ViewInfo.Instance#47/viewMap/'Basic'
+    {},    // #206 xdc.rov.ViewInfo.Instance#48
+    [],    // #207 xdc.rov.ViewInfo.Instance#48/viewMap
+    {},    // #208 xdc.rov.ViewInfo.Instance#48/viewMap/'Basic'
+    {},    // #209 xdc.rov.ViewInfo.Instance#49
+    [],    // #210 xdc.rov.ViewInfo.Instance#49/viewMap
+    {},    // #211 xdc.rov.ViewInfo.Instance#49/viewMap/'Basic'
+    {},    // #212 xdc.rov.ViewInfo.Instance#49/viewMap/'Detailed'
+    {},    // #213 xdc.rov.ViewInfo.Instance#50
+    [],    // #214 xdc.rov.ViewInfo.Instance#50/viewMap
+    {},    // #215 xdc.rov.ViewInfo.Instance#50/viewMap/'Basic'
+    {},    // #216 xdc.rov.ViewInfo.Instance#51
+    [],    // #217 xdc.rov.ViewInfo.Instance#51/viewMap
+    {},    // #218 xdc.rov.ViewInfo.Instance#51/viewMap/'Basic'
+    {},    // #219 xdc.rov.ViewInfo.Instance#52
+    [],    // #220 xdc.rov.ViewInfo.Instance#52/viewMap
+    {},    // #221 xdc.rov.ViewInfo.Instance#52/viewMap/'Basic'
     {},    // #222 xdc.rov.ViewInfo.Instance#53
     [],    // #223 xdc.rov.ViewInfo.Instance#53/viewMap
     {},    // #224 xdc.rov.ViewInfo.Instance#53/viewMap/'Module'
     {},    // #225 xdc.rov.ViewInfo.Instance#54
     [],    // #226 xdc.rov.ViewInfo.Instance#54/viewMap
     {},    // #227 xdc.rov.ViewInfo.Instance#54/viewMap/'Module'
-    [],    // #228 xdc.rov.ViewInfo.Instance#42/viewMap
-    {},    // #229 xdc.rov.ViewInfo.Instance#42/viewMap/'Basic'
+    [],    // #228 xdc.rov.ViewInfo.Instance#45/viewMap
+    {},    // #229 xdc.rov.ViewInfo.Instance#45/viewMap/'Basic'
     [],    // #230 ti.sysbios.gates.GateHwi/viewNameMap$
     {},    // #231 ti.sysbios.gates.GateHwi.Instance#0/instance
     [],    // #232 xdc.runtime.Assert/configNameMap$
@@ -253,8 +253,8 @@ __obj = [
     [],    // #250 ti.uia.loggers.LoggerStopMode/$instances
     {},    // #251 ti.uia.loggers.LoggerStopMode.Instance#1
     {},    // #252 ti.uia.loggers.LoggerStopMode.Instance#1/instance
-    {},    // #253 xdc.runtime.Error.Desc#43
-    {},    // #254 xdc.runtime.Log.EventDesc#120
+    {},    // #253 xdc.runtime.Error.Desc#42
+    {},    // #254 xdc.runtime.Log.EventDesc#117
     {},    // #255 ti.uia.loggers.LoggerStopMode/common$
     [],    // #256 ti.uia.loggers.LoggerStopMode/configNameMap$
     {},    // #257 ti.uia.loggers.LoggerStopMode/configNameMap$/'xdc.runtime/Memory'
@@ -1326,9 +1326,9 @@ __o = __obj[1]
     __o['#51'] = __obj[1082.0]
     __o['#52'] = __obj[1099.0]
     __o['#53'] = __obj[1116.0]
-    __o['#54'] = __obj[7.0]
-    __o['#55'] = __obj[740.0]
-    __o['#56'] = __obj[249.0]
+    __o['#54'] = __obj[249.0]
+    __o['#55'] = __obj[7.0]
+    __o['#56'] = __obj[740.0]
     __o['#6'] = __obj[1135.0]
     __o['#7'] = __obj[1152.0]
     __o['#8'] = __obj[1181.0]
@@ -1464,7 +1464,7 @@ __o = __obj[7]  // ti.sysbios.gates.GateHwi
     __o['Module__diagsMask'] = null
     __o['Module__gateObj'] = null
     __o['Module__gatePrms'] = null
-    __o['Module__id'] = 54
+    __o['Module__id'] = 55
     __o['Module__loggerDefined'] = false
     __o['Module__loggerFxn0'] = null
     __o['Module__loggerFxn1'] = null
@@ -1624,10 +1624,10 @@ __o = __obj[22]  // ti.sysbios.gates.GateHwi/configNameMap$/'xdc.runtime/Errors'
     __o['$name'] = String(java.net.URLDecoder.decode('ti.sysbios.gates.GateHwi%2FconfigNameMap%24%2F%27xdc.runtime%2FErrors%27%2Ffields', 'UTF-8'))
     __o['0'] = String(java.net.URLDecoder.decode('Error.Id', 'UTF-8'))
 
-__o = __obj[23]  // xdc.rov.ViewInfo.Instance#42
+__o = __obj[23]  // xdc.rov.ViewInfo.Instance#45
     __o['$category'] = String(java.net.URLDecoder.decode('Instance', 'UTF-8'))
     __o['$module'] = __obj[24.0]
-    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2342', 'UTF-8'))
+    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2345', 'UTF-8'))
     __o['showRawTab'] = true
     __o['viewMap'] = __obj[228.0]
 
@@ -1681,17 +1681,17 @@ __o = __obj[25]  // xdc.rov.ViewInfo/$instances
     __o['39'] = __obj[173.0]
     __o['40'] = __obj[177.0]
     __o['41'] = __obj[182.0]
-    __o['42'] = __obj[23.0]
-    __o['43'] = __obj[186.0]
-    __o['44'] = __obj[189.0]
-    __o['45'] = __obj[192.0]
-    __o['46'] = __obj[195.0]
-    __o['47'] = __obj[199.0]
-    __o['48'] = __obj[202.0]
-    __o['49'] = __obj[205.0]
-    __o['50'] = __obj[208.0]
-    __o['51'] = __obj[213.0]
-    __o['52'] = __obj[218.0]
+    __o['42'] = __obj[186.0]
+    __o['43'] = __obj[191.0]
+    __o['44'] = __obj[196.0]
+    __o['45'] = __obj[23.0]
+    __o['46'] = __obj[200.0]
+    __o['47'] = __obj[203.0]
+    __o['48'] = __obj[206.0]
+    __o['49'] = __obj[209.0]
+    __o['50'] = __obj[213.0]
+    __o['51'] = __obj[216.0]
+    __o['52'] = __obj[219.0]
     __o['53'] = __obj[222.0]
     __o['54'] = __obj[225.0]
 
@@ -2807,253 +2807,253 @@ __o = __obj[185]  // xdc.rov.ViewInfo.Instance#41/viewMap/'Records'
     __o['type'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.MODULE_DATA', 'UTF-8'))
     __o['viewInitFxn'] = String(java.net.URLDecoder.decode('viewInitRecords', 'UTF-8'))
 
-__o = __obj[186]  // xdc.rov.ViewInfo.Instance#43
+__o = __obj[186]  // xdc.rov.ViewInfo.Instance#42
+    __o['$category'] = String(java.net.URLDecoder.decode('Instance', 'UTF-8'))
+    __o['$module'] = __obj[24.0]
+    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2342', 'UTF-8'))
+    __o['showRawTab'] = true
+    __o['viewMap'] = __obj[187.0]
+
+__o = __obj[187]  // xdc.rov.ViewInfo.Instance#42/viewMap
+    __o.$keys = []
+    __o.push(__o['Module'] = __obj[188.0]); __o.$keys.push('Module')
+    __o.push(__o['Instances'] = __obj[189.0]); __o.$keys.push('Instances')
+    __o.push(__o['Records'] = __obj[190.0]); __o.$keys.push('Records')
+    __o['$category'] = String(java.net.URLDecoder.decode('Map', 'UTF-8'))
+    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2342%2FviewMap', 'UTF-8'))
+
+__o = __obj[188]  // xdc.rov.ViewInfo.Instance#42/viewMap/'Module'
+    __o['$category'] = String(java.net.URLDecoder.decode('Struct', 'UTF-8'))
+    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2342%2FviewMap%2F%27Module%27', 'UTF-8'))
+    __o['structName'] = String(java.net.URLDecoder.decode('ModuleView', 'UTF-8'))
+    __o['type'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.MODULE', 'UTF-8'))
+    __o['viewInitFxn'] = String(java.net.URLDecoder.decode('viewInitModule', 'UTF-8'))
+
+__o = __obj[189]  // xdc.rov.ViewInfo.Instance#42/viewMap/'Instances'
+    __o['$category'] = String(java.net.URLDecoder.decode('Struct', 'UTF-8'))
+    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2342%2FviewMap%2F%27Instances%27', 'UTF-8'))
+    __o['structName'] = String(java.net.URLDecoder.decode('InstanceView', 'UTF-8'))
+    __o['type'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.INSTANCE', 'UTF-8'))
+    __o['viewInitFxn'] = String(java.net.URLDecoder.decode('viewInitInstances', 'UTF-8'))
+
+__o = __obj[190]  // xdc.rov.ViewInfo.Instance#42/viewMap/'Records'
+    __o['$category'] = String(java.net.URLDecoder.decode('Struct', 'UTF-8'))
+    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2342%2FviewMap%2F%27Records%27', 'UTF-8'))
+    __o['structName'] = String(java.net.URLDecoder.decode('RecordView', 'UTF-8'))
+    __o['type'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.INSTANCE_DATA', 'UTF-8'))
+    __o['viewInitFxn'] = String(java.net.URLDecoder.decode('viewInitRecords', 'UTF-8'))
+
+__o = __obj[191]  // xdc.rov.ViewInfo.Instance#43
     __o['$category'] = String(java.net.URLDecoder.decode('Instance', 'UTF-8'))
     __o['$module'] = __obj[24.0]
     __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2343', 'UTF-8'))
     __o['showRawTab'] = true
-    __o['viewMap'] = __obj[187.0]
+    __o['viewMap'] = __obj[192.0]
 
-__o = __obj[187]  // xdc.rov.ViewInfo.Instance#43/viewMap
+__o = __obj[192]  // xdc.rov.ViewInfo.Instance#43/viewMap
     __o.$keys = []
-    __o.push(__o['Basic'] = __obj[188.0]); __o.$keys.push('Basic')
+    __o.push(__o['Module'] = __obj[193.0]); __o.$keys.push('Module')
+    __o.push(__o['Instances'] = __obj[194.0]); __o.$keys.push('Instances')
+    __o.push(__o['Records'] = __obj[195.0]); __o.$keys.push('Records')
     __o['$category'] = String(java.net.URLDecoder.decode('Map', 'UTF-8'))
     __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2343%2FviewMap', 'UTF-8'))
 
-__o = __obj[188]  // xdc.rov.ViewInfo.Instance#43/viewMap/'Basic'
+__o = __obj[193]  // xdc.rov.ViewInfo.Instance#43/viewMap/'Module'
     __o['$category'] = String(java.net.URLDecoder.decode('Struct', 'UTF-8'))
-    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2343%2FviewMap%2F%27Basic%27', 'UTF-8'))
-    __o['structName'] = String(java.net.URLDecoder.decode('BasicView', 'UTF-8'))
-    __o['type'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.INSTANCE', 'UTF-8'))
-    __o['viewInitFxn'] = String(java.net.URLDecoder.decode('viewInitBasic', 'UTF-8'))
+    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2343%2FviewMap%2F%27Module%27', 'UTF-8'))
+    __o['structName'] = String(java.net.URLDecoder.decode('ModuleView', 'UTF-8'))
+    __o['type'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.MODULE', 'UTF-8'))
+    __o['viewInitFxn'] = String(java.net.URLDecoder.decode('viewInitModule', 'UTF-8'))
 
-__o = __obj[189]  // xdc.rov.ViewInfo.Instance#44
+__o = __obj[194]  // xdc.rov.ViewInfo.Instance#43/viewMap/'Instances'
+    __o['$category'] = String(java.net.URLDecoder.decode('Struct', 'UTF-8'))
+    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2343%2FviewMap%2F%27Instances%27', 'UTF-8'))
+    __o['structName'] = String(java.net.URLDecoder.decode('InstanceView', 'UTF-8'))
+    __o['type'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.INSTANCE', 'UTF-8'))
+    __o['viewInitFxn'] = String(java.net.URLDecoder.decode('viewInitInstances', 'UTF-8'))
+
+__o = __obj[195]  // xdc.rov.ViewInfo.Instance#43/viewMap/'Records'
+    __o['$category'] = String(java.net.URLDecoder.decode('Struct', 'UTF-8'))
+    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2343%2FviewMap%2F%27Records%27', 'UTF-8'))
+    __o['structName'] = String(java.net.URLDecoder.decode('RecordView', 'UTF-8'))
+    __o['type'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.INSTANCE_DATA', 'UTF-8'))
+    __o['viewInitFxn'] = String(java.net.URLDecoder.decode('viewInitRecords', 'UTF-8'))
+
+__o = __obj[196]  // xdc.rov.ViewInfo.Instance#44
     __o['$category'] = String(java.net.URLDecoder.decode('Instance', 'UTF-8'))
     __o['$module'] = __obj[24.0]
     __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2344', 'UTF-8'))
     __o['showRawTab'] = true
-    __o['viewMap'] = __obj[190.0]
+    __o['viewMap'] = __obj[197.0]
 
-__o = __obj[190]  // xdc.rov.ViewInfo.Instance#44/viewMap
+__o = __obj[197]  // xdc.rov.ViewInfo.Instance#44/viewMap
     __o.$keys = []
-    __o.push(__o['Basic'] = __obj[191.0]); __o.$keys.push('Basic')
+    __o.push(__o['Module'] = __obj[198.0]); __o.$keys.push('Module')
+    __o.push(__o['Records'] = __obj[199.0]); __o.$keys.push('Records')
     __o['$category'] = String(java.net.URLDecoder.decode('Map', 'UTF-8'))
     __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2344%2FviewMap', 'UTF-8'))
 
-__o = __obj[191]  // xdc.rov.ViewInfo.Instance#44/viewMap/'Basic'
+__o = __obj[198]  // xdc.rov.ViewInfo.Instance#44/viewMap/'Module'
     __o['$category'] = String(java.net.URLDecoder.decode('Struct', 'UTF-8'))
-    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2344%2FviewMap%2F%27Basic%27', 'UTF-8'))
-    __o['structName'] = String(java.net.URLDecoder.decode('BasicView', 'UTF-8'))
-    __o['type'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.INSTANCE', 'UTF-8'))
-    __o['viewInitFxn'] = String(java.net.URLDecoder.decode('viewInitBasic', 'UTF-8'))
+    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2344%2FviewMap%2F%27Module%27', 'UTF-8'))
+    __o['structName'] = String(java.net.URLDecoder.decode('ModuleView', 'UTF-8'))
+    __o['type'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.MODULE', 'UTF-8'))
+    __o['viewInitFxn'] = String(java.net.URLDecoder.decode('viewInitModule', 'UTF-8'))
 
-__o = __obj[192]  // xdc.rov.ViewInfo.Instance#45
-    __o['$category'] = String(java.net.URLDecoder.decode('Instance', 'UTF-8'))
-    __o['$module'] = __obj[24.0]
-    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2345', 'UTF-8'))
-    __o['showRawTab'] = true
-    __o['viewMap'] = __obj[193.0]
-
-__o = __obj[193]  // xdc.rov.ViewInfo.Instance#45/viewMap
-    __o.$keys = []
-    __o.push(__o['Basic'] = __obj[194.0]); __o.$keys.push('Basic')
-    __o['$category'] = String(java.net.URLDecoder.decode('Map', 'UTF-8'))
-    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2345%2FviewMap', 'UTF-8'))
-
-__o = __obj[194]  // xdc.rov.ViewInfo.Instance#45/viewMap/'Basic'
+__o = __obj[199]  // xdc.rov.ViewInfo.Instance#44/viewMap/'Records'
     __o['$category'] = String(java.net.URLDecoder.decode('Struct', 'UTF-8'))
-    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2345%2FviewMap%2F%27Basic%27', 'UTF-8'))
-    __o['structName'] = String(java.net.URLDecoder.decode('BasicView', 'UTF-8'))
-    __o['type'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.INSTANCE', 'UTF-8'))
-    __o['viewInitFxn'] = String(java.net.URLDecoder.decode('viewInitBasic', 'UTF-8'))
+    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2344%2FviewMap%2F%27Records%27', 'UTF-8'))
+    __o['structName'] = String(java.net.URLDecoder.decode('RecordView', 'UTF-8'))
+    __o['type'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.MODULE_DATA', 'UTF-8'))
+    __o['viewInitFxn'] = String(java.net.URLDecoder.decode('viewInitRecords', 'UTF-8'))
 
-__o = __obj[195]  // xdc.rov.ViewInfo.Instance#46
+__o = __obj[200]  // xdc.rov.ViewInfo.Instance#46
     __o['$category'] = String(java.net.URLDecoder.decode('Instance', 'UTF-8'))
     __o['$module'] = __obj[24.0]
     __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2346', 'UTF-8'))
     __o['showRawTab'] = true
-    __o['viewMap'] = __obj[196.0]
+    __o['viewMap'] = __obj[201.0]
 
-__o = __obj[196]  // xdc.rov.ViewInfo.Instance#46/viewMap
+__o = __obj[201]  // xdc.rov.ViewInfo.Instance#46/viewMap
     __o.$keys = []
-    __o.push(__o['Basic'] = __obj[197.0]); __o.$keys.push('Basic')
-    __o.push(__o['Detailed'] = __obj[198.0]); __o.$keys.push('Detailed')
+    __o.push(__o['Basic'] = __obj[202.0]); __o.$keys.push('Basic')
     __o['$category'] = String(java.net.URLDecoder.decode('Map', 'UTF-8'))
     __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2346%2FviewMap', 'UTF-8'))
 
-__o = __obj[197]  // xdc.rov.ViewInfo.Instance#46/viewMap/'Basic'
+__o = __obj[202]  // xdc.rov.ViewInfo.Instance#46/viewMap/'Basic'
     __o['$category'] = String(java.net.URLDecoder.decode('Struct', 'UTF-8'))
     __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2346%2FviewMap%2F%27Basic%27', 'UTF-8'))
     __o['structName'] = String(java.net.URLDecoder.decode('BasicView', 'UTF-8'))
     __o['type'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.INSTANCE', 'UTF-8'))
     __o['viewInitFxn'] = String(java.net.URLDecoder.decode('viewInitBasic', 'UTF-8'))
 
-__o = __obj[198]  // xdc.rov.ViewInfo.Instance#46/viewMap/'Detailed'
-    __o['$category'] = String(java.net.URLDecoder.decode('Struct', 'UTF-8'))
-    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2346%2FviewMap%2F%27Detailed%27', 'UTF-8'))
-    __o['structName'] = String(java.net.URLDecoder.decode('DetailedView', 'UTF-8'))
-    __o['type'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.INSTANCE', 'UTF-8'))
-    __o['viewInitFxn'] = String(java.net.URLDecoder.decode('viewInitDetailed', 'UTF-8'))
-
-__o = __obj[199]  // xdc.rov.ViewInfo.Instance#47
+__o = __obj[203]  // xdc.rov.ViewInfo.Instance#47
     __o['$category'] = String(java.net.URLDecoder.decode('Instance', 'UTF-8'))
     __o['$module'] = __obj[24.0]
     __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2347', 'UTF-8'))
     __o['showRawTab'] = true
-    __o['viewMap'] = __obj[200.0]
+    __o['viewMap'] = __obj[204.0]
 
-__o = __obj[200]  // xdc.rov.ViewInfo.Instance#47/viewMap
+__o = __obj[204]  // xdc.rov.ViewInfo.Instance#47/viewMap
     __o.$keys = []
-    __o.push(__o['Basic'] = __obj[201.0]); __o.$keys.push('Basic')
+    __o.push(__o['Basic'] = __obj[205.0]); __o.$keys.push('Basic')
     __o['$category'] = String(java.net.URLDecoder.decode('Map', 'UTF-8'))
     __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2347%2FviewMap', 'UTF-8'))
 
-__o = __obj[201]  // xdc.rov.ViewInfo.Instance#47/viewMap/'Basic'
+__o = __obj[205]  // xdc.rov.ViewInfo.Instance#47/viewMap/'Basic'
     __o['$category'] = String(java.net.URLDecoder.decode('Struct', 'UTF-8'))
     __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2347%2FviewMap%2F%27Basic%27', 'UTF-8'))
     __o['structName'] = String(java.net.URLDecoder.decode('BasicView', 'UTF-8'))
     __o['type'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.INSTANCE', 'UTF-8'))
     __o['viewInitFxn'] = String(java.net.URLDecoder.decode('viewInitBasic', 'UTF-8'))
 
-__o = __obj[202]  // xdc.rov.ViewInfo.Instance#48
+__o = __obj[206]  // xdc.rov.ViewInfo.Instance#48
     __o['$category'] = String(java.net.URLDecoder.decode('Instance', 'UTF-8'))
     __o['$module'] = __obj[24.0]
     __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2348', 'UTF-8'))
     __o['showRawTab'] = true
-    __o['viewMap'] = __obj[203.0]
+    __o['viewMap'] = __obj[207.0]
 
-__o = __obj[203]  // xdc.rov.ViewInfo.Instance#48/viewMap
+__o = __obj[207]  // xdc.rov.ViewInfo.Instance#48/viewMap
     __o.$keys = []
-    __o.push(__o['Basic'] = __obj[204.0]); __o.$keys.push('Basic')
+    __o.push(__o['Basic'] = __obj[208.0]); __o.$keys.push('Basic')
     __o['$category'] = String(java.net.URLDecoder.decode('Map', 'UTF-8'))
     __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2348%2FviewMap', 'UTF-8'))
 
-__o = __obj[204]  // xdc.rov.ViewInfo.Instance#48/viewMap/'Basic'
+__o = __obj[208]  // xdc.rov.ViewInfo.Instance#48/viewMap/'Basic'
     __o['$category'] = String(java.net.URLDecoder.decode('Struct', 'UTF-8'))
     __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2348%2FviewMap%2F%27Basic%27', 'UTF-8'))
     __o['structName'] = String(java.net.URLDecoder.decode('BasicView', 'UTF-8'))
     __o['type'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.INSTANCE', 'UTF-8'))
     __o['viewInitFxn'] = String(java.net.URLDecoder.decode('viewInitBasic', 'UTF-8'))
 
-__o = __obj[205]  // xdc.rov.ViewInfo.Instance#49
+__o = __obj[209]  // xdc.rov.ViewInfo.Instance#49
     __o['$category'] = String(java.net.URLDecoder.decode('Instance', 'UTF-8'))
     __o['$module'] = __obj[24.0]
     __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2349', 'UTF-8'))
     __o['showRawTab'] = true
-    __o['viewMap'] = __obj[206.0]
+    __o['viewMap'] = __obj[210.0]
 
-__o = __obj[206]  // xdc.rov.ViewInfo.Instance#49/viewMap
+__o = __obj[210]  // xdc.rov.ViewInfo.Instance#49/viewMap
     __o.$keys = []
-    __o.push(__o['Basic'] = __obj[207.0]); __o.$keys.push('Basic')
+    __o.push(__o['Basic'] = __obj[211.0]); __o.$keys.push('Basic')
+    __o.push(__o['Detailed'] = __obj[212.0]); __o.$keys.push('Detailed')
     __o['$category'] = String(java.net.URLDecoder.decode('Map', 'UTF-8'))
     __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2349%2FviewMap', 'UTF-8'))
 
-__o = __obj[207]  // xdc.rov.ViewInfo.Instance#49/viewMap/'Basic'
+__o = __obj[211]  // xdc.rov.ViewInfo.Instance#49/viewMap/'Basic'
     __o['$category'] = String(java.net.URLDecoder.decode('Struct', 'UTF-8'))
     __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2349%2FviewMap%2F%27Basic%27', 'UTF-8'))
     __o['structName'] = String(java.net.URLDecoder.decode('BasicView', 'UTF-8'))
     __o['type'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.INSTANCE', 'UTF-8'))
     __o['viewInitFxn'] = String(java.net.URLDecoder.decode('viewInitBasic', 'UTF-8'))
 
-__o = __obj[208]  // xdc.rov.ViewInfo.Instance#50
+__o = __obj[212]  // xdc.rov.ViewInfo.Instance#49/viewMap/'Detailed'
+    __o['$category'] = String(java.net.URLDecoder.decode('Struct', 'UTF-8'))
+    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2349%2FviewMap%2F%27Detailed%27', 'UTF-8'))
+    __o['structName'] = String(java.net.URLDecoder.decode('DetailedView', 'UTF-8'))
+    __o['type'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.INSTANCE', 'UTF-8'))
+    __o['viewInitFxn'] = String(java.net.URLDecoder.decode('viewInitDetailed', 'UTF-8'))
+
+__o = __obj[213]  // xdc.rov.ViewInfo.Instance#50
     __o['$category'] = String(java.net.URLDecoder.decode('Instance', 'UTF-8'))
     __o['$module'] = __obj[24.0]
     __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2350', 'UTF-8'))
     __o['showRawTab'] = true
-    __o['viewMap'] = __obj[209.0]
+    __o['viewMap'] = __obj[214.0]
 
-__o = __obj[209]  // xdc.rov.ViewInfo.Instance#50/viewMap
+__o = __obj[214]  // xdc.rov.ViewInfo.Instance#50/viewMap
     __o.$keys = []
-    __o.push(__o['Module'] = __obj[210.0]); __o.$keys.push('Module')
-    __o.push(__o['Instances'] = __obj[211.0]); __o.$keys.push('Instances')
-    __o.push(__o['Records'] = __obj[212.0]); __o.$keys.push('Records')
+    __o.push(__o['Basic'] = __obj[215.0]); __o.$keys.push('Basic')
     __o['$category'] = String(java.net.URLDecoder.decode('Map', 'UTF-8'))
     __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2350%2FviewMap', 'UTF-8'))
 
-__o = __obj[210]  // xdc.rov.ViewInfo.Instance#50/viewMap/'Module'
+__o = __obj[215]  // xdc.rov.ViewInfo.Instance#50/viewMap/'Basic'
     __o['$category'] = String(java.net.URLDecoder.decode('Struct', 'UTF-8'))
-    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2350%2FviewMap%2F%27Module%27', 'UTF-8'))
-    __o['structName'] = String(java.net.URLDecoder.decode('ModuleView', 'UTF-8'))
-    __o['type'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.MODULE', 'UTF-8'))
-    __o['viewInitFxn'] = String(java.net.URLDecoder.decode('viewInitModule', 'UTF-8'))
-
-__o = __obj[211]  // xdc.rov.ViewInfo.Instance#50/viewMap/'Instances'
-    __o['$category'] = String(java.net.URLDecoder.decode('Struct', 'UTF-8'))
-    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2350%2FviewMap%2F%27Instances%27', 'UTF-8'))
-    __o['structName'] = String(java.net.URLDecoder.decode('InstanceView', 'UTF-8'))
+    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2350%2FviewMap%2F%27Basic%27', 'UTF-8'))
+    __o['structName'] = String(java.net.URLDecoder.decode('BasicView', 'UTF-8'))
     __o['type'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.INSTANCE', 'UTF-8'))
-    __o['viewInitFxn'] = String(java.net.URLDecoder.decode('viewInitInstances', 'UTF-8'))
+    __o['viewInitFxn'] = String(java.net.URLDecoder.decode('viewInitBasic', 'UTF-8'))
 
-__o = __obj[212]  // xdc.rov.ViewInfo.Instance#50/viewMap/'Records'
-    __o['$category'] = String(java.net.URLDecoder.decode('Struct', 'UTF-8'))
-    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2350%2FviewMap%2F%27Records%27', 'UTF-8'))
-    __o['structName'] = String(java.net.URLDecoder.decode('RecordView', 'UTF-8'))
-    __o['type'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.INSTANCE_DATA', 'UTF-8'))
-    __o['viewInitFxn'] = String(java.net.URLDecoder.decode('viewInitRecords', 'UTF-8'))
-
-__o = __obj[213]  // xdc.rov.ViewInfo.Instance#51
+__o = __obj[216]  // xdc.rov.ViewInfo.Instance#51
     __o['$category'] = String(java.net.URLDecoder.decode('Instance', 'UTF-8'))
     __o['$module'] = __obj[24.0]
     __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2351', 'UTF-8'))
     __o['showRawTab'] = true
-    __o['viewMap'] = __obj[214.0]
+    __o['viewMap'] = __obj[217.0]
 
-__o = __obj[214]  // xdc.rov.ViewInfo.Instance#51/viewMap
+__o = __obj[217]  // xdc.rov.ViewInfo.Instance#51/viewMap
     __o.$keys = []
-    __o.push(__o['Module'] = __obj[215.0]); __o.$keys.push('Module')
-    __o.push(__o['Instances'] = __obj[216.0]); __o.$keys.push('Instances')
-    __o.push(__o['Records'] = __obj[217.0]); __o.$keys.push('Records')
+    __o.push(__o['Basic'] = __obj[218.0]); __o.$keys.push('Basic')
     __o['$category'] = String(java.net.URLDecoder.decode('Map', 'UTF-8'))
     __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2351%2FviewMap', 'UTF-8'))
 
-__o = __obj[215]  // xdc.rov.ViewInfo.Instance#51/viewMap/'Module'
+__o = __obj[218]  // xdc.rov.ViewInfo.Instance#51/viewMap/'Basic'
     __o['$category'] = String(java.net.URLDecoder.decode('Struct', 'UTF-8'))
-    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2351%2FviewMap%2F%27Module%27', 'UTF-8'))
-    __o['structName'] = String(java.net.URLDecoder.decode('ModuleView', 'UTF-8'))
-    __o['type'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.MODULE', 'UTF-8'))
-    __o['viewInitFxn'] = String(java.net.URLDecoder.decode('viewInitModule', 'UTF-8'))
-
-__o = __obj[216]  // xdc.rov.ViewInfo.Instance#51/viewMap/'Instances'
-    __o['$category'] = String(java.net.URLDecoder.decode('Struct', 'UTF-8'))
-    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2351%2FviewMap%2F%27Instances%27', 'UTF-8'))
-    __o['structName'] = String(java.net.URLDecoder.decode('InstanceView', 'UTF-8'))
+    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2351%2FviewMap%2F%27Basic%27', 'UTF-8'))
+    __o['structName'] = String(java.net.URLDecoder.decode('BasicView', 'UTF-8'))
     __o['type'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.INSTANCE', 'UTF-8'))
-    __o['viewInitFxn'] = String(java.net.URLDecoder.decode('viewInitInstances', 'UTF-8'))
+    __o['viewInitFxn'] = String(java.net.URLDecoder.decode('viewInitBasic', 'UTF-8'))
 
-__o = __obj[217]  // xdc.rov.ViewInfo.Instance#51/viewMap/'Records'
-    __o['$category'] = String(java.net.URLDecoder.decode('Struct', 'UTF-8'))
-    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2351%2FviewMap%2F%27Records%27', 'UTF-8'))
-    __o['structName'] = String(java.net.URLDecoder.decode('RecordView', 'UTF-8'))
-    __o['type'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.INSTANCE_DATA', 'UTF-8'))
-    __o['viewInitFxn'] = String(java.net.URLDecoder.decode('viewInitRecords', 'UTF-8'))
-
-__o = __obj[218]  // xdc.rov.ViewInfo.Instance#52
+__o = __obj[219]  // xdc.rov.ViewInfo.Instance#52
     __o['$category'] = String(java.net.URLDecoder.decode('Instance', 'UTF-8'))
     __o['$module'] = __obj[24.0]
     __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2352', 'UTF-8'))
     __o['showRawTab'] = true
-    __o['viewMap'] = __obj[219.0]
+    __o['viewMap'] = __obj[220.0]
 
-__o = __obj[219]  // xdc.rov.ViewInfo.Instance#52/viewMap
+__o = __obj[220]  // xdc.rov.ViewInfo.Instance#52/viewMap
     __o.$keys = []
-    __o.push(__o['Module'] = __obj[220.0]); __o.$keys.push('Module')
-    __o.push(__o['Records'] = __obj[221.0]); __o.$keys.push('Records')
+    __o.push(__o['Basic'] = __obj[221.0]); __o.$keys.push('Basic')
     __o['$category'] = String(java.net.URLDecoder.decode('Map', 'UTF-8'))
     __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2352%2FviewMap', 'UTF-8'))
 
-__o = __obj[220]  // xdc.rov.ViewInfo.Instance#52/viewMap/'Module'
+__o = __obj[221]  // xdc.rov.ViewInfo.Instance#52/viewMap/'Basic'
     __o['$category'] = String(java.net.URLDecoder.decode('Struct', 'UTF-8'))
-    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2352%2FviewMap%2F%27Module%27', 'UTF-8'))
-    __o['structName'] = String(java.net.URLDecoder.decode('ModuleView', 'UTF-8'))
-    __o['type'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.MODULE', 'UTF-8'))
-    __o['viewInitFxn'] = String(java.net.URLDecoder.decode('viewInitModule', 'UTF-8'))
-
-__o = __obj[221]  // xdc.rov.ViewInfo.Instance#52/viewMap/'Records'
-    __o['$category'] = String(java.net.URLDecoder.decode('Struct', 'UTF-8'))
-    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2352%2FviewMap%2F%27Records%27', 'UTF-8'))
-    __o['structName'] = String(java.net.URLDecoder.decode('RecordView', 'UTF-8'))
-    __o['type'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.MODULE_DATA', 'UTF-8'))
-    __o['viewInitFxn'] = String(java.net.URLDecoder.decode('viewInitRecords', 'UTF-8'))
+    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2352%2FviewMap%2F%27Basic%27', 'UTF-8'))
+    __o['structName'] = String(java.net.URLDecoder.decode('BasicView', 'UTF-8'))
+    __o['type'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.INSTANCE', 'UTF-8'))
+    __o['viewInitFxn'] = String(java.net.URLDecoder.decode('viewInitBasic', 'UTF-8'))
 
 __o = __obj[222]  // xdc.rov.ViewInfo.Instance#53
     __o['$category'] = String(java.net.URLDecoder.decode('Instance', 'UTF-8'))
@@ -3095,15 +3095,15 @@ __o = __obj[227]  // xdc.rov.ViewInfo.Instance#54/viewMap/'Module'
     __o['type'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.MODULE', 'UTF-8'))
     __o['viewInitFxn'] = String(java.net.URLDecoder.decode('viewInitModule', 'UTF-8'))
 
-__o = __obj[228]  // xdc.rov.ViewInfo.Instance#42/viewMap
+__o = __obj[228]  // xdc.rov.ViewInfo.Instance#45/viewMap
     __o.$keys = []
     __o.push(__o['Basic'] = __obj[229.0]); __o.$keys.push('Basic')
     __o['$category'] = String(java.net.URLDecoder.decode('Map', 'UTF-8'))
-    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2342%2FviewMap', 'UTF-8'))
+    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2345%2FviewMap', 'UTF-8'))
 
-__o = __obj[229]  // xdc.rov.ViewInfo.Instance#42/viewMap/'Basic'
+__o = __obj[229]  // xdc.rov.ViewInfo.Instance#45/viewMap/'Basic'
     __o['$category'] = String(java.net.URLDecoder.decode('Struct', 'UTF-8'))
-    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2342%2FviewMap%2F%27Basic%27', 'UTF-8'))
+    __o['$name'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.Instance%2345%2FviewMap%2F%27Basic%27', 'UTF-8'))
     __o['structName'] = String(java.net.URLDecoder.decode('BasicView', 'UTF-8'))
     __o['type'] = String(java.net.URLDecoder.decode('xdc.rov.ViewInfo.INSTANCE', 'UTF-8'))
     __o['viewInitFxn'] = String(java.net.URLDecoder.decode('viewInitBasic', 'UTF-8'))
@@ -3284,7 +3284,7 @@ __o = __obj[249]  // ti.uia.loggers.LoggerStopMode
     __o['Module__diagsMask'] = null
     __o['Module__gateObj'] = null
     __o['Module__gatePrms'] = null
-    __o['Module__id'] = 56
+    __o['Module__id'] = 54
     __o['Module__loggerDefined'] = false
     __o['Module__loggerFxn0'] = null
     __o['Module__loggerFxn1'] = null
@@ -3310,7 +3310,7 @@ __o = __obj[249]  // ti.uia.loggers.LoggerStopMode
     __o['numCores'] = 1
     __o['overflowLogger'] = null
     __o['rovShowRawTab$'] = true
-    __o['rovViewInfo'] = __obj[208.0]
+    __o['rovViewInfo'] = __obj[186.0]
     __o['statusLogger'] = null
     __o['supportLoggerDisable'] = false
     __o['viewNameMap$'] = __obj[269.0]
@@ -3341,15 +3341,15 @@ __o = __obj[252]  // ti.uia.loggers.LoggerStopMode.Instance#1/instance
     __o['$name'] = String(java.net.URLDecoder.decode('ti.uia.loggers.LoggerStopMode.Instance%231%2Finstance', 'UTF-8'))
     __o['name'] = String(java.net.URLDecoder.decode('SYSBIOS+System+Logger', 'UTF-8'))
 
-__o = __obj[253]  // xdc.runtime.Error.Desc#43
+__o = __obj[253]  // xdc.runtime.Error.Desc#42
     __o['$category'] = String(java.net.URLDecoder.decode('Struct', 'UTF-8'))
-    __o['$name'] = String(java.net.URLDecoder.decode('xdc.runtime.Error.Desc%2343', 'UTF-8'))
+    __o['$name'] = String(java.net.URLDecoder.decode('xdc.runtime.Error.Desc%2342', 'UTF-8'))
     __o['code'] = 0
     __o['msg'] = String(java.net.URLDecoder.decode('E_badLevel%3A+Bad+filter+level+value%3A+%25d', 'UTF-8'))
 
-__o = __obj[254]  // xdc.runtime.Log.EventDesc#120
+__o = __obj[254]  // xdc.runtime.Log.EventDesc#117
     __o['$category'] = String(java.net.URLDecoder.decode('Struct', 'UTF-8'))
-    __o['$name'] = String(java.net.URLDecoder.decode('xdc.runtime.Log.EventDesc%23120', 'UTF-8'))
+    __o['$name'] = String(java.net.URLDecoder.decode('xdc.runtime.Log.EventDesc%23117', 'UTF-8'))
     __o['level'] = undefined
     __o['mask'] = 256
     __o['msg'] = String(java.net.URLDecoder.decode('LoggerStopMode+Test', 'UTF-8'))
@@ -8162,7 +8162,7 @@ __o = __obj[738]  // ti.sysbios.BIOS
     __o['common$'] = __obj[762.0]
     __o['configNameMap$'] = __obj[763.0]
     __o['cpuFreq'] = __obj[776.0]
-    __o['customCCOpts'] = String(java.net.URLDecoder.decode('--endian%3Dlittle+-mv7M3+--abi%3Deabi+-q+-ms+--opt_for_speed%3D0++--program_level_compile+-o3+-g+', 'UTF-8'))
+    __o['customCCOpts'] = String(java.net.URLDecoder.decode('--endian%3Dlittle+-mv7M3+--abi%3Deabi+-q+-ms+--opt_for_speed%3D0++--program_level_compile+-o3+-g+--optimize_with_debug+', 'UTF-8'))
     __o['heapSection'] = null
     __o['heapSize'] = 4096
     __o['heapTrackEnabled'] = false
@@ -8170,7 +8170,7 @@ __o = __obj[738]  // ti.sysbios.BIOS
     __o['installedErrorHook'] = null
     __o['libDir'] = null
     __o['libType'] = String(java.net.URLDecoder.decode('ti.sysbios.BIOS.LibType_Custom', 'UTF-8'))
-    __o['logsEnabled'] = true
+    __o['logsEnabled'] = false
     __o['rovShowRawTab$'] = true
     __o['rovViewInfo'] = __obj[86.0]
     __o['rtsGateType'] = String(java.net.URLDecoder.decode('ti.sysbios.BIOS.GateMutex', 'UTF-8'))
@@ -8181,7 +8181,7 @@ __o = __obj[738]  // ti.sysbios.BIOS
     __o['swiEnabled'] = true
     __o['taskEnabled'] = true
     __o['useSK'] = false
-    __o['version'] = 414977
+    __o['version'] = 413952
     __o['viewNameMap$'] = __obj[778.0]
 
 __o = __obj[739]  // ti.sysbios.BIOS/$instances
@@ -8198,7 +8198,7 @@ __o = __obj[740]  // ti.sysbios.gates.GateMutex
     __o['Module__diagsMask'] = null
     __o['Module__gateObj'] = null
     __o['Module__gatePrms'] = null
-    __o['Module__id'] = 55
+    __o['Module__id'] = 56
     __o['Module__loggerDefined'] = false
     __o['Module__loggerFxn0'] = null
     __o['Module__loggerFxn1'] = null
@@ -8215,7 +8215,7 @@ __o = __obj[740]  // ti.sysbios.gates.GateMutex
     __o['common$'] = __obj[747.0]
     __o['configNameMap$'] = __obj[748.0]
     __o['rovShowRawTab$'] = true
-    __o['rovViewInfo'] = __obj[199.0]
+    __o['rovViewInfo'] = __obj[213.0]
     __o['viewNameMap$'] = __obj[761.0]
 
 __o = __obj[741]  // ti.sysbios.gates.GateMutex/$instances
@@ -11977,15 +11977,6 @@ __o = __obj[1099]  // ti.uia.runtime.QueueDescriptor
     __o['Object__heap'] = null
     __o['Object__sizeof'] = 0
     __o['Object__table'] = null
-    __o['QueueType_FROMHOST_CMD_CIRCULAR_BUFFER'] = 2
-    __o['QueueType_FROMHOST_DATA_CIRCULAR_BUFFER'] = 6
-    __o['QueueType_NONE'] = 0
-    __o['QueueType_TOHOST_CMD_CIRCULAR_BUFFER'] = 1
-    __o['QueueType_TOHOST_DATA_CIRCULAR_BUFFER'] = 5
-    __o['QueueType_TOHOST_EVENT_CIRCULAR_BUFFER'] = 3
-    __o['QueueType_TOHOST_EVENT_OVERFLOW_BUFFER'] = 4
-    __o['QueueType_TOHOST_EVENT_UIAPACKET_ARRAY'] = 7
-    __o['QueueType_TOHOST_EVENT_UIAPACKET_STOPMODE'] = 8
     __o['common$'] = __obj[1101.0]
     __o['configNameMap$'] = __obj[1102.0]
     __o['maxId'] = 0
@@ -13284,7 +13275,7 @@ __o = __obj[1228]  // ti.targets.arm.elf.M3/ccConfigOpts
 __o = __obj[1229]  // ti.targets.arm.elf.M3/ccOpts
     __o['$category'] = String(java.net.URLDecoder.decode('Struct', 'UTF-8'))
     __o['$name'] = String(java.net.URLDecoder.decode('ti.targets.arm.elf.M3%2FccOpts', 'UTF-8'))
-    __o['prefix'] = String(java.net.URLDecoder.decode('-mv7M3+--code_state%3D16+--float_support%3Dvfplib+-me+--include_path%3D%22%2FUsers%2Fhunteradams%2FDocuments%2FMSP430%2Fworkspace%2FMonarch_Software%22+--include_path%3D%22%2FUsers%2Fhunteradams%2Fti%2Fsimplelink_cc13x0_sdk_2_30_00_20%2Fsource%2Fti%2Fposix%2Fccs%22+--include_path%3D%22%2FApplications%2Fti%2Fccsv8%2Ftools%2Fcompiler%2Fti-cgt-arm_18.1.4.LTS%2Finclude%22+--define%3DDeviceFamily_CC13X0+-g+--diag_warning%3D225+--diag_warning%3D255+--diag_wrap%3Doff+--display_error_number+--gen_func_subsections%3Don++-std%3Dc99++-qq+-pdsw225', 'UTF-8'))
+    __o['prefix'] = String(java.net.URLDecoder.decode('-mv7M3+--code_state%3D16+--float_support%3Dvfplib+-me+--include_path%3D%22%2FUsers%2Fhunteradams%2FDocuments%2FMSP430%2Fworkspace%2FMonarch_Software%22+--include_path%3D%22%2FApplications%2Fti%2Fsimplelink_cc13x0_sdk_1_40_00_10%2Fkernel%2Ftirtos%2Fpackages%2Fti%2Fsysbios%2Fposix%22+--include_path%3D%22%2FApplications%2Fti%2Fccsv8%2Ftools%2Fcompiler%2Fti-cgt-arm_18.1.4.LTS%2Finclude%22+--define%3DDeviceFamily_CC13X0+-g+--diag_warning%3D225+--diag_warning%3D255+--diag_wrap%3Doff+--display_error_number+--gen_func_subsections%3Don+++-qq+-pdsw225', 'UTF-8'))
     __o['suffix'] = String(java.net.URLDecoder.decode('', 'UTF-8'))
 
 __o = __obj[1230]  // ti.targets.arm.elf.M3/compatibleSuffixes
